@@ -1,0 +1,240 @@
+\documentclass[review,11pt,3p,authoryear,nopreprintline]{elsarticle}
+
+\usepackage[T1]{fontenc}
+\usepackage{amsmath,amssymb,amsthm}
+\usepackage{mathrsfs}
+\usepackage{bm}
+\usepackage{xcolor}
+\usepackage[colorlinks=true,citecolor=blue,linkcolor=blue,urlcolor=blue]{hyperref}
+
+\newtheorem{theorem}{Theorem}
+\newtheorem{proposition}{Proposition}
+\newtheorem{corollary}{Corollary}
+\newtheorem{lemma}{Lemma}
+\newdefinition{example}{Example}
+\newdefinition{definition}{Definition}
+\newdefinition{remark}{Remark}
+\newdefinition{property}{Property}
+\newdefinition{condition}{Condition}
+
+\begin{document}
+
+\begin{frontmatter}
+\title{Failure Probability Bounds with Uncertain Surrogate Residual Distributions}
+
+\author[inst1]{Renlong Wang}
+\ead{rw106@rice.edu}
+\affiliation[inst1]{organization={Department of Civil and Environmental Engineering, Rice University},
+  city={Houston},
+  postcode={TX 77005},
+  country={USA}}
+
+\begin{abstract}
+\end{abstract}
+
+\begin{keyword}
+\end{keyword}
+\end{frontmatter}
+
+\section{Introduction}
+
+\section{Problem Description}
+\label{sec-problem}
+
+For a random input $X\sim\mathbb{P}$ and a measurable limit-state function $g:\mathcal{X}\to\mathbb{R}$, the failure probability is defined as
+\[
+  p_f
+  := \Pr\{g(X)\leq 0\}
+  = \mathbb{E}_{X\sim\mathbb{P}} \left[\mathbf{1}_{\{g(X)\leq 0\}}\right]
+  = \int_{\mathcal{X}}
+    \mathbf{1}_{\{g(x)\leq 0\}}\,\mathbb{P}(\mathrm{d}x).
+\]
+For fixed $g$, this functional is linear in $\mathbb{P}$.
+
+Evaluating $g$ can be computationally expensive, particularly when each evaluation requires a high-fidelity simulation. A common approach is to replace $g$ with a computationally
+efficient surrogate model. Let
+\[
+  \mathcal{D}
+  := \{(x_i,g(x_i))\}_{i=1}^{m}
+\]
+denote the training dataset used to construct the surrogate $\hat{g}_{\mathcal{D}}$. Throughout the following analysis, $\mathcal{D}$ and $\hat{g}_{\mathcal{D}}$ are treated as fixed. For every $x\in\mathcal{X}$, the residual function is defined as
+\[
+  r_{\mathcal{D}}(x)
+  := g(x)-\hat{g}_{\mathcal{D}}(x) .
+\]
+
+Although $r_{\mathcal{D}}$ is deterministic for fixed $g$ and $\mathcal{D}$, its values are generally unknown at unevaluated inputs. In surrogate-based reliability analysis, uncertainty about the residual function is often represented by a real-valued stochastic process
+\[
+  R_{\mathcal{D}}
+  := \{R_{\mathcal{D}}(x):x\in\mathcal{X}\},
+\]
+whose sample paths represent possible residual functions. Let $\mathcal{R}$ be a measurable space of admissible residual functions such that the evaluation map $(x,r)\mapsto r(x)$ is measurable. We denote the probability law of $R_{\mathcal{D}}$ on $\mathcal{R}$ by $\mathbb{Q}$. All process laws are understood conditional on the fixed training dataset $\mathcal{D}$.
+
+Conditional on the fixed training dataset $\mathcal{D}$, the input $X\sim\mathbb{P}$ is assumed to be independent of the residual process $R_{\mathcal{D}}$. The corresponding surrogate-based failure probability is
+\begin{equation} 
+    p_{\hat{f}}(\mathbb{Q}) 
+    := \Pr_{\mathbb{P}\otimes\mathbb{Q}}
+       \left\{
+         \hat{g}_{\mathcal{D}}(X)+R_{\mathcal{D}}(X)\leq 0
+       \right\} 
+    = \int_{\mathcal{R}}
+         \int_{\mathcal{X}}
+         \mathbf{1}_{\{
+           \hat{g}_{\mathcal{D}}(x)+r(x)\leq 0
+         \}}
+         \mathbb{P}(\mathrm{d}x)
+       \mathbb{Q}(\mathrm{d}r). 
+\end{equation}
+Thus, $p_{\hat{f}}(\mathbb{Q})$ averages the failure probability over possible residual functions. For fixed $\mathbb{P}$ and $\hat{g}_{\mathcal{D}}$, it is linear in $\mathbb{Q}$.
+
+However, in complex engineering systems, the available information may be insufficient to specify the probability law of the residual process reliably. We therefore construct an ambiguity set $\mathscr{Q}$ of candidate process laws consistent with the available information. Each $\mathbb{Q}\in\mathscr{Q}$ represents a plausible description of uncertainty about the residual function.
+
+For fixed $\mathbb{P}$ and $\hat{g}_{\mathcal{D}}$, we seek the range of surrogate-based failure probabilities over all candidate process laws in $\mathscr{Q}$. The upper
+and lower bounds are
+\begin{equation}
+  \overline{p}_{\hat{f}}
+  := \sup_{\mathbb{Q}\in\mathscr{Q}}
+     p_{\hat{f}}(\mathbb{Q}),
+  \label{eq-upper-bound}
+\end{equation}
+and
+\begin{equation}
+  \underline{p}_{\hat{f}}
+  := \inf_{\mathbb{Q}\in\mathscr{Q}}
+     p_{\hat{f}}(\mathbb{Q}),
+  \label{eq-lower-bound}
+\end{equation}
+respectively. These bounds characterize the range of surrogate-based failure probabilities over the candidate process laws in $\mathscr{Q}$. Their computation generally requires optimization over probability measures on a function space, leading to infinite-dimensional optimization problems.
+
+Accordingly, success depends on two components:
+\begin{enumerate}
+  \item \textbf{Statistically calibrated ambiguity sets.} Select suitable residual distribution features and calibrate the set size using confidence regions to obtain finite-sample guarantees.
+  \item \textbf{Tractable reformulations.} Reformulate both bound problems for efficient computation without additional approximation error.
+\end{enumerate}
+
+
+% For a random input $X\sim\mathbb{P}$ and a measurable limit-state function $g:\mathcal{X}\to\mathbb{R}$, the failure probability is defined as
+% \[
+%   p_f := \Pr\left\{g(X)\leq 0\right\} = \mathbb{E}_{X\sim\mathbb{P}} \left[\mathbf{1}_{\{g(X)\leq 0\}}\right] = \int_{\mathcal{X}} \mathbf{1}_{\{g(X)\leq 0\}} \mathbb{P}(\mathrm{d}X).
+% \]
+% For fixed $g$, this functional is linear in $\mathbb{P}$.
+
+% Evaluating the limit-state function $g$ at a given input $X$ can be computationally expensive, particularly when each evaluation requires a high-fidelity simulation. A common approach is to replace $g$ with a computationally efficient surrogate model $\hat{g}$. Let $\mathcal{D} := \{(x_i, g(x_i))\}_{i=1}^{m}$ denote the training dataset used to construct $\hat{g}$. Throughout the following analysis, the training dataset $\mathcal{D}$ and the fitted surrogate $\hat{g}_{\mathcal{D}}$ are treated as fixed. The residual of the fitted surrogate is defined as
+% \[
+%   e_{\mathcal{D}}(x)
+%   := g(x)-\hat{g}_{\mathcal{D}}(x),
+%   \qquad x\in\mathcal{X}.
+% \]
+% For fixed $g$ and $\mathcal{D}$, this residual is a deterministic
+% function, but its values are generally unknown at unevaluated
+% inputs. We represent epistemic uncertainty about this function
+% by a real-valued stochastic process
+% \[
+%   \epsilon_{\mathcal{D}}
+%   := \{\epsilon_{\mathcal{D}}(x):x\in\mathcal{X}\}.
+% \]
+% Let $\mathcal{E}$ be a measurable space of admissible residual
+% functions, with the measurability conditions needed for the
+% probabilities and integrals below. The probability law
+% $\mathbb{Q}$ of $\epsilon_{\mathcal{D}}$ is a probability
+% measure on $\mathcal{E}$. We treat $\mathbb{Q}$ as uncertain
+% and consider an ambiguity set $\mathscr{Q}$ of candidate
+% process laws.
+
+
+
+
+% Throughout the following analysis, the training dataset and the fitted surrogate are treated as fixed. The surrogate residual at input $x$ is defined as
+% \[
+%   \epsilon_{\mathcal{D}}(x) = g_{\mathcal{D}}(x) - \hat{g}_{\mathcal{D}}(x).
+% \]
+% The surrogate residual is commonly modeled as a random variable $\epsilon \in \Xi \subseteq \mathbb{R}$ with probability distribution $\mathbb{Q}\in\mathcal{Q}(\Xi)$, where $\mathcal{Q}(\Xi)$ denotes the set of probability measures supported on $\Xi$. Assuming that $\epsilon$ is independent of $X$, the corresponding surrogate-based failure probability is
+% \begin{equation}
+%   p_{\hat{f}} := \Pr\left\{\hat{g}(X)+\epsilon\leq 0\right\} = \mathbb{E}_{X\sim\mathbb{P}} \left[ \mathbb{E}_{\epsilon\sim\mathbb{Q}} \left[ \mathbf{1}_{\{\hat{g}(X)+\epsilon\leq 0\}} \right] \right] = \int_{\mathcal{X}} \int_{\Xi} \mathbf{1}_{\{\hat{g}(X)+\epsilon\leq 0\}} \mathbb{Q}(\mathrm{d} \epsilon) \mathbb{P}(\mathrm{d}X) .
+% \end{equation} 
+
+% The surrogate-based failure probability depends on the assumed residual distribution. However, in complex engineering systems, the available information may be insufficient to specify the error distribution reliably. To address this limitation, we construct an ambiguity set $\mathscr{Q}$ of candidate error distributions intended to contain the unknown true error distribution $\mathbb{Q}^{\star}$ with high confidence. Each distribution in $\mathscr{Q}$ represents a plausible candidate for the unknown true error distribution.
+
+% For fixed $\mathbb{P}$ and $\hat{g}$, we seek the range of surrogate-based failure probabilities over all candidate residual distributions in $\mathscr{Q}$. The corresponding upper bound is
+% \begin{equation}
+%   \overline{p}_{\hat{f}} := \sup_{\mathbb{Q}\in\mathscr{Q}} p_{\hat{f}},
+%   \label{eq-upper-bound}
+% \end{equation}
+% and the lower bound is
+% \begin{equation}
+%   \underline{p}_{\hat{f}} := \inf_{\mathbb{Q}\in\mathscr{Q}} p_{\hat{f}}.
+%   \label{eq-lower-bound}
+% \end{equation}
+% If $\mathbb{Q}^{\star}\in\mathscr{Q}$, these bounds contain the surrogate-based failure probability evaluated under $\mathbb{Q}^{\star}$. However, computing these bounds generally entails optimization over a family of probability distributions, which leads to infinite-dimensional optimization problems.
+
+% Accordingly, success depends on two components:
+% \begin{enumerate}
+%   \item \textbf{Statistically calibrated ambiguity sets.} Select suitable residual distribution features and calibrate the set size using confidence regions to obtain finite-sample guarantees.
+%   \item \textbf{Tractable reformulations.} Reformulate both bound problems for efficient computation without additional approximation error.
+% \end{enumerate}
+
+
+% \section{Ambiguity Set Design}
+
+% When information about the surrogate residual distribution is limited, estimates of its mean and variance provide a practical basis for characterizing it. These estimates are themselves subject to sampling uncertainty. We therefore construct a moment-based ambiguity set that accounts for uncertainty in both the distributional form and the estimated moments.
+
+% \begin{definition}[Moment-based ambiguity set] 
+%   Let $\mathcal{F}$ its Borel $\sigma$-algebra and $\mathscr{M}$ the set of probability measures on $(\mathbb{R},\mathcal{F})$ with finite second moments. Given estimates $\mu_0$ and $\Sigma_0 > 0$ of the residual mean and variance matrix, respectively, and parameters $\gamma_1\geq0$ and $\gamma_2\geq1$, define
+%   \begin{equation}
+%     \mathscr{Q} := \left\{
+%       \mathbb{Q} \in \mathscr{M}
+%       \left|
+%       \begin{aligned}
+%         & \left(\mathbb{E}_{\mathbb{Q}}[\epsilon]-\mu_0\right)^{2} \leq \gamma_1 \\
+%         & \mathbb{E}_{\mathbb{Q}} \left[ (\epsilon-\mu_0)^{2} \right] \preceq \gamma_2\Sigma_0 \\
+%         & \Pr \left\{\epsilon \in \Xi\right\} = 1
+%       \end{aligned}
+%       \right.
+%     \right\}.
+%   \end{equation} 
+% \end{definition}
+
+% The first constraint limits the deviation of the residual mean from $\mu_0$. The second controls residual dispersion about $\mu_0$. The third specifies the residual support.
+
+% Before calibrating the size parameters of the moment-based ambiguity set, we state the following finite-sample guarantee, which does not relies on the specify form of ambiguity set.
+% \begin{theorem} 
+%   For $\delta\in(0,1)$, if the ambiguity set $\mathscr{Q}$ contains the true distribution $\mathbb{Q}^{\star}$ with probability at least $1 - \delta$, i.e.,
+%   \[
+%     \Pr \left\{ \mathbb{Q}^{\star} \in \mathscr{Q} \right\} \geq 1 - \delta,
+%   \]
+%   then
+%   \[
+%     \Pr \left\{ \underline{p}_{\hat{f}} \leq p_{\hat{f}}(\mathbb{Q}^{\star}) \leq \overline{p}_{\hat{f}} \right\} \geq 1 - \delta.
+%   \]
+% \end{theorem}
+
+% \begin{proof}
+%   By the definition of the lower and upper bounds, $\mathbb{Q}^{\star} \in \mathscr{Q}$ imples
+%   \[
+%     \underline{p}_{\hat{f}} \leq p_{\hat{f}}(\mathbb{Q}^{\star}) \leq \overline{p}_{\hat{f}}.
+%   \]
+%   Therefore,
+%   \[
+%     \Pr\left\{ \underline{p}_{\hat{f}} \leq p_{\hat{f}}(\mathbb{Q}^{\star}) \leq \overline{p}_{\hat{f}} \right\}
+%     \geq
+%     \Pr\left\{\mathbb{Q}^{\star}\in\mathscr{Q}\right\} \geq 1-\delta.
+%   \]
+% \end{proof}
+
+% The following proposition states conditions under which the true probability distribution of $\epsilon$ falls in the ambiguity set $\mathscr{Q}$ by a proper setting of $\gamma_1$ and $\gamma_2$ for the fixed sample size $N$ and confidence level $1 - \delta$.
+
+% \begin{proposition}
+%   For a given $\delta$, let 
+%   \begin{equation}
+%     \gamma_1^{N} = \qquad \gamma_2^{N} = . 
+%   \end{equation}
+%   There then exists a positive integer $N_0$ depending on $\delta$ such that, for the true probability distribution $\mathbb{Q}^{\star}$ of surrogate residual $\epsilon$,
+%   \[
+%     \Pr\left\{\mathbb{Q}^{\star}\in\mathscr{Q}(\gamma_1^{N},\gamma_2^{N})\right\} \geq 1-\delta
+%   \]
+%   for all $N \geq N_0$.
+% \end{proposition}
+
+% \section{Tractable Reformulation}
+
+\end{document}
