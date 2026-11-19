@@ -1,0 +1,347 @@
+\documentclass[review,11pt,3p,authoryear,nopreprintline]{elsarticle}
+
+\usepackage[T1]{fontenc}
+\usepackage{amsmath,amssymb,amsthm}
+\usepackage{mathrsfs}
+\usepackage{bm}
+\usepackage{xcolor}
+\usepackage[colorlinks=true,citecolor=blue,linkcolor=blue,urlcolor=blue]{hyperref}
+
+\newtheorem{theorem}{Theorem}
+\newtheorem{proposition}{Proposition}
+\newtheorem{corollary}{Corollary}
+\newtheorem{lemma}{Lemma}
+\newdefinition{example}{Example}
+\newdefinition{definition}{Definition}
+\newdefinition{remark}{Remark}
+\newdefinition{property}{Property}
+\newdefinition{condition}{Condition}
+\newtheorem{assumption}{Assumption}
+
+\begin{document}
+
+\begin{frontmatter}
+\title{Failure Probability Bounds with Uncertain Surrogate Residual Distributions}
+
+\author[inst1]{Renlong Wang}
+\ead{rw106@rice.edu}
+\affiliation[inst1]{organization={Department of Civil and Environmental Engineering, Rice University},
+  city={Houston},
+  postcode={TX 77005},
+  country={USA}}
+
+\begin{abstract}
+\end{abstract}
+
+\begin{keyword}
+\end{keyword}
+\end{frontmatter}
+
+\section{Introduction}
+
+\section{Problem Description}
+\label{sec-problem}
+
+For a random input $X\sim\mathbb{P}$ and a measurable limit-state function $g:\mathcal{X}\to\mathbb{R}$, the failure probability is defined as
+\[
+  p_f
+  := \Pr\{g(X)\leq 0\}
+  = \mathbb{E}_{X\sim\mathbb{P}} \left[\mathbf{1}_{\{g(X)\leq 0\}}\right]
+  = \int_{\mathcal{X}}
+    \mathbf{1}_{\{g(x)\leq 0\}}\,\mathbb{P}(\mathrm{d}x).
+\]
+For fixed $g$, this functional is linear in $\mathbb{P}$.
+
+Evaluating $g$ can be computationally expensive, particularly when each evaluation requires a high-fidelity simulation. A common approach is to replace $g$ with a computationally
+efficient surrogate model. Let
+\[
+  \mathcal{D}
+  := \{(x_i,g(x_i))\}_{i=1}^{m}
+\]
+denote the training dataset used to construct the surrogate $\hat{g}_{\mathcal{D}}$. Throughout the following analysis, $\mathcal{D}$ and $\hat{g}_{\mathcal{D}}$ are treated as fixed. For every $x\in\mathcal{X}$, the residual function is defined as
+\[
+  r_{\mathcal{D}}(x)
+  := g(x)-\hat{g}_{\mathcal{D}}(x) .
+\]
+
+Although $r_{\mathcal{D}}$ is deterministic for fixed $g$ and $\mathcal{D}$, its values are generally unknown at unevaluated inputs. In surrogate-based reliability analysis, uncertainty about the residual function is often represented by a real-valued stochastic process
+\[
+  R_{\mathcal{D}}
+  := \{R_{\mathcal{D}}(x):x\in\mathcal{X}\},
+\]
+whose sample paths represent possible residual functions consistent with the observed training data. Let $\mathcal{R}$ be a measurable space of admissible residual functions such that the evaluation map $(x,r)\mapsto r(x)$ is measurable. We denote the probability law of $R_{\mathcal{D}}$ on $\mathcal{R}$ by $\mathbb{Q}$. All process laws are understood conditional on the fixed training dataset $\mathcal{D}$.
+
+Conditional on the fixed training dataset $\mathcal{D}$, the input $X\sim\mathbb{P}$ is assumed to be independent of the residual process $R_{\mathcal{D}}$. The corresponding surrogate-based failure probability is
+\begin{equation} 
+    p_{\hat{f}}(\mathbb{Q}) 
+    := \Pr_{\mathbb{P}\otimes\mathbb{Q}}
+       \left\{
+         \hat{g}_{\mathcal{D}}(X)+R_{\mathcal{D}}(X)\leq 0
+       \right\} 
+    = \int_{\mathcal{R}}
+         \int_{\mathcal{X}}
+         \mathbf{1}_{\{
+           \hat{g}_{\mathcal{D}}(x)+r(x)\leq 0
+         \}}
+         \mathbb{P}(\mathrm{d}x)
+       \mathbb{Q}(\mathrm{d}r). 
+\end{equation}
+Thus, $p_{\hat{f}}(\mathbb{Q})$ averages the failure probability over possible residual functions. For fixed $\mathbb{P}$ and $\hat{g}_{\mathcal{D}}$, it is linear in $\mathbb{Q}$.
+
+However, in complex engineering systems, the available information may be insufficient to specify the probability law of the residual process reliably. We therefore construct a nonempty ambiguity set $\mathscr{Q}$ of candidate process laws consistent with the available information. Each $\mathbb{Q}\in\mathscr{Q}$ represents a plausible description of uncertainty about the residual function.
+
+For fixed $\mathbb{P}$ and $\hat{g}_{\mathcal{D}}$, we seek the range of surrogate-based failure probabilities over all candidate process laws in $\mathscr{Q}$. The upper
+and lower bounds are
+\begin{equation}
+  \overline{p}_{\hat{f}}
+  := \sup_{\mathbb{Q}\in\mathscr{Q}}
+     p_{\hat{f}}(\mathbb{Q}),
+  \label{eq-upper-bound}
+\end{equation}
+and
+\begin{equation}
+  \underline{p}_{\hat{f}}
+  := \inf_{\mathbb{Q}\in\mathscr{Q}}
+     p_{\hat{f}}(\mathbb{Q}),
+  \label{eq-lower-bound}
+\end{equation}
+respectively. These bounds characterize the range of surrogate-based failure probabilities over the candidate process laws in $\mathscr{Q}$. Their computation generally requires optimization over probability measures on a function space, leading to infinite-dimensional optimization problems.
+
+Accordingly, success depends on two components:
+\begin{enumerate}
+  \item \textbf{Statistically calibrated ambiguity sets.} Select suitable residual distribution features and calibrate the set size using confidence regions to obtain finite-sample guarantees.
+  \item \textbf{Tractable reformulations.} Reformulate both bound problems for efficient computation without additional approximation error.
+\end{enumerate}
+
+\section{Ambiguity Set Design}
+
+Gaussian process models induce multivariate Gaussian
+distributions for residuals evaluated at finitely many inputs.
+When information about the joint residual distribution is
+limited, estimates of its mean and covariance matrix provide
+a practical basis for characterizing uncertainty.
+We construct a moment-based ambiguity set to account for
+uncertainty in both the distributional form and the estimated
+moments.
+
+The admissible residual family $\mathcal{R}$ is chosen to be
+consistent with the training data: every $r\in\mathcal{R}$
+satisfies
+\[
+  r(x_i^{\mathrm{tr}})
+  =
+  g(x_i^{\mathrm{tr}})
+  -\hat{g}_{\mathcal{D}}(x_i^{\mathrm{tr}}),
+  \qquad i=1,\ldots,m.
+\]
+Choose reconstruction nodes $x_1,\ldots,x_n\in\mathcal{X}$
+and define
+\[
+  \epsilon
+  := \left(
+    R_{\mathcal{D}}(x_1),\ldots,R_{\mathcal{D}}(x_n)
+  \right)^{\top}
+  \in\mathbb{R}^{n}.
+\]
+The training inputs impose the observed residual values,
+while the reconstruction nodes identify the remaining
+variation within $\mathcal{R}$.
+Let $\Xi\subseteq\mathbb{R}^{n}$ be a known nonempty Borel
+set of admissible nodal residual vectors.
+
+\begin{assumption}[Finite-dimensional residual representation]
+\label{ass-residual-reconstruction}
+  The evaluation map
+  \[
+    r\longmapsto
+    \left(r(x_1),\ldots,r(x_n)\right)^{\top}
+  \]
+  is a measurable bijection from $\mathcal{R}$ onto $\Xi$
+  with a measurable inverse $S:\Xi\to\mathcal{R}$.
+\end{assumption}
+
+For an affine residual family with $n$ free parameters,
+this condition follows when the nodal evaluation matrix
+is invertible.
+The map $S$ reconstructs an admissible residual function
+from its nodal values.
+
+Define $h:\Xi\to[0,1]$ by
+\begin{equation}
+  h(\epsilon)
+  :=
+  \int_{\mathcal{X}}
+    \mathbf{1}_{\{
+      \hat{g}_{\mathcal{D}}(x)+S(\epsilon)(x)\leq0
+    \}}\,
+    \mathbb{P}(\mathrm{d}x).
+  \label{eq-residual-failure-function}
+\end{equation}
+Thus, reliability is evaluated under $\mathbb{P}$ using
+the residual function reconstructed from $\epsilon$.
+For a process law $\mathbb{Q}$, write
+$\mathbb{Q}_{\epsilon}
+:=\operatorname{Law}_{\mathbb{Q}}(\epsilon)$
+for the induced joint distribution.
+
+\begin{definition}[Moment-based ambiguity set]
+  Let $\mathcal{F}$ be the Borel $\sigma$-algebra on
+  $\mathbb{R}^{n}$, and let $\mathscr{M}$ denote the set
+  of probability measures on $(\mathbb{R}^{n},\mathcal{F})$
+  with finite second moments.
+  Given a mean vector estimate $\mu_0$, a positive definite
+  covariance matrix estimate $\mathbf{\Sigma}_0$, and
+  parameters $\gamma_1\geq0$ and $\gamma_2\geq1$, define
+  \begin{equation}
+    \mathscr{Q}_{\epsilon}
+    := \left\{
+      \mathbb{Q}_{\epsilon}\in\mathscr{M}
+      \;\middle|\;
+      \begin{aligned}
+        & \left(
+            \mathbb{E}_{\mathbb{Q}_{\epsilon}}[\epsilon]-\mu_0
+          \right)^{\top}
+          \mathbf{\Sigma}_0^{-1}
+          \left(
+            \mathbb{E}_{\mathbb{Q}_{\epsilon}}[\epsilon]-\mu_0
+          \right)
+          \leq\gamma_1, \\
+        & \mathbb{E}_{\mathbb{Q}_{\epsilon}}\!\left[
+            (\epsilon-\mu_0)(\epsilon-\mu_0)^{\top}
+          \right]
+          \preceq\gamma_2\mathbf{\Sigma}_0, \\
+        & \mathbb{Q}_{\epsilon}(\Xi)=1
+      \end{aligned}
+    \right\}.
+    \label{eq-moment-ambiguity-set}
+  \end{equation}
+  The parameters are chosen so that
+  $\mathscr{Q}_{\epsilon}$ is nonempty.
+\end{definition}
+
+The first constraint controls uncertainty in the residual
+mean vector. The second bounds the second-moment matrix
+about $\mu_0$. The third specifies the residual support.
+
+We define the corresponding process-law ambiguity set
+$\mathscr{Q}$ to contain all probability laws $\mathbb{Q}$
+on $\mathcal{R}$ whose induced joint distributions satisfy
+$\operatorname{Law}_{\mathbb{Q}}(\epsilon)
+\in\mathscr{Q}_{\epsilon}$.
+
+\begin{proposition}[Exact finite-dimensional representation]
+\label{prop-exact-finite-representation}
+  Under Assumption~\ref{ass-residual-reconstruction},
+  \begin{equation}
+    \mathscr{Q}_{\epsilon}
+    =
+    \left\{
+      \operatorname{Law}_{\mathbb{Q}}(\epsilon):
+      \mathbb{Q}\in\mathscr{Q}
+    \right\},
+    \label{eq-exact-induced-ambiguity-set}
+  \end{equation}
+  and the failure probability bounds satisfy
+  \begin{equation}
+    \begin{aligned}
+      \overline{p}_{\hat{f}}
+      &=
+      \sup_{\mathbb{Q}_{\epsilon}\in\mathscr{Q}_{\epsilon}}
+      \mathbb{E}_{\mathbb{Q}_{\epsilon}}[h(\epsilon)], \\
+      \underline{p}_{\hat{f}}
+      &=
+      \inf_{\mathbb{Q}_{\epsilon}\in\mathscr{Q}_{\epsilon}}
+      \mathbb{E}_{\mathbb{Q}_{\epsilon}}[h(\epsilon)].
+    \end{aligned}
+    \label{eq-finite-dimensional-bounds}
+  \end{equation}
+\end{proposition}
+
+\begin{proof}
+  By Assumption~\ref{ass-residual-reconstruction}, each
+  admissible residual function is reconstructed from its
+  nodal values. Hence,
+  \[
+    p_{\hat{f}}(\mathbb{Q})
+    =
+    \mathbb{E}_{\mathbb{Q}_{\epsilon}}[h(\epsilon)].
+  \]
+  Every $\mathbb{Q}\in\mathscr{Q}$ induces a distribution
+  in $\mathscr{Q}_{\epsilon}$ by construction.
+  Conversely, for any
+  $\mathbb{Q}_{\epsilon}\in\mathscr{Q}_{\epsilon}$,
+  take $\epsilon\sim\mathbb{Q}_{\epsilon}$ and set
+  $R_{\mathcal{D}}=S(\epsilon)$.
+  Its evaluation vector has distribution
+  $\mathbb{Q}_{\epsilon}$, and its process law belongs
+  to $\mathscr{Q}$.
+  This proves the equality of the induced distribution
+  sets and the stated representations of both bounds.
+\end{proof}
+
+
+
+% \section{Ambiguity Set Design}
+
+% Gaussian distributions have been used to model surrogate residuals in reliability analysis. When information about the residual distribution is limited, its estimated mean and covariance provide a practical basis for characterizing uncertainty. We therefore construct the following moment-based ambiguity set to account for uncertainty in both the distributional form and the estimated moments.
+
+% \begin{definition}[Moment-based ambiguity set] 
+%   Let $\mathcal{F}$ its Borel $\sigma$-algebra and $\mathscr{M}$ the set of probability measures on $(\mathbb{R},\mathcal{F})$ with finite second moments. Given estimates $\mu_0$ and $\mathbf{\Sigma}_0$ of the residual mean and covariance matrix, respectively, and parameters $\gamma_1\geq0$ and $\gamma_2\geq1$, define
+%   \begin{equation}
+%     \mathscr{Q} := \left\{
+%       \mathbb{Q} \in \mathscr{M}
+%       \left|
+%       \begin{aligned}
+%         & \left(\mathbb{E}_{\mathbb{Q}}[\epsilon]-\mu_0\right)^{\top} \mathbf{\Sigma}_0^{-1} \left(\mathbb{E}_{\mathbb{Q}}[\epsilon]-\mu_0\right) \leq \gamma_1 \\
+%         & \mathbb{E}_{\mathbb{Q}} \left[ (\epsilon-\mu_0)(\epsilon-\mu_0)^{\top} \right] \preceq \gamma_2\mathbf{\Sigma}_0 \\
+%         & \Pr \left\{\epsilon \in \Xi\right\} = 1
+%       \end{aligned}
+%       \right.
+%     \right\}.
+%   \end{equation} 
+% \end{definition}
+
+% The first constraint in the moment-based ambiguity set assumes that the mean of $\epsilon$ lies in an ellipsoid of size $\gamma_1$ centered at the estimate $\mu_0$. The second constraint bounds the second-moment matrix about $\mu_0$ from above by $\gamma_2\mathbf{\Sigma}_0$ in the positive semidefinite order, thereby controlling both residual variability and mean deviation from $\mu_0$ in every direction. The parameters $\gamma_1$ and $\gamma_2$ control the allowable mean deviation and the second-moment bound about $\mu_0$, respectively.
+
+% Before calibrating the size parameters of the moment-based ambiguity set, we state the following finite-sample guarantee, which does not relies on the specify form of ambiguity set.
+% \begin{theorem} 
+%   For $\delta\in(0,1)$, if the ambiguity set $\mathscr{Q}$ contains the true distribution $\mathbb{Q}^{\star}$ with probability at least $1 - \delta$, i.e.,
+%   \[
+%     \Pr \left\{ \mathbb{Q}^{\star} \in \mathscr{Q} \right\} \geq 1 - \delta,
+%   \]
+%   then
+%   \[
+%     \Pr \left\{ \underline{p}_{\hat{f}} \leq p_{\hat{f}}(\mathbb{Q}^{\star}) \leq \overline{p}_{\hat{f}} \right\} \geq 1 - \delta.
+%   \]
+% \end{theorem}
+
+% \begin{proof}
+%   By the definition of the lower and upper bounds, $\mathbb{Q}^{\star} \in \mathscr{Q}$ imples
+%   \[
+%     \underline{p}_{\hat{f}} \leq p_{\hat{f}}(\mathbb{Q}^{\star}) \leq \overline{p}_{\hat{f}}.
+%   \]
+%   Therefore,
+%   \[
+%     \Pr\left\{ \underline{p}_{\hat{f}} \leq p_{\hat{f}}(\mathbb{Q}^{\star}) \leq \overline{p}_{\hat{f}} \right\}
+%     \geq
+%     \Pr\left\{\mathbb{Q}^{\star}\in\mathscr{Q}\right\} \geq 1-\delta.
+%   \]
+% \end{proof}
+
+% The following proposition states conditions under which the true probability distribution of $\epsilon$ falls in the ambiguity set $\mathscr{Q}$ by a proper setting of $\gamma_1$ and $\gamma_2$ for the fixed sample size $N$ and confidence level $1 - \delta$.
+
+% \begin{proposition}
+%   For a given $\delta$, let 
+%   \begin{equation}
+%     \gamma_1^{N} = \qquad \gamma_2^{N} = . 
+%   \end{equation}
+%   There then exists a positive integer $N_0$ depending on $\delta$ such that, for the true probability distribution $\mathbb{Q}^{\star}$ of surrogate residual $\epsilon$,
+%   \[
+%     \Pr\left\{\mathbb{Q}^{\star}\in\mathscr{Q}(\gamma_1^{N},\gamma_2^{N})\right\} \geq 1-\delta
+%   \]
+%   for all $N \geq N_0$.
+% \end{proposition}
+
+% \section{Tractable Reformulation}
+
+\end{document}
