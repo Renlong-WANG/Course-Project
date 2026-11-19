@@ -98,22 +98,21 @@ When information about the surrogate error distribution is limited, estimates of
 These quantities serve as reference moment estimates. Assuming $\Sigma_0>0$, we construct a moment-based ambiguity set to account for uncertainty in both the distributional form and the estimated moments.
 
 \begin{definition}[Moment-based ambiguity set]
-  Let $\mathcal F$ be the Borel $\sigma$-algebra on $\mathbb R$, and let $\mathscr M$ denote the set of probability measures on $(\mathbb R,\mathcal F)$ with finite second moments. For $\gamma_1\geq0$ and $\gamma_2\geq1$, define
+  Given reference estimates $\mu_0\in\mathbb R$ and $\Sigma_0>0$ of the error mean and variance, respectively, and parameters $\gamma_1\geq0$ and $\gamma_2\geq1$, define the moment-based ambiguity set:
   \begin{equation}
     \mathscr Q:=\left\{
-      \mathbb Q\in\mathscr M
+      \mathbb Q\in\mathcal Q(\Xi)
       \;\middle|\;
       \begin{aligned}
-        & \left(\mathbb E_{\mathbb Q}[\xi]-\mu_0\right)^2\leq\gamma_1,\\
-        & \mathbb E_{\mathbb Q}\left[(\xi-\mu_0)^2\right]\leq\gamma_2\Sigma_0,\\
-        & \mathbb Q(\Xi)=1
+        & \left| \mathbb E_{\mathbb Q}[\xi] - \mu_0 \right| \leq \gamma_1\\
+        & \mathbb E_{\mathbb Q}\left[(\xi-\mu_0)^2\right]\leq\gamma_2\Sigma_0
       \end{aligned}
     \right\}.
     \label{eq-moment-ambiguity-set}
-  \end{equation} 
+  \end{equation}
 \end{definition}
 
-The first constraint limits the deviation of the error mean from $\mu_0$. The second bounds the expected squared deviation from $\mu_0$, accounting for both error variance and mean deviation. The third specifies the error support.
+The first constraint limits the deviation of the error mean from $\mu_0$. The second bounds the expected squared deviation from $\mu_0$, accounting for both error variance and mean deviation. 
 
 % In the reliability analysis, this ambiguity set constrains the error marginal of the joint distribution $\Pi$, while the input marginal remains fixed:
 % \[
