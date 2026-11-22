@@ -1,0 +1,22 @@
+{
+  "verification_date": "2026-11-22",
+  "entries": [
+    {
+      "key": "B.V04",
+      "metadata_source": "https://api.crossref.org/works/10.1017/CBO9780511804441",
+      "publisher_source": "https://www.cambridge.org/highereducation/books/convex-optimization/17D2FAA54F641A2F62C7CCD01DFA97C4",
+      "extraction": "citation-management/scripts/doi_to_bibtex.py",
+      "verified_fields": ["authors", "title", "year", "publisher", "doi", "print_isbn"],
+      "normalization": "Existing citation-key convention retained; print ISBN verified with publisher.",
+      "not_applicable": ["journal", "volume", "issue"]
+    },
+    {
+      "key": "F.F56",
+      "metadata_source": "https://api.crossref.org/works/10.4153/CJM-1956-045-5",
+      "publisher_source": "https://www.cambridge.org/core/journals/canadian-journal-of-mathematics/article/maximal-flow-through-a-network/5D6E55D3B06C4F7B1043BC1D82D40764",
+      "extraction": "citation-management/scripts/doi_to_bibtex.py",
+      "verified_fields": ["authors", "title", "year", "journal", "volume", "pages", "doi"],
+      "normalization": "Ford's Jr. suffix restored from publisher record; page dash normalized to BibTeX double hyphen. The print year 1956 is used."
+    }
+  ]
+}

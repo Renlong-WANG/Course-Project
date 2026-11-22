@@ -1,0 +1,308 @@
+    Failure Probability Bounds with Uncertain Surrogate Residual Distributions
+
+                                                    Renlong Wanga
+             a
+                 Department of Civil and Environmental Engineering, Rice University, Houston, TX 77005, USA
+
+
+
+
+Abstract
+
+Keywords:
+
+
+
+1. Introduction
+
+2. Problem Description
+
+    Let X ∼ P be a random input taking values in X ⊆ Rn , and let g : X → R be a measurable limit-state
+function. The failure probability is defined as
+                                                                                Z
+                                                            
+                          pf := Pr{g(X) ≤ 0} = EX∼P 1{g(X)≤0} =                     1{g(x)≤0} P(dx).
+                                                                                X
+
+For fixed g, this functional is linear in P.
+    Evaluating g at an input x can be computationally expensive, particularly when each evaluation
+requires a high-fidelity simulation. A common approach is to replace g with a computationally efficient
+surrogate model. Let
+                                                                        N tr
+                                               Dtr :=       xtr     tr
+                                                        
+                                                             i , g(xi ) i=1
+
+
+denote the training dataset used to construct a measurable surrogate ĝ := ĝDtr . All model fitting
+and selection are completed using the training data before the test data introduced below are used.
+Throughout the analysis, we condition on Dtr , treat ĝ as fixed, and suppress this dependence in the
+notation.
+    Define the signed residual function
+
+                                           ξ(x) := g(x) − ĝ(x),        ∀x ∈ X .
+
+For a new input X ∼ P independent of the training data, the residual ξ ⋆ := ξ(X) has distribution Q⋆
+under the fixed surrogate ĝ. Let Ξ ⊆ R be a known Borel set satisfying Q⋆ (Ξ) = 1, and let Q(Ξ) denote
+the set of probability measures on R supported on Ξ. We take Ξ = R when no smaller support can be
+justified.
+
+
+    Email address: rw106@rice.edu (Renlong Wang)
+    For a candidate residual distribution Q ∈ Q(Ξ), let Π denote a joint distribution of (X, ξ) on X × Ξ
+with input marginal P = ΠX and residual marginal Q = Πξ . The corresponding surrogate-based failure
+probability is
+                                                               Z
+                         pfˆ(Π) := Pr{ĝ(X) + ξ ≤ 0} =                1{ĝ(x)+ξ≤0} Π(dx, dξ).                    (1)
+                                    Π                          X ×Ξ
+
+For fixed ĝ, this functional is linear in Π. In particular, the true joint distribution Π⋆ satisfies pfˆ(Π⋆ ) = pf .
+    The surrogate-based failure probability depends on both the residual distribution and its dependence
+on the input. This dependence is particularly relevant for inputs whose surrogate predictions lie close to
+the failure threshold, where even small residual errors can change the failure classification. In complex
+engineering systems, however, the available information may be insufficient to specify the residual distri-
+bution reliably. We therefore construct an ambiguity set Q of plausible residual distributions intended
+to contain Q⋆ with high confidence. For a given residual ambiguity set Q, define the joint ambiguity set
+P(Q) by
+                               P(Q) := {Π ∈ P(X × Ξ) : ΠX = P, Πξ ∈ Q} ,
+
+where P(X × Ξ) is the set of probability measures on X × Ξ. This set allows all dependence structures
+consistent with the specified marginals. The upper and lower failure probability bounds are
+
+                                               pfˆ :=    sup pfˆ(Π),                                             (2)
+                                                        Π∈P(Q)
+
+and
+                                               pfˆ :=     inf p ˆ(Π),                                            (3)
+                                                        Π∈P(Q) f
+
+respectively. If Q⋆ ∈ Q, then Π⋆ ∈ P(Q) and hence pfˆ ≤ pf ≤ pfˆ.
+    The main tasks are therefore:
+
+   1. Ambiguity set design and statistical calibration. Construct a residual ambiguity set and
+      establish its coverage guarantee under explicit sampling conditions.
+   2. Tractable reformulations. Derive exact and computationally tractable reformulations of the
+      infinite-dimensional optimization problems defining the failure probability bounds.
+
+
+3. Ambiguity Set Design
+
+    In the surrogate formulation, failure occurs when ξ ≤ −ĝ(X). The residual cumulative distribution
+function (CDF) therefore describes the marginal probability mass relevant to each failure threshold. Its
+tail accuracy matters when estimating small failure probabilities. We use the Dümbgen–Wellner (DW)
+construction (Dümbgen and Wellner, 2023) to control deviations from the empirical CDF simultaneously
+over all thresholds, with tolerances that vary across probability levels.
+                                                           2
+   We first introduce a local discrepancy that accounts for the probability level. Let q and p denote
+an empirical probability and a candidate probability, respectively. Following Berk and Jones (1979) and
+the CDF confidence band construction of Owen (1995), we compare them using the Bernoulli Kullback–
+Leibler divergence
+
+                                        q               1−q
+                     ϕ(q, p) := q log     + (1 − q) log     ,          ∀q ∈ [0, 1], p ∈ (0, 1),          (4)
+                                        p               1−p
+
+where logarithms are natural and a term with zero numerator is interpreted as zero. For q close to an
+interior p, the approximation ϕ(q, p) ≈ (q − p)2 /[2p(1 − p)] scales the deviation by the Bernoulli variance.
+Thus, the same absolute deviation receives a larger weight near the probability boundaries. The full
+divergence also covers zero and full empirical counts through ϕ(0, p) = − log(1 − p) and ϕ(1, p) = − log p.
+At the boundaries of the candidate probability, we set ϕ(0, 0) = ϕ(1, 1) = 0, ϕ(q, 0) = +∞ for q > 0, and
+ϕ(q, 1) = +∞ for q < 1.
+   To compare deviations simultaneously across probability levels, we use the additive correction of
+Dümbgen and Wellner (2023). For v ∈ (0, 1), define
+
+                                                e
+                                                               ω(v) := log 1 + ρ(v)2 .
+                                                                                    
+                          ρ(v) := log log             ,                                                  (5)
+                                            4v(1 − v)
+
+We fix the divergence parameter s = 1, corresponding to (4), and the correction parameter ν = 1 before
+sampling. The resulting correction is ψ(v) := ρ(v) + ω(v), with ψ(0) = ψ(1) = +∞. For q, p ∈ [0, 1],
+define its bivariate extension
+                                      ψ(q, p) :=           min              ψ(v).                        (6)
+                                                   v∈[min{q,p}, max{q,p}]
+
+The functions ρ and ω vanish at v = 1/2 and increase toward the probability boundaries. Taking the
+minimum over the interval between q and p makes the correction large only when both probabilities lie
+in the same tail. This correction balances fluctuations across probability scales in the simultaneous CDF
+constraint.
+   We now construct the empirical CDF from a test dataset
+
+                                                                   N te
+                                          Dte :=       xte     te
+                                                   
+                                                        j , g(xj ) j=1 .
+
+
+The test inputs xte           te                                                          tr         te
+                 1 , . . . , xN te are drawn independently from P and are independent of D . We fix N ≥ 1
+
+before sampling and use the test data to calibrate the residual ambiguity set. The fitted surrogate remains
+fixed during and after calibration.
+   Define the signed test residuals
+
+                           ξjte := ξ(xte       te        te
+                                      j ) = g(xj ) − ĝ(xj ),          j = 1, . . . , N te .
+
+
+                                                          3
+Conditional on Dtr , these residuals are independent and identically distributed according to Q⋆ . Their
+empirical CDF is
+                                                           N te
+                                                     1 X
+                                         Fbte (t) := te  1{ξjte ≤t} ,                 ∀t ∈ R.             (7)
+                                                    N
+                                                           j=1
+
+For Q ∈ Q(Ξ), write FQ (t) := Q((−∞, t]). At threshold t, q = Fbte (t) is the average of the Bernoulli
+indicators in (7), and p = FQ (t) is the candidate probability. The quantity N te ϕ(q, p) is then the
+Bernoulli log-likelihood difference between the empirical and candidate probabilities. Combining this
+local discrepancy with the multiscale correction gives N te ϕ(q, p) − ψ(q, p).
+   At the probability boundaries, the corrected discrepancy is −∞ for q = p ∈ {0, 1} and +∞ for
+p = 0 < q or p = 1 > q. These conventions extend the constraint to every residual threshold.
+
+Definition 1 (DW-based CDF ambiguity set). Given the empirical CDF Fbte and a threshold θ ≥ 0,
+define                                                                                  
+                                                 h                                i
+             Q   DW
+                      (θ) :=                       te     te               te
+                                   Q ∈ Q(Ξ) : sup N ϕ F (t), FQ (t) − ψ F (t), FQ (t) ≤ θ .
+                                                        b                b                                (8)
+                                                 t∈R
+
+   We calibrate θ against a distribution-free reference law. Following Dümbgen and Wellner (2023), let
+V1 , . . . , VN te be independent standard uniform variables, independent of the training and test data. Their
+empirical CDF is
+                                                           N te
+                                                   1 X
+                                      GN te (u) := te  1{Vj ≤u} ,                 ∀u ∈ [0, 1].            (9)
+                                                  N
+                                                           j=1
+
+Define the uniform reference statistic
+
+                                   TNUte := sup
+                                                      te                                
+                                                      N ϕ(GN te (u), u) − ψ(GN te (u), u) .              (10)
+                                           u∈(0,1)
+
+Here PrU denotes probability under the uniform reference law. The next proposition uses a quantile of
+this reference statistic to calibrate the residual ambiguity set.
+
+Proposition 1 (Finite-sample θ calibration). Under the sampling conditions stated above, let δ ∈ (0, 1)
+and define                                                                                     
+                                                                          TNUte ≤ z
+                                                                      
+                                    θN te (δ) := inf z ≥ 0 : Pr                        ≥1−δ .            (11)
+                                                                  U
+
+   Then, for every θ ≥ θN te (δ), the DW-based CDF ambiguity set satisfies
+
+                                            Pr Q⋆ ∈ Q DW (θ) Dtr ≥ 1 − δ.
+                                              
+                                                                                                         (12)
+                                           Dte
+
+Proof. The reference statistic is finite almost surely, and its distribution function is right-continuous.
+Hence (11) gives
+                                                  Pr TNUte > θN te (δ) ≤ δ.
+                                                    
+                                                  U
+                                                                  4
+Conditioning on Dtr fixes ĝ and Q⋆ . Define the generalized quantile function FQ−1
+                                                                                  ⋆ (u) := inf{t ∈ R :
+
+
+FQ⋆ (t) ≥ u}, u ∈ (0, 1). The sample FQ−1                        te
+                                        ⋆ (Vj ), j = 1, . . . , N , has the same conditional joint law as the
+
+
+test residuals. Thus, given Dtr ,
+                                             
+                                           te           d
+                                         F (t)
+                                         b              = (GN te (FQ⋆ (t)))t∈R .
+                                                  t∈R
+
+For 0 < FQ⋆ (t) < 1, the discrepancy at Q⋆ is evaluated at a probability level included in (10). When
+FQ⋆ (t) is zero or one, the empirical CDF equals that boundary almost surely, giving discrepancy −∞. The
+supremum in (8), evaluated at Q⋆ , is therefore bounded by TNUte under this coupling. Since Q⋆ (Ξ) = 1,
+we obtain
+                              / Q DW (θN te (δ)) Dtr ≤ Pr TNUte > θN te (δ) ≤ δ.
+                        Pr Q⋆ ∈
+                                                        
+                        Dte                                       U
+
+For every test sample, θ ≥ θN te (δ) implies Q DW (θN te (δ)) ⊆ Q DW (θ). This inclusion proves (12) for every
+such θ.
+
+   For every fixed N te ≥ 1, the proposition covers arbitrary residual distributions, including laws with
+atoms or infinite moments. With fixed method parameters, the reference law depends only on N te , so
+the threshold can be calibrated offline. Dümbgen and Wellner (2023, Supplement, Sections S.6–S.7)
+provide finite-sample evaluation through uniform order-statistic boundary probabilities. Choosing θ as a
+conservative upper bound on the quantile in (11) preserves (12). Calibration by simulation must control
+quantile estimation error to retain the stated coverage. The threshold may also depend on the test data,
+provided θ ≥ θN te (δ) almost surely; the same nesting argument then preserves (12).
+   Statistical confidence regions yield finite-sample guarantees for distributionally robust objectives
+(Bertsimas et al., 2018). The following theorem transfers residual-distribution coverage to simultane-
+ous bounds on the failure probability under the joint model. It applies to any residual ambiguity set
+satisfying the stated coverage condition.
+
+Theorem 1 (Finite-sample failure probability bounds). Let δ ∈ (0, 1), and suppose a test-data-dependent
+residual ambiguity set Q satisfies
+                                           Pr Q⋆ ∈ Q Dtr ≥ 1 − δ.
+                                             
+                                           Dte
+
+Then the bounds defined in (2) and (3) satisfy
+                                       n                  o
+                                     Pr pfˆ ≤ pf ≤ pfˆ Dtr ≥ 1 − δ.                                      (13)
+                                     Dte
+
+In particular, this guarantee holds for Q = Q DW (θ) whenever θ ≥ θN te (δ), with the calibrated threshold
+defined in (11).
+
+
+                                                            5
+Proof. On Q⋆ ∈ Q, the true joint distribution Π⋆ belongs to P(Q). Since pfˆ(Π⋆ ) = pf , the lower and
+upper bounds satisfy
+                                               pfˆ ≤ pfˆ(Π⋆ ) = pf ≤ pfˆ.
+
+Taking probabilities yields
+                               n                  o
+                             Pr pfˆ ≤ pf ≤ pfˆ Dtr ≥ Pr Q⋆ ∈ Q Dtr ≥ 1 − δ,
+                                                       
+                             Dte                              Dte
+
+which proves Theorem 1.
+
+    The event Q⋆ ∈ Q gives both inequalities, so 1 − δ is the confidence level for the entire interval. In
+the DW set, θ controls the corrected likelihood discrepancy. The corresponding CDF tolerances vary
+by probability level and can differ above and below the empirical CDF. For a fixed sample size, higher
+confidence requires a nondecreasing calibrated threshold θN te (δ).
+    For a fixed empirical CDF, 0 ≤ θ1 ≤ θ2 implies Q DW (θ1 ) ⊆ Q DW (θ2 ). The lower bound is therefore
+nonincreasing in θ, and the upper bound is nondecreasing. The interval reflects finite-sample uncertainty
+in the residual law and uncertainty in its dependence on the input. Because the joint ambiguity set allows
+all couplings with the specified marginals, a gap can persist even when the residual marginal is known
+exactly.
+
+
+4. Tractable Reformulation
+
+References
+
+Berk, R.H., Jones, D.H., 1979. Goodness-of-fit test statistics that dominate the Kolmogorov statistics. Zeitschrift für
+  Wahrscheinlichkeitstheorie und Verwandte Gebiete 47, 47–59. doi:10.1007/BF00533250.
+Bertsimas, D., Gupta, V., Kallus, N., 2018. Robust sample average approximation. Mathematical Programming 171,
+  217–282. doi:10.1007/s10107-017-1174-z.
+Dümbgen, L., Wellner, J.A., 2023. A new approach to tests and confidence bands for distribution functions. The Annals of
+  Statistics 51, 260–289. doi:10.1214/22-AOS2249.
+Owen, A.B., 1995. Nonparametric likelihood confidence bands for a distribution function. Journal of the American Statistical
+  Association 90, 516–521. doi:10.1080/01621459.1995.10476543.
+
+
+
+
+                                                             6
+

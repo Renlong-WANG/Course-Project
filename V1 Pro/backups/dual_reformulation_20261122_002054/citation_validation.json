@@ -1,0 +1,24 @@
+{
+  "filepath": "reference.bib",
+  "total_entries": 6,
+  "valid_entries": 6,
+  "errors": [],
+  "warnings": [],
+  "duplicates": [],
+  "venue_standard_checked": null,
+  "min_count_checked": null,
+  "manuscript_results": {
+    "checked": true,
+    "manuscript_filepath": "manuscript.tex",
+    "cited_keys": [
+      "O95",
+      "F.F56",
+      "B.G.K18",
+      "L.J23",
+      "B.J79",
+      "B.V04"
+    ],
+    "missing_keys": [],
+    "unused_keys": []
+  }
+}

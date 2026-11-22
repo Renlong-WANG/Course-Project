@@ -1,0 +1,166 @@
+--- backup/manuscript.tex
++++ manuscript.tex
+@@ -91,7 +91,26 @@
+ 
+ In the surrogate formulation, failure occurs when $\xi\le-\hat g(\bm X)$. The residual cumulative distribution function (CDF) therefore describes the marginal probability mass relevant to each failure threshold. Its tail accuracy matters when estimating small failure probabilities. We use the D\"umbgen--Wellner (DW) construction \citep{L.J23} to control deviations from the empirical CDF simultaneously over all thresholds, with tolerances that vary across probability levels.
+ 
+-We construct an empirical CDF from a test dataset
++We first introduce a local discrepancy that accounts for the probability level. Let $q$ and $p$ denote an empirical probability and a candidate probability, respectively. Following \citet{B.J79} and the CDF confidence band construction of \citet{O95}, we compare them using the Bernoulli Kullback--Leibler divergence
++\begin{equation}
++  \phi(q,p):=q\log\frac{q}{p}+(1-q)\log\frac{1-q}{1-p},\qquad q\in[0,1],\quad p\in(0,1),
++  \label{eq-bernoulli-kl}
++\end{equation}
++where logarithms are natural and a term with zero numerator is interpreted as zero. For $q$ close to an interior $p$, the approximation $\phi(q,p)\approx(q-p)^2/[2p(1-p)]$ scales the deviation by the Bernoulli variance. Thus, the same absolute deviation receives a larger weight near the probability boundaries. The full divergence also covers zero and full empirical counts through $\phi(0,p)=-\log(1-p)$ and $\phi(1,p)=-\log p$. At the boundaries of the candidate probability, we set $\phi(0,0)=\phi(1,1)=0$, $\phi(q,0)=+\infty$ for $q>0$, and $\phi(q,1)=+\infty$ for $q<1$.
++
++To compare deviations simultaneously across probability levels, we use the additive correction of \citet{L.J23}. For $v\in(0,1)$, define
++\begin{equation}
++  \rho(v):=\log\log\frac{e}{4v(1-v)},\qquad \omega(v):=\log\!\left(1+\rho(v)^2\right).
++  \label{eq-dw-correction-functions}
++\end{equation}
++We fix the divergence parameter $s=1$, corresponding to \eqref{eq-bernoulli-kl}, and the correction parameter $\nu=1$ before sampling. The resulting correction is $\psi(v):=\rho(v)+\omega(v)$, with $\psi(0)=\psi(1)=+\infty$. For $q,p\in[0,1]$, define its bivariate extension
++\begin{equation}
++  \psi(q,p):=\min_{v\in[\min\{q,p\},\,\max\{q,p\}]}\psi(v).
++  \label{eq-dw-bivariate-correction}
++\end{equation}
++The functions $\rho$ and $\omega$ vanish at $v=1/2$ and increase toward the probability boundaries. Taking the minimum over the interval between $q$ and $p$ makes the correction large only when both probabilities lie in the same tail. This correction balances fluctuations across probability scales in the simultaneous CDF constraint.
++
++We now construct the empirical CDF from a test dataset
+ \[
+   \mathcal D^{\mathrm{te}}:=\left\{\left(\bm x_j^{\mathrm{te}},g(\bm x_j^{\mathrm{te}})\right)\right\}_{j=1}^{N^{\mathrm{te}}}.
+ \]
+@@ -106,34 +125,17 @@
+   \widehat F^{\mathrm{te}}(t):=\frac{1}{N^{\mathrm{te}}}\sum_{j=1}^{N^{\mathrm{te}}}\mathbf 1_{\{\xi_j^{\mathrm{te}}\le t\}},\qquad \forall t\in\mathbb R.
+   \label{eq-empirical-cdf}
+ \end{equation}
+-For $\mathbb Q\in\mathcal Q(\Xi)$, write $F_{\mathbb Q}(t):=\mathbb Q(({-\infty},t])$. At threshold $t$, the empirical probability $q=\widehat F^{\mathrm{te}}(t)$ is the mean of the Bernoulli indicators $\mathbf 1_{\{\xi_j^{\mathrm{te}}\le t\}}$, and $p=F_{\mathbb Q}(t)$ is its candidate value. Following \citet{B.J79} and the CDF confidence band construction of \citet{O95}, we compare these probabilities using the Bernoulli Kullback--Leibler divergence
+-\begin{equation}
+-  K(q,p):=q\log\frac{q}{p}+(1-q)\log\frac{1-q}{1-p},\qquad q\in[0,1],\quad p\in(0,1),
+-  \label{eq-bernoulli-kl}
+-\end{equation}
+-where logarithms are natural and a term with zero numerator is interpreted as zero. The quantity $N^{\mathrm{te}}K(q,p)$ is the Bernoulli log-likelihood difference between the empirical and candidate probabilities. For $q$ close to an interior $p$, the approximation $K(q,p)\approx(q-p)^2/[2p(1-p)]$ weights the CDF deviation by its local sampling variance. The full divergence also covers zero counts through $K(0,p)=-\log(1-p)$ and $K(1,p)=-\log p$.
+-
+-We use the additive correction of \citet{L.J23} to balance fluctuations across probability scales in the simultaneous constraint. For $v\in(0,1)$, define
+-\begin{equation}
+-  C(v):=\log\log\frac{e}{4v(1-v)},\qquad D(v):=\log\!\left(1+C(v)^2\right).
+-  \label{eq-dw-correction-functions}
+-\end{equation}
+-With $\nu=1$, write $C_1(v):=C(v)+D(v)$ and set $C_1(0)=C_1(1)=+\infty$. For $q,p\in[0,1]$, define the bivariate correction
+-\begin{equation}
+-  C_1(q,p):=\min_{v\in[\min\{q,p\},\,\max\{q,p\}]}C_1(v).
+-  \label{eq-dw-bivariate-correction}
+-\end{equation}
+-The functions $C$ and $D$ vanish at $v=1/2$ and increase toward the probability boundaries. The bivariate correction is therefore large only when both probabilities lie in the same tail. The corrected discrepancy is $N^{\mathrm{te}}K(q,p)-C_1(q,p)$. Before using the test data, we fix the divergence parameter $s=1$, corresponding to \eqref{eq-bernoulli-kl}, and the correction parameter $\nu=1$.
+-
+-At the probability boundaries, extend the divergence by $K(0,0)=K(1,1)=0$, $K(q,0)=+\infty$ for $q>0$, and $K(q,1)=+\infty$ for $q<1$. The corrected discrepancy is then $-\infty$ for $q=p\in\{0,1\}$ and $+\infty$ for $p=0<q$ or $p=1>q$. These conventions extend the constraint to every residual threshold.
++For $\mathbb Q\in\mathcal Q(\Xi)$, write $F_{\mathbb Q}(t):=\mathbb Q(({-\infty},t])$. At threshold $t$, $q=\widehat F^{\mathrm{te}}(t)$ is the average of the Bernoulli indicators in \eqref{eq-empirical-cdf}, and $p=F_{\mathbb Q}(t)$ is the candidate probability. The quantity $N^{\mathrm{te}}\phi(q,p)$ is then the Bernoulli log-likelihood difference between the empirical and candidate probabilities. Combining this local discrepancy with the multiscale correction gives $N^{\mathrm{te}}\phi(q,p)-\psi(q,p)$.
++
++At the probability boundaries, the corrected discrepancy is $-\infty$ for $q=p\in\{0,1\}$ and $+\infty$ for $p=0<q$ or $p=1>q$. These conventions extend the constraint to every residual threshold.
+ 
+ \begin{definition}[DW CDF-based ambiguity set]
+   \label{definition-dw-ambiguity-set}
+   Given the empirical CDF $\widehat F^{\mathrm{te}}$ and a threshold $\theta\ge0$, define
+   \begin{equation} 
+       \mathscr Q^{\mathrm{DW}}(\theta):=\Bigl\{\mathbb Q\in\mathcal Q(\Xi):\ 
+-      \sup_{t\in\mathbb R}\Bigl[ N^{\mathrm{te}}K\!\left(\widehat F^{\mathrm{te}}(t),F_{\mathbb Q}(t)\right) 
+-       {}-C_1\!\left(\widehat F^{\mathrm{te}}(t),F_{\mathbb Q}(t)\right)\Bigr]\le\theta\Bigr\}. 
++      \sup_{t\in\mathbb R}\Bigl[ N^{\mathrm{te}}\phi\!\left(\widehat F^{\mathrm{te}}(t),F_{\mathbb Q}(t)\right) 
++       {}-\psi\!\left(\widehat F^{\mathrm{te}}(t),F_{\mathbb Q}(t)\right)\Bigr]\le\theta\Bigr\}. 
+     \label{eq-cdf-ambiguity-set}
+   \end{equation}
+   The notation suppresses the dependence on the test data and $N^{\mathrm{te}}$. The threshold $\theta$ specifies the allowed corrected discrepancy; a confidence level is assigned through its statistical calibration.
+@@ -146,7 +148,7 @@
+ \end{equation}
+ Define the uniform reference statistic
+ \begin{equation}
+-  T_{N^{\mathrm{te}}}^{\mathrm U}:=\sup_{u\in(0,1)}\left[N^{\mathrm{te}}K\!\left(G_{N^{\mathrm{te}}}(u),u\right)-C_1\!\left(G_{N^{\mathrm{te}}}(u),u\right)\right].
++  T_{N^{\mathrm{te}}}^{\mathrm U}:=\sup_{u\in(0,1)}\left[N^{\mathrm{te}}\phi\!\left(G_{N^{\mathrm{te}}}(u),u\right)-\psi\!\left(G_{N^{\mathrm{te}}}(u),u\right)\right].
+   \label{eq-dw-reference-statistic}
+ \end{equation}
+ Here $\Pr_{\mathrm U}$ denotes probability under the uniform reference law. The next proposition converts a tail bound for the reference statistic into coverage of the residual distribution.
+@@ -227,7 +229,7 @@
+ \begin{equation}
+   \mathcal I_j(\theta):=
+   \left\{p\in[0,1]:
+-  N^{\mathrm{te}}K(q_j,p)-C_1(q_j,p)\le\theta\right\}.
++  N^{\mathrm{te}}\phi(q_j,p)-\psi(q_j,p)\le\theta\right\}.
+   \label{eq-dw-rank-acceptance}
+ \end{equation}
+ The corrected discrepancy decreases as $p$ approaches $q_j$ from below and increases as $p$ moves above $q_j$. Its acceptance set is therefore an interval,
+@@ -340,7 +342,7 @@
+ \end{equation}
+ Define the step function
+ \begin{equation}
+-  \psi_{\lambda,\mu}(\xi):=
++  \eta_{\lambda,\mu}(\xi):=
+   \sum_{k=1}^K\lambda_k\mathbf1_{\{\xi<r_k\}}
+   -\sum_{k=1}^K\mu_k\mathbf1_{\{\xi\le r_k\}}.
+   \label{eq-dual-step-function}
+@@ -353,7 +355,7 @@
+   +\lambda^\top u-\mu^\top\ell
+   +\int_{\mathcal X\times\Xi}
+   \left[\mathbf1_{\{\hat g(\bm x)+\xi\le0\}}-\varphi(\bm x)
+-  -\psi_{\lambda,\mu}(\xi)\right]\,\Pi(\mathrm d\bm x,\mathrm d\xi).
++  -\eta_{\lambda,\mu}(\xi)\right]\,\Pi(\mathrm d\bm x,\mathrm d\xi).
+ \]
+ Its supremum over $\Pi\ge0$ is finite exactly when the integrand is nonpositive at every point. A positive value at any point would allow an arbitrarily large point mass there. The upper dual is therefore
+ \begin{equation}
+@@ -362,7 +364,7 @@
+     \mathbb E_{\mathbb P}[\varphi(\bm X)]
+     +\lambda^\top u-\mu^\top\ell\\
+     \text{s.t.}\quad&
+-    \varphi(\bm x)+\psi_{\lambda,\mu}(\xi)
++    \varphi(\bm x)+\eta_{\lambda,\mu}(\xi)
+     \ge\mathbf1_{\{\hat g(\bm x)+\xi\le0\}},
+     \quad\forall(\bm x,\xi)\in\mathcal X\times\Xi.
+   \end{aligned}
+@@ -379,7 +381,7 @@
+   -\lambda^\top u+\mu^\top\ell
+   +\int_{\mathcal X\times\Xi}
+   \left[\mathbf1_{\{\hat g(\bm x)+\xi\le0\}}-\varphi(\bm x)
+-  +\psi_{\lambda,\mu}(\xi)\right]\,\Pi(\mathrm d\bm x,\mathrm d\xi).
++  +\eta_{\lambda,\mu}(\xi)\right]\,\Pi(\mathrm d\bm x,\mathrm d\xi).
+ \]
+ Taking its infimum over $\Pi\ge0$ requires a nonnegative integrand and gives
+ \begin{equation}
+@@ -388,7 +390,7 @@
+     \mathbb E_{\mathbb P}[\varphi(\bm X)]
+     -\lambda^\top u+\mu^\top\ell\\
+     \text{s.t.}\quad&
+-    \varphi(\bm x)-\psi_{\lambda,\mu}(\xi)
++    \varphi(\bm x)-\eta_{\lambda,\mu}(\xi)
+     \le\mathbf1_{\{\hat g(\bm x)+\xi\le0\}},
+     \quad\forall(\bm x,\xi)\in\mathcal X\times\Xi.
+   \end{aligned}
+@@ -397,9 +399,9 @@
+ Weak duality gives
+ $\underline d_\theta\le\underline p_{\hat f}\le\overline p_{\hat f}\le\overline d_\theta$.
+ For fixed multipliers, the optimal upper potential is the pointwise supremum of
+-$\mathbf1_{\{\hat g(\bm x)+\xi\le0\}}-\psi_{\lambda,\mu}(\xi)$ over $\xi\in\Xi$.
++$\mathbf1_{\{\hat g(\bm x)+\xi\le0\}}-\eta_{\lambda,\mu}(\xi)$ over $\xi\in\Xi$.
+ The optimal lower potential is the corresponding infimum of
+-$\mathbf1_{\{\hat g(\bm x)+\xi\le0\}}+\psi_{\lambda,\mu}(\xi)$.
++$\mathbf1_{\{\hat g(\bm x)+\xi\le0\}}+\eta_{\lambda,\mu}(\xi)$.
+ 
+ \subsection{Finite linear programs and strong duality}
+ \label{subsec-finite-duality}
+@@ -458,7 +460,7 @@
+ 
+ On $C_j$, the dual step function has the constant value
+ \begin{equation}
+-  \psi_j:=
++  \eta_j:=
+   \sum_{k=1}^K\lambda_k\mathbf1_{\{j<2k\}}
+   -\sum_{k=1}^K\mu_k\mathbf1_{\{j\le2k\}}.
+   \label{eq-dual-cell-values}
+@@ -501,9 +503,9 @@
+   The polytope $\mathcal A_\theta$ is nonempty and compact. Nonemptiness follows from the product of the input law and the empirical residual law; compactness follows from the fixed row sums and nonnegativity. Both finite primal objectives are bounded between zero and one. Finite-dimensional LP strong duality therefore equates their values with their dual optima \citep{B.V04}.
+ 
+   It remains to identify these finite duals with the measure duals. For fixed multipliers and $\bm x\in A_i$, the upper pointwise constraints are equivalent to
+-  $\varphi(\bm x)\ge\max_j(\overline h_{ij}-\psi_j)$.
++  $\varphi(\bm x)\ge\max_j(\overline h_{ij}-\eta_j)$.
+   Their least feasible potential is constant on each $A_i$ and can be written as $z_i$. This gives \eqref{eq-finite-upper-dual} exactly. Similarly, the lower constraints are equivalent to
+-  $\varphi(\bm x)\le\min_j(\underline h_{ij}+\psi_j)$,
++  $\varphi(\bm x)\le\min_j(\underline h_{ij}+\eta_j)$,
+   yielding \eqref{eq-finite-lower-dual}. The resulting potentials are bounded and measurable. Together with Lemma~\ref{lem-exact-aggregation}, these identities establish strong duality for the measure programs.
+ \end{proof}
+ 

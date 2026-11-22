@@ -1,0 +1,61 @@
+--- backup/manuscript.tex
++++ manuscript.tex
+@@ -150,7 +150,7 @@
+   T_{N^{\mathrm{te}}}^{\mathrm U}:=\sup_{u\in(0,1)}\left[N^{\mathrm{te}}\phi\!\left(G_{N^{\mathrm{te}}}(u),u\right)-\psi\!\left(G_{N^{\mathrm{te}}}(u),u\right)\right].
+   \label{eq-dw-reference-statistic}
+ \end{equation}
+-Here $\Pr_{\mathrm U}$ denotes probability under the uniform reference law. The next proposition converts a tail bound for the reference statistic into coverage of the residual distribution.
++Here $\Pr_{\mathrm U}$ denotes probability under the uniform reference law. The next proposition uses a quantile of this reference statistic to calibrate the residual ambiguity set.
+ 
+ \begin{proposition}[Finite-sample $\theta$ calibration]
+   \label{proposition-01}
+@@ -164,22 +164,26 @@
+   \begin{equation}
+     \Pr_{\mathcal D^{\mathrm{te}}}\left\{\mathbb Q^\star\in\mathscr Q^{\mathrm{DW}}(\theta)\,\middle|\,\mathcal D^{\mathrm{tr}}\right\}\ge1-\delta.
+     \label{eq-cdf-coverage}
+-  \end{equation} 
++  \end{equation}
+ \end{proposition}
+ \begin{proof}
++  The reference statistic is finite almost surely, and its distribution function is right-continuous. Hence \eqref{eq-dw-calibrated-threshold} gives
++  \[
++    \Pr_{\mathrm U}\left\{T_{N^{\mathrm{te}}}^{\mathrm U}>\theta_{N^{\mathrm{te}}}(\delta)\right\}\le\delta.
++  \]
+   Conditioning on $\mathcal D^{\mathrm{tr}}$ fixes $\hat g$ and $\mathbb Q^\star$. Define the generalized quantile function $F_{\mathbb Q^\star}^{-1}(u):=\inf\{t\in\mathbb R:F_{\mathbb Q^\star}(t)\ge u\}$, $u\in(0,1)$. The sample $F_{\mathbb Q^\star}^{-1}(V_j)$, $j=1,\ldots,N^{\mathrm{te}}$, has the same conditional joint law as the test residuals. Thus, given $\mathcal D^{\mathrm{tr}}$,
+   \[
+     \left(\widehat F^{\mathrm{te}}(t)\right)_{t\in\mathbb R}\overset{\mathrm d}{=}\left(G_{N^{\mathrm{te}}}\!\left(F_{\mathbb Q^\star}(t)\right)\right)_{t\in\mathbb R}.
+   \]
+   For $0<F_{\mathbb Q^\star}(t)<1$, the discrepancy at $\mathbb Q^\star$ is evaluated at a probability level included in \eqref{eq-dw-reference-statistic}. When $F_{\mathbb Q^\star}(t)$ is zero or one, the empirical CDF equals that boundary almost surely, giving discrepancy $-\infty$. The supremum in \eqref{eq-cdf-ambiguity-set}, evaluated at $\mathbb Q^\star$, is therefore bounded by $T_{N^{\mathrm{te}}}^{\mathrm U}$ under this coupling. Since $\mathbb Q^\star(\Xi)=1$, we obtain
+   \[
+-    \Pr_{\mathcal D^{\mathrm{te}}}\left\{\mathbb Q^\star\notin\mathscr Q^{\mathrm{DW}}(\theta)\,\middle|\,\mathcal D^{\mathrm{tr}}\right\}
+-    \le\Pr_{\mathrm U}\left\{T_{N^{\mathrm{te}}}^{\mathrm U}>\theta\right\}\le\delta.
++    \Pr_{\mathcal D^{\mathrm{te}}}\left\{\mathbb Q^\star\notin\mathscr Q^{\mathrm{DW}}\!\left(\theta_{N^{\mathrm{te}}}(\delta)\right)\,\middle|\,\mathcal D^{\mathrm{tr}}\right\}
++    \le\Pr_{\mathrm U}\left\{T_{N^{\mathrm{te}}}^{\mathrm U}>\theta_{N^{\mathrm{te}}}(\delta)\right\}\le\delta.
+   \]
+-  This proves \eqref{eq-cdf-coverage}. Right-continuity of the reference distribution function ensures that the quantile in \eqref{eq-dw-calibrated-threshold} satisfies \eqref{eq-dw-calibration-condition}. Increasing $\theta$ preserves this condition.
++  For every test sample, $\theta\ge\theta_{N^{\mathrm{te}}}(\delta)$ implies $\mathscr Q^{\mathrm{DW}}\!\left(\theta_{N^{\mathrm{te}}}(\delta)\right)\subseteq\mathscr Q^{\mathrm{DW}}(\theta)$. This inclusion proves \eqref{eq-cdf-coverage} for every such $\theta$.
+ \end{proof}
+ 
+-For every fixed $N^{\mathrm{te}}\ge1$, the proposition covers arbitrary residual distributions, including laws with atoms or infinite moments. With fixed method parameters, the reference law depends only on $N^{\mathrm{te}}$, so the threshold can be calibrated offline. \citet[Supplement, Sections~S.6--S.7]{L.J23} provide finite-sample evaluation through uniform order-statistic boundary probabilities. A conservative upper bound on the quantile in \eqref{eq-dw-calibrated-threshold} preserves \eqref{eq-dw-calibration-condition}. Calibration by simulation must control quantile estimation error to retain the stated coverage.
++For every fixed $N^{\mathrm{te}}\ge1$, the proposition covers arbitrary residual distributions, including laws with atoms or infinite moments. With fixed method parameters, the reference law depends only on $N^{\mathrm{te}}$, so the threshold can be calibrated offline. \citet[Supplement, Sections~S.6--S.7]{L.J23} provide finite-sample evaluation through uniform order-statistic boundary probabilities. Choosing $\theta$ as a conservative upper bound on the quantile in \eqref{eq-dw-calibrated-threshold} preserves \eqref{eq-cdf-coverage}. Calibration by simulation must control quantile estimation error to retain the stated coverage. The threshold may also depend on the test data, provided $\theta\ge\theta_{N^{\mathrm{te}}}(\delta)$ almost surely; the same nesting argument then preserves \eqref{eq-cdf-coverage}.
+ 
+ Statistical confidence regions yield finite-sample guarantees for distributionally robust objectives \citep{B.G.K18}. The following theorem transfers residual-distribution coverage to simultaneous bounds on the failure probability under the joint model. It applies to any residual ambiguity set satisfying the stated coverage condition.
+ 
+@@ -194,7 +198,7 @@
+     \Pr_{\mathcal D^{\mathrm{te}}}\left\{\underline p_{\hat f}\le p_f\le\overline p_{\hat f}\,\middle|\,\mathcal D^{\mathrm{tr}}\right\}\ge1-\delta.
+     \label{eq-failure-probability-coverage}
+   \end{equation}
+-  In particular, this guarantee holds for $\mathscr Q=\mathscr Q^{\mathrm{DW}}(\theta)$ whenever $\theta$ satisfies \eqref{eq-dw-calibration-condition}, including $\theta=\theta_{N^{\mathrm{te}}}(\delta)$.
++  In particular, this guarantee holds for $\mathscr Q=\mathscr Q^{\mathrm{DW}}(\theta)$ whenever $\theta\ge\theta_{N^{\mathrm{te}}}(\delta)$, with the calibrated threshold defined in \eqref{eq-dw-calibrated-threshold}.
+ \end{theorem}
+ \begin{proof}
+   On $\mathbb Q^\star\in\mathscr Q$, the true joint distribution $\Pi^\star$ belongs to $\mathscr P(\mathscr Q)$. Since $p_{\hat f}(\Pi^\star)=p_f$, the lower and upper bounds satisfy
+@@ -615,7 +619,7 @@
+ 
+ % After rank endpoint inversion, \eqref{eq-dw-closed-upper}--\eqref{eq-dw-closed-lower} require only $K$ evaluations of the surrogate response CDF and finite minimum and maximum operations. The upper candidate $u_k+H_k$ combines the permitted residual left-tail mass with the input probability whose surrogate margin is insufficient at that threshold. The lower candidate $\ell_k+H_k-1$ measures unavoidable overlap of the corresponding events.
+ 
+-% For a threshold satisfying \eqref{eq-dw-calibration-condition}, these exact reformulations inherit the coverage guarantee in Theorem~\ref{theorem-01}. If the CDF values are evaluated by simulation, simultaneous upper confidence bounds for $H_k$ yield a certified upper failure bound, and simultaneous lower confidence bounds yield a certified lower bound. The numerical integration error is then included in the overall confidence budget.
++% For $\theta\ge\theta_{N^{\mathrm{te}}}(\delta)$, these exact reformulations inherit the coverage guarantee in Theorem~\ref{theorem-01}. If the CDF values are evaluated by simulation, simultaneous upper confidence bounds for $H_k$ yield a certified upper failure bound, and simultaneous lower confidence bounds yield a certified lower bound. The numerical integration error is then included in the overall confidence budget.
+ 
+ \bibliographystyle{elsarticle-harv}
+ \bibliography{reference}

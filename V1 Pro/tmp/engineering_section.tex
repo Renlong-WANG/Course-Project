@@ -1,0 +1,287 @@
+\section{Tractable Reformulation}
+\label{sec-reformulation}
+
+The DW ambiguity set can be converted into linear probability constraints. We use these constraints to derive upper and lower dual bounds, then show that optimizing the duals gives the exact failure probability bounds. The resulting calculation requires the ordered test residuals and the CDF of the surrogate response. Throughout this section, the training data, the test residuals, and $\theta\ge0$ are fixed. The finite reformulations use the default residual support $\Xi=\mathbb R$.
+
+For each empirical probability level $q_j:=j/N^{\mathrm{te}}$, invert the scalar DW constraint to define
+\begin{equation}
+  \left[\alpha_j(\theta),\beta_j(\theta)\right]
+  :=\left\{p\in[0,1]:
+  N^{\mathrm{te}}\phi\left(q_j,p\right)-\psi\left(q_j,p\right)\le\theta\right\},
+  \qquad j=0,\ldots,N^{\mathrm{te}}.
+  \label{eq-dw-rank-acceptance}
+\end{equation}
+These endpoints can be computed by one-dimensional bisection. Let $r_1<\cdots<r_K$ be the distinct test residuals, and set
+\begin{equation}
+  \begin{aligned}
+    c_0&:=0,&
+    c_k&:=\sum_{j=1}^{N^{\mathrm{te}}}\mathbf1_{\{\xi_j^{\mathrm{te}}\le r_k\}},\\
+    \ell_k&:=\alpha_{c_k}(\theta),&
+    u_k&:=\beta_{c_{k-1}}(\theta),\qquad k=1,\ldots,K.
+  \end{aligned}
+  \label{eq-dw-counts-and-levels}
+\end{equation}
+Thus $c_K=N^{\mathrm{te}}$, and the counts retain repeated residuals.
+
+\begin{proposition}[CDF band and finite rank constraints]
+  \label{prop-finite-rank-constraints}
+  Each set in \eqref{eq-dw-rank-acceptance} is a nonempty closed interval containing $q_j$. Define
+  $L_\theta(t):=\alpha_{N^{\mathrm{te}}\widehat F^{\mathrm{te}}(t)}(\theta)$ and
+  $U_\theta(t):=\beta_{N^{\mathrm{te}}\widehat F^{\mathrm{te}}(t)}(\theta)$.
+  Then
+  \begin{equation}
+    \mathscr Q^{\mathrm{DW}}(\theta)
+    =\left\{\mathbb Q\in\mathcal Q(\Xi):
+    L_\theta(t)\le F_{\mathbb Q}(t)\le U_\theta(t),\quad\forall t\in\mathbb R\right\},
+    \label{eq-dw-band-representation}
+  \end{equation}
+  or, equivalently,
+  \begin{equation}
+    \mathscr Q^{\mathrm{DW}}(\theta)
+    =\left\{\mathbb Q\in\mathcal Q(\Xi):
+    \begin{array}{l}
+      \mathbb Q\left\{\xi<r_k\right\}\le u_k,\\
+      \mathbb Q\left\{\xi\le r_k\right\}\ge\ell_k,
+    \end{array}
+    \quad k=1,\ldots,K\right\}.
+    \label{eq-finite-rank-constraints}
+  \end{equation}
+\end{proposition}
+\begin{proof}
+  For fixed $q$, the divergence increases as $p$ moves away from $q$, while the correction $\psi(q,p)$ cannot increase as the interval between $q$ and $p$ expands. The corrected discrepancy is therefore decreasing below $q$ and increasing above $q$. It is continuous for $p\in(0,1)$, with value $-\psi(q)\le0$ at $p=q$. Together with the boundary conventions in Section~\ref{sec-ambiguity-set}, this gives a nonempty closed acceptance interval, including when $\theta=0$. Its inversion at each empirical CDF level gives \eqref{eq-dw-band-representation} \citep[Supplement, Section~S.6]{L.J23}.
+
+  On $[r_k,r_{k+1})$, the empirical CDF equals $c_k/N^{\mathrm{te}}$. Since a candidate CDF is nondecreasing, its lower band constraint on this interval is equivalent to
+  $F_{\mathbb Q}(r_k)\ge\alpha_{c_k}(\theta)$, and its upper constraint is equivalent to
+  $F_{\mathbb Q}(r_{k+1}^-)\le\beta_{c_k}(\theta)$.
+  The same argument applies to the exterior intervals because $\alpha_0(\theta)=0$ and $\beta_{N^{\mathrm{te}}}(\theta)=1$. Using
+  $F_{\mathbb Q}(r_k^-)=\mathbb Q\{\xi<r_k\}$ proves \eqref{eq-finite-rank-constraints}.
+\end{proof}
+
+The open and closed half-lines distinguish probability mass below a residual from mass at that residual. This distinction preserves the validity of the reformulation when residuals have atoms. The same monotonicity in $q$ gives endpoints that are nondecreasing in $j$, with $\alpha_j(\theta)\le q_j\le\beta_j(\theta)$. Consequently, $u_k$ and $\ell_k$ are nondecreasing and satisfy $\ell_{k-1}\le u_k$ and $\ell_k\le u_{k+1}$, with $\ell_0:=0$ and $u_{K+1}:=1$.
+
+Because the bounds in \eqref{eq-finite-rank-constraints} are fixed numbers, all residual constraints are linear in the unknown joint measure. Let $\mathcal M_+(\mathcal X\times\Xi)$ denote the finite nonnegative Borel measures. The upper failure probability is the measure linear program
+\begin{equation}
+  \begin{aligned}
+    \overline p_{\hat f}
+    =\sup_{\Pi\in\mathcal M_+(\mathcal X\times\Xi)}\quad&
+    \int_{\mathcal X\times\Xi}
+    \mathbf1_{\{\hat g(\bm x)+\xi\le0\}}\,\Pi\left(\mathrm d\bm x,\mathrm d\xi\right)\\
+    \text{s.t.}\quad&
+    \int_{\mathcal X\times\Xi}\mathbf1_A(\bm x)\,\Pi\left(\mathrm d\bm x,\mathrm d\xi\right)
+    =\int_{\mathcal X}\mathbf1_A(\bm x)\,\mathbb P\left(\mathrm d\bm x\right),
+    &&\forall A\in\mathcal B(\mathcal X),\\
+    &\int_{\mathcal X\times\Xi}\mathbf1_{\{\xi<r_k\}}\,\Pi\left(\mathrm d\bm x,\mathrm d\xi\right)\le u_k,
+    &&k=1,\ldots,K,\\
+    &\int_{\mathcal X\times\Xi}\mathbf1_{\{\xi\le r_k\}}\,\Pi\left(\mathrm d\bm x,\mathrm d\xi\right)\ge\ell_k,
+    &&k=1,\ldots,K.
+  \end{aligned}
+  \label{eq-measure-upper}
+\end{equation}
+The lower problem minimizes the same objective under exactly these constraints:
+\begin{equation}
+  \underline p_{\hat f}
+  =\inf_{\Pi\in\mathscr P\left(\mathscr Q^{\mathrm{DW}}(\theta)\right)}
+  \int_{\mathcal X\times\Xi}\mathbf1_{\{\hat g(\bm x)+\xi\le0\}}\,\Pi\left(\mathrm d\bm x,\mathrm d\xi\right).
+  \label{eq-measure-lower}
+\end{equation}
+The marginal equality gives total mass one. Both problems are feasible for every $\theta\ge0$, since the product of $\mathbb P$ and the empirical residual distribution satisfies the constraints. The decision variable remains a joint measure; only the residual restrictions have become finite.
+
+Introduce nonnegative multipliers $\lambda_k$ and $\mu_k$ for the open upper and closed lower constraints, respectively. A bounded measurable function $\varphi$ is the unrestricted multiplier for the input marginal equality. This equality implies
+$\int\varphi(\bm x)\,\mathrm d\Pi=\mathbb E_{\mathbb P}[\varphi(\bm X)]$.
+Writing $u=(u_1,\ldots,u_K)^\top$ and $\ell=(\ell_1,\ldots,\ell_K)^\top$, the upper Lagrangian is \citep[Section~5.1]{B.V04}
+\begin{equation}
+  \begin{aligned}
+    \mathcal L^+={}&
+    \int_{\mathcal X\times\Xi}\mathbf1_{\{\hat g(\bm x)+\xi\le0\}}\,\Pi\left(\mathrm d\bm x,\mathrm d\xi\right)\\
+    &+\mathbb E_{\mathbb P}\left[\varphi(\bm X)\right]
+    -\int_{\mathcal X\times\Xi}\varphi(\bm x)\,\Pi\left(\mathrm d\bm x,\mathrm d\xi\right)\\
+    &+\sum_{k=1}^K\lambda_k\left[u_k-\int_{\mathcal X\times\Xi}\mathbf1_{\{\xi<r_k\}}\,\Pi\left(\mathrm d\bm x,\mathrm d\xi\right)\right]\\
+    &+\sum_{k=1}^K\mu_k\left[\int_{\mathcal X\times\Xi}\mathbf1_{\{\xi\le r_k\}}\,\Pi\left(\mathrm d\bm x,\mathrm d\xi\right)-\ell_k\right].
+  \end{aligned}
+  \label{eq-upper-lagrangian}
+\end{equation}
+Define the combined rank penalty
+\begin{equation}
+  \eta_{\lambda,\mu}(\xi):=
+  \sum_{k=1}^K\lambda_k\mathbf1_{\{\xi<r_k\}}
+  -\sum_{k=1}^K\mu_k\mathbf1_{\{\xi\le r_k\}}.
+  \label{eq-dual-step-function}
+\end{equation}
+Collecting the measure-dependent terms gives
+\begin{equation}
+  \begin{aligned}
+    \mathcal L^+={}&\mathbb E_{\mathbb P}\left[\varphi(\bm X)\right]+\lambda^\top u-\mu^\top\ell\\
+    &+\int_{\mathcal X\times\Xi}\left[\mathbf1_{\{\hat g(\bm x)+\xi\le0\}}-\varphi(\bm x)-\eta_{\lambda,\mu}(\xi)\right]\,\Pi\left(\mathrm d\bm x,\mathrm d\xi\right).
+  \end{aligned}
+  \label{eq-collected-upper-lagrangian}
+\end{equation}
+When taking the supremum over nonnegative finite measures, the integrand must be nonpositive everywhere; otherwise an arbitrarily large point mass makes the Lagrangian unbounded. When it is nonpositive, the supremum integral is zero. Thus the upper dual chooses a function and rank penalties that dominate the failure indicator:
+\begin{equation}
+  \begin{aligned}
+    \overline d_\theta:=\inf_{\lambda,\mu\ge0,\ \varphi}\quad&
+    \mathbb E_{\mathbb P}\left[\varphi(\bm X)\right]+\lambda^\top u-\mu^\top\ell\\
+    \text{s.t.}\quad&
+    \varphi(\bm x)+\eta_{\lambda,\mu}(\xi)\ge\mathbf1_{\{\hat g(\bm x)+\xi\le0\}},
+    \quad\forall(\bm x,\xi)\in\mathcal X\times\Xi.
+  \end{aligned}
+  \label{eq-upper-measure-dual}
+\end{equation}
+Here and below, $\varphi$ ranges over bounded measurable functions. For the lower problem, reversing the signs of the two inequality penalties gives
+\begin{equation}
+  \begin{aligned}
+    \mathcal L^-={}&\mathbb E_{\mathbb P}\left[\varphi(\bm X)\right]-\lambda^\top u+\mu^\top\ell\\
+    &+\int_{\mathcal X\times\Xi}\left[\mathbf1_{\{\hat g(\bm x)+\xi\le0\}}-\varphi(\bm x)+\eta_{\lambda,\mu}(\xi)\right]\,\Pi\left(\mathrm d\bm x,\mathrm d\xi\right).
+  \end{aligned}
+  \label{eq-lower-lagrangian}
+\end{equation}
+Its infimum over nonnegative measures is finite exactly when the integrand is nonnegative everywhere. The lower dual is therefore
+\begin{equation}
+  \begin{aligned}
+    \underline d_\theta:=\sup_{\lambda,\mu\ge0,\ \varphi}\quad&
+    \mathbb E_{\mathbb P}\left[\varphi(\bm X)\right]-\lambda^\top u+\mu^\top\ell\\
+    \text{s.t.}\quad&
+    \varphi(\bm x)-\eta_{\lambda,\mu}(\xi)\le\mathbf1_{\{\hat g(\bm x)+\xi\le0\}},
+    \quad\forall(\bm x,\xi)\in\mathcal X\times\Xi.
+  \end{aligned}
+  \label{eq-lower-measure-dual}
+\end{equation}
+
+\begin{lemma}[Weak duality]
+  \label{lem-weak-duality}
+  For every $\theta\ge0$,
+  \begin{equation}
+    \underline d_\theta\le\underline p_{\hat f}\le\overline p_{\hat f}\le\overline d_\theta.
+    \label{eq-weak-duality}
+  \end{equation}
+  In particular, any feasible upper or lower dual solution gives a valid bound before the dual is optimized.
+\end{lemma}
+\begin{proof}
+  For any feasible joint measure, the rank constraints and nonnegative multipliers imply
+  \[
+    \int_{\mathcal X\times\Xi}\eta_{\lambda,\mu}(\xi)\,\Pi\left(\mathrm d\bm x,\mathrm d\xi\right)
+    \le\lambda^\top u-\mu^\top\ell.
+  \]
+  Integrating the upper pointwise dual constraint therefore gives
+  $p_{\hat f}(\Pi)\le\mathbb E_{\mathbb P}[\varphi(\bm X)]+\lambda^\top u-\mu^\top\ell$.
+  Integrating the lower constraint gives
+  $p_{\hat f}(\Pi)\ge\mathbb E_{\mathbb P}[\varphi(\bm X)]-\lambda^\top u+\mu^\top\ell$.
+  Taking the respective optima proves \eqref{eq-weak-duality}.
+\end{proof}
+
+To compute these duals, take $\Xi=\mathbb R$ and compare the failure threshold $T(\bm x):=-\hat g(\bm x)$ with the observed residuals. Define
+\begin{equation}
+  H(t):=\mathbb P\left\{\hat g(\bm X)\le t\right\},\qquad
+  H_k:=H(-r_k)=\mathbb P\left\{T(\bm X)\ge r_k\right\}.
+  \label{eq-surrogate-response-cdf}
+\end{equation}
+Set $r_0:=-\infty$, $r_{K+1}:=+\infty$, $H_0:=1$, and $H_{K+1}:=0$. Only $K+1$ input bins are needed:
+\begin{equation}
+  A_i:=\left\{\bm x:r_i\le T(\bm x)<r_{i+1}\right\},\qquad
+  w_i:=\mathbb P\left(A_i\right)=H_i-H_{i+1},\quad i=0,\ldots,K.
+  \label{eq-input-cells}
+\end{equation}
+Thus all input-bin probabilities follow from the $K$ CDF values in \eqref{eq-surrogate-response-cdf}, including when the surrogate response has atoms. Partition the residual axis into $J:=2K+1$ cells,
+\begin{equation}
+  C_{2k}:=\left\{r_k\right\}\quad(k=1,\ldots,K),\qquad
+  C_{2k+1}:=\left(r_k,r_{k+1}\right)\quad(k=0,\ldots,K).
+  \label{eq-residual-cells}
+\end{equation}
+For $\bm x\in A_i$ and $\xi\in C_j$, simple bounds on the failure indicator are
+\begin{equation}
+  \underline h_{ij}:=\mathbf1_{\{j\le2i\}}
+  \le\mathbf1_{\{\xi\le T(\bm x)\}}
+  \le\overline h_{ij}:=\mathbf1_{\{j\le2i+1\}}.
+  \label{eq-cell-costs}
+\end{equation}
+Residual cells $j\le2i$ always cause failure, while cells $j\ge2i+2$ are always safe. Only the overlapping open cell distinguishes the two bounds; thresholds at its left endpoint are accounted for in the proof below. The rank penalty is constant on each $C_j$, with value
+\begin{equation}
+  \eta_j:=\sum_{k=1}^K\lambda_k\mathbf1_{\{j<2k\}}
+  -\sum_{k=1}^K\mu_k\mathbf1_{\{j\le2k\}}.
+  \label{eq-dual-cell-values}
+\end{equation}
+Assigning a constant potential $z_i$ to input bin $A_i$ makes the upper dual constraints $z_i+\eta_j\ge\overline h_{ij}$ and the lower constraints $z_i-\eta_j\le\underline h_{ij}$. The next theorem shows that these finite restrictions retain the exact optimal values.
+
+\begin{theorem}[Exact finite dual reformulations]
+  \label{thm-finite-dual-reformulations}
+  For $\Xi=\mathbb R$ and every $\theta\ge0$, both measure programs satisfy strong duality. Their values are
+  \begin{equation}
+    \begin{aligned}
+      \overline p_{\hat f}=\overline d_\theta
+      =\min_{\lambda,\mu\ge0,\ z\in\mathbb R^{K+1}}\quad&
+      \lambda^\top u-\mu^\top\ell+\sum_{i=0}^K w_i z_i\\
+      \text{s.t.}\quad&z_i+\eta_j\ge\overline h_{ij},
+      \quad i=0,\ldots,K,\quad j=1,\ldots,J,
+    \end{aligned}
+    \label{eq-finite-upper-dual}
+  \end{equation}
+  and
+  \begin{equation}
+    \begin{aligned}
+      \underline p_{\hat f}=\underline d_\theta
+      =\max_{\lambda,\mu\ge0,\ z\in\mathbb R^{K+1}}\quad&
+      -\lambda^\top u+\mu^\top\ell+\sum_{i=0}^K w_i z_i\\
+      \text{s.t.}\quad&z_i-\eta_j\le\underline h_{ij},
+      \quad i=0,\ldots,K,\quad j=1,\ldots,J.
+    \end{aligned}
+    \label{eq-finite-lower-dual}
+  \end{equation}
+  Both are linear programs with $3K+1$ scalar variables and $(K+1)(2K+1)$ pointwise inequalities. Their optima, and the corresponding measure primal and dual optima, are attained.
+\end{theorem}
+\begin{proof}
+  Let $p_{ij}$ denote the mass assigned to input bin $A_i$ and residual cell $C_j$. The finite feasible set is
+  \begin{equation}
+    \mathcal A_\theta:=\left\{p\in\mathbb R_+^{(K+1)\times J}:
+    \begin{array}{ll}
+      \displaystyle\sum_{j=1}^Jp_{ij}=w_i,&i=0,\ldots,K,\\[1mm]
+      \displaystyle\sum_{i=0}^K\sum_{j<2k}p_{ij}\le u_k,&k=1,\ldots,K,\\[1mm]
+      \displaystyle\sum_{i=0}^K\sum_{j\le2k}p_{ij}\ge\ell_k,&k=1,\ldots,K
+    \end{array}\right\}.
+    \label{eq-cell-mass-polytope}
+  \end{equation}
+  Every feasible joint measure gives a matrix in this set. Conversely, the indicator bounds in \eqref{eq-cell-costs} are attainable without violating the rank constraints, giving
+  \begin{equation}
+    \overline p_{\hat f}=\max_{p\in\mathcal A_\theta}\sum_{i=0}^K\sum_{j=1}^J\overline h_{ij}p_{ij},\qquad
+    \underline p_{\hat f}=\min_{p\in\mathcal A_\theta}\sum_{i=0}^K\sum_{j=1}^J\underline h_{ij}p_{ij}.
+    \label{eq-finite-primal-values}
+  \end{equation}
+  To verify attainability, for $\bm x\in A_i$ with $w_i>0$, select category $j$ with probability $p_{ij}/w_i$. Outside the overlapping open cell $j=2i+1$, choose any fixed point in $C_j$; its failure indicator equals both coefficients in \eqref{eq-cell-costs}. In the overlapping cell, choose $\xi=T(\bm x)$ for the upper problem. If $T(\bm x)=r_i$, this choice moves the assigned mass from the open interval to its left endpoint. All open upper probabilities remain unchanged, and the closed lower probabilities can only increase. Both families of rank constraints therefore remain satisfied, and every assigned upper coefficient is attained. For the lower problem, choose $\xi=(T(\bm x)+r_{i+1})/2$ when $i<K$, or $\xi=T(\bm x)+1$ when $i=K$; these choices remain in the open cell and are strictly above the failure threshold. All selections are measurable, preserve the input law, and give the claimed objectives. Zero-weight input bins contribute no mass.
+
+  The set $\mathcal A_\theta$ is nonempty by empirical-product feasibility and compact because its nonnegative entries sum to one. The finite primal objectives are bounded. Finite-dimensional LP strong duality therefore gives attained dual optima \citep[Section~5.2.3]{B.V04}. A free multiplier $z_i$ for each row equality and nonnegative multipliers $\lambda_k,\mu_k$ for the prefix inequalities give exactly \eqref{eq-finite-upper-dual} and \eqref{eq-finite-lower-dual}.
+
+  Finally, any finite dual solution defines a bounded measurable function $\varphi(\bm x)=z_i$ on $A_i$. By \eqref{eq-cell-costs}, it satisfies the corresponding measure dual constraint with the same objective value. Combining finite LP equality with Lemma~\ref{lem-weak-duality} proves equality of the measure primal and dual values and their attainment. The proof uses finite LP feasibility and boundedness, so it remains valid at $\theta=0$ even when a DW acceptance interval is a singleton.
+\end{proof}
+
+The finite LPs provide a direct computational formulation. Their ordered constraints also yield a simpler evaluation rule.
+
+\begin{corollary}[Closed-form failure probability bounds]
+  \label{thm-closed-form-bounds}
+  For $\Xi=\mathbb R$, $\mathscr Q^{\mathrm{DW}}(\theta)$, and every $\theta\ge0$,
+  \begin{align}
+    \overline p_{\hat f}
+    &=\min\left\{1,\min_{k=1,\ldots,K}\left[u_k+H_k\right]\right\},
+    \label{eq-dw-closed-upper}\\
+    \underline p_{\hat f}
+    &=\max\left\{0,\max_{k=1,\ldots,K}\left[\ell_k+H_k-1\right]\right\}.
+    \label{eq-dw-closed-lower}
+  \end{align}
+\end{corollary}
+\begin{proof}
+  Fix column totals $v_j:=\sum_i p_{ij}$ in the finite primal LPs and write $V_s:=\sum_{j=1}^s v_j$. The upper objective maximizes mass transported along pairs $j\le2i+1$. Equivalently, it is a maximum flow with row capacities $w_i$, column capacities $v_j$, and capacity two on each permitted row-to-column arc. Total mass is one, so a minimum cut crosses none of these capacity-two arcs. The nested row neighborhoods imply that a minimum cut can use rows $0,\ldots,k-1$ and columns $1,\ldots,2k-1$ on the source side, with capacity $H_k+V_{2k-1}$; the empty row set gives capacity one. For the lower objective, maximize the safe mass along $j>2i$. The analogous suffix cut has capacity $2-H_k-V_{2k}$, again with the outer cut of capacity one. By max-flow min-cut duality \citep{F.F56}, the fixed-column upper and lower values are therefore
+  \[
+    \min\left\{1,\min_k\left[H_k+V_{2k-1}\right]\right\},\qquad
+    \max\left\{0,\max_k\left[H_k+V_{2k}-1\right]\right\}.
+  \]
+  A permitted partial flow can be completed using the remaining row and column masses, so these flow values equal the corresponding transport objectives.
+
+  Feasibility gives $V_{2k-1}\le u_k$ and $V_{2k}\ge\ell_k$. Hence the upper value is at most \eqref{eq-dw-closed-upper}, and the lower value is at least \eqref{eq-dw-closed-lower}. For the upper value, choose column totals $v_1=u_1$ and $v_{2k}=u_{k+1}-u_k$, with all remaining entries zero. For the lower value, choose $v_{2k}=\ell_k-\ell_{k-1}$ and $v_J=1-\ell_K$, with all remaining entries zero. The endpoint ordering and compatibility inequalities stated after Proposition~\ref{prop-finite-rank-constraints} make both choices feasible. The first has $V_{2k-1}=u_k$, and the second has $V_{2k}=\ell_k$, proving attainment of both expressions.
+\end{proof}
+
+The closed forms have a direct dual interpretation. For any rank $k$, an upper dual certificate is $\lambda=e_k$, $\mu=0$, and $\varphi(\bm x)=\mathbf1_{\{T(\bm x)\ge r_k\}}$, with objective $u_k+H_k$. A lower certificate is $\lambda=0$, $\mu=e_k$, and $\varphi(\bm x)=\mathbf1_{\{T(\bm x)\ge r_k\}}-1$, with objective $\ell_k+H_k-1$; here $e_k$ is the $k$th unit vector. The constant certificates give one and zero. Lemma~\ref{lem-weak-duality} validates each candidate, and the corollary establishes that the best candidate is exact. Thus the final calculation compares $K$ threshold-based dual bounds. The upper candidate combines allowed residual mass below $r_k$ with the probability that the surrogate threshold is at least $r_k$; the lower candidate quantifies unavoidable overlap of the corresponding events.
+
+\begin{remark}[Known interval support]
+  \label{rem-interval-support}
+  If $\Xi=[a,b]$ is known, add its endpoints to the ordered partition and retain only admissible residual cells. Thresholds below $a$ cannot fail, while thresholds at least $b$ must fail. Accordingly, the outer constants one and zero in \eqref{eq-dw-closed-upper}--\eqref{eq-dw-closed-lower} become $H(-a)$ and $H(-b)$, respectively.
+\end{remark}
+
+In practice, compute the rank endpoints from $N^{\mathrm{te}}$ and $\theta$, evaluate the $K$ surrogate CDF values $H(-r_k)$ under $\mathbb P$, and apply \eqref{eq-dw-closed-upper}--\eqref{eq-dw-closed-lower}. For $\theta\ge\theta_{N^{\mathrm{te}}}(\delta)$, these exact bounds inherit Theorem~\ref{theorem-01}. If the CDF values are estimated by simulation, simultaneous upper CDF bounds give a certified upper failure bound and simultaneous lower CDF bounds give a certified lower failure bound; their numerical error is included in the overall confidence budget.
+

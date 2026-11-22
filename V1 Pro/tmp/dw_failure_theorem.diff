@@ -1,0 +1,48 @@
+--- backup/manuscript.tex
++++ manuscript.tex
+@@ -185,36 +185,31 @@
+ 
+ For every fixed $N^{\mathrm{te}}\ge1$, the proposition applies to arbitrary residual distributions, including laws with atoms or infinite moments. With $\phi$ and $\psi$ fixed as above, the reference distribution depends only on $N^{\mathrm{te}}$, so $\theta_{N^{\mathrm{te}}}(\delta)$ can be computed offline for each prescribed confidence level $1-\delta$. \citet[Supplement, Sections~S.6--S.7]{L.J23} describe finite-sample numerical calibration using probabilities that uniform order statistics lie within specified bounds. Choosing $\theta$ as a conservative upper bound on the quantile in \eqref{eq-dw-calibrated-threshold} preserves \eqref{eq-cdf-coverage}. If calibration is performed by simulation, quantile estimation error must be accounted for in the confidence guarantee. A threshold chosen from the test data also preserves \eqref{eq-cdf-coverage}, provided $\theta\ge\theta_{N^{\mathrm{te}}}(\delta)$ almost surely, by the same nesting argument.
+ 
+-The following theorem transfers residual-distribution coverage to simultaneous bounds on the failure probability under the joint model. It applies to any residual ambiguity set satisfying the stated coverage condition.
++The following theorem transfers the coverage guarantee of the DW-based CDF ambiguity set to simultaneous bounds on the failure probability under the joint model.
+ 
+ \begin{theorem}[Finite-sample failure probability bounds]
+   \label{theorem-01}
+-  Let $\delta\in(0,1)$, and suppose a test-data-dependent residual ambiguity set $\mathscr Q$ satisfies
+-  \[
+-    \Pr_{\mathcal D^{\mathrm{te}}}\left\{\mathbb Q^\star\in\mathscr Q\,\middle|\,\mathcal D^{\mathrm{tr}}\right\}\ge1-\delta.
+-  \]
+-  Then the bounds defined in \eqref{eq-upper-bound} and \eqref{eq-lower-bound} satisfy
++  Under the sampling conditions of Proposition~\ref{proposition-01}, let $\delta\in(0,1)$ and $\theta\ge\theta_{N^{\mathrm{te}}}(\delta)$, with the calibrated threshold defined in \eqref{eq-dw-calibrated-threshold}. Then the bounds defined in \eqref{eq-upper-bound} and \eqref{eq-lower-bound}, evaluated with $\mathscr Q=\mathscr Q^{\mathrm{DW}}(\theta)$, satisfy
+   \begin{equation}
+     \Pr_{\mathcal D^{\mathrm{te}}}\left\{\underline p_{\hat f}\le p_f\le\overline p_{\hat f}\,\middle|\,\mathcal D^{\mathrm{tr}}\right\}\ge1-\delta.
+     \label{eq-failure-probability-coverage}
+   \end{equation}
+-  In particular, this guarantee holds for $\mathscr Q=\mathscr Q^{\mathrm{DW}}(\theta)$ whenever $\theta\ge\theta_{N^{\mathrm{te}}}(\delta)$, with the calibrated threshold defined in \eqref{eq-dw-calibrated-threshold}.
+ \end{theorem}
+ \begin{proof}
+-  On $\mathbb Q^\star\in\mathscr Q$, the true joint distribution $\Pi^\star$ belongs to $\mathscr P(\mathscr Q)$. Since $p_{\hat f}(\Pi^\star)=p_f$, the lower and upper bounds satisfy
++  On the event $\mathbb Q^\star\in\mathscr Q^{\mathrm{DW}}(\theta)$, the true joint distribution $\Pi^\star$ belongs to $\mathscr P\!\left(\mathscr Q^{\mathrm{DW}}(\theta)\right)$. Since $p_{\hat f}(\Pi^\star)=p_f$, the lower and upper bounds satisfy
+   \[
+     \underline p_{\hat f}\le p_{\hat f}(\Pi^\star)=p_f\le\overline p_{\hat f}.
+   \]
+-  Taking probabilities yields
++  Taking conditional probabilities and applying Proposition~\ref{proposition-01} yields
+   \[
+-    \Pr_{\mathcal D^{\mathrm{te}}}\left\{\underline p_{\hat f}\le p_f\le\overline p_{\hat f}\,\middle|\,\mathcal D^{\mathrm{tr}}\right\}\ge\Pr_{\mathcal D^{\mathrm{te}}}\left\{\mathbb Q^\star\in\mathscr Q\,\middle|\,\mathcal D^{\mathrm{tr}}\right\}\ge1-\delta,
++    \Pr_{\mathcal D^{\mathrm{te}}}\left\{\underline p_{\hat f}\le p_f\le\overline p_{\hat f}\,\middle|\,\mathcal D^{\mathrm{tr}}\right\}
++    \ge\Pr_{\mathcal D^{\mathrm{te}}}\left\{\mathbb Q^\star\in\mathscr Q^{\mathrm{DW}}(\theta)\,\middle|\,\mathcal D^{\mathrm{tr}}\right\}\ge1-\delta.\qedhere
+   \]
+-  which proves Theorem~\ref{theorem-01}.
+ \end{proof}
+ 
+-The event $\mathbb Q^\star\in\mathscr Q$ gives both inequalities, so $1-\delta$ is the confidence level for the entire interval. In the DW set, $\theta$ controls the corrected likelihood discrepancy. The corresponding CDF tolerances vary by probability level and can differ above and below the empirical CDF. For a fixed sample size, higher confidence requires a nondecreasing calibrated threshold $\theta_{N^{\mathrm{te}}}(\delta)$.
+-
+-For a fixed empirical CDF, $0\le\theta_1\le\theta_2$ implies $\mathscr Q^{\mathrm{DW}}(\theta_1)\subseteq\mathscr Q^{\mathrm{DW}}(\theta_2)$. The lower bound is therefore nonincreasing in $\theta$, and the upper bound is nondecreasing. The interval reflects finite-sample uncertainty in the residual law and uncertainty in its dependence on the input. Because the joint ambiguity set allows all couplings with the specified marginals, a gap can persist even when the residual marginal is known exactly.
++The event $\mathbb Q^\star\in\mathscr Q^{\mathrm{DW}}(\theta)$ gives both inequalities, so $1-\delta$ is the confidence level for the entire interval. In the DW set, $\theta$ controls the corrected likelihood discrepancy. The corresponding CDF tolerances vary by probability level and can differ above and below the empirical CDF. For a fixed sample size, higher confidence requires a nondecreasing calibrated threshold $\theta_{N^{\mathrm{te}}}(\delta)$.
++
++For a fixed empirical CDF, $0\le\theta_1\le\theta_2$ implies $\mathscr Q^{\mathrm{DW}}(\theta_1)\subseteq\mathscr Q^{\mathrm{DW}}(\theta_2)$. The lower bound is therefore nonincreasing in $\theta$, and the upper bound is nondecreasing. The interval reflects finite-sample uncertainty in the residual law and uncertainty in its dependence on the input. Because the joint ambiguity set allows all couplings with the specified marginals, a gap can persist even when the residual marginal is known exactly. The same coverage argument applies to any test-data-dependent residual ambiguity set that contains $\mathbb Q^\star$ with conditional probability at least $1-\delta$ given $\mathcal D^{\mathrm{tr}}$.
+ 
+ \section{Tractable Reformulation}
+ \label{sec-reformulation}

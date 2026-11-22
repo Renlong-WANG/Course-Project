@@ -1,0 +1,7 @@
+{
+  "fixed_column_transport_cases": 32,
+  "known_interval_support_cases": 16,
+  "additional_lp_solves": 96,
+  "max_cut_identity_error": 3.3306690738754696e-16,
+  "max_interval_formula_error": 3.3306690738754696e-16
+}

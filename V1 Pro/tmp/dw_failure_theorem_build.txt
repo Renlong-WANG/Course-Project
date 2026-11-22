@@ -1,0 +1,142 @@
+perl: warning: Setting locale failed.
+perl: warning: Please check that your locale settings:
+	LC_ALL = "C.UTF-8",
+	(possibly more locale environment variables)
+	LANG = "C.UTF-8"
+    are supported and installed on your system.
+perl: warning: Falling back to the system default locale ("Chinese (Simplified)_China.936").
+Locale 'Chinese (Simplified)_China.936' is unsupported, and may crash the interpreter.
+Initial Win CP for (console input, console output, system): (CP936, CP65001, CP936)
+I changed them all to CP936
+Rc files read:
+  NONE
+Latexmk: This is Latexmk, John Collins, 31 Jan. 2024. Version 4.83.
+Latexmk: applying rule 'pdflatex'...
+Rule 'pdflatex':  Reasons for rerun
+Changed files or newly in use/created:
+  manuscript.tex
+Category 'changed_user':
+  manuscript.tex
+
+------------
+Run number 1 of rule 'pdflatex'
+------------
+------------
+Running 'pdflatex  -synctex=1 -interaction=nonstopmode -halt-on-error -file-line-error -recorder  "manuscript.tex"'
+------------
+This is pdfTeX, Version 3.141592653-2.6-1.40.26 (TeX Live 2024) (preloaded format=pdflatex)
+ restricted \write18 enabled.
+entering extended mode
+(./manuscript.tex
+LaTeX2e <2023-11-01> patch level 1
+L3 programming layer <2024-02-20>
+(./elsarticle.cls
+Document Class: elsarticle 2020/11/20, 3.3: Elsevier Ltd
+(d:/texlive/2024/texmf-dist/tex/latex/l3kernel/expl3.sty
+(d:/texlive/2024/texmf-dist/tex/latex/l3backend/l3backend-pdftex.def))
+(d:/texlive/2024/texmf-dist/tex/latex/l3packages/xparse/xparse.sty)
+(d:/texlive/2024/texmf-dist/tex/latex/etoolbox/etoolbox.sty)
+(d:/texlive/2024/texmf-dist/tex/latex/base/article.cls
+Document Class: article 2023/05/17 v1.4n Standard LaTeX document class
+(d:/texlive/2024/texmf-dist/tex/latex/base/size11.clo))
+(d:/texlive/2024/texmf-dist/tex/latex/graphics/graphicx.sty
+(d:/texlive/2024/texmf-dist/tex/latex/graphics/keyval.sty)
+(d:/texlive/2024/texmf-dist/tex/latex/graphics/graphics.sty
+(d:/texlive/2024/texmf-dist/tex/latex/graphics/trig.sty)
+(d:/texlive/2024/texmf-dist/tex/latex/graphics-cfg/graphics.cfg)
+(d:/texlive/2024/texmf-dist/tex/latex/graphics-def/pdftex.def)))
+(./manuscript.spl) (d:/texlive/2024/texmf-dist/tex/latex/natbib/natbib.sty)
+(d:/texlive/2024/texmf-dist/tex/latex/geometry/geometry.sty
+(d:/texlive/2024/texmf-dist/tex/generic/iftex/ifvtex.sty
+(d:/texlive/2024/texmf-dist/tex/generic/iftex/iftex.sty))))
+(d:/texlive/2024/texmf-dist/tex/latex/base/fontenc.sty)
+(d:/texlive/2024/texmf-dist/tex/latex/amsmath/amsmath.sty
+For additional information on amsmath, use the `?' option.
+(d:/texlive/2024/texmf-dist/tex/latex/amsmath/amstext.sty
+(d:/texlive/2024/texmf-dist/tex/latex/amsmath/amsgen.sty))
+(d:/texlive/2024/texmf-dist/tex/latex/amsmath/amsbsy.sty)
+(d:/texlive/2024/texmf-dist/tex/latex/amsmath/amsopn.sty))
+(d:/texlive/2024/texmf-dist/tex/latex/amsfonts/amssymb.sty
+(d:/texlive/2024/texmf-dist/tex/latex/amsfonts/amsfonts.sty))
+(d:/texlive/2024/texmf-dist/tex/latex/amscls/amsthm.sty)
+(d:/texlive/2024/texmf-dist/tex/latex/jknapltx/mathrsfs.sty)
+(d:/texlive/2024/texmf-dist/tex/latex/tools/bm.sty)
+(d:/texlive/2024/texmf-dist/tex/latex/xcolor/xcolor.sty
+(d:/texlive/2024/texmf-dist/tex/latex/graphics-cfg/color.cfg)
+(d:/texlive/2024/texmf-dist/tex/latex/graphics/mathcolor.ltx))
+(d:/texlive/2024/texmf-dist/tex/latex/hyperref/hyperref.sty
+(d:/texlive/2024/texmf-dist/tex/latex/kvsetkeys/kvsetkeys.sty)
+(d:/texlive/2024/texmf-dist/tex/generic/kvdefinekeys/kvdefinekeys.sty)
+(d:/texlive/2024/texmf-dist/tex/generic/pdfescape/pdfescape.sty
+(d:/texlive/2024/texmf-dist/tex/generic/ltxcmds/ltxcmds.sty)
+(d:/texlive/2024/texmf-dist/tex/generic/pdftexcmds/pdftexcmds.sty
+(d:/texlive/2024/texmf-dist/tex/generic/infwarerr/infwarerr.sty)))
+(d:/texlive/2024/texmf-dist/tex/latex/hycolor/hycolor.sty)
+(d:/texlive/2024/texmf-dist/tex/latex/auxhook/auxhook.sty)
+(d:/texlive/2024/texmf-dist/tex/latex/hyperref/nameref.sty
+(d:/texlive/2024/texmf-dist/tex/latex/refcount/refcount.sty)
+(d:/texlive/2024/texmf-dist/tex/generic/gettitlestring/gettitlestring.sty
+(d:/texlive/2024/texmf-dist/tex/latex/kvoptions/kvoptions.sty)))
+(d:/texlive/2024/texmf-dist/tex/latex/hyperref/pd1enc.def)
+(d:/texlive/2024/texmf-dist/tex/generic/intcalc/intcalc.sty)
+(d:/texlive/2024/texmf-dist/tex/latex/hyperref/puenc.def)
+(d:/texlive/2024/texmf-dist/tex/latex/url/url.sty)
+(d:/texlive/2024/texmf-dist/tex/generic/bitset/bitset.sty
+(d:/texlive/2024/texmf-dist/tex/generic/bigintcalc/bigintcalc.sty))
+(d:/texlive/2024/texmf-dist/tex/latex/base/atbegshi-ltx.sty))
+(d:/texlive/2024/texmf-dist/tex/latex/hyperref/hpdftex.def
+(d:/texlive/2024/texmf-dist/tex/latex/base/atveryend-ltx.sty)
+(d:/texlive/2024/texmf-dist/tex/latex/rerunfilecheck/rerunfilecheck.sty
+(d:/texlive/2024/texmf-dist/tex/generic/uniquecounter/uniquecounter.sty)))
+(./manuscript.aux)
+(d:/texlive/2024/texmf-dist/tex/context/base/mkii/supp-pdf.mkii
+[Loading MPS to PDF converter (version 2006.09.02).]
+) (d:/texlive/2024/texmf-dist/tex/latex/epstopdf-pkg/epstopdf-base.sty
+(d:/texlive/2024/texmf-dist/tex/latex/latexconfig/epstopdf-sys.cfg))
+*geometry* driver: auto-detecting
+*geometry* detected driver: pdftex
+(./manuscript.out) (./manuscript.out)
+(d:/texlive/2024/texmf-dist/tex/latex/amsfonts/umsa.fd)
+(d:/texlive/2024/texmf-dist/tex/latex/amsfonts/umsb.fd)
+(d:/texlive/2024/texmf-dist/tex/latex/jknapltx/ursfs.fd)
+(d:/texlive/2024/texmf-dist/tex/latex/base/t1cmtt.fd)
+Overfull \hbox (2.42162pt too wide) has occurred while \output is active
+[] 
+[1{d:/texlive/2024/texmf-var/fonts/map/pdftex/updmap/pdftex.map}{d:/texlive/202
+4/texmf-dist/fonts/enc/dvips/cm-super/cm-super-t1.enc}] [2] [3] [4] [5]
+(./manuscript.bbl) [6] (./manuscript.aux) )
+(see the transcript file for additional information)<d:/texlive/2024/texmf-dist
+/fonts/type1/public/amsfonts/cm/cmbx10.pfb><d:/texlive/2024/texmf-dist/fonts/ty
+pe1/public/amsfonts/cm/cmex10.pfb><d:/texlive/2024/texmf-dist/fonts/type1/publi
+c/amsfonts/cm/cmmi10.pfb><d:/texlive/2024/texmf-dist/fonts/type1/public/amsfont
+s/cm/cmmi6.pfb><d:/texlive/2024/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi8
+.pfb><d:/texlive/2024/texmf-dist/fonts/type1/public/amsfonts/cm/cmmib10.pfb><d:
+/texlive/2024/texmf-dist/fonts/type1/public/amsfonts/cmextra/cmmib8.pfb><d:/tex
+live/2024/texmf-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb><d:/texlive/2024/
+texmf-dist/fonts/type1/public/amsfonts/cm/cmr6.pfb><d:/texlive/2024/texmf-dist/
+fonts/type1/public/amsfonts/cm/cmr8.pfb><d:/texlive/2024/texmf-dist/fonts/type1
+/public/amsfonts/cm/cmsy10.pfb><d:/texlive/2024/texmf-dist/fonts/type1/public/a
+msfonts/cm/cmsy8.pfb><d:/texlive/2024/texmf-dist/fonts/type1/public/amsfonts/sy
+mbols/msbm10.pfb><d:/texlive/2024/texmf-dist/fonts/type1/public/rsfs/rsfs10.pfb
+><d:/texlive/2024/texmf-dist/fonts/type1/public/cm-super/sfbx1095.pfb><d:/texli
+ve/2024/texmf-dist/fonts/type1/public/cm-super/sfrm0800.pfb><d:/texlive/2024/te
+xmf-dist/fonts/type1/public/cm-super/sfrm0900.pfb><d:/texlive/2024/texmf-dist/f
+onts/type1/public/cm-super/sfrm1095.pfb><d:/texlive/2024/texmf-dist/fonts/type1
+/public/cm-super/sfrm1440.pfb><d:/texlive/2024/texmf-dist/fonts/type1/public/cm
+-super/sfti0600.pfb><d:/texlive/2024/texmf-dist/fonts/type1/public/cm-super/sft
+i0900.pfb><d:/texlive/2024/texmf-dist/fonts/type1/public/cm-super/sfti1095.pfb>
+<d:/texlive/2024/texmf-dist/fonts/type1/public/cm-super/sftt0900.pfb>
+Output written on manuscript.pdf (6 pages, 338538 bytes).
+SyncTeX written on manuscript.synctex.gz.
+
+Transcript written on manuscript.log.
+Latexmk: Getting log file 'manuscript.log'
+Latexmk: Examining 'manuscript.fls'
+Latexmk: Examining 'manuscript.log'
+Latexmk: Found input bbl file 'manuscript.bbl'
+Latexmk: Log file says output to 'manuscript.pdf'
+Reverting Windows console CPs to (in,out) = (936,65001)
+Latexmk: Found bibliography file(s):
+  ./reference.bib
+Latexmk: All targets (manuscript.pdf) are up-to-date
+

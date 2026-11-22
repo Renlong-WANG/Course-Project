@@ -1,0 +1,45 @@
+\begin{thebibliography}{5}
+\expandafter\ifx\csname natexlab\endcsname\relax\def\natexlab#1{#1}\fi
+\providecommand{\url}[1]{\texttt{#1}}
+\providecommand{\href}[2]{#2}
+\providecommand{\path}[1]{#1}
+\providecommand{\DOIprefix}{doi:}
+\providecommand{\ArXivprefix}{arXiv:}
+\providecommand{\URLprefix}{URL: }
+\providecommand{\Pubmedprefix}{pmid:}
+\providecommand{\doi}[1]{\href{http://dx.doi.org/#1}{\path{#1}}}
+\providecommand{\Pubmed}[1]{\href{pmid:#1}{\path{#1}}}
+\providecommand{\bibinfo}[2]{#2}
+\ifx\xfnm\relax \def\xfnm[#1]{\unskip,\space#1}\fi
+%Type = Article
+\bibitem[{Berk and Jones(1979)}]{B.J79}
+\bibinfo{author}{Berk, R.H.}, \bibinfo{author}{Jones, D.H.}, \bibinfo{year}{1979}.
+\newblock \bibinfo{title}{Goodness-of-fit test statistics that dominate the {Kolmogorov} statistics}.
+\newblock \bibinfo{journal}{Zeitschrift f\"ur Wahrscheinlichkeitstheorie und Verwandte Gebiete} \bibinfo{volume}{47}, \bibinfo{pages}{47--59}.
+\newblock \DOIprefix\doi{10.1007/BF00533250}.
+%Type = Book
+\bibitem[{Boyd and Vandenberghe(2004)}]{B.V04}
+\bibinfo{author}{Boyd, S.}, \bibinfo{author}{Vandenberghe, L.}, \bibinfo{year}{2004}.
+\newblock \bibinfo{title}{Convex Optimization}.
+\newblock \bibinfo{publisher}{Cambridge University Press}.
+\newblock \DOIprefix\doi{10.1017/CBO9780511804441}.
+%Type = Article
+\bibitem[{D{\"u}mbgen and Wellner(2023)}]{L.J23}
+\bibinfo{author}{D{\"u}mbgen, L.}, \bibinfo{author}{Wellner, J.A.}, \bibinfo{year}{2023}.
+\newblock \bibinfo{title}{A new approach to tests and confidence bands for distribution functions}.
+\newblock \bibinfo{journal}{The Annals of Statistics} \bibinfo{volume}{51}, \bibinfo{pages}{260--289}.
+\newblock \DOIprefix\doi{10.1214/22-AOS2249}.
+%Type = Article
+\bibitem[{Ford and Fulkerson(1956)}]{F.F56}
+\bibinfo{author}{Ford, Jr., L.R.}, \bibinfo{author}{Fulkerson, D.R.}, \bibinfo{year}{1956}.
+\newblock \bibinfo{title}{Maximal flow through a network}.
+\newblock \bibinfo{journal}{Canadian Journal of Mathematics} \bibinfo{volume}{8}, \bibinfo{pages}{399--404}.
+\newblock \DOIprefix\doi{10.4153/CJM-1956-045-5}.
+%Type = Article
+\bibitem[{Owen(1995)}]{O95}
+\bibinfo{author}{Owen, A.B.}, \bibinfo{year}{1995}.
+\newblock \bibinfo{title}{Nonparametric likelihood confidence bands for a distribution function}.
+\newblock \bibinfo{journal}{Journal of the American Statistical Association} \bibinfo{volume}{90}, \bibinfo{pages}{516--521}.
+\newblock \DOIprefix\doi{10.1080/01621459.1995.10476543}.
+
+\end{thebibliography}

@@ -1,0 +1,224 @@
+\documentclass[review,11pt,3p,authoryear,nopreprintline]{elsarticle}
+
+\usepackage[T1]{fontenc}
+\usepackage{amsmath,amssymb,amsthm}
+\usepackage{mathrsfs}
+\usepackage{bm}
+\usepackage{xcolor}
+\usepackage[colorlinks=true,citecolor=blue,linkcolor=blue,urlcolor=blue]{hyperref}
+
+\newtheorem{theorem}{Theorem}
+\newtheorem{proposition}{Proposition}
+\newtheorem{corollary}{Corollary}
+\newtheorem{lemma}{Lemma}
+\newdefinition{example}{Example}
+\newdefinition{definition}{Definition}
+\newdefinition{remark}{Remark}
+\newdefinition{property}{Property}
+\newdefinition{condition}{Condition}
+
+\begin{document}
+
+\begin{frontmatter}
+  \title{Failure Probability Bounds with Uncertain Surrogate Residual Distributions}
+
+  \author[inst1]{Renlong Wang}
+  \ead{rw106@rice.edu}
+  \affiliation[inst1]{organization={Department of Civil and Environmental Engineering, Rice University}, city={Houston}, postcode={TX 77005}, country={USA}}
+
+  \begin{abstract}
+  \end{abstract}
+
+  \begin{keyword}
+  \end{keyword}
+\end{frontmatter}
+
+\section{Introduction}
+
+\section{Problem Description}
+\label{sec-problem}
+
+Let $\bm X\sim\mathbb P$ be a random input taking values in $\mathcal X\subseteq\mathbb R^n$, and let $g:\mathcal X\to\mathbb R$ be a measurable limit-state function. The failure probability is defined as
+\[
+  p_f:=\Pr\{g(\bm X)\le0\}=\mathbb E_{\bm X\sim\mathbb P}\left[\mathbf 1_{\{g(\bm X)\le0\}}\right]=\int_{\mathcal X}\mathbf 1_{\{g(\bm x)\le0\}}\,\mathbb P(\mathrm d\bm x).
+\]
+For fixed $g$, this functional is linear in $\mathbb P$.
+
+Evaluating $g$ at an input $\bm x$ can be computationally expensive, particularly when each evaluation requires a high-fidelity simulation. A common approach is to replace $g$ with a computationally efficient surrogate model. Let
+\[
+  \mathcal D^{\mathrm{tr}}:=\left\{\left(\bm x_i^{\mathrm{tr}},g(\bm x_i^{\mathrm{tr}})\right)\right\}_{i=1}^{N^{\mathrm{tr}}}
+\]
+denote the training dataset used to construct a measurable surrogate $\hat g:=\hat g_{\mathcal D^{\mathrm{tr}}}$. All model fitting and selection are completed using the training data before the test data introduced below are used. Throughout the analysis, we condition on $\mathcal D^{\mathrm{tr}}$, treat $\hat g$ as fixed, and suppress this dependence in the notation.
+
+Define the signed residual function
+\[
+  \xi(\bm x):=g(\bm x)-\hat g(\bm x),\qquad \forall \bm x\in\mathcal X.
+\]
+For a new input $\bm X\sim\mathbb P$ independent of the training data, the residual $\xi^\star:=\xi(\bm X)$ has distribution $\mathbb Q^\star$ under the fixed surrogate $\hat g$. Let $\Xi\subseteq\mathbb R$ be a known Borel set satisfying $\mathbb Q^\star(\Xi)=1$, and let $\mathcal Q(\Xi)$ denote the set of probability measures on $\mathbb R$ supported on $\Xi$. We take $\Xi=\mathbb R$ when no smaller support can be justified.
+
+For a candidate residual distribution $\mathbb Q\in\mathcal Q(\Xi)$, let $\Pi$ denote a joint distribution of $(\bm X,\xi)$ on $\mathcal X\times\Xi$ with input marginal $\mathbb P = \Pi_{\bm X}$ and residual marginal $\mathbb Q = \Pi_{\xi}$. The corresponding surrogate-based failure probability is
+\begin{equation}
+  p_{\hat f}(\Pi):=\Pr_\Pi\{\hat g(\bm X)+\xi\le0\}=\int_{\mathcal X\times\Xi}\mathbf 1_{\{\hat g(\bm x)+\xi\le0\}}\,\Pi(\mathrm d\bm x,\mathrm d\xi).
+  \label{eq-surrogate-failure-probability}
+\end{equation}
+For fixed $\hat g$, this functional is linear in $\Pi$. In particular, the true joint distribution $\Pi^\star$ satisfies $p_{\hat f}(\Pi^\star)=p_f$.
+
+The surrogate-based failure probability depends on both the residual distribution and its dependence on the input. This dependence is particularly relevant for inputs whose surrogate predictions lie close to the failure threshold, where even small residual errors can change the failure classification. In complex engineering systems, however, the available information may be insufficient to specify the residual distribution reliably. We therefore construct an ambiguity set $\mathscr Q$ of plausible residual distributions intended to contain $\mathbb Q^\star$ with high confidence. For a given residual ambiguity set $\mathscr Q$, define the joint ambiguity set $\mathscr P(\mathscr Q)$ by
+\[
+  \mathscr P(\mathscr Q) :=\left\{\Pi\in\mathcal P(\mathcal X\times\Xi):\Pi_{\bm X}=\mathbb P,\ \Pi_\xi\in\mathscr Q\right\},
+\]
+where $\mathcal P(\mathcal X\times\Xi)$ is the set of probability measures on $\mathcal X\times\Xi$. This set allows all dependence structures consistent with the specified marginals. The upper and lower failure probability bounds are
+\begin{equation}
+  \overline p_{\hat f}:=\sup_{\Pi\in\mathscr P(\mathscr Q)}p_{\hat f}(\Pi),
+  \label{eq-upper-bound}
+\end{equation}
+and
+\begin{equation}
+  \underline p_{\hat f}:=\inf_{\Pi\in\mathscr P(\mathscr Q)}p_{\hat f}(\Pi),
+  \label{eq-lower-bound}
+\end{equation}
+respectively. If $\mathbb Q^\star\in\mathscr Q$, then $\Pi^\star\in\mathscr P(\mathscr Q)$ and hence $\underline p_{\hat f}\le p_f\le\overline p_{\hat f}$.
+
+The main tasks are therefore:
+\begin{enumerate}
+  \item \textbf{Ambiguity set design and statistical calibration.} Construct a residual ambiguity set and establish its coverage guarantee under explicit sampling conditions.
+  \item \textbf{Tractable reformulations.} Derive exact and computationally tractable reformulations of the infinite-dimensional optimization problems defining the failure probability bounds.
+\end{enumerate}
+
+
+\section{Ambiguity Set Design}
+\label{sec-ambiguity-set}
+
+In the surrogate formulation, failure occurs when $\xi\le-\hat g(\bm X)$. The residual cumulative distribution function (CDF) therefore describes the marginal probability mass relevant to each failure threshold. Its tail accuracy matters when estimating small failure probabilities. We use the D\"umbgen--Wellner (DW) construction \citep{L.J23} to control deviations from the empirical CDF simultaneously over all thresholds, with tolerances that vary across probability levels.
+
+We construct an empirical CDF from a test dataset
+\[
+  \mathcal D^{\mathrm{te}}:=\left\{\left(\bm x_j^{\mathrm{te}},g(\bm x_j^{\mathrm{te}})\right)\right\}_{j=1}^{N^{\mathrm{te}}}.
+\]
+The test inputs $\bm x_1^{\mathrm{te}},\ldots,\bm x_{N^{\mathrm{te}}}^{\mathrm{te}}$ are drawn independently from $\mathbb P$ and are independent of $\mathcal D^{\mathrm{tr}}$. We fix $N^{\mathrm{te}}\ge1$ before sampling and use the test data to calibrate the residual ambiguity set. The fitted surrogate remains fixed during and after calibration.
+
+Define the signed test residuals
+\[
+  \xi_j^{\mathrm{te}}:=\xi(\bm x_j^{\mathrm{te}})=g(\bm x_j^{\mathrm{te}})-\hat g(\bm x_j^{\mathrm{te}}),\qquad j=1,\ldots,N^{\mathrm{te}}.
+\]
+Conditional on $\mathcal D^{\mathrm{tr}}$, these residuals are independent and identically distributed according to $\mathbb Q^\star$. Their empirical CDF is
+\begin{equation}
+  \widehat F^{\mathrm{te}}(t):=\frac{1}{N^{\mathrm{te}}}\sum_{j=1}^{N^{\mathrm{te}}}\mathbf 1_{\{\xi_j^{\mathrm{te}}\le t\}},\qquad \forall t\in\mathbb R.
+  \label{eq-empirical-cdf}
+\end{equation}
+For $\mathbb Q\in\mathcal Q(\Xi)$, write $F_{\mathbb Q}(t):=\mathbb Q(({-\infty},t])$. At threshold $t$, the empirical probability $q=\widehat F^{\mathrm{te}}(t)$ is the mean of the Bernoulli indicators $\mathbf 1_{\{\xi_j^{\mathrm{te}}\le t\}}$, and $p=F_{\mathbb Q}(t)$ is its candidate value. Following \citet{B.J79} and the CDF confidence band construction of \citet{O95}, we compare these probabilities using the Bernoulli Kullback--Leibler divergence
+\begin{equation}
+  K(q,p):=q\log\frac{q}{p}+(1-q)\log\frac{1-q}{1-p},\qquad q\in[0,1],\quad p\in(0,1),
+  \label{eq-bernoulli-kl}
+\end{equation}
+where logarithms are natural and a term with zero numerator is interpreted as zero. The quantity $N^{\mathrm{te}}K(q,p)$ is the Bernoulli log-likelihood difference between the empirical and candidate probabilities. For $q$ close to an interior $p$, the approximation $K(q,p)\approx(q-p)^2/[2p(1-p)]$ weights the CDF deviation by its local sampling variance. The full divergence also covers zero counts through $K(0,p)=-\log(1-p)$ and $K(1,p)=-\log p$.
+
+We use the additive correction of \citet{L.J23} to balance fluctuations across probability scales in the simultaneous constraint. For $v\in(0,1)$, define
+\begin{equation}
+  C(v):=\log\log\frac{e}{4v(1-v)},\qquad D(v):=\log\!\left(1+C(v)^2\right).
+  \label{eq-dw-correction-functions}
+\end{equation}
+With $\nu=1$, write $C_1(v):=C(v)+D(v)$ and set $C_1(0)=C_1(1)=+\infty$. For $q,p\in[0,1]$, define the bivariate correction
+\begin{equation}
+  C_1(q,p):=\min_{v\in[\min\{q,p\},\,\max\{q,p\}]}C_1(v).
+  \label{eq-dw-bivariate-correction}
+\end{equation}
+The functions $C$ and $D$ vanish at $v=1/2$ and increase toward the probability boundaries. The bivariate correction is therefore large only when both probabilities lie in the same tail. The corrected discrepancy is $N^{\mathrm{te}}K(q,p)-C_1(q,p)$. Before using the test data, we fix the divergence parameter $s=1$, corresponding to \eqref{eq-bernoulli-kl}, and the correction parameter $\nu=1$.
+
+At the probability boundaries, extend the divergence by $K(0,0)=K(1,1)=0$, $K(q,0)=+\infty$ for $q>0$, and $K(q,1)=+\infty$ for $q<1$. The corrected discrepancy is then $-\infty$ for $q=p\in\{0,1\}$ and $+\infty$ for $p=0<q$ or $p=1>q$. These conventions extend the constraint to every residual threshold.
+
+\begin{definition}[DW CDF-based ambiguity set]
+  \label{definition-dw-ambiguity-set}
+  Given the empirical CDF $\widehat F^{\mathrm{te}}$ and a threshold $\theta\ge0$, define
+  \begin{equation} 
+      \mathscr Q^{\mathrm{DW}}(\theta):=\Bigl\{\mathbb Q\in\mathcal Q(\Xi):\ 
+      \sup_{t\in\mathbb R}\Bigl[ N^{\mathrm{te}}K\!\left(\widehat F^{\mathrm{te}}(t),F_{\mathbb Q}(t)\right) 
+       {}-C_1\!\left(\widehat F^{\mathrm{te}}(t),F_{\mathbb Q}(t)\right)\Bigr]\le\theta\Bigr\}. 
+    \label{eq-cdf-ambiguity-set}
+  \end{equation}
+  The notation suppresses the dependence on the test data and $N^{\mathrm{te}}$. The threshold $\theta$ specifies the allowed corrected discrepancy; a confidence level is assigned through its statistical calibration.
+\end{definition}
+
+We calibrate $\theta$ against a distribution-free reference law. Following \citet{L.J23}, let $V_1,\ldots,V_{N^{\mathrm{te}}}$ be independent standard uniform variables, independent of the training and test data. Their empirical CDF is
+\begin{equation}
+  G_{N^{\mathrm{te}}}(u):=\frac{1}{N^{\mathrm{te}}}\sum_{j=1}^{N^{\mathrm{te}}}\mathbf 1_{\{V_j\le u\}},\qquad u\in[0,1].
+  \label{eq-dw-reference-cdf}
+\end{equation}
+Define the uniform reference statistic
+\begin{equation}
+  T_{N^{\mathrm{te}}}^{\mathrm U}:=\sup_{u\in(0,1)}\left[N^{\mathrm{te}}K\!\left(G_{N^{\mathrm{te}}}(u),u\right)-C_1\!\left(G_{N^{\mathrm{te}}}(u),u\right)\right].
+  \label{eq-dw-reference-statistic}
+\end{equation}
+Here $\Pr_{\mathrm U}$ denotes probability under the uniform reference law. The next proposition converts a tail bound for the reference statistic into coverage of the residual distribution.
+
+\begin{proposition}[Finite-sample $\theta$ calibration]
+  \label{proposition-01}
+  Under the sampling conditions stated above, let $\delta\in(0,1)$. Suppose that $\theta\ge0$ is fixed before observing $\mathcal D^{\mathrm{te}}$ and satisfies
+  \begin{equation}
+    \Pr_{\mathrm U}\left\{T_{N^{\mathrm{te}}}^{\mathrm U}>\theta\right\}\le\delta.
+    \label{eq-dw-calibration-condition}
+  \end{equation}
+  Then the DW ambiguity set satisfies
+  \begin{equation}
+    \Pr_{\mathcal D^{\mathrm{te}}}\left\{\mathbb Q^\star\in\mathscr Q^{\mathrm{DW}}(\theta)\,\middle|\,\mathcal D^{\mathrm{tr}}\right\}\ge1-\delta.
+    \label{eq-cdf-coverage}
+  \end{equation}
+  In particular, \eqref{eq-dw-calibration-condition} holds for every $\theta\ge\theta_{N^{\mathrm{te}}}(\delta)$, where
+  \begin{equation}
+    \theta_{N^{\mathrm{te}}}(\delta):=\inf\left\{z\ge0:\Pr_{\mathrm U}\left\{T_{N^{\mathrm{te}}}^{\mathrm U}\le z\right\}\ge1-\delta\right\}.
+    \label{eq-dw-calibrated-threshold}
+  \end{equation}
+\end{proposition}
+\begin{proof}
+  Conditioning on $\mathcal D^{\mathrm{tr}}$ fixes $\hat g$ and $\mathbb Q^\star$. Define the generalized quantile function $F_{\mathbb Q^\star}^{-1}(u):=\inf\{t\in\mathbb R:F_{\mathbb Q^\star}(t)\ge u\}$, $u\in(0,1)$. The sample $F_{\mathbb Q^\star}^{-1}(V_j)$, $j=1,\ldots,N^{\mathrm{te}}$, has the same conditional joint law as the test residuals. Thus, given $\mathcal D^{\mathrm{tr}}$,
+  \[
+    \left(\widehat F^{\mathrm{te}}(t)\right)_{t\in\mathbb R}\overset{\mathrm d}{=}\left(G_{N^{\mathrm{te}}}\!\left(F_{\mathbb Q^\star}(t)\right)\right)_{t\in\mathbb R}.
+  \]
+  For $0<F_{\mathbb Q^\star}(t)<1$, the discrepancy at $\mathbb Q^\star$ is evaluated at a probability level included in \eqref{eq-dw-reference-statistic}. When $F_{\mathbb Q^\star}(t)$ is zero or one, the empirical CDF equals that boundary almost surely, giving discrepancy $-\infty$. The supremum in \eqref{eq-cdf-ambiguity-set}, evaluated at $\mathbb Q^\star$, is therefore bounded by $T_{N^{\mathrm{te}}}^{\mathrm U}$ under this coupling. Since $\mathbb Q^\star(\Xi)=1$, we obtain
+  \[
+    \Pr_{\mathcal D^{\mathrm{te}}}\left\{\mathbb Q^\star\notin\mathscr Q^{\mathrm{DW}}(\theta)\,\middle|\,\mathcal D^{\mathrm{tr}}\right\}
+    \le\Pr_{\mathrm U}\left\{T_{N^{\mathrm{te}}}^{\mathrm U}>\theta\right\}\le\delta.
+  \]
+  This proves \eqref{eq-cdf-coverage}. Right-continuity of the reference distribution function ensures that the quantile in \eqref{eq-dw-calibrated-threshold} satisfies \eqref{eq-dw-calibration-condition}. Increasing $\theta$ preserves this condition.
+\end{proof}
+
+For every fixed $N^{\mathrm{te}}\ge1$, the proposition covers arbitrary residual distributions, including laws with atoms or infinite moments. With fixed method parameters, the reference law depends only on $N^{\mathrm{te}}$, so the threshold can be calibrated offline. \citet[Supplement, Sections~S.6--S.7]{L.J23} provide finite-sample evaluation through uniform order-statistic boundary probabilities. A conservative upper bound on the quantile in \eqref{eq-dw-calibrated-threshold} preserves \eqref{eq-dw-calibration-condition}. Calibration by simulation must control quantile estimation error to retain the stated coverage.
+
+Statistical confidence regions yield finite-sample guarantees for distributionally robust objectives \citep{B.G.K18}. The following theorem transfers residual-distribution coverage to simultaneous bounds on the failure probability under the joint model. It applies to any residual ambiguity set satisfying the stated coverage condition.
+
+\begin{theorem}[Finite-sample failure probability bounds]
+  \label{theorem-01}
+  Let $\delta\in(0,1)$, and suppose a test-data-dependent residual ambiguity set $\mathscr Q$ satisfies
+  \[
+    \Pr_{\mathcal D^{\mathrm{te}}}\left\{\mathbb Q^\star\in\mathscr Q\,\middle|\,\mathcal D^{\mathrm{tr}}\right\}\ge1-\delta.
+  \]
+  Then the bounds defined in \eqref{eq-upper-bound} and \eqref{eq-lower-bound} satisfy
+  \begin{equation}
+    \Pr_{\mathcal D^{\mathrm{te}}}\left\{\underline p_{\hat f}\le p_f\le\overline p_{\hat f}\,\middle|\,\mathcal D^{\mathrm{tr}}\right\}\ge1-\delta.
+    \label{eq-failure-probability-coverage}
+  \end{equation}
+  In particular, this guarantee holds for $\mathscr Q=\mathscr Q^{\mathrm{DW}}(\theta)$ whenever $\theta$ satisfies \eqref{eq-dw-calibration-condition}, including $\theta=\theta_{N^{\mathrm{te}}}(\delta)$.
+\end{theorem}
+\begin{proof}
+  On $\mathbb Q^\star\in\mathscr Q$, the true joint distribution $\Pi^\star$ belongs to $\mathscr P(\mathscr Q)$. Since $p_{\hat f}(\Pi^\star)=p_f$, the lower and upper bounds satisfy
+  \[
+    \underline p_{\hat f}\le p_{\hat f}(\Pi^\star)=p_f\le\overline p_{\hat f}.
+  \]
+  Taking probabilities yields
+  \[
+    \Pr_{\mathcal D^{\mathrm{te}}}\left\{\underline p_{\hat f}\le p_f\le\overline p_{\hat f}\,\middle|\,\mathcal D^{\mathrm{tr}}\right\}\ge\Pr_{\mathcal D^{\mathrm{te}}}\left\{\mathbb Q^\star\in\mathscr Q\,\middle|\,\mathcal D^{\mathrm{tr}}\right\}\ge1-\delta,
+  \]
+  which proves Theorem~\ref{theorem-01}.
+\end{proof}
+
+The event $\mathbb Q^\star\in\mathscr Q$ gives both inequalities, so $1-\delta$ is the confidence level for the entire interval. In the DW set, $\theta$ controls the corrected likelihood discrepancy. The corresponding CDF tolerances vary by probability level and can differ above and below the empirical CDF. For a fixed sample size, higher confidence requires a nondecreasing calibrated threshold $\theta_{N^{\mathrm{te}}}(\delta)$.
+
+For a fixed empirical CDF, $0\le\theta_1\le\theta_2$ implies $\mathscr Q^{\mathrm{DW}}(\theta_1)\subseteq\mathscr Q^{\mathrm{DW}}(\theta_2)$. The lower bound is therefore nonincreasing in $\theta$, and the upper bound is nondecreasing. The interval reflects finite-sample uncertainty in the residual law and uncertainty in its dependence on the input. Because the joint ambiguity set allows all couplings with the specified marginals, a gap can persist even when the residual marginal is known exactly.
+
+\section{Tractable Reformulation}
+\label{sec-reformulation}
+
+\bibliographystyle{elsarticle-harv}
+\bibliography{reference}
+
+\end{document}
