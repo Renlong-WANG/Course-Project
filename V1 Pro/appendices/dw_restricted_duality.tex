@@ -1,0 +1,367 @@
+\section{Technical proofs for the restricted dual reformulation}
+\label{app-restricted-duality}
+
+All arguments below condition on the fixed training and test data. The rank bounds $\ell_k,u_k$ are those in \eqref{eq-dw-counts-and-levels}. No continuity assumption on the residual or surrogate response distribution is imposed.
+
+\subsection{DW inversion and finite rank constraints}
+\label{app-dw-rank}
+
+\begin{proof}[Proof of Proposition~\ref{prop-finite-rank-constraints}]
+  For fixed $q\in(0,1)$, the Bernoulli divergence $\phi(q,p)$ decreases as $p$ approaches $q$ from below and increases as $p$ moves above $q$. The correction $\psi(q,p)$ is the minimum over the interval between $q$ and $p$, so it cannot increase as that interval expands. Therefore $N^{\mathrm{te}}\phi(q,p)-\psi(q,p)$ is decreasing on $(0,q]$ and increasing on $[q,1)$. It is continuous on $(0,1)$ and equals $-\psi(q)\le0$ at $p=q$. At $p=0,1$, the conventions in Section~\ref{sec-ambiguity-set} give a lower semicontinuous extension. For $q=0$ or $q=1$, the same monotonicity holds on the corresponding one-sided domain, and the discrepancy equals $-\infty$ at $p=q$. Hence its sublevel set at every $\theta\ge0$ is a nonempty closed interval containing $q$. This is the scalar inversion used in DW confidence bands \citep[Supplement, Section~S.6]{L.J23}.
+
+  Applying this inversion to $q=\widehat F^{\mathrm{te}}(t)$ proves \eqref{eq-dw-band-representation}. On $[r_k,r_{k+1})$, the empirical CDF is $c_k/N^{\mathrm{te}}$, so the band there is
+  $\alpha_{c_k}(\theta)\le F_{\mathbb Q}(t)\le\beta_{c_k}(\theta)$.
+  Monotonicity of the candidate CDF makes the lower constraint equivalent to
+  $F_{\mathbb Q}(r_k)\ge\alpha_{c_k}(\theta)$ and the upper constraint equivalent to
+  $F_{\mathbb Q}(r_{k+1}^-)\le\beta_{c_k}(\theta)$.
+  The left exterior interval contributes only
+  $F_{\mathbb Q}(r_1^-)\le\beta_0(\theta)$, because $\alpha_0(\theta)=0$; the right exterior interval contributes only
+  $F_{\mathbb Q}(r_K)\ge\alpha_{N^{\mathrm{te}}}(\theta)$, because $\beta_{N^{\mathrm{te}}}(\theta)=1$.
+  Finally, $F_{\mathbb Q}(r_k^-)=\mathbb Q\{\xi<r_k\}$ and $F_{\mathbb Q}(r_k)=\mathbb Q\{\xi\le r_k\}$ give \eqref{eq-finite-rank-constraints}.
+\end{proof}
+
+For later use, fix $p$ and apply the same argument in $q$: the discrepancy decreases toward $q=p$ and increases away from it. For $q_1\le q_2$ and $p\le q_1$, acceptance of $p$ at $q_2$ therefore implies acceptance at $q_1$; for $p\ge q_2$, acceptance at $q_1$ implies acceptance at $q_2$. Consequently, $\alpha_j(\theta)$ and $\beta_j(\theta)$ are nondecreasing in $j$. Since each acceptance interval contains $q_j$, the rank bounds satisfy
+\begin{equation}
+  0\le\ell_k,u_k\le1,\qquad
+  \ell_{k-1}\le u_k,\qquad \ell_k\le u_{k+1},
+  \quad k=1,\ldots,K,
+  \label{eq-app-rank-compatibility}
+\end{equation}
+where $\ell_0:=0$ and $u_{K+1}:=1$. Both sequences are nondecreasing. These properties hold also at $\theta=0$; an acceptance interval may then reduce to a singleton.
+
+\subsection{Lagrangian origin of the restricted duals}
+\label{app-restricted-lagrangian}
+
+Let $\mathcal M_+(\mathcal X\times\Xi)$ be the finite nonnegative Borel measures. Proposition~\ref{prop-finite-rank-constraints} gives the expanded upper measure LP
+\begin{equation}
+  \begin{aligned}
+    \overline p_{\hat f}
+    =\sup_{\Pi\in\mathcal M_+(\mathcal X\times\Xi)}\quad&
+    \int_{\mathcal X\times\Xi}\mathbf1_{\{\hat g(\bm x)+\xi\le0\}}\,\Pi\left(\mathrm d\bm x,\mathrm d\xi\right)\\
+    \text{s.t.}\quad&
+    \int_{\mathcal X\times\Xi}\mathbf1_A(\bm x)\,\Pi\left(\mathrm d\bm x,\mathrm d\xi\right)
+    =\int_{\mathcal X}\mathbf1_A(\bm x)\,\mathbb P\left(\mathrm d\bm x\right),
+    &&\forall A\in\mathcal B(\mathcal X),\\
+    &\int_{\mathcal X\times\Xi}\mathbf1_{\{\xi<r_k\}}\,\Pi\left(\mathrm d\bm x,\mathrm d\xi\right)\le u_k,
+    &&k=1,\ldots,K,\\
+    &\int_{\mathcal X\times\Xi}\mathbf1_{\{\xi\le r_k\}}\,\Pi\left(\mathrm d\bm x,\mathrm d\xi\right)\ge\ell_k,
+    &&k=1,\ldots,K.
+  \end{aligned}
+  \label{eq-measure-upper}
+\end{equation}
+The lower measure LP has the same constraints and replaces the supremum by an infimum:
+\begin{equation}
+  \underline p_{\hat f}
+  =\inf_{\Pi\in\mathscr P\left(\mathscr Q^{\mathrm{DW}}(\theta)\right)}
+  \int_{\mathcal X\times\Xi}\mathbf1_{\{\hat g(\bm x)+\xi\le0\}}\,\Pi\left(\mathrm d\bm x,\mathrm d\xi\right).
+  \label{eq-measure-lower}
+\end{equation}
+Taking $A=\mathcal X$ fixes total mass at one. Both programs are feasible for every $\theta\ge0$: the product of $\mathbb P$ and the empirical residual law satisfies all rank constraints, since its CDF takes the empirical values $q_j\in[\alpha_j(\theta),\beta_j(\theta)]$.
+
+For unrestricted nonnegative multipliers $\lambda,\mu\in\mathbb R_+^K$, define
+\begin{equation}
+  \eta_{\lambda,\mu}(\xi):=
+  \sum_{k=1}^K\lambda_k\mathbf1_{\{\xi<r_k\}}
+  -\sum_{k=1}^K\mu_k\mathbf1_{\{\xi\le r_k\}}.
+  \label{eq-dual-step-function}
+\end{equation}
+Let $\varphi$ be a bounded measurable function on $\mathcal X$. For the upper problem, add the marginal term
+$\mathbb E_{\mathbb P}[\varphi(\bm X)]-\int\varphi(\bm x)\,\mathrm d\Pi$,
+the upper-constraint penalties
+$\lambda_k(u_k-\int\mathbf1_{\{\xi<r_k\}}\,\mathrm d\Pi)$,
+and the lower-constraint penalties
+$\mu_k(\int\mathbf1_{\{\xi\le r_k\}}\,\mathrm d\Pi-\ell_k)$.
+The standard Lagrangian construction \citep[Section~5.1]{B.V04} gives
+\begin{equation}
+  \begin{aligned}
+    \mathcal L^+={}&\mathbb E_{\mathbb P}\left[\varphi(\bm X)\right]+\lambda^\top u-\mu^\top\ell\\
+    &+\int_{\mathcal X\times\Xi}
+    \left[\mathbf1_{\{\hat g(\bm x)+\xi\le0\}}-\varphi(\bm x)-\eta_{\lambda,\mu}(\xi)\right]\,\Pi\left(\mathrm d\bm x,\mathrm d\xi\right),
+  \end{aligned}
+  \label{eq-upper-lagrangian}
+\end{equation}
+where $u=(u_1,\ldots,u_K)^\top$ and $\ell=(\ell_1,\ldots,\ell_K)^\top$. Its supremum over nonnegative finite measures is finite exactly when the integrand is nonpositive everywhere: a positive value permits an arbitrarily large point mass, while a nonpositive integrand has supremum integral zero at the zero measure. Thus the full upper dual is
+\begin{equation}
+  \begin{aligned}
+    \overline d_\theta^{\mathrm{full}}:=\inf_{\lambda,\mu\ge0,\ \varphi}\quad&
+    \mathbb E_{\mathbb P}\left[\varphi(\bm X)\right]+\lambda^\top u-\mu^\top\ell\\
+    \text{s.t.}\quad&\varphi(\bm x)+\eta_{\lambda,\mu}(\xi)
+    \ge\mathbf1_{\{\hat g(\bm x)+\xi\le0\}},
+    \quad\forall(\bm x,\xi)\in\mathcal X\times\Xi.
+  \end{aligned}
+  \label{eq-upper-measure-dual}
+\end{equation}
+Reversing the signs of the two inequality penalties gives the lower Lagrangian
+\begin{equation}
+  \begin{aligned}
+    \mathcal L^-={}&\mathbb E_{\mathbb P}\left[\varphi(\bm X)\right]-\lambda^\top u+\mu^\top\ell\\
+    &+\int_{\mathcal X\times\Xi}
+    \left[\mathbf1_{\{\hat g(\bm x)+\xi\le0\}}-\varphi(\bm x)+\eta_{\lambda,\mu}(\xi)\right]\,\Pi\left(\mathrm d\bm x,\mathrm d\xi\right).
+  \end{aligned}
+  \label{eq-lower-lagrangian}
+\end{equation}
+Its infimum over nonnegative finite measures is finite exactly when the integrand is nonnegative everywhere, with infimum integral zero. The full lower dual is
+\begin{equation}
+  \begin{aligned}
+    \underline d_\theta^{\mathrm{full}}:=\sup_{\lambda,\mu\ge0,\ \varphi}\quad&
+    \mathbb E_{\mathbb P}\left[\varphi(\bm X)\right]-\lambda^\top u+\mu^\top\ell\\
+    \text{s.t.}\quad&\varphi(\bm x)-\eta_{\lambda,\mu}(\xi)
+    \le\mathbf1_{\{\hat g(\bm x)+\xi\le0\}},
+    \quad\forall(\bm x,\xi)\in\mathcal X\times\Xi.
+  \end{aligned}
+  \label{eq-lower-measure-dual}
+\end{equation}
+Both full duals range over bounded measurable $\varphi$. For primal feasible measures, $\mathcal L^+\ge p_{\hat f}(\Pi)\ge\mathcal L^-$, so full weak duality holds.
+
+\begin{proof}[Proof of Lemma~\ref{lem-weak-duality}]
+  The threshold relations are the pointwise inequalities
+  \begin{align}
+    \mathbf1_{\{\xi\le T(\bm x)\}}
+    &\le\mathbf1_{\{\xi<r_k\}}+\mathbf1_{\{T(\bm x)\ge r_k\}},
+    \label{eq-app-upper-threshold-certificate}\\
+    \mathbf1_{\{\xi\le T(\bm x)\}}
+    &\ge\mathbf1_{\{\xi\le r_k\}}+\mathbf1_{\{T(\bm x)\ge r_k\}}-1.
+    \label{eq-app-lower-threshold-certificate}
+  \end{align}
+  For any $\lambda\ge0$ with $\sum_k\lambda_k\le1$, set the full upper multiplier $\mu=0$ and choose
+  \begin{equation}
+    \varphi_\lambda^+(\bm x):=
+    1-\sum_{k=1}^K\lambda_k+
+    \sum_{k=1}^K\lambda_k\mathbf1_{\{T(\bm x)\ge r_k\}}.
+    \label{eq-app-upper-restricted-potential}
+  \end{equation}
+  Taking the weighted sum of \eqref{eq-app-upper-threshold-certificate}, with the remaining weight on the constant upper bound one, gives
+  $\varphi_\lambda^+(\bm x)+\eta_{\lambda,0}(\xi)\ge\mathbf1_{\{\xi\le T(\bm x)\}}$.
+  Thus these are full-dual feasible variables. Their objective is
+  \[
+    \mathbb E_{\mathbb P}\left[\varphi_\lambda^+(\bm X)\right]+\lambda^\top u
+    =1+\sum_{k=1}^K\lambda_k\left[u_k+H_k-1\right].
+  \]
+  This establishes the Lagrangian origin of \eqref{eq-upper-restricted-dual}.
+
+  For any $\mu\ge0$ with $\sum_k\mu_k\le1$, set the full lower multiplier $\lambda=0$ and choose
+  \begin{equation}
+    \varphi_\mu^-(\bm x):=
+    \sum_{k=1}^K\mu_k\left[\mathbf1_{\{T(\bm x)\ge r_k\}}-1\right].
+    \label{eq-app-lower-restricted-potential}
+  \end{equation}
+  The weighted sum of \eqref{eq-app-lower-threshold-certificate}, with unused weight on the constant lower bound zero, gives
+  $\varphi_\mu^-(\bm x)-\eta_{0,\mu}(\xi)\le\mathbf1_{\{\xi\le T(\bm x)\}}$.
+  Its full lower-dual objective is
+  \[
+    \mathbb E_{\mathbb P}\left[\varphi_\mu^-(\bm X)\right]+\mu^\top\ell
+    =\sum_{k=1}^K\mu_k\left[\ell_k+H_k-1\right],
+  \]
+  giving \eqref{eq-lower-restricted-dual}. Both constructed functions are bounded and measurable. Since the restricted problems optimize over subsets of the full dual feasible sets,
+  \begin{equation}
+    \underline d_\theta
+    \le\underline d_\theta^{\mathrm{full}}
+    \le\underline p_{\hat f}
+    \le\overline p_{\hat f}
+    \le\overline d_\theta^{\mathrm{full}}
+    \le\overline d_\theta.
+    \label{eq-app-full-restricted-weak-chain}
+  \end{equation}
+  This proves \eqref{eq-weak-duality}. The restricted feasible weight sets are compact and their objectives are continuous, so both restricted optima are attained.
+\end{proof}
+
+\subsection{Exact finite aggregation and full strong duality}
+\label{app-finite-aggregation}
+
+Take $\Xi=\mathbb R$. Set $r_0:=-\infty$, $r_{K+1}:=+\infty$, $H_0:=1$, $H_{K+1}:=0$, and $J:=2K+1$. Define the input intervals and their probabilities by
+\begin{equation}
+  A_i:=\left\{\bm x:r_i\le T(\bm x)<r_{i+1}\right\},\qquad
+  w_i:=\mathbb P\left(A_i\right)=H_i-H_{i+1},\quad i=0,\ldots,K,
+  \label{eq-input-cells}
+\end{equation}
+and the residual cells by
+\begin{equation}
+  C_{2k}:=\left\{r_k\right\}\quad(k=1,\ldots,K),\qquad
+  C_{2k+1}:=\left(r_k,r_{k+1}\right)\quad(k=0,\ldots,K).
+  \label{eq-residual-cells}
+\end{equation}
+The input intervals include their left endpoints. Their weights use $H_k=\mathbb P\{T(\bm X)\ge r_k\}$ and therefore include any threshold atoms exactly. For $\bm x\in A_i$ and $\xi\in C_j$,
+\begin{equation}
+  \underline h_{ij}:=\mathbf1_{\{j\le2i\}}
+  \le\mathbf1_{\{\xi\le T(\bm x)\}}
+  \le\overline h_{ij}:=\mathbf1_{\{j\le2i+1\}}.
+  \label{eq-cell-costs}
+\end{equation}
+The feasible probability-allocation matrices form
+\begin{equation}
+  \mathcal A_\theta:=\left\{p\in\mathbb R_+^{(K+1)\times J}:
+  \begin{array}{ll}
+    \displaystyle\sum_{j=1}^Jp_{ij}=w_i,&i=0,\ldots,K,\\[1mm]
+    \displaystyle\sum_{i=0}^K\sum_{j<2k}p_{ij}\le u_k,&k=1,\ldots,K,\\[1mm]
+    \displaystyle\sum_{i=0}^K\sum_{j\le2k}p_{ij}\ge\ell_k,&k=1,\ldots,K
+  \end{array}\right\}.
+  \label{eq-cell-mass-polytope}
+\end{equation}
+
+\begin{lemma}[Finite representation and full duality]
+  \label{lem-app-full-duality}
+  For every $\theta\ge0$,
+  \begin{align}
+    \overline p_{\hat f}
+    &=\max_{p\in\mathcal A_\theta}\sum_{i=0}^K\sum_{j=1}^J\overline h_{ij}p_{ij},
+    \label{eq-finite-primal-values}\\
+    \underline p_{\hat f}
+    &=\min_{p\in\mathcal A_\theta}\sum_{i=0}^K\sum_{j=1}^J\underline h_{ij}p_{ij}.
+    \label{eq-app-finite-lower-primal}
+  \end{align}
+  Both measure primal optima are attained. The full Lagrangian duals also attain their optima and satisfy
+  $\overline p_{\hat f}=\overline d_\theta^{\mathrm{full}}$ and
+  $\underline p_{\hat f}=\underline d_\theta^{\mathrm{full}}$.
+\end{lemma}
+\begin{proof}
+  Every feasible joint measure induces $p_{ij}:=\Pi(A_i\times C_j)\in\mathcal A_\theta$. By \eqref{eq-cell-costs}, its objective is at most the upper finite objective and at least the lower finite objective. These give one direction of each equality.
+
+  For the reverse directions, fix $p\in\mathcal A_\theta$. For $\bm x\in A_i$ with $w_i>0$, select category $j$ with probability $p_{ij}/w_i$. If $j\ne2i+1$, choose a fixed representative of $C_j$; both coefficients in \eqref{eq-cell-costs} then equal the actual indicator. In the overlapping open category, choose $\xi=T(\bm x)$ for the upper problem. This lies in $C_{2i+1}$ when $T(\bm x)>r_i$ and at the left endpoint when $T(\bm x)=r_i$. In the latter case, for every $s\in(r_i,r_{i+1})$ and every observed threshold $r_k$,
+  \begin{equation}
+    \mathbf1_{\{r_i<r_k\}}=\mathbf1_{\{s<r_k\}},\qquad
+    \mathbf1_{\{r_i\le r_k\}}\ge\mathbf1_{\{s\le r_k\}}.
+    \label{eq-app-endpoint-move}
+  \end{equation}
+  Moving the assigned mass to $r_i$ therefore leaves all open upper probabilities unchanged and can only increase the closed lower probabilities. It preserves every rank constraint and makes the assigned upper indicator one. For $i=0$, the threshold is finite and cannot equal $r_0=-\infty$, so no endpoint move is needed.
+
+  For the lower problem, choose $\xi=(T(\bm x)+r_{i+1})/2$ in the overlapping category when $i<K$, and $\xi=T(\bm x)+1$ when $i=K$. These choices remain within that open residual cell and exceed $T(\bm x)$, even when $T(\bm x)=r_i$. They attain the lower coefficient zero and preserve all residual cell probabilities.
+
+  Let $\zeta_{ij}^{\pm}(\bm x)$ denote these selections. The corresponding joint measures are defined by the measurable probability kernels
+  \begin{equation}
+    \Pi^{\pm}\left(\mathrm d\bm x,\mathrm d\xi\right)
+    =\mathbb P\left(\mathrm d\bm x\right)
+    \sum_{j=1}^J\frac{p_{ij}}{w_i}
+    \delta_{\zeta_{ij}^{\pm}(\bm x)}\left(\mathrm d\xi\right),
+    \qquad\bm x\in A_i,\quad w_i>0.
+    \label{eq-app-lifting-kernels}
+  \end{equation}
+  A zero-weight input interval has a zero row in $p$ and may use any residual probability kernel. The input marginal is exactly $\mathbb P$. The lower construction preserves all category masses; the upper construction may redistribute mass from an open category to its left endpoint, as described in \eqref{eq-app-endpoint-move}. Feasibility and the respective objective values are preserved. This proves \eqref{eq-finite-primal-values}--\eqref{eq-app-finite-lower-primal} as equalities of optimal values.
+
+  Empirical-product feasibility makes $\mathcal A_\theta$ nonempty, including at $\theta=0$. Its entries are nonnegative and sum to one, and all constraints are closed, so it is compact. The finite linear objectives attain their extrema. Finite LP strong duality gives attained dual optima \citep[Section~5.2.3]{B.V04}. On $C_j$, write
+  \begin{equation}
+    \eta_j:=\sum_{k=1}^K\lambda_k\mathbf1_{\{j<2k\}}
+    -\sum_{k=1}^K\mu_k\mathbf1_{\{j\le2k\}}.
+    \label{eq-dual-cell-values}
+  \end{equation}
+  Dualizing the row equalities with free $z_i$ and the two prefix inequalities with nonnegative $\lambda_k,\mu_k$ gives
+  \begin{equation}
+    \begin{aligned}
+      \min_{\lambda,\mu\ge0,\ z\in\mathbb R^{K+1}}\quad&
+      \lambda^\top u-\mu^\top\ell+\sum_{i=0}^K w_i z_i\\
+      \text{s.t.}\quad&z_i+\eta_j\ge\overline h_{ij},
+      \quad i=0,\ldots,K,\quad j=1,\ldots,J,
+    \end{aligned}
+    \label{eq-finite-upper-dual}
+  \end{equation}
+  and
+  \begin{equation}
+    \begin{aligned}
+      \max_{\lambda,\mu\ge0,\ z\in\mathbb R^{K+1}}\quad&
+      -\lambda^\top u+\mu^\top\ell+\sum_{i=0}^K w_i z_i\\
+      \text{s.t.}\quad&z_i-\eta_j\le\underline h_{ij},
+      \quad i=0,\ldots,K,\quad j=1,\ldots,J.
+    \end{aligned}
+    \label{eq-finite-lower-dual}
+  \end{equation}
+  For either finite dual, $\varphi(\bm x)=z_i$ on $A_i$ is bounded and measurable. By \eqref{eq-cell-costs}, it is feasible for the corresponding full measure dual and has the same objective. Consequently,
+  \[
+    \overline p_{\hat f}\le\overline d_\theta^{\mathrm{full}}
+    \le\operatorname{val}\eqref{eq-finite-upper-dual}
+    =\overline p_{\hat f},
+  \]
+  and
+  \[
+    \underline p_{\hat f}\ge\underline d_\theta^{\mathrm{full}}
+    \ge\operatorname{val}\eqref{eq-finite-lower-dual}
+    =\underline p_{\hat f}.
+  \]
+  The first inequalities are full weak duality; the last equalities are finite LP duality and the exact finite representation. Optimal finite dual variables lift to optimal full measure-dual variables, and optimal finite primal matrices lift through \eqref{eq-app-lifting-kernels} to optimal joint measures. No strictly feasible band point is required.
+\end{proof}
+
+\subsection{Why restricting the dual loses no optimality}
+\label{app-lossless-restriction}
+
+\begin{proof}[Completion of the proof of Theorem~\ref{thm-finite-dual-reformulations}]
+  Lemma~\ref{lem-app-full-duality} establishes full strong duality. It remains to prove that the restricted duals have the same values. We do this directly from the finite probability-allocation model, without assuming the closed-form result in the main text.
+
+  First fix nonnegative column totals $v_1,\ldots,v_J$ with $\sum_jv_j=1$, write
+  $V_s:=\sum_{j=1}^s v_j$, and let $\Gamma(w,v)$ be the nonnegative matrices with row sums $w_i$ and column sums $v_j$. This set is nonempty because it contains $p_{ij}=w_iv_j$. Its two ordered transportation problems satisfy
+  \begin{align}
+    \max_{p\in\Gamma(w,v)}\sum_{i,j}\overline h_{ij}p_{ij}
+    &=\min\left\{1,\min_{k=1,\ldots,K}\left[H_k+V_{2k-1}\right]\right\},
+    \label{eq-app-fixed-column-upper}\\
+    \min_{p\in\Gamma(w,v)}\sum_{i,j}\underline h_{ij}p_{ij}
+    &=\max\left\{0,\max_{k=1,\ldots,K}\left[H_k+V_{2k}-1\right]\right\}.
+    \label{eq-app-fixed-column-lower}
+  \end{align}
+  Here and below, sums over $i,j$ range over $i=0,\ldots,K$ and $j=1,\ldots,J$.
+
+  To prove \eqref{eq-app-fixed-column-upper}, construct a flow network with source-to-row capacities $w_i$, column-to-sink capacities $v_j$, and row-to-column edges precisely when $j\le2i+1$. Give each middle edge capacity two. The maximum flow is the greatest probability mass that a transportation matrix can place on these edges: any such matrix gives a feasible partial flow, and any partial flow can be completed to a matrix in $\Gamma(w,v)$ by distributing the remaining row and column masses. By the max-flow/min-cut theorem, this value equals the minimum cut capacity \citep{F.F56}.
+
+  There is a cut of capacity one. Consequently, a minimum cut crosses no middle edge of capacity two. If its source-side rows are nonempty and their largest index is $m$, their neighbors are exactly columns $1,\ldots,2m+1$. Adding every row of smaller index to the source side and removing all other source-side columns cannot increase the cut capacity. For $m<K$, put $k=m+1$. The resulting cut has capacity
+  \[
+    \sum_{i=k}^K w_i+\sum_{j=1}^{2k-1}v_j=H_k+V_{2k-1}.
+  \]
+  If $m=K$, all columns are forced to the source side and the normalized cut has capacity one. A cut with no source-side rows also has minimum capacity one. Conversely, each displayed prefix cut is feasible. This proves \eqref{eq-app-fixed-column-upper} as a primal--dual equality for the network LP.
+
+  For \eqref{eq-app-fixed-column-lower}, maximize the safe mass on the edges $j>2i$, and subtract the resulting maximum flow from one. The row neighborhoods are now nested suffixes. For nonempty source-side rows with smallest index $m$, adding all rows of larger index and retaining exactly columns $2m+1,\ldots,J$ cannot increase the cut capacity. When $m=k\ge1$, its capacity is
+  \[
+    \sum_{i=0}^{k-1}w_i+\sum_{j=2k+1}^Jv_j
+    =2-H_k-V_{2k}.
+  \]
+  The case $m=0$ and the empty row set give capacity one. These are all cuts needed for the minimum. Subtracting the minimum safe-flow cut from one gives \eqref{eq-app-fixed-column-lower}.
+
+  We now optimize over column totals allowed by the rank constraints. Every $p\in\mathcal A_\theta$ has
+  \[
+    V_{2k-1}\le u_k,\qquad V_{2k}\ge\ell_k,
+    \qquad k=1,\ldots,K.
+  \]
+  For the upper problem, the column allocation
+  \begin{equation}
+    v_1^+:=u_1,\qquad
+    v_{2k}^+:=u_{k+1}-u_k\quad(k=1,\ldots,K),\qquad
+    v_{2k+1}^+:=0\quad(k=1,\ldots,K)
+    \label{eq-app-upper-column-allocation}
+  \end{equation}
+  is feasible. Indeed, its entries are nonnegative, sum to one, and satisfy
+  $V_{2k-1}^+=u_k$ and $V_{2k}^+=u_{k+1}\ge\ell_k$ by \eqref{eq-app-rank-compatibility}. Thus all open upper probabilities can attain their allowed values simultaneously. Since the right side of \eqref{eq-app-fixed-column-upper} is nondecreasing in each $V_{2k-1}$, this allocation maximizes the upper finite objective over all feasible column totals. For the lower problem, use
+  \begin{equation}
+    v_{2k}^-:=\ell_k-\ell_{k-1}\quad(k=1,\ldots,K),\qquad
+    v_J^-:=1-\ell_K,\qquad
+    v_{2k-1}^-:=0\quad(k=1,\ldots,K).
+    \label{eq-app-lower-column-allocation}
+  \end{equation}
+  Here $V_{2k}^-=\ell_k$ and $V_{2k-1}^-=\ell_{k-1}\le u_k$, so the allocation is feasible. It simultaneously attains all closed lower probabilities and minimizes the right side of \eqref{eq-app-fixed-column-lower}.
+
+  It follows from Lemma~\ref{lem-app-full-duality} and the two network dualities that the upper primal value is the smallest of the $K+1$ numbers $1,u_1+H_1,\ldots,u_K+H_K$, and the lower primal value is the largest of $0,\ell_1+H_1-1,\ldots,\ell_K+H_K-1$. Independently, the restricted upper objective is a convex combination of the first list, and the restricted lower objective is a convex combination of the second list. Each list member is achieved by a feasible restricted weight vector, namely zero or a unit vector. Hence the respective restricted and primal values coincide. Together with \eqref{eq-app-full-restricted-weak-chain}, this proves equality with the full Lagrangian dual values and proves that the restriction is lossless. Compactness gives restricted dual attainment, while Lemma~\ref{lem-app-full-duality} gives primal and full dual attainment.
+
+  Every step uses non-strict inequalities. In particular, the column allocations remain feasible when some adjacent bounds coincide. If $\ell_k=u_{k+1}$, the two constraints force $V_{2k}=V_{2k+1}$, hence zero mass in the intervening open cell; the construction does not require positive mass there. Threshold equality $T(\bm x)=r_i$ is covered by the left-closed input intervals and the feasible endpoint move in \eqref{eq-app-endpoint-move}. Therefore neither equality at a test residual nor $\theta=0$ requires a perturbation, a limiting argument, or a strict-feasibility assumption.
+\end{proof}
+
+\subsection{Known interval support}
+\label{app-interval-support}
+
+For $\Xi=[a,b]$ with finite $a\le b$, the exact bounds become
+\begin{align}
+  \overline p_{\hat f}
+  &=\min\left\{H(-a),\min_{k=1,\ldots,K}\left[u_k+H_k\right]\right\},
+  \label{eq-app-interval-upper}\\
+  \underline p_{\hat f}
+  &=\max\left\{H(-b),\max_{k=1,\ldots,K}\left[\ell_k+H_k-1\right]\right\}.
+  \label{eq-app-interval-lower}
+\end{align}
+The corresponding restricted dual objectives are
+\[
+  H(-a)+\sum_{k=1}^K\lambda_k\left[u_k+H_k-H(-a)\right],\qquad
+  H(-b)+\sum_{k=1}^K\mu_k\left[\ell_k+H_k-1-H(-b)\right],
+\]
+minimized and maximized, respectively, over the same nonnegative weight vectors with total weight at most one.
+
+To verify the extension, view a law on $[a,b]$ as a law on $\mathbb R$ with the additional constraints
+\[
+  \mathbb Q\{\xi<a\}\le0,\qquad \mathbb Q\{\xi\le b\}\ge1.
+\]
+Add $a,b$ to the ordered threshold list. At a newly added $a$, use lower bound zero; at a newly added $b$, use upper bound one. If either endpoint is already an observed threshold, retain its original other bound and tighten the displayed support bound. All test residuals lie in $[a,b]$, so the enlarged sequences remain nondecreasing and satisfy the neighboring compatibility inequalities \eqref{eq-app-rank-compatibility}. The finite-aggregation and ordered-cut proofs above use only these properties, and therefore apply unchanged to the enlarged list. The added open constraint at $a$ contributes the upper candidate $0+H(-a)$ and an otherwise redundant lower candidate; the added closed constraint at $b$ contributes the lower candidate $1+H(-b)-1$ and an otherwise redundant upper candidate. This proves \eqref{eq-app-interval-upper}--\eqref{eq-app-interval-lower}, including coincident endpoints and $\theta=0$.
+
+The baseline potentials also follow directly from support: $\mathbf1_{\{\xi\le T(\bm x)\}}\le\mathbf1_{\{T(\bm x)\ge a\}}$ and $\mathbf1_{\{\xi\le T(\bm x)\}}\ge\mathbf1_{\{T(\bm x)\ge b\}}$ for $\xi\in[a,b]$. Replacing the constant potentials in the restricted construction by these functions gives the two objectives above. If $a=b$, both exact bounds equal $H(-a)$.
+

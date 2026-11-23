@@ -1,0 +1,136 @@
+\section{Tractable Reformulation}
+\label{sec-reformulation}
+
+Each observed residual threshold provides an upper and a lower bound on the failure probability. We derive these bounds as feasible Lagrangian dual solutions and show that their best weighted combinations recover the exact worst- and best-case probabilities. The calculation uses only the test residuals and the CDF of the surrogate response. Throughout this section, the training data, test residuals, and $\theta\ge0$ are fixed; the exact reformulations use the default support $\Xi=\mathbb R$.
+
+For $q_j:=j/N^{\mathrm{te}}$, invert the scalar DW constraint to obtain
+\begin{equation}
+  \left[\alpha_j(\theta),\beta_j(\theta)\right]
+  :=\left\{p\in[0,1]:
+  N^{\mathrm{te}}\phi\left(q_j,p\right)-\psi\left(q_j,p\right)\le\theta\right\},
+  \qquad j=0,\ldots,N^{\mathrm{te}}.
+  \label{eq-dw-rank-acceptance}
+\end{equation}
+These endpoints can be computed by one-dimensional bisection. Let $r_1<\cdots<r_K$ be the distinct test residuals, and define
+\begin{equation}
+  \begin{aligned}
+    c_0&:=0,&
+    c_k&:=\sum_{j=1}^{N^{\mathrm{te}}}\mathbf1_{\{\xi_j^{\mathrm{te}}\le r_k\}},\\
+    \ell_k&:=\alpha_{c_k}(\theta),&
+    u_k&:=\beta_{c_{k-1}}(\theta),\qquad k=1,\ldots,K.
+  \end{aligned}
+  \label{eq-dw-counts-and-levels}
+\end{equation}
+The cumulative counts retain all multiplicities, so $c_K=N^{\mathrm{te}}$ even when residuals repeat.
+
+\begin{proposition}[CDF band and finite rank constraints]
+  \label{prop-finite-rank-constraints}
+  For every $\theta\ge0$, each set in \eqref{eq-dw-rank-acceptance} is a nonempty closed interval containing $q_j$. With
+  $L_\theta(t):=\alpha_{N^{\mathrm{te}}\widehat F^{\mathrm{te}}(t)}(\theta)$ and
+  $U_\theta(t):=\beta_{N^{\mathrm{te}}\widehat F^{\mathrm{te}}(t)}(\theta)$, the DW ambiguity set is
+  \begin{equation}
+    \mathscr Q^{\mathrm{DW}}(\theta)
+    =\left\{\mathbb Q\in\mathcal Q(\Xi):
+    L_\theta(t)\le F_{\mathbb Q}(t)\le U_\theta(t),\quad\forall t\in\mathbb R\right\},
+    \label{eq-dw-band-representation}
+  \end{equation}
+  or, equivalently,
+  \begin{equation}
+    \mathscr Q^{\mathrm{DW}}(\theta)
+    =\left\{\mathbb Q\in\mathcal Q(\Xi):
+    \begin{array}{l}
+      \mathbb Q\left\{\xi<r_k\right\}\le u_k,\\
+      \mathbb Q\left\{\xi\le r_k\right\}\ge\ell_k,
+    \end{array}
+    \quad k=1,\ldots,K\right\}.
+    \label{eq-finite-rank-constraints}
+  \end{equation}
+\end{proposition}
+\begin{proof}
+  Scalar inversion gives the CDF band. Monotonicity of a candidate CDF reduces each constant segment of that band to its endpoint constraints. Appendix~\ref{app-dw-rank} gives the complete argument, including the open and closed endpoints.
+\end{proof}
+
+Thus $u_k$ limits the probability of a residual strictly below $r_k$, while $\ell_k$ guarantees a minimum probability at or below $r_k$. The distinction preserves probability mass at the threshold. Substitution into \eqref{eq-upper-bound} and \eqref{eq-lower-bound} gives linear constraints on the joint measure; the expanded measure programs are given in Appendix~\ref{app-restricted-lagrangian}.
+
+For the input-dependent failure threshold $T(\bm x):=-\hat g(\bm x)$, define
+\begin{equation}
+  H(t):=\mathbb P\left\{\hat g(\bm X)\le t\right\},\qquad
+  H_k:=H(-r_k)=\mathbb P\left\{T(\bm X)\ge r_k\right\}.
+  \label{eq-surrogate-response-cdf}
+\end{equation}
+At any rank $k$, failure is contained in the union of the events $\{\xi<r_k\}$ and $\{T(\bm X)\ge r_k\}$, and contains the intersection of $\{\xi\le r_k\}$ and $\{T(\bm X)\ge r_k\}$. These event relations give the candidate upper bound $u_k+H_k$ and lower bound $\ell_k+H_k-1$ without an independence assumption. Their weighted combinations form the following restricted Lagrangian duals.
+
+\begin{lemma}[Restricted dual problems and weak duality]
+  \label{lem-weak-duality}
+  For every $\theta\ge0$, consider the upper restricted dual problem
+  \begin{equation}
+    \begin{aligned}
+      \min_{\lambda\in\mathbb R_+^K}\quad&
+      1+\sum_{k=1}^K\lambda_k\left[u_k+H_k-1\right]\\
+      \text{s.t.}\quad&\sum_{k=1}^K\lambda_k\le1,
+    \end{aligned}
+    \label{eq-upper-restricted-dual}
+  \end{equation}
+  and denote its optimal value by $\overline d_\theta$. The lower restricted dual problem is
+  \begin{equation}
+    \begin{aligned}
+      \max_{\mu\in\mathbb R_+^K}\quad&
+      \sum_{k=1}^K\mu_k\left[\ell_k+H_k-1\right]\\
+      \text{s.t.}\quad&\sum_{k=1}^K\mu_k\le1,
+    \end{aligned}
+    \label{eq-lower-restricted-dual}
+  \end{equation}
+  with optimal value denoted by $\underline d_\theta$. These values satisfy
+  \begin{equation}
+    \underline d_\theta\le\underline p_{\hat f}\le\overline p_{\hat f}\le\overline d_\theta.
+    \label{eq-weak-duality}
+  \end{equation}
+\end{lemma}
+\begin{proof}
+  Each feasible weight vector combines threshold-based Lagrangian dual solutions with the constant upper bound one or lower bound zero. The corresponding functions and multipliers, and the full weak-duality derivation, are given in Appendix~\ref{app-restricted-lagrangian}.
+\end{proof}
+
+Each problem has only $K$ nonnegative weights. Any unused weight is assigned to the constant probability bound, so a feasible weight vector already gives a valid failure probability bound. The next result establishes that this restriction of the dual does not sacrifice optimality.
+
+\begin{theorem}[Lossless restriction and strong duality]
+  \label{thm-finite-dual-reformulations}
+  For $\Xi=\mathbb R$, $\mathscr Q=\mathscr Q^{\mathrm{DW}}(\theta)$, and every $\theta\ge0$, the restricted duals are exact:
+  \begin{equation}
+    \overline p_{\hat f}=\overline d_\theta,\qquad
+    \underline p_{\hat f}=\underline d_\theta.
+    \label{eq-strong-duality}
+  \end{equation}
+  Their values also equal those of the full Lagrangian duals. Optimal joint measures and optimal full and restricted dual solutions exist, including at $\theta=0$.
+\end{theorem}
+\begin{proof}
+  Appendix~\ref{app-finite-aggregation} constructs an exact finite probability-allocation model and establishes full Lagrangian strong duality. Appendix~\ref{app-lossless-restriction} then proves that its ordered constraints admit optimal solutions within the restricted threshold family. Both arguments retain threshold equalities and use finite LP feasibility and boundedness, so they remain valid when the DW band has no strictly feasible point.
+\end{proof}
+
+The theorem concerns all joint distributions admitted by the model. In particular, the restricted duals introduce no additional conservatism beyond the uncertainty already represented by $\mathscr P\left(\mathscr Q^{\mathrm{DW}}(\theta)\right)$.
+
+\begin{corollary}[Closed-form failure probability bounds]
+  \label{thm-closed-form-bounds}
+  Under the conditions of Theorem~\ref{thm-finite-dual-reformulations},
+  \begin{align}
+    \overline p_{\hat f}
+    &=\min\left\{1,\min_{k=1,\ldots,K}\left[u_k+H_k\right]\right\},
+    \label{eq-dw-closed-upper}\\
+    \underline p_{\hat f}
+    &=\max\left\{0,\max_{k=1,\ldots,K}\left[\ell_k+H_k-1\right]\right\}.
+    \label{eq-dw-closed-lower}
+  \end{align}
+  An optimal upper weight vector is $\lambda=e_k$ for a rank minimizing $u_k+H_k$ when that minimum is below one, and $\lambda=0$ otherwise. An optimal lower weight vector is $\mu=e_k$ for a rank maximizing $\ell_k+H_k-1$ when that maximum is positive, and $\mu=0$ otherwise. Here $e_k$ is the $k$th unit vector; ties may be resolved arbitrarily.
+\end{corollary}
+\begin{proof}
+  The upper objective is the weighted average of one and the $K$ values $u_k+H_k$, with unused weight on one. Its minimum selects the smallest candidate. The lower objective similarly selects the largest of zero and the $K$ values $\ell_k+H_k-1$. Apply \eqref{eq-strong-duality}.
+\end{proof}
+
+The upper candidate adds the allowed residual mass below $r_k$ to the probability that the surrogate prediction satisfies $\hat g(\bm X)\le-r_k$. The lower candidate measures unavoidable overlap of the corresponding events. Thus evaluation consists of scalar DW inversion, $K$ surrogate CDF evaluations under $\mathbb P$, and finite minimum and maximum operations.
+
+\begin{remark}[Known interval support]
+  \label{rem-interval-support}
+  For known support $\Xi=[a,b]$, the endpoint bounds $H(-a)$ and $H(-b)$ replace the outer constants one and zero in \eqref{eq-dw-closed-upper}--\eqref{eq-dw-closed-lower}. Equivalently, they replace the constant candidates in the restricted duals. Appendix~\ref{app-interval-support} gives the extension.
+\end{remark}
+
+For $\theta\ge\theta_{N^{\mathrm{te}}}(\delta)$, the exact bounds inherit the coverage guarantee of Theorem~\ref{theorem-01}. When the surrogate CDF is evaluated by simulation, simultaneous upper CDF bounds give a certified upper failure bound and simultaneous lower CDF bounds give a certified lower failure bound; their numerical error is included in the overall confidence budget.
+

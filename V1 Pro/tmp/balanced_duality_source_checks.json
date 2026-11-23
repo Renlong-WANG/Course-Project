@@ -1,0 +1,16 @@
+{
+  "active_labels": 60,
+  "no_missing_or_duplicate_references": true,
+  "no_missing_citations": true,
+  "no_active_appendix": true,
+  "no_main_subsections": true,
+  "original_section_comments_unchanged": true,
+  "prior_restricted_section_archived_bytes": 9188,
+  "prior_appendix_source_preserved": true,
+  "prefix_and_bibliography_unchanged": true,
+  "display_delimiters_checked": true,
+  "pdf_pages": 15,
+  "rendered_pages_checked": "6-15",
+  "build_passed": true,
+  "remaining_log_warning": "pre-existing first-page overfull hbox, 2.42162pt"
+}

@@ -1,0 +1,17 @@
+{
+  "representation": "K-weight restricted duals vs full duals and primal allocations",
+  "scenarios": 64,
+  "linear_program_solves": 512,
+  "cdf_band_equivalence_checks": 128,
+  "max_absolute_difference": 3.0531133177191805e-16,
+  "covered_cases": [
+    "theta=0",
+    "positive theta",
+    "single residual",
+    "tied residuals",
+    "threshold equality",
+    "atomic input law",
+    "unequal input weights",
+    "zero cell masses"
+  ]
+}

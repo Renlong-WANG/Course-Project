@@ -1,0 +1,104 @@
+The measure duals can be evaluated through finite linear programs using the surrogate response CDF
+\begin{equation}
+  H(t):=\mathbb P\left\{\hat g(\bm X)\le t\right\},\qquad
+  H_k:=H(-r_k),\quad k=1,\ldots,K.
+  \label{eq-surrogate-response-cdf}
+\end{equation}
+The following theorem states these computational formulations; their equivalence is established in the proof.
+
+\begin{theorem}[Finite-dimensional duals and strong duality]
+  \label{thm-finite-dual-reformulations}
+  For $\Xi=\mathbb R$ and every $\theta\ge0$, set $J:=2K+1$, $H_0:=1$, $H_{K+1}:=0$, and $w_i:=H_i-H_{i+1}$ for $i=0,\ldots,K$. Consider the upper finite-dimensional dual problem
+  \begin{equation}
+    \begin{aligned}
+      \min_{\lambda,\mu\ge0,\ z\in\mathbb R^{K+1}}\quad&
+      \lambda^\top u-\mu^\top\ell+\sum_{i=0}^K w_i z_i\\
+      \text{s.t.}\quad&
+      z_i+\sum_{k=1}^K\lambda_k\mathbf1_{\{j<2k\}}
+      -\sum_{k=1}^K\mu_k\mathbf1_{\{j\le2k\}}
+      \ge\mathbf1_{\{j\le2i+1\}},\\
+      &i=0,\ldots,K,\quad j=1,\ldots,J,
+    \end{aligned}
+    \label{eq-finite-upper-dual}
+  \end{equation}
+  and the lower finite-dimensional dual problem
+  \begin{equation}
+    \begin{aligned}
+      \max_{\lambda,\mu\ge0,\ z\in\mathbb R^{K+1}}\quad&
+      -\lambda^\top u+\mu^\top\ell+\sum_{i=0}^K w_i z_i\\
+      \text{s.t.}\quad&
+      z_i-\sum_{k=1}^K\lambda_k\mathbf1_{\{j<2k\}}
+      +\sum_{k=1}^K\mu_k\mathbf1_{\{j\le2k\}}
+      \le\mathbf1_{\{j\le2i\}},\\
+      &i=0,\ldots,K,\quad j=1,\ldots,J.
+    \end{aligned}
+    \label{eq-finite-lower-dual}
+  \end{equation}
+  Their optimal values coincide with $\overline d_\theta$ and $\underline d_\theta$, respectively, and satisfy
+  \begin{equation}
+    \overline p_{\hat f}=\overline d_\theta,\qquad
+    \underline p_{\hat f}=\underline d_\theta.
+    \label{eq-strong-duality}
+  \end{equation}
+  Each finite LP has $3K+1$ scalar variables and $(K+1)(2K+1)$ pointwise inequalities. Both finite LP optima and the corresponding measure primal and dual optima are attained.
+\end{theorem}
+\begin{proof}
+  Let $T(\bm x):=-\hat g(\bm x)$, $r_0:=-\infty$, and $r_{K+1}:=+\infty$. The $K$ ordered residuals define $K+1$ input intervals,
+  \begin{equation}
+    A_i:=\left\{\bm x:r_i\le T(\bm x)<r_{i+1}\right\},\qquad
+    \mathbb P\left(A_i\right)
+    =\mathbb P\left\{T(\bm X)\ge r_i\right\}
+    -\mathbb P\left\{T(\bm X)\ge r_{i+1}\right\}=w_i.
+    \label{eq-input-cells}
+  \end{equation}
+  These half-open intervals include all threshold equalities, so the weights remain valid when the surrogate response has atoms. Partition the residual axis into
+  \begin{equation}
+    C_{2k}:=\left\{r_k\right\}\quad(k=1,\ldots,K),\qquad
+    C_{2k+1}:=\left(r_k,r_{k+1}\right)\quad(k=0,\ldots,K).
+    \label{eq-residual-cells}
+  \end{equation}
+  For $\bm x\in A_i$ and $\xi\in C_j$, the failure indicator satisfies
+  \begin{equation}
+    \underline h_{ij}:=\mathbf1_{\{j\le2i\}}
+    \le\mathbf1_{\{\xi\le T(\bm x)\}}
+    \le\overline h_{ij}:=\mathbf1_{\{j\le2i+1\}}.
+    \label{eq-cell-costs}
+  \end{equation}
+  Cells $j\le2i$ always cause failure, cells $j\ge2i+2$ are always safe, and only the overlapping open cell $j=2i+1$ distinguishes the two bounds. On each residual cell, the rank penalty has the constant value
+  \begin{equation}
+    \eta_j:=\sum_{k=1}^K\lambda_k\mathbf1_{\{j<2k\}}
+    -\sum_{k=1}^K\mu_k\mathbf1_{\{j\le2k\}}.
+    \label{eq-dual-cell-values}
+  \end{equation}
+
+  Every feasible joint measure induces masses $p_{ij}:=\Pi(A_i\times C_j)$ in the finite feasible set
+  \begin{equation}
+    \mathcal A_\theta:=\left\{p\in\mathbb R_+^{(K+1)\times J}:
+    \begin{array}{ll}
+      \displaystyle\sum_{j=1}^Jp_{ij}=w_i,&i=0,\ldots,K,\\[1mm]
+      \displaystyle\sum_{i=0}^K\sum_{j<2k}p_{ij}\le u_k,&k=1,\ldots,K,\\[1mm]
+      \displaystyle\sum_{i=0}^K\sum_{j\le2k}p_{ij}\ge\ell_k,&k=1,\ldots,K
+    \end{array}\right\}.
+    \label{eq-cell-mass-polytope}
+  \end{equation}
+  By \eqref{eq-cell-costs}, maximizing $\sum_{i,j}\overline h_{ij}p_{ij}$ over this set bounds the original upper problem from above, while minimizing $\sum_{i,j}\underline h_{ij}p_{ij}$ bounds the lower problem from below.
+
+  To prove the reverse inequalities, fix $p\in\mathcal A_\theta$. Draw $\bm x$ from its original law $\mathbb P$ and, for $\bm x\in A_i$ with $w_i>0$, choose category $j$ with probability $p_{ij}/w_i$. Outside $j=2i+1$, any fixed point in $C_j$ attains both coefficients in \eqref{eq-cell-costs}. In the overlapping cell, choose $\xi=T(\bm x)$ for the upper problem. When $T(\bm x)>r_i$, this residual stays in the open cell. When $T(\bm x)=r_i$, it moves the assigned mass to the left endpoint and still causes failure. For any $s\in(r_i,r_{i+1})$ and every observed rank $r_k$,
+  \[
+    \mathbf1_{\{r_i<r_k\}}=\mathbf1_{\{s<r_k\}},\qquad
+    \mathbf1_{\{r_i\le r_k\}}\ge\mathbf1_{\{s\le r_k\}}.
+  \]
+  Hence the endpoint move leaves every open upper probability unchanged and can only increase the closed lower probabilities. It preserves all DW rank constraints and attains every assigned upper coefficient. The construction establishes equality of optimal values while allowing this feasible redistribution between adjacent residual cells.
+
+  For the lower problem, choose $\xi=(T(\bm x)+r_{i+1})/2$ in the overlapping cell when $i<K$, or $\xi=T(\bm x)+1$ when $i=K$. These choices remain inside that cell and exceed $T(\bm x)$, including when $T(\bm x)=r_i$, so they attain the lower coefficient zero. All selections are measurable and preserve the input marginal; zero-weight input intervals contribute no mass. Thus
+  \begin{equation}
+    \overline p_{\hat f}=\max_{p\in\mathcal A_\theta}\sum_{i=0}^K\sum_{j=1}^J\overline h_{ij}p_{ij},\qquad
+    \underline p_{\hat f}=\min_{p\in\mathcal A_\theta}\sum_{i=0}^K\sum_{j=1}^J\underline h_{ij}p_{ij}.
+    \label{eq-finite-primal-values}
+  \end{equation}
+
+  The set $\mathcal A_\theta$ is nonempty by empirical-product feasibility and compact because its nonnegative entries sum to one. Its linear objectives are bounded, so finite LP strong duality gives attained primal and dual optima \citep[Section~5.2.3]{B.V04}. A free multiplier $z_i$ for each row equality and nonnegative multipliers $\lambda_k,\mu_k$ for the prefix inequalities give the upper constraints $z_i+\eta_j\ge\overline h_{ij}$ and the lower constraints $z_i-\eta_j\le\underline h_{ij}$. Expanding their coefficients yields exactly \eqref{eq-finite-upper-dual} and \eqref{eq-finite-lower-dual}.
+
+  Each finite dual solution defines a bounded measurable function $\varphi(\bm x)=z_i$ on $A_i$. By \eqref{eq-cell-costs}, it is feasible for the corresponding measure dual with the same objective value. Lemma~\ref{lem-weak-duality} and finite LP equality then prove \eqref{eq-strong-duality}; the constructions above also establish attainment for the measure programs and their duals. All steps use non-strict probability constraints and finite LP feasibility and boundedness. They therefore cover $\theta=0$, including collapsed DW acceptance intervals, without requiring strict feasibility.
+\end{proof}
+

@@ -1,0 +1,66 @@
+The following lemma gives the dual problems and relates their optimal values to the failure probability bounds. Write $u=(u_1,\ldots,u_K)^\top$ and $\ell=(\ell_1,\ldots,\ell_K)^\top$. For $\lambda,\mu\in\mathbb R_+^K$, define the rank penalty
+\begin{equation}
+  \eta_{\lambda,\mu}(\xi):=
+  \sum_{k=1}^K\lambda_k\mathbf1_{\{\xi<r_k\}}
+  -\sum_{k=1}^K\mu_k\mathbf1_{\{\xi\le r_k\}}.
+  \label{eq-dual-step-function}
+\end{equation}
+
+\begin{lemma}[Dual problems and weak duality]
+  \label{lem-weak-duality}
+  For every $\theta\ge0$, the upper Lagrangian dual of \eqref{eq-measure-upper} is
+  \begin{equation}
+    \begin{aligned}
+      \inf_{\lambda,\mu\ge0,\ \varphi}\quad&
+      \mathbb E_{\mathbb P}\left[\varphi(\bm X)\right]+\lambda^\top u-\mu^\top\ell\\
+      \text{s.t.}\quad&
+      \varphi(\bm x)+\eta_{\lambda,\mu}(\xi)\ge\mathbf1_{\{\hat g(\bm x)+\xi\le0\}},
+      \quad\forall(\bm x,\xi)\in\mathcal X\times\Xi,
+    \end{aligned}
+    \label{eq-upper-measure-dual}
+  \end{equation}
+  where $\varphi$ ranges over bounded measurable functions on $\mathcal X$. Denote its optimal value by $\overline d_\theta$. The lower Lagrangian dual of \eqref{eq-measure-lower} is
+  \begin{equation}
+    \begin{aligned}
+      \sup_{\lambda,\mu\ge0,\ \varphi}\quad&
+      \mathbb E_{\mathbb P}\left[\varphi(\bm X)\right]-\lambda^\top u+\mu^\top\ell\\
+      \text{s.t.}\quad&
+      \varphi(\bm x)-\eta_{\lambda,\mu}(\xi)\le\mathbf1_{\{\hat g(\bm x)+\xi\le0\}},
+      \quad\forall(\bm x,\xi)\in\mathcal X\times\Xi,
+    \end{aligned}
+    \label{eq-lower-measure-dual}
+  \end{equation}
+  with the same function class and optimal value denoted by $\underline d_\theta$. These values satisfy
+  \begin{equation}
+    \underline d_\theta\le\underline p_{\hat f}\le\overline p_{\hat f}\le\overline d_\theta.
+    \label{eq-weak-duality}
+  \end{equation}
+  Any feasible upper or lower dual solution therefore gives a valid bound before optimization.
+\end{lemma}
+\begin{proof}
+  Introduce $\varphi$ for the input marginal equality, $\lambda_k\ge0$ for the open upper probability constraint, and $\mu_k\ge0$ for the closed lower probability constraint. In the upper maximization problem, the inequality penalties are
+  $\lambda_k(u_k-\int\mathbf1_{\{\xi<r_k\}}\,\mathrm d\Pi)$ and
+  $\mu_k(\int\mathbf1_{\{\xi\le r_k\}}\,\mathrm d\Pi-\ell_k)$.
+  Adding the marginal term $\mathbb E_{\mathbb P}[\varphi(\bm X)]-\int\varphi(\bm x)\,\mathrm d\Pi$ and collecting terms gives the Lagrangian \citep[Section~5.1]{B.V04}
+  \begin{equation}
+    \begin{aligned}
+      \mathcal L^+={}&\mathbb E_{\mathbb P}\left[\varphi(\bm X)\right]+\lambda^\top u-\mu^\top\ell\\
+      &+\int_{\mathcal X\times\Xi}\left[\mathbf1_{\{\hat g(\bm x)+\xi\le0\}}-\varphi(\bm x)-\eta_{\lambda,\mu}(\xi)\right]\,\Pi\left(\mathrm d\bm x,\mathrm d\xi\right).
+    \end{aligned}
+    \label{eq-upper-lagrangian}
+  \end{equation}
+  Its supremum over all nonnegative finite measures is finite exactly when the integrand is nonpositive everywhere. A positive value at any point allows an arbitrarily large point mass there; otherwise the supremum integral is zero, attained by the zero measure. The remaining constant term, minimized over the multipliers, gives \eqref{eq-upper-measure-dual}.
+
+  For the lower minimization problem, reverse the signs of the two inequality penalties. The resulting Lagrangian is
+  \begin{equation}
+    \begin{aligned}
+      \mathcal L^-={}&\mathbb E_{\mathbb P}\left[\varphi(\bm X)\right]-\lambda^\top u+\mu^\top\ell\\
+      &+\int_{\mathcal X\times\Xi}\left[\mathbf1_{\{\hat g(\bm x)+\xi\le0\}}-\varphi(\bm x)+\eta_{\lambda,\mu}(\xi)\right]\,\Pi\left(\mathrm d\bm x,\mathrm d\xi\right).
+    \end{aligned}
+    \label{eq-lower-lagrangian}
+  \end{equation}
+  Its infimum over nonnegative finite measures is finite exactly when the integrand is nonnegative everywhere, in which case the infimum integral is zero. Maximizing the remaining constant term gives \eqref{eq-lower-measure-dual}.
+
+  For primal feasible $\Pi$, the penalty signs give $\mathcal L^+\ge p_{\hat f}(\Pi)\ge\mathcal L^-$. The feasible dual objectives therefore bound the corresponding primal optima. Optimizing these objectives and using primal feasibility proves \eqref{eq-weak-duality}.
+\end{proof}
+

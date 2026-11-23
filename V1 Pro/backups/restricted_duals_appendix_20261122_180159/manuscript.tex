@@ -1,0 +1,507 @@
+\documentclass[review,11pt,3p,authoryear,nopreprintline]{elsarticle}
+
+\usepackage[T1]{fontenc}
+\usepackage{amsmath,amssymb,amsthm}
+\usepackage{mathrsfs}
+\usepackage{bm}
+\usepackage{xcolor}
+\usepackage[colorlinks=true,citecolor=blue,linkcolor=blue,urlcolor=blue]{hyperref}
+
+\newtheorem{theorem}{Theorem}
+\newtheorem{proposition}{Proposition}
+\newtheorem{corollary}{Corollary}
+\newtheorem{lemma}{Lemma}
+\newdefinition{example}{Example}
+\newdefinition{definition}{Definition}
+\newdefinition{remark}{Remark}
+\newdefinition{property}{Property}
+\newdefinition{condition}{Condition}
+
+\begin{document}
+
+\begin{frontmatter}
+  \title{Failure Probability Bounds with Uncertain Surrogate Residual Distributions}
+
+  \author[inst1]{Renlong Wang}
+  \ead{rw106@rice.edu}
+  \affiliation[inst1]{organization={Department of Civil and Environmental Engineering, Rice University}, city={Houston}, postcode={TX 77005}, country={USA}}
+
+  \begin{abstract}
+  \end{abstract}
+
+  \begin{keyword}
+  \end{keyword}
+\end{frontmatter}
+
+\section{Introduction}
+
+\section{Problem Description}
+\label{sec-problem}
+
+Let $\bm X\sim\mathbb P$ be a random input taking values in $\mathcal X\subseteq\mathbb R^n$, and let $g:\mathcal X\to\mathbb R$ be a measurable limit-state function. The failure probability is defined as
+\[
+  p_f:=\Pr\{g(\bm X)\le0\}=\mathbb E_{\bm X\sim\mathbb P}\left[\mathbf 1_{\{g(\bm X)\le0\}}\right]=\int_{\mathcal X}\mathbf 1_{\{g(\bm x)\le0\}}\,\mathbb P(\mathrm d\bm x).
+\]
+For fixed $g$, this functional is linear in $\mathbb P$.
+
+Evaluating $g$ at an input $\bm x$ can be computationally expensive, particularly when each evaluation requires a high-fidelity simulation. A common approach is to replace $g$ with a computationally efficient surrogate model. Let
+\[
+  \mathcal D^{\mathrm{tr}}:=\left\{\left(\bm x_i^{\mathrm{tr}},g(\bm x_i^{\mathrm{tr}})\right)\right\}_{i=1}^{N^{\mathrm{tr}}}
+\]
+denote the training dataset used to construct a measurable surrogate $\hat g:=\hat g_{\mathcal D^{\mathrm{tr}}}$. All model fitting and selection are completed using the training data before the test data introduced below are used. Throughout the analysis, we condition on $\mathcal D^{\mathrm{tr}}$, treat $\hat g$ as fixed, and suppress this dependence in the notation.
+
+Define the signed residual function
+\[
+  \xi(\bm x):=g(\bm x)-\hat g(\bm x),\qquad \forall \bm x\in\mathcal X.
+\]
+For a new input $\bm X\sim\mathbb P$ independent of the training data, the residual $\xi^\star:=\xi(\bm X)$ has distribution $\mathbb Q^\star$ under the fixed surrogate $\hat g$. Let $\Xi\subseteq\mathbb R$ be a known Borel set satisfying $\mathbb Q^\star(\Xi)=1$, and let $\mathcal Q(\Xi)$ denote the set of probability measures on $\mathbb R$ supported on $\Xi$. We take $\Xi=\mathbb R$ when no smaller support can be justified.
+
+For a candidate residual distribution $\mathbb Q\in\mathcal Q(\Xi)$, let $\Pi$ denote a joint distribution of $(\bm X,\xi)$ on $\mathcal X\times\Xi$ with input marginal $\mathbb P = \Pi_{\bm X}$ and residual marginal $\mathbb Q = \Pi_{\xi}$. The corresponding surrogate-based failure probability is
+\begin{equation}
+  p_{\hat f}(\Pi):=\Pr_\Pi\{\hat g(\bm X)+\xi\le0\}=\int_{\mathcal X\times\Xi}\mathbf 1_{\{\hat g(\bm x)+\xi\le0\}}\,\Pi(\mathrm d\bm x,\mathrm d\xi).
+  \label{eq-surrogate-failure-probability}
+\end{equation}
+For fixed $\hat g$, this functional is linear in $\Pi$. In particular, the true joint distribution $\Pi^\star$ satisfies $p_{\hat f}(\Pi^\star)=p_f$.
+
+The surrogate-based failure probability depends on both the residual distribution and its dependence on the input. This dependence is particularly relevant for inputs whose surrogate predictions lie close to the failure threshold, where even small residual errors can change the failure classification. In complex engineering systems, however, the available information may be insufficient to specify the residual distribution reliably. We therefore construct an ambiguity set $\mathscr Q$ of plausible residual distributions intended to contain $\mathbb Q^\star$ with high confidence. For a given residual ambiguity set $\mathscr Q$, define the joint ambiguity set $\mathscr P(\mathscr Q)$ by
+\[
+  \mathscr P(\mathscr Q) :=\left\{\Pi\in\mathcal P(\mathcal X\times\Xi):\Pi_{\bm X}=\mathbb P,\ \Pi_\xi\in\mathscr Q\right\},
+\]
+where $\mathcal P(\mathcal X\times\Xi)$ is the set of probability measures on $\mathcal X\times\Xi$. This set allows all dependence structures consistent with the specified marginals. The upper and lower failure probability bounds are
+\begin{equation}
+  \overline p_{\hat f}:=\sup_{\Pi\in\mathscr P(\mathscr Q)}p_{\hat f}(\Pi),
+  \label{eq-upper-bound}
+\end{equation}
+and
+\begin{equation}
+  \underline p_{\hat f}:=\inf_{\Pi\in\mathscr P(\mathscr Q)}p_{\hat f}(\Pi),
+  \label{eq-lower-bound}
+\end{equation}
+respectively. If $\mathbb Q^\star\in\mathscr Q$, then $\Pi^\star\in\mathscr P(\mathscr Q)$ and hence $\underline p_{\hat f}\le p_f\le\overline p_{\hat f}$.
+
+The main tasks are therefore:
+\begin{enumerate}
+  \item \textbf{Ambiguity set design and statistical calibration.} Construct a residual ambiguity set and establish its coverage guarantee under explicit sampling conditions.
+  \item \textbf{Tractable reformulations.} Derive exact and computationally tractable reformulations of the infinite-dimensional optimization problems defining the failure probability bounds.
+\end{enumerate}
+
+
+\section{Ambiguity Set Design}
+\label{sec-ambiguity-set}
+
+In the surrogate formulation, failure occurs when $\xi\le-\hat g(\bm X)$. The residual cumulative distribution function (CDF) therefore describes the marginal probability mass relevant to each failure threshold. Its tail accuracy matters when estimating small failure probabilities. We use the D\"umbgen--Wellner (DW) construction \citep{L.J23} to control deviations from the empirical CDF simultaneously over all thresholds, with tolerances that vary across probability levels.
+
+We first introduce a local discrepancy that accounts for the probability level. Let $q$ and $p$ denote an empirical probability and a candidate probability, respectively. Following \citet{B.J79} and the CDF confidence band construction of \citet{O95}, we compare them using the Bernoulli Kullback--Leibler divergence
+\begin{equation}
+  \phi(q,p):=q\log\frac{q}{p}+(1-q)\log\frac{1-q}{1-p},\qquad \forall q\in[0,1],\, p\in(0,1),
+  \label{eq-bernoulli-kl}
+\end{equation}
+where logarithms are natural and a term with zero numerator is interpreted as zero. For $q$ close to an interior $p$, the approximation $\phi(q,p)\approx(q-p)^2/[2p(1-p)]$ scales the deviation by the Bernoulli variance. Thus, the same absolute deviation receives a larger weight near the probability boundaries. The full divergence also covers zero and full empirical counts through $\phi(0,p)=-\log(1-p)$ and $\phi(1,p)=-\log p$. At the boundaries of the candidate probability, we set $\phi(0,0)=\phi(1,1)=0$, $\phi(q,0)=+\infty$ for $q>0$, and $\phi(q,1)=+\infty$ for $q<1$.
+
+To compare deviations simultaneously across probability levels, we use the additive correction of \citet{L.J23}. For $v\in(0,1)$, define
+\begin{equation}
+  \rho(v):=\log\log\frac{e}{4v(1-v)},\qquad \omega(v):=\log\!\left(1+\rho(v)^2\right).
+  \label{eq-dw-correction-functions}
+\end{equation}
+We fix the divergence parameter $s=1$, corresponding to \eqref{eq-bernoulli-kl}, and the correction parameter $\nu=1$ before sampling. The resulting correction is $\psi(v):=\rho(v)+\omega(v)$, with $\psi(0)=\psi(1)=+\infty$. For $q,p\in[0,1]$, define its bivariate extension
+\begin{equation}
+  \psi(q,p):=\min_{v\in[\min\{q,p\},\,\max\{q,p\}]}\psi(v).
+  \label{eq-dw-bivariate-correction}
+\end{equation}
+The functions $\rho$ and $\omega$ vanish at $v=1/2$ and increase toward the probability boundaries. Taking the minimum over the interval between $q$ and $p$ makes the correction large only when both probabilities lie in the same tail. This correction balances fluctuations across probability scales in the simultaneous CDF constraint.
+
+We now construct the empirical CDF from a test dataset
+\[
+  \mathcal D^{\mathrm{te}}:=\left\{\left(\bm x_j^{\mathrm{te}},g(\bm x_j^{\mathrm{te}})\right)\right\}_{j=1}^{N^{\mathrm{te}}}.
+\]
+The test inputs $\bm x_1^{\mathrm{te}},\ldots,\bm x_{N^{\mathrm{te}}}^{\mathrm{te}}$ are drawn independently from $\mathbb P$ and are independent of $\mathcal D^{\mathrm{tr}}$. We fix $N^{\mathrm{te}}\ge1$ before sampling and use the test data to calibrate the residual ambiguity set. The fitted surrogate remains fixed during and after calibration.
+
+Define the signed test residuals
+\[
+  \xi_j^{\mathrm{te}}:=\xi(\bm x_j^{\mathrm{te}})=g(\bm x_j^{\mathrm{te}})-\hat g(\bm x_j^{\mathrm{te}}),\qquad j=1,\ldots,N^{\mathrm{te}}.
+\]
+Conditional on $\mathcal D^{\mathrm{tr}}$, these residuals are independent and identically distributed according to $\mathbb Q^\star$. Their empirical CDF is
+\begin{equation}
+  \widehat F^{\mathrm{te}}(t):=\frac{1}{N^{\mathrm{te}}}\sum_{j=1}^{N^{\mathrm{te}}}\mathbf 1_{\{\xi_j^{\mathrm{te}}\le t\}},\qquad \forall t\in\mathbb R.
+  \label{eq-empirical-cdf}
+\end{equation}
+For $\mathbb Q\in\mathcal Q(\Xi)$, write $F_{\mathbb Q}(t):=\mathbb Q(({-\infty},t])$. At threshold $t$, $q=\widehat F^{\mathrm{te}}(t)$ is the average of the Bernoulli indicators in \eqref{eq-empirical-cdf}, and $p=F_{\mathbb Q}(t)$ is the candidate probability. The quantity $N^{\mathrm{te}}\phi(q,p)$ is then the Bernoulli log-likelihood difference between the empirical and candidate probabilities. Combining this local discrepancy with the multiscale correction gives $N^{\mathrm{te}}\phi(q,p)-\psi(q,p)$.
+
+At the probability boundaries, the corrected discrepancy is $-\infty$ for $q=p\in\{0,1\}$ and $+\infty$ for $p=0<q$ or $p=1>q$. These conventions extend the constraint to every residual threshold.
+
+\begin{definition}[DW-based CDF ambiguity set]
+  \label{definition-dw-ambiguity-set}
+  Given the empirical CDF $\widehat F^{\mathrm{te}}$ and a threshold $\theta\ge0$, define
+  \begin{equation} 
+    \label{eq-cdf-ambiguity-set}
+      \mathscr Q^{\mathrm{DW}}(\theta):=\left\{\mathbb Q\in\mathcal Q(\Xi):\ 
+      \sup_{t\in\mathbb R}\left[ N^{\mathrm{te}}\phi\!\left(\widehat F^{\mathrm{te}}(t),F_{\mathbb Q}(t)\right) 
+       {}-\psi\!\left(\widehat F^{\mathrm{te}}(t),F_{\mathbb Q}(t)\right)\right]\le\theta\right\}. 
+  \end{equation} 
+\end{definition}
+
+We calibrate $\theta$ against a distribution-free reference law. Following \citet{L.J23}, let $V_1,\ldots,V_{N^{\mathrm{te}}}$ be independent standard uniform variables, independent of the training and test data. Their empirical CDF is
+\begin{equation}
+  G_{N^{\mathrm{te}}}(u):=\frac{1}{N^{\mathrm{te}}}\sum_{j=1}^{N^{\mathrm{te}}}\mathbf 1_{\{V_j\le u\}},\qquad \forall u\in[0,1].
+  \label{eq-dw-reference-cdf}
+\end{equation}
+Define the uniform reference statistic
+\begin{equation}
+  T_{N^{\mathrm{te}}}^{\mathrm U}:=\sup_{u\in(0,1)}\left[N^{\mathrm{te}}\phi\!\left(G_{N^{\mathrm{te}}}(u),u\right)-\psi\!\left(G_{N^{\mathrm{te}}}(u),u\right)\right].
+  \label{eq-dw-reference-statistic}
+\end{equation}
+Here $\Pr_{\mathrm U}$ denotes probability under the uniform reference law. The next proposition uses a quantile of this reference statistic to calibrate the residual ambiguity set.
+
+\begin{proposition}[Finite-sample $\theta$ calibration]
+  \label{proposition-01}
+  Under the sampling conditions stated above, let $\delta\in(0,1)$ and define
+  \begin{equation}
+    \theta_{N^{\mathrm{te}}}(\delta):=\inf\left\{z\ge0:\Pr_{\mathrm U}\left\{T_{N^{\mathrm{te}}}^{\mathrm U}\le z\right\}\ge1-\delta\right\}.
+    \label{eq-dw-calibrated-threshold}
+  \end{equation}
+
+  Then, for every $\theta\ge\theta_{N^{\mathrm{te}}}(\delta)$, the DW-based CDF ambiguity set satisfies
+  \begin{equation}
+    \Pr_{\mathcal D^{\mathrm{te}}}\left\{\mathbb Q^\star\in\mathscr Q^{\mathrm{DW}}(\theta)\,\middle|\,\mathcal D^{\mathrm{tr}}\right\}\ge1-\delta.
+    \label{eq-cdf-coverage}
+  \end{equation}
+\end{proposition}
+\begin{proof}
+  The reference statistic is finite almost surely, and its distribution function is right-continuous. Hence \eqref{eq-dw-calibrated-threshold} gives
+  \[
+    \Pr_{\mathrm U}\left\{T_{N^{\mathrm{te}}}^{\mathrm U}>\theta_{N^{\mathrm{te}}}(\delta)\right\}\le\delta.
+  \]
+  Conditioning on $\mathcal D^{\mathrm{tr}}$ fixes $\hat g$ and $\mathbb Q^\star$. Define the generalized quantile function $F_{\mathbb Q^\star}^{-1}(u):=\inf\{t\in\mathbb R:F_{\mathbb Q^\star}(t)\ge u\}$ for all $u\in(0,1)$. The sample $F_{\mathbb Q^\star}^{-1}(V_j)$ for $j=1,\ldots,N^{\mathrm{te}}$, has the same conditional joint law as the test residuals. Thus, given $\mathcal D^{\mathrm{tr}}$,
+  \[
+    \left(\widehat F^{\mathrm{te}}(t)\right)_{t\in\mathbb R}\overset{\mathrm d}{=}\left(G_{N^{\mathrm{te}}}\!\left(F_{\mathbb Q^\star}(t)\right)\right)_{t\in\mathbb R}.
+  \]
+  For $0<F_{\mathbb Q^\star}(t)<1$, the discrepancy at $\mathbb Q^\star$ is evaluated at a probability level included in \eqref{eq-dw-reference-statistic}. When $F_{\mathbb Q^\star}(t)$ is zero or one, the empirical CDF equals that boundary almost surely, giving discrepancy $-\infty$. The supremum in \eqref{eq-cdf-ambiguity-set}, evaluated at $\mathbb Q^\star$, is therefore bounded by $T_{N^{\mathrm{te}}}^{\mathrm U}$ under this coupling. Since $\mathbb Q^\star(\Xi)=1$, we obtain
+  \[
+    \Pr_{\mathcal D^{\mathrm{te}}}\left\{\mathbb Q^\star\notin\mathscr Q^{\mathrm{DW}}\!\left(\theta_{N^{\mathrm{te}}}(\delta)\right)\,\middle|\,\mathcal D^{\mathrm{tr}}\right\}
+    \le\Pr_{\mathrm U}\left\{T_{N^{\mathrm{te}}}^{\mathrm U}>\theta_{N^{\mathrm{te}}}(\delta)\right\}\le\delta.
+  \]
+  For every test sample, $\theta\ge\theta_{N^{\mathrm{te}}}(\delta)$ implies $\mathscr Q^{\mathrm{DW}}\!\left(\theta_{N^{\mathrm{te}}}(\delta)\right)\subseteq\mathscr Q^{\mathrm{DW}}(\theta)$. This inclusion proves \eqref{eq-cdf-coverage} for every such $\theta$.
+\end{proof}
+
+For every fixed $N^{\mathrm{te}}\ge1$, the proposition applies to arbitrary residual distributions, including laws with atoms or infinite moments. With $\phi$ and $\psi$ fixed as above, the reference distribution depends only on $N^{\mathrm{te}}$, so $\theta_{N^{\mathrm{te}}}(\delta)$ can be computed offline for each prescribed confidence level $1-\delta$. \citet[Supplement, Sections~S.6--S.7]{L.J23} describe finite-sample numerical calibration using probabilities that uniform order statistics lie within specified bounds. Choosing $\theta$ as a conservative upper bound on the quantile in \eqref{eq-dw-calibrated-threshold} preserves \eqref{eq-cdf-coverage}. If calibration is performed by simulation, quantile estimation error must be accounted for in the confidence guarantee. A threshold chosen from the test data also preserves \eqref{eq-cdf-coverage}, provided $\theta\ge\theta_{N^{\mathrm{te}}}(\delta)$ almost surely, by the same nesting argument.
+
+The following theorem transfers the coverage guarantee of the DW-based CDF ambiguity set to simultaneous bounds on the failure probability under the joint model.
+
+\begin{theorem}[Finite-sample failure probability bounds]
+  \label{theorem-01}
+  Under the sampling conditions of Proposition~\ref{proposition-01}, let $\delta\in(0,1)$ and $\theta\ge\theta_{N^{\mathrm{te}}}(\delta)$, with the calibrated threshold defined in \eqref{eq-dw-calibrated-threshold}. Then the bounds defined in \eqref{eq-upper-bound} and \eqref{eq-lower-bound}, evaluated with $\mathscr Q=\mathscr Q^{\mathrm{DW}}(\theta)$, satisfy
+  \begin{equation}
+    \Pr_{\mathcal D^{\mathrm{te}}}\left\{\underline p_{\hat f}\le p_f\le\overline p_{\hat f}\,\middle|\,\mathcal D^{\mathrm{tr}}\right\}\ge1-\delta.
+    \label{eq-failure-probability-coverage}
+  \end{equation}
+\end{theorem}
+\begin{proof}
+  On the event $\mathbb Q^\star\in\mathscr Q^{\mathrm{DW}}(\theta)$, the true joint distribution $\Pi^\star$ belongs to $\mathscr P\!\left(\mathscr Q^{\mathrm{DW}}(\theta)\right)$. Since $p_{\hat f}(\Pi^\star)=p_f$, the lower and upper bounds satisfy
+  \[
+    \underline p_{\hat f}\le p_{\hat f}(\Pi^\star)=p_f\le\overline p_{\hat f}.
+  \]
+  Taking conditional probabilities and applying Proposition~\ref{proposition-01} yields
+  \[
+    \Pr_{\mathcal D^{\mathrm{te}}}\left\{\underline p_{\hat f}\le p_f\le\overline p_{\hat f}\,\middle|\,\mathcal D^{\mathrm{tr}}\right\}
+    \ge\Pr_{\mathcal D^{\mathrm{te}}}\left\{\mathbb Q^\star\in\mathscr Q^{\mathrm{DW}}(\theta)\,\middle|\,\mathcal D^{\mathrm{tr}}\right\}\ge1-\delta.\qedhere
+  \]
+\end{proof}
+
+The event $\mathbb Q^\star\in\mathscr Q^{\mathrm{DW}}(\theta)$ gives both inequalities, so $1-\delta$ is the confidence level for the entire interval. In the DW set, $\theta$ controls the corrected likelihood discrepancy. The corresponding CDF tolerances vary by probability level and can differ above and below the empirical CDF. For a fixed sample size, higher confidence requires a nondecreasing calibrated threshold $\theta_{N^{\mathrm{te}}}(\delta)$. For a fixed empirical CDF, $0\le\theta_1\le\theta_2$ implies $\mathscr Q^{\mathrm{DW}}(\theta_1)\subseteq\mathscr Q^{\mathrm{DW}}(\theta_2)$. The lower bound is therefore nonincreasing in $\theta$, and the upper bound is nondecreasing. The interval reflects finite-sample uncertainty in the residual law and uncertainty in its dependence on the input. Because the joint ambiguity set allows all couplings with the specified marginals, a gap can persist even when the residual marginal is known exactly. The same coverage argument applies to any test-data-dependent residual ambiguity set that contains $\mathbb Q^\star$ with conditional probability at least $1-\delta$ given $\mathcal D^{\mathrm{tr}}$.
+
+\section{Tractable Reformulation}
+\label{sec-reformulation}
+
+The DW ambiguity set can be converted into linear probability constraints. We use these constraints to derive upper and lower dual bounds, then show that optimizing the duals gives the exact failure probability bounds. The resulting calculation requires the ordered test residuals and the CDF of the surrogate response. Throughout this section, the training data, the test residuals, and $\theta\ge0$ are fixed. The finite reformulations use the default residual support $\Xi=\mathbb R$.
+
+For each empirical probability level $q_j:=j/N^{\mathrm{te}}$, invert the scalar DW constraint to define
+\begin{equation}
+  \left[\alpha_j(\theta),\beta_j(\theta)\right]
+  :=\left\{p\in[0,1]:
+  N^{\mathrm{te}}\phi\left(q_j,p\right)-\psi\left(q_j,p\right)\le\theta\right\},
+  \qquad j=0,\ldots,N^{\mathrm{te}}.
+  \label{eq-dw-rank-acceptance}
+\end{equation}
+These endpoints can be computed by one-dimensional bisection. Let $r_1<\cdots<r_K$ be the distinct test residuals, and set
+\begin{equation}
+  \begin{aligned}
+    c_0&:=0,&
+    c_k&:=\sum_{j=1}^{N^{\mathrm{te}}}\mathbf1_{\{\xi_j^{\mathrm{te}}\le r_k\}},\\
+    \ell_k&:=\alpha_{c_k}(\theta),&
+    u_k&:=\beta_{c_{k-1}}(\theta),\qquad k=1,\ldots,K.
+  \end{aligned}
+  \label{eq-dw-counts-and-levels}
+\end{equation}
+Thus $c_K=N^{\mathrm{te}}$, and the counts retain repeated residuals.
+
+\begin{proposition}[CDF band and finite rank constraints]
+  \label{prop-finite-rank-constraints}
+  Each set in \eqref{eq-dw-rank-acceptance} is a nonempty closed interval containing $q_j$. Define
+  $L_\theta(t):=\alpha_{N^{\mathrm{te}}\widehat F^{\mathrm{te}}(t)}(\theta)$ and
+  $U_\theta(t):=\beta_{N^{\mathrm{te}}\widehat F^{\mathrm{te}}(t)}(\theta)$.
+  Then
+  \begin{equation}
+    \mathscr Q^{\mathrm{DW}}(\theta)
+    =\left\{\mathbb Q\in\mathcal Q(\Xi):
+    L_\theta(t)\le F_{\mathbb Q}(t)\le U_\theta(t),\quad\forall t\in\mathbb R\right\},
+    \label{eq-dw-band-representation}
+  \end{equation}
+  or, equivalently,
+  \begin{equation}
+    \mathscr Q^{\mathrm{DW}}(\theta)
+    =\left\{\mathbb Q\in\mathcal Q(\Xi):
+    \begin{array}{l}
+      \mathbb Q\left\{\xi<r_k\right\}\le u_k,\\
+      \mathbb Q\left\{\xi\le r_k\right\}\ge\ell_k,
+    \end{array}
+    \quad k=1,\ldots,K\right\}.
+    \label{eq-finite-rank-constraints}
+  \end{equation}
+\end{proposition}
+\begin{proof}
+  For fixed $q$, the divergence increases as $p$ moves away from $q$, while the correction $\psi(q,p)$ cannot increase as the interval between $q$ and $p$ expands. The corrected discrepancy is therefore decreasing below $q$ and increasing above $q$. It is continuous for $p\in(0,1)$, with value $-\psi(q)\le0$ at $p=q$. Together with the boundary conventions in Section~\ref{sec-ambiguity-set}, this gives a nonempty closed acceptance interval, including when $\theta=0$. Its inversion at each empirical CDF level gives \eqref{eq-dw-band-representation} \citep[Supplement, Section~S.6]{L.J23}.
+
+  On $[r_k,r_{k+1})$, the empirical CDF equals $c_k/N^{\mathrm{te}}$. Since a candidate CDF is nondecreasing, its lower band constraint on this interval is equivalent to
+  $F_{\mathbb Q}(r_k)\ge\alpha_{c_k}(\theta)$, and its upper constraint is equivalent to
+  $F_{\mathbb Q}(r_{k+1}^-)\le\beta_{c_k}(\theta)$.
+  The same argument applies to the exterior intervals because $\alpha_0(\theta)=0$ and $\beta_{N^{\mathrm{te}}}(\theta)=1$. Using
+  $F_{\mathbb Q}(r_k^-)=\mathbb Q\{\xi<r_k\}$ proves \eqref{eq-finite-rank-constraints}.
+\end{proof}
+
+The open and closed half-lines distinguish probability mass below a residual from mass at that residual. This distinction preserves the validity of the reformulation when residuals have atoms. The same monotonicity in $q$ gives endpoints that are nondecreasing in $j$, with $\alpha_j(\theta)\le q_j\le\beta_j(\theta)$. Consequently, $u_k$ and $\ell_k$ are nondecreasing and satisfy $\ell_{k-1}\le u_k$ and $\ell_k\le u_{k+1}$, with $\ell_0:=0$ and $u_{K+1}:=1$.
+
+Because the bounds in \eqref{eq-finite-rank-constraints} are fixed numbers, all residual constraints are linear in the unknown joint measure. Let $\mathcal M_+(\mathcal X\times\Xi)$ denote the finite nonnegative Borel measures. The upper failure probability is the measure linear program
+\begin{equation}
+  \begin{aligned}
+    \overline p_{\hat f}
+    =\sup_{\Pi\in\mathcal M_+(\mathcal X\times\Xi)}\quad&
+    \int_{\mathcal X\times\Xi}
+    \mathbf1_{\{\hat g(\bm x)+\xi\le0\}}\,\Pi\left(\mathrm d\bm x,\mathrm d\xi\right)\\
+    \text{s.t.}\quad&
+    \int_{\mathcal X\times\Xi}\mathbf1_A(\bm x)\,\Pi\left(\mathrm d\bm x,\mathrm d\xi\right)
+    =\int_{\mathcal X}\mathbf1_A(\bm x)\,\mathbb P\left(\mathrm d\bm x\right),
+    &&\forall A\in\mathcal B(\mathcal X),\\
+    &\int_{\mathcal X\times\Xi}\mathbf1_{\{\xi<r_k\}}\,\Pi\left(\mathrm d\bm x,\mathrm d\xi\right)\le u_k,
+    &&k=1,\ldots,K,\\
+    &\int_{\mathcal X\times\Xi}\mathbf1_{\{\xi\le r_k\}}\,\Pi\left(\mathrm d\bm x,\mathrm d\xi\right)\ge\ell_k,
+    &&k=1,\ldots,K.
+  \end{aligned}
+  \label{eq-measure-upper}
+\end{equation}
+The lower problem minimizes the same objective under exactly these constraints:
+\begin{equation}
+  \underline p_{\hat f}
+  =\inf_{\Pi\in\mathscr P\left(\mathscr Q^{\mathrm{DW}}(\theta)\right)}
+  \int_{\mathcal X\times\Xi}\mathbf1_{\{\hat g(\bm x)+\xi\le0\}}\,\Pi\left(\mathrm d\bm x,\mathrm d\xi\right).
+  \label{eq-measure-lower}
+\end{equation}
+The marginal equality gives total mass one. Both problems are feasible for every $\theta\ge0$, since the product of $\mathbb P$ and the empirical residual distribution satisfies the constraints. The decision variable remains a joint measure; only the residual restrictions have become finite.
+
+The following lemma gives the dual problems and relates their optimal values to the failure probability bounds. Write $u=(u_1,\ldots,u_K)^\top$ and $\ell=(\ell_1,\ldots,\ell_K)^\top$. For $\lambda,\mu\in\mathbb R_+^K$, define the rank penalty
+\begin{equation}
+  \eta_{\lambda,\mu}(\xi):=
+  \sum_{k=1}^K\lambda_k\mathbf1_{\{\xi<r_k\}}
+  -\sum_{k=1}^K\mu_k\mathbf1_{\{\xi\le r_k\}}.
+  \label{eq-dual-step-function}
+\end{equation}
+
+\begin{lemma}[Dual problems and weak duality]
+  \label{lem-weak-duality}
+  For every $\theta\ge0$, the upper Lagrangian dual of \eqref{eq-measure-upper} is
+  \begin{equation}
+    \begin{aligned}
+      \inf_{\lambda,\mu\ge0,\ \varphi}\quad&
+      \mathbb E_{\mathbb P}\left[\varphi(\bm X)\right]+\lambda^\top u-\mu^\top\ell\\
+      \text{s.t.}\quad&
+      \varphi(\bm x)+\eta_{\lambda,\mu}(\xi)\ge\mathbf1_{\{\hat g(\bm x)+\xi\le0\}},
+      \quad\forall(\bm x,\xi)\in\mathcal X\times\Xi,
+    \end{aligned}
+    \label{eq-upper-measure-dual}
+  \end{equation}
+  where $\varphi$ ranges over bounded measurable functions on $\mathcal X$. Denote its optimal value by $\overline d_\theta$. The lower Lagrangian dual of \eqref{eq-measure-lower} is
+  \begin{equation}
+    \begin{aligned}
+      \sup_{\lambda,\mu\ge0,\ \varphi}\quad&
+      \mathbb E_{\mathbb P}\left[\varphi(\bm X)\right]-\lambda^\top u+\mu^\top\ell\\
+      \text{s.t.}\quad&
+      \varphi(\bm x)-\eta_{\lambda,\mu}(\xi)\le\mathbf1_{\{\hat g(\bm x)+\xi\le0\}},
+      \quad\forall(\bm x,\xi)\in\mathcal X\times\Xi,
+    \end{aligned}
+    \label{eq-lower-measure-dual}
+  \end{equation}
+  with the same function class and optimal value denoted by $\underline d_\theta$. These values satisfy
+  \begin{equation}
+    \underline d_\theta\le\underline p_{\hat f}\le\overline p_{\hat f}\le\overline d_\theta.
+    \label{eq-weak-duality}
+  \end{equation}
+  Any feasible upper or lower dual solution therefore gives a valid bound before optimization.
+\end{lemma}
+\begin{proof}
+  Introduce $\varphi$ for the input marginal equality, $\lambda_k\ge0$ for the open upper probability constraint, and $\mu_k\ge0$ for the closed lower probability constraint. In the upper maximization problem, the inequality penalties are
+  $\lambda_k(u_k-\int\mathbf1_{\{\xi<r_k\}}\,\mathrm d\Pi)$ and
+  $\mu_k(\int\mathbf1_{\{\xi\le r_k\}}\,\mathrm d\Pi-\ell_k)$.
+  Adding the marginal term $\mathbb E_{\mathbb P}[\varphi(\bm X)]-\int\varphi(\bm x)\,\mathrm d\Pi$ and collecting terms gives the Lagrangian \citep[Section~5.1]{B.V04}
+  \begin{equation}
+    \begin{aligned}
+      \mathcal L^+={}&\mathbb E_{\mathbb P}\left[\varphi(\bm X)\right]+\lambda^\top u-\mu^\top\ell\\
+      &+\int_{\mathcal X\times\Xi}\left[\mathbf1_{\{\hat g(\bm x)+\xi\le0\}}-\varphi(\bm x)-\eta_{\lambda,\mu}(\xi)\right]\,\Pi\left(\mathrm d\bm x,\mathrm d\xi\right).
+    \end{aligned}
+    \label{eq-upper-lagrangian}
+  \end{equation}
+  Its supremum over all nonnegative finite measures is finite exactly when the integrand is nonpositive everywhere. A positive value at any point allows an arbitrarily large point mass there; otherwise the supremum integral is zero, attained by the zero measure. The remaining constant term, minimized over the multipliers, gives \eqref{eq-upper-measure-dual}.
+
+  For the lower minimization problem, reverse the signs of the two inequality penalties. The resulting Lagrangian is
+  \begin{equation}
+    \begin{aligned}
+      \mathcal L^-={}&\mathbb E_{\mathbb P}\left[\varphi(\bm X)\right]-\lambda^\top u+\mu^\top\ell\\
+      &+\int_{\mathcal X\times\Xi}\left[\mathbf1_{\{\hat g(\bm x)+\xi\le0\}}-\varphi(\bm x)+\eta_{\lambda,\mu}(\xi)\right]\,\Pi\left(\mathrm d\bm x,\mathrm d\xi\right).
+    \end{aligned}
+    \label{eq-lower-lagrangian}
+  \end{equation}
+  Its infimum over nonnegative finite measures is finite exactly when the integrand is nonnegative everywhere, in which case the infimum integral is zero. Maximizing the remaining constant term gives \eqref{eq-lower-measure-dual}.
+
+  For primal feasible $\Pi$, the penalty signs give $\mathcal L^+\ge p_{\hat f}(\Pi)\ge\mathcal L^-$. The feasible dual objectives therefore bound the corresponding primal optima. Optimizing these objectives and using primal feasibility proves \eqref{eq-weak-duality}.
+\end{proof}
+
+The measure duals can be evaluated through finite linear programs using the surrogate response CDF
+\begin{equation}
+  H(t):=\mathbb P\left\{\hat g(\bm X)\le t\right\},\qquad
+  H_k:=H(-r_k),\quad k=1,\ldots,K.
+  \label{eq-surrogate-response-cdf}
+\end{equation}
+The following theorem states these computational formulations; their equivalence is established in the proof.
+
+\begin{theorem}[Finite-dimensional duals and strong duality]
+  \label{thm-finite-dual-reformulations}
+  For $\Xi=\mathbb R$ and every $\theta\ge0$, set $J:=2K+1$, $H_0:=1$, $H_{K+1}:=0$, and $w_i:=H_i-H_{i+1}$ for $i=0,\ldots,K$. Consider the upper finite-dimensional dual problem
+  \begin{equation}
+    \begin{aligned}
+      \min_{\lambda,\mu\ge0,\ z\in\mathbb R^{K+1}}\quad&
+      \lambda^\top u-\mu^\top\ell+\sum_{i=0}^K w_i z_i\\
+      \text{s.t.}\quad&
+      z_i+\sum_{k=1}^K\lambda_k\mathbf1_{\{j<2k\}}
+      -\sum_{k=1}^K\mu_k\mathbf1_{\{j\le2k\}}
+      \ge\mathbf1_{\{j\le2i+1\}},\\
+      &i=0,\ldots,K,\quad j=1,\ldots,J,
+    \end{aligned}
+    \label{eq-finite-upper-dual}
+  \end{equation}
+  and the lower finite-dimensional dual problem
+  \begin{equation}
+    \begin{aligned}
+      \max_{\lambda,\mu\ge0,\ z\in\mathbb R^{K+1}}\quad&
+      -\lambda^\top u+\mu^\top\ell+\sum_{i=0}^K w_i z_i\\
+      \text{s.t.}\quad&
+      z_i-\sum_{k=1}^K\lambda_k\mathbf1_{\{j<2k\}}
+      +\sum_{k=1}^K\mu_k\mathbf1_{\{j\le2k\}}
+      \le\mathbf1_{\{j\le2i\}},\\
+      &i=0,\ldots,K,\quad j=1,\ldots,J.
+    \end{aligned}
+    \label{eq-finite-lower-dual}
+  \end{equation}
+  Their optimal values coincide with $\overline d_\theta$ and $\underline d_\theta$, respectively, and satisfy
+  \begin{equation}
+    \overline p_{\hat f}=\overline d_\theta,\qquad
+    \underline p_{\hat f}=\underline d_\theta.
+    \label{eq-strong-duality}
+  \end{equation}
+  Each finite LP has $3K+1$ scalar variables and $(K+1)(2K+1)$ pointwise inequalities. Both finite LP optima and the corresponding measure primal and dual optima are attained.
+\end{theorem}
+\begin{proof}
+  Let $T(\bm x):=-\hat g(\bm x)$, $r_0:=-\infty$, and $r_{K+1}:=+\infty$. The $K$ ordered residuals define $K+1$ input intervals,
+  \begin{equation}
+    A_i:=\left\{\bm x:r_i\le T(\bm x)<r_{i+1}\right\},\qquad
+    \mathbb P\left(A_i\right)
+    =\mathbb P\left\{T(\bm X)\ge r_i\right\}
+    -\mathbb P\left\{T(\bm X)\ge r_{i+1}\right\}=w_i.
+    \label{eq-input-cells}
+  \end{equation}
+  These half-open intervals include all threshold equalities, so the weights remain valid when the surrogate response has atoms. Partition the residual axis into
+  \begin{equation}
+    C_{2k}:=\left\{r_k\right\}\quad(k=1,\ldots,K),\qquad
+    C_{2k+1}:=\left(r_k,r_{k+1}\right)\quad(k=0,\ldots,K).
+    \label{eq-residual-cells}
+  \end{equation}
+  For $\bm x\in A_i$ and $\xi\in C_j$, the failure indicator satisfies
+  \begin{equation}
+    \underline h_{ij}:=\mathbf1_{\{j\le2i\}}
+    \le\mathbf1_{\{\xi\le T(\bm x)\}}
+    \le\overline h_{ij}:=\mathbf1_{\{j\le2i+1\}}.
+    \label{eq-cell-costs}
+  \end{equation}
+  Cells $j\le2i$ always cause failure, cells $j\ge2i+2$ are always safe, and only the overlapping open cell $j=2i+1$ distinguishes the two bounds. On each residual cell, the rank penalty has the constant value
+  \begin{equation}
+    \eta_j:=\sum_{k=1}^K\lambda_k\mathbf1_{\{j<2k\}}
+    -\sum_{k=1}^K\mu_k\mathbf1_{\{j\le2k\}}.
+    \label{eq-dual-cell-values}
+  \end{equation}
+
+  Every feasible joint measure induces masses $p_{ij}:=\Pi(A_i\times C_j)$ in the finite feasible set
+  \begin{equation}
+    \mathcal A_\theta:=\left\{p\in\mathbb R_+^{(K+1)\times J}:
+    \begin{array}{ll}
+      \displaystyle\sum_{j=1}^Jp_{ij}=w_i,&i=0,\ldots,K,\\[1mm]
+      \displaystyle\sum_{i=0}^K\sum_{j<2k}p_{ij}\le u_k,&k=1,\ldots,K,\\[1mm]
+      \displaystyle\sum_{i=0}^K\sum_{j\le2k}p_{ij}\ge\ell_k,&k=1,\ldots,K
+    \end{array}\right\}.
+    \label{eq-cell-mass-polytope}
+  \end{equation}
+  By \eqref{eq-cell-costs}, maximizing $\sum_{i,j}\overline h_{ij}p_{ij}$ over this set bounds the original upper problem from above, while minimizing $\sum_{i,j}\underline h_{ij}p_{ij}$ bounds the lower problem from below.
+
+  To prove the reverse inequalities, fix $p\in\mathcal A_\theta$. Draw $\bm x$ from its original law $\mathbb P$ and, for $\bm x\in A_i$ with $w_i>0$, choose category $j$ with probability $p_{ij}/w_i$. Outside $j=2i+1$, any fixed point in $C_j$ attains both coefficients in \eqref{eq-cell-costs}. In the overlapping cell, choose $\xi=T(\bm x)$ for the upper problem. When $T(\bm x)>r_i$, this residual stays in the open cell. When $T(\bm x)=r_i$, it moves the assigned mass to the left endpoint and still causes failure. For any $s\in(r_i,r_{i+1})$ and every observed rank $r_k$,
+  \[
+    \mathbf1_{\{r_i<r_k\}}=\mathbf1_{\{s<r_k\}},\qquad
+    \mathbf1_{\{r_i\le r_k\}}\ge\mathbf1_{\{s\le r_k\}}.
+  \]
+  Hence the endpoint move leaves every open upper probability unchanged and can only increase the closed lower probabilities. It preserves all DW rank constraints and attains every assigned upper coefficient. The construction establishes equality of optimal values while allowing this feasible redistribution between adjacent residual cells.
+
+  For the lower problem, choose $\xi=(T(\bm x)+r_{i+1})/2$ in the overlapping cell when $i<K$, or $\xi=T(\bm x)+1$ when $i=K$. These choices remain inside that cell and exceed $T(\bm x)$, including when $T(\bm x)=r_i$, so they attain the lower coefficient zero. All selections are measurable and preserve the input marginal; zero-weight input intervals contribute no mass. Thus
+  \begin{equation}
+    \overline p_{\hat f}=\max_{p\in\mathcal A_\theta}\sum_{i=0}^K\sum_{j=1}^J\overline h_{ij}p_{ij},\qquad
+    \underline p_{\hat f}=\min_{p\in\mathcal A_\theta}\sum_{i=0}^K\sum_{j=1}^J\underline h_{ij}p_{ij}.
+    \label{eq-finite-primal-values}
+  \end{equation}
+
+  The set $\mathcal A_\theta$ is nonempty by empirical-product feasibility and compact because its nonnegative entries sum to one. Its linear objectives are bounded, so finite LP strong duality gives attained primal and dual optima \citep[Section~5.2.3]{B.V04}. A free multiplier $z_i$ for each row equality and nonnegative multipliers $\lambda_k,\mu_k$ for the prefix inequalities give the upper constraints $z_i+\eta_j\ge\overline h_{ij}$ and the lower constraints $z_i-\eta_j\le\underline h_{ij}$. Expanding their coefficients yields exactly \eqref{eq-finite-upper-dual} and \eqref{eq-finite-lower-dual}.
+
+  Each finite dual solution defines a bounded measurable function $\varphi(\bm x)=z_i$ on $A_i$. By \eqref{eq-cell-costs}, it is feasible for the corresponding measure dual with the same objective value. Lemma~\ref{lem-weak-duality} and finite LP equality then prove \eqref{eq-strong-duality}; the constructions above also establish attainment for the measure programs and their duals. All steps use non-strict probability constraints and finite LP feasibility and boundedness. They therefore cover $\theta=0$, including collapsed DW acceptance intervals, without requiring strict feasibility.
+\end{proof}
+
+The finite LPs provide a direct computational formulation. Their ordered constraints also yield a simpler evaluation rule.
+
+\begin{corollary}[Closed-form failure probability bounds]
+  \label{thm-closed-form-bounds}
+  For $\Xi=\mathbb R$, $\mathscr Q^{\mathrm{DW}}(\theta)$, and every $\theta\ge0$,
+  \begin{align}
+    \overline p_{\hat f}
+    &=\min\left\{1,\min_{k=1,\ldots,K}\left[u_k+H_k\right]\right\},
+    \label{eq-dw-closed-upper}\\
+    \underline p_{\hat f}
+    &=\max\left\{0,\max_{k=1,\ldots,K}\left[\ell_k+H_k-1\right]\right\}.
+    \label{eq-dw-closed-lower}
+  \end{align}
+\end{corollary}
+\begin{proof}
+  Fix column totals $v_j:=\sum_i p_{ij}$ in the finite primal LPs and write $V_s:=\sum_{j=1}^s v_j$. The upper objective maximizes mass transported along pairs $j\le2i+1$. Equivalently, it is a maximum flow with row capacities $w_i$, column capacities $v_j$, and capacity two on each permitted row-to-column arc. Total mass is one, so a minimum cut crosses none of these capacity-two arcs. The nested row neighborhoods imply that a minimum cut can use rows $0,\ldots,k-1$ and columns $1,\ldots,2k-1$ on the source side, with capacity $H_k+V_{2k-1}$; the empty row set gives capacity one. For the lower objective, maximize the safe mass along $j>2i$. The analogous suffix cut has capacity $2-H_k-V_{2k}$, again with the outer cut of capacity one. By max-flow min-cut duality \citep{F.F56}, the fixed-column upper and lower values are therefore
+  \[
+    \min\left\{1,\min_k\left[H_k+V_{2k-1}\right]\right\},\qquad
+    \max\left\{0,\max_k\left[H_k+V_{2k}-1\right]\right\}.
+  \]
+  A permitted partial flow can be completed using the remaining row and column masses, so these flow values equal the corresponding transport objectives.
+
+  Feasibility gives $V_{2k-1}\le u_k$ and $V_{2k}\ge\ell_k$. Hence the upper value is at most \eqref{eq-dw-closed-upper}, and the lower value is at least \eqref{eq-dw-closed-lower}. For the upper value, choose column totals $v_1=u_1$ and $v_{2k}=u_{k+1}-u_k$, with all remaining entries zero. For the lower value, choose $v_{2k}=\ell_k-\ell_{k-1}$ and $v_J=1-\ell_K$, with all remaining entries zero. The endpoint ordering and compatibility inequalities stated after Proposition~\ref{prop-finite-rank-constraints} make both choices feasible. The first has $V_{2k-1}=u_k$, and the second has $V_{2k}=\ell_k$, proving attainment of both expressions.
+\end{proof}
+
+The closed forms have a direct dual interpretation. For any rank $k$, an upper dual certificate is $\lambda=e_k$, $\mu=0$, and $\varphi(\bm x)=\mathbf1_{\{T(\bm x)\ge r_k\}}$, with objective $u_k+H_k$. A lower certificate is $\lambda=0$, $\mu=e_k$, and $\varphi(\bm x)=\mathbf1_{\{T(\bm x)\ge r_k\}}-1$, with objective $\ell_k+H_k-1$; here $e_k$ is the $k$th unit vector. The constant certificates give one and zero. Lemma~\ref{lem-weak-duality} validates each candidate, and the corollary establishes that the best candidate is exact. Thus the final calculation compares $K$ threshold-based dual bounds. The upper candidate combines allowed residual mass below $r_k$ with the probability that the surrogate threshold is at least $r_k$; the lower candidate quantifies unavoidable overlap of the corresponding events.
+
+\begin{remark}[Known interval support]
+  \label{rem-interval-support}
+  If $\Xi=[a,b]$ is known, add its endpoints to the ordered partition and retain only admissible residual cells. Thresholds below $a$ cannot fail, while thresholds at least $b$ must fail. Accordingly, the outer constants one and zero in \eqref{eq-dw-closed-upper}--\eqref{eq-dw-closed-lower} become $H(-a)$ and $H(-b)$, respectively.
+\end{remark}
+
+In practice, compute the rank endpoints from $N^{\mathrm{te}}$ and $\theta$, evaluate the $K$ surrogate CDF values $H(-r_k)$ under $\mathbb P$, and apply \eqref{eq-dw-closed-upper}--\eqref{eq-dw-closed-lower}. For $\theta\ge\theta_{N^{\mathrm{te}}}(\delta)$, these exact bounds inherit Theorem~\ref{theorem-01}. If the CDF values are estimated by simulation, simultaneous upper CDF bounds give a certified upper failure bound and simultaneous lower CDF bounds give a certified lower failure bound; their numerical error is included in the overall confidence budget.
+
+\bibliographystyle{elsarticle-harv}
+\bibliography{reference}
+
+\end{document}

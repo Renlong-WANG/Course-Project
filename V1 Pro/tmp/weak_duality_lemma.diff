@@ -1,0 +1,140 @@
+--- backup/manuscript.tex
++++ manuscript.tex
+@@ -297,86 +297,70 @@
+ \end{equation}
+ The marginal equality gives total mass one. Both problems are feasible for every $\theta\ge0$, since the product of $\mathbb P$ and the empirical residual distribution satisfies the constraints. The decision variable remains a joint measure; only the residual restrictions have become finite.
+ 
+-Introduce nonnegative multipliers $\lambda_k$ and $\mu_k$ for the open upper and closed lower constraints, respectively. A bounded measurable function $\varphi$ is the unrestricted multiplier for the input marginal equality. This equality implies
+-$\int\varphi(\bm x)\,\mathrm d\Pi=\mathbb E_{\mathbb P}[\varphi(\bm X)]$.
+-Writing $u=(u_1,\ldots,u_K)^\top$ and $\ell=(\ell_1,\ldots,\ell_K)^\top$, the upper Lagrangian is \citep[Section~5.1]{B.V04}
+-\begin{equation}
+-  \begin{aligned}
+-    \mathcal L^+={}&
+-    \int_{\mathcal X\times\Xi}\mathbf1_{\{\hat g(\bm x)+\xi\le0\}}\,\Pi\left(\mathrm d\bm x,\mathrm d\xi\right)\\
+-    &+\mathbb E_{\mathbb P}\left[\varphi(\bm X)\right]
+-    -\int_{\mathcal X\times\Xi}\varphi(\bm x)\,\Pi\left(\mathrm d\bm x,\mathrm d\xi\right)\\
+-    &+\sum_{k=1}^K\lambda_k\left[u_k-\int_{\mathcal X\times\Xi}\mathbf1_{\{\xi<r_k\}}\,\Pi\left(\mathrm d\bm x,\mathrm d\xi\right)\right]\\
+-    &+\sum_{k=1}^K\mu_k\left[\int_{\mathcal X\times\Xi}\mathbf1_{\{\xi\le r_k\}}\,\Pi\left(\mathrm d\bm x,\mathrm d\xi\right)-\ell_k\right].
+-  \end{aligned}
+-  \label{eq-upper-lagrangian}
+-\end{equation}
+-Define the combined rank penalty
++The following lemma gives the dual problems and relates their optimal values to the failure probability bounds. Write $u=(u_1,\ldots,u_K)^\top$ and $\ell=(\ell_1,\ldots,\ell_K)^\top$. For $\lambda,\mu\in\mathbb R_+^K$, define the rank penalty
+ \begin{equation}
+   \eta_{\lambda,\mu}(\xi):=
+   \sum_{k=1}^K\lambda_k\mathbf1_{\{\xi<r_k\}}
+   -\sum_{k=1}^K\mu_k\mathbf1_{\{\xi\le r_k\}}.
+   \label{eq-dual-step-function}
+ \end{equation}
+-Collecting the measure-dependent terms gives
+-\begin{equation}
+-  \begin{aligned}
+-    \mathcal L^+={}&\mathbb E_{\mathbb P}\left[\varphi(\bm X)\right]+\lambda^\top u-\mu^\top\ell\\
+-    &+\int_{\mathcal X\times\Xi}\left[\mathbf1_{\{\hat g(\bm x)+\xi\le0\}}-\varphi(\bm x)-\eta_{\lambda,\mu}(\xi)\right]\,\Pi\left(\mathrm d\bm x,\mathrm d\xi\right).
+-  \end{aligned}
+-  \label{eq-collected-upper-lagrangian}
+-\end{equation}
+-When taking the supremum over nonnegative finite measures, the integrand must be nonpositive everywhere; otherwise an arbitrarily large point mass makes the Lagrangian unbounded. When it is nonpositive, the supremum integral is zero. Thus the upper dual chooses a function and rank penalties that dominate the failure indicator:
+-\begin{equation}
+-  \begin{aligned}
+-    \overline d_\theta:=\inf_{\lambda,\mu\ge0,\ \varphi}\quad&
+-    \mathbb E_{\mathbb P}\left[\varphi(\bm X)\right]+\lambda^\top u-\mu^\top\ell\\
+-    \text{s.t.}\quad&
+-    \varphi(\bm x)+\eta_{\lambda,\mu}(\xi)\ge\mathbf1_{\{\hat g(\bm x)+\xi\le0\}},
+-    \quad\forall(\bm x,\xi)\in\mathcal X\times\Xi.
+-  \end{aligned}
+-  \label{eq-upper-measure-dual}
+-\end{equation}
+-Here and below, $\varphi$ ranges over bounded measurable functions. For the lower problem, reversing the signs of the two inequality penalties gives
+-\begin{equation}
+-  \begin{aligned}
+-    \mathcal L^-={}&\mathbb E_{\mathbb P}\left[\varphi(\bm X)\right]-\lambda^\top u+\mu^\top\ell\\
+-    &+\int_{\mathcal X\times\Xi}\left[\mathbf1_{\{\hat g(\bm x)+\xi\le0\}}-\varphi(\bm x)+\eta_{\lambda,\mu}(\xi)\right]\,\Pi\left(\mathrm d\bm x,\mathrm d\xi\right).
+-  \end{aligned}
+-  \label{eq-lower-lagrangian}
+-\end{equation}
+-Its infimum over nonnegative measures is finite exactly when the integrand is nonnegative everywhere. The lower dual is therefore
+-\begin{equation}
+-  \begin{aligned}
+-    \underline d_\theta:=\sup_{\lambda,\mu\ge0,\ \varphi}\quad&
+-    \mathbb E_{\mathbb P}\left[\varphi(\bm X)\right]-\lambda^\top u+\mu^\top\ell\\
+-    \text{s.t.}\quad&
+-    \varphi(\bm x)-\eta_{\lambda,\mu}(\xi)\le\mathbf1_{\{\hat g(\bm x)+\xi\le0\}},
+-    \quad\forall(\bm x,\xi)\in\mathcal X\times\Xi.
+-  \end{aligned}
+-  \label{eq-lower-measure-dual}
+-\end{equation}
+-
+-\begin{lemma}[Weak duality]
++
++\begin{lemma}[Dual problems and weak duality]
+   \label{lem-weak-duality}
+-  For every $\theta\ge0$,
++  For every $\theta\ge0$, the upper Lagrangian dual of \eqref{eq-measure-upper} is
++  \begin{equation}
++    \begin{aligned}
++      \inf_{\lambda,\mu\ge0,\ \varphi}\quad&
++      \mathbb E_{\mathbb P}\left[\varphi(\bm X)\right]+\lambda^\top u-\mu^\top\ell\\
++      \text{s.t.}\quad&
++      \varphi(\bm x)+\eta_{\lambda,\mu}(\xi)\ge\mathbf1_{\{\hat g(\bm x)+\xi\le0\}},
++      \quad\forall(\bm x,\xi)\in\mathcal X\times\Xi,
++    \end{aligned}
++    \label{eq-upper-measure-dual}
++  \end{equation}
++  where $\varphi$ ranges over bounded measurable functions on $\mathcal X$. Denote its optimal value by $\overline d_\theta$. The lower Lagrangian dual of \eqref{eq-measure-lower} is
++  \begin{equation}
++    \begin{aligned}
++      \sup_{\lambda,\mu\ge0,\ \varphi}\quad&
++      \mathbb E_{\mathbb P}\left[\varphi(\bm X)\right]-\lambda^\top u+\mu^\top\ell\\
++      \text{s.t.}\quad&
++      \varphi(\bm x)-\eta_{\lambda,\mu}(\xi)\le\mathbf1_{\{\hat g(\bm x)+\xi\le0\}},
++      \quad\forall(\bm x,\xi)\in\mathcal X\times\Xi,
++    \end{aligned}
++    \label{eq-lower-measure-dual}
++  \end{equation}
++  with the same function class and optimal value denoted by $\underline d_\theta$. These values satisfy
+   \begin{equation}
+     \underline d_\theta\le\underline p_{\hat f}\le\overline p_{\hat f}\le\overline d_\theta.
+     \label{eq-weak-duality}
+   \end{equation}
+-  In particular, any feasible upper or lower dual solution gives a valid bound before the dual is optimized.
++  Any feasible upper or lower dual solution therefore gives a valid bound before optimization.
+ \end{lemma}
+ \begin{proof}
+-  For any feasible joint measure, the rank constraints and nonnegative multipliers imply
+-  \[
+-    \int_{\mathcal X\times\Xi}\eta_{\lambda,\mu}(\xi)\,\Pi\left(\mathrm d\bm x,\mathrm d\xi\right)
+-    \le\lambda^\top u-\mu^\top\ell.
+-  \]
+-  Integrating the upper pointwise dual constraint therefore gives
+-  $p_{\hat f}(\Pi)\le\mathbb E_{\mathbb P}[\varphi(\bm X)]+\lambda^\top u-\mu^\top\ell$.
+-  Integrating the lower constraint gives
+-  $p_{\hat f}(\Pi)\ge\mathbb E_{\mathbb P}[\varphi(\bm X)]-\lambda^\top u+\mu^\top\ell$.
+-  Taking the respective optima proves \eqref{eq-weak-duality}.
++  Introduce $\varphi$ for the input marginal equality, $\lambda_k\ge0$ for the open upper probability constraint, and $\mu_k\ge0$ for the closed lower probability constraint. In the upper maximization problem, the inequality penalties are
++  $\lambda_k(u_k-\int\mathbf1_{\{\xi<r_k\}}\,\mathrm d\Pi)$ and
++  $\mu_k(\int\mathbf1_{\{\xi\le r_k\}}\,\mathrm d\Pi-\ell_k)$.
++  Adding the marginal term $\mathbb E_{\mathbb P}[\varphi(\bm X)]-\int\varphi(\bm x)\,\mathrm d\Pi$ and collecting terms gives the Lagrangian \citep[Section~5.1]{B.V04}
++  \begin{equation}
++    \begin{aligned}
++      \mathcal L^+={}&\mathbb E_{\mathbb P}\left[\varphi(\bm X)\right]+\lambda^\top u-\mu^\top\ell\\
++      &+\int_{\mathcal X\times\Xi}\left[\mathbf1_{\{\hat g(\bm x)+\xi\le0\}}-\varphi(\bm x)-\eta_{\lambda,\mu}(\xi)\right]\,\Pi\left(\mathrm d\bm x,\mathrm d\xi\right).
++    \end{aligned}
++    \label{eq-upper-lagrangian}
++  \end{equation}
++  Its supremum over all nonnegative finite measures is finite exactly when the integrand is nonpositive everywhere. A positive value at any point allows an arbitrarily large point mass there; otherwise the supremum integral is zero, attained by the zero measure. The remaining constant term, minimized over the multipliers, gives \eqref{eq-upper-measure-dual}.
++
++  For the lower minimization problem, reverse the signs of the two inequality penalties. The resulting Lagrangian is
++  \begin{equation}
++    \begin{aligned}
++      \mathcal L^-={}&\mathbb E_{\mathbb P}\left[\varphi(\bm X)\right]-\lambda^\top u+\mu^\top\ell\\
++      &+\int_{\mathcal X\times\Xi}\left[\mathbf1_{\{\hat g(\bm x)+\xi\le0\}}-\varphi(\bm x)+\eta_{\lambda,\mu}(\xi)\right]\,\Pi\left(\mathrm d\bm x,\mathrm d\xi\right).
++    \end{aligned}
++    \label{eq-lower-lagrangian}
++  \end{equation}
++  Its infimum over nonnegative finite measures is finite exactly when the integrand is nonnegative everywhere, in which case the infimum integral is zero. Maximizing the remaining constant term gives \eqref{eq-lower-measure-dual}.
++
++  For primal feasible $\Pi$, the penalty signs give $\mathcal L^+\ge p_{\hat f}(\Pi)\ge\mathcal L^-$. The feasible dual objectives therefore bound the corresponding primal optima. Optimizing these objectives and using primal feasibility proves \eqref{eq-weak-duality}.
+ \end{proof}
+ 
+ To compute these duals, take $\Xi=\mathbb R$ and compare the failure threshold $T(\bm x):=-\hat g(\bm x)$ with the observed residuals. Define
