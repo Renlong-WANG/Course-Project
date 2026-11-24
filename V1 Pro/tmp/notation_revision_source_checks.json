@@ -1,0 +1,15 @@
+{
+  "notation_scope": "From distinct ordered test residuals through the end of Section 4",
+  "no_old_residual_rank_or_lower_bound_symbols": true,
+  "no_T_or_H_index_aliases": true,
+  "boundary_conventions_explicit": true,
+  "prefix_and_suffix_unchanged": true,
+  "existing_comments_preserved": true,
+  "equation_labels_and_citations_unchanged": true,
+  "sample_notation_and_ambiguity_set_notation_preserved": true,
+  "active_labels": 59,
+  "pdf_pages": 14,
+  "rendered_pages_checked": "6-14",
+  "build_passed": true,
+  "new_layout_warnings": false
+}
