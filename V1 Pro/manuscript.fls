@@ -232,6 +232,7 @@ INPUT manuscript.aux
 INPUT ./manuscript.out
 INPUT ./manuscript.out
 INPUT d:/texlive/2024/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx10.pfb
+INPUT d:/texlive/2024/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx8.pfb
 INPUT d:/texlive/2024/texmf-dist/fonts/type1/public/amsfonts/cm/cmex10.pfb
 INPUT d:/texlive/2024/texmf-dist/fonts/type1/public/amsfonts/cmextra/cmex8.pfb
 INPUT d:/texlive/2024/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi10.pfb

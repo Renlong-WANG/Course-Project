@@ -345,14 +345,14 @@ The lower problem minimizes the same integral under the same constraints:
 \end{equation}
 The marginal equality fixes the input law and total mass one. The other constraints restrict the residual marginal while allowing its dependence on the input to vary. For $\Xi=\mathbb R$, both problems are feasible for every $\theta\ge0$: the product of $\mathbb P$ and the empirical residual law is feasible.
 
-Write $u=(u_1,\ldots,u_K)^\top$ and $l=(l_1,\ldots,l_K)^\top$. For nonnegative multipliers $\lambda,\mu\in\mathbb R_+^K$, define the residual step function
+Write $\bm u=(u_1,\ldots,u_K)^\top$ and $\bm l=(l_1,\ldots,l_K)^\top$. For nonnegative multipliers $\bm\lambda,\bm\mu\in\mathbb R_+^K$, define the residual step function
 \begin{equation}
-  \eta_{\lambda,\mu}(\xi)
+  \eta_{\bm\lambda,\bm\mu}(\xi)
   :=\sum_{k=1}^K\lambda_k\mathbf1_{\{\xi<\xi_{(k)}^{\mathrm{te}}\}}
     -\sum_{k=1}^K\mu_k\mathbf1_{\{\xi\le \xi_{(k)}^{\mathrm{te}}\}}.
   \label{eq-dual-step-function}
 \end{equation}
-The function $\varphi$ below is the multiplier for the input marginal equality. Together, $\varphi$ and $\eta_{\lambda,\mu}$ bound the failure indicator at every input--residual pair.
+The function $\varphi$ below is the multiplier for the input marginal equality. Together, $\varphi$ and $\eta_{\bm\lambda,\bm\mu}$ bound the failure indicator at every input--residual pair.
 
 \begin{lemma}[Lagrangian dual problems and weak duality]
   \label{lem-weak-duality}
@@ -360,11 +360,11 @@ The function $\varphi$ below is the multiplier for the input marginal equality. 
   \begin{equation}
     \begin{aligned}
       \overline d_\theta
-      :=\inf_{\lambda,\mu\ge0,\ \varphi}\quad&
+      :=\inf_{\bm\lambda,\bm\mu\ge\bm 0,\ \varphi}\quad&
         \mathbb E_{\mathbb P}[\varphi(\bm X)]
-        +\lambda^\top u-\mu^\top l\\
+        +\bm\lambda^\top\bm u-\bm\mu^\top\bm l\\
       \text{s.t.}\quad&
-        \varphi(\bm x)+\eta_{\lambda,\mu}(\xi)
+        \varphi(\bm x)+\eta_{\bm\lambda,\bm\mu}(\xi)
         \ge\mathbf1_{\{\xi\le -\hat g(\bm x)\}},
         \quad\forall(\bm x,\xi)\in\mathcal X\times\Xi,
     \end{aligned}
@@ -374,11 +374,11 @@ The function $\varphi$ below is the multiplier for the input marginal equality. 
   \begin{equation}
     \begin{aligned}
       \underline d_\theta
-      :=\sup_{\lambda,\mu\ge0,\ \varphi}\quad&
+      :=\sup_{\bm\lambda,\bm\mu\ge\bm 0,\ \varphi}\quad&
         \mathbb E_{\mathbb P}[\varphi(\bm X)]
-        -\lambda^\top u+\mu^\top l\\
+        -\bm\lambda^\top\bm u+\bm\mu^\top\bm l\\
       \text{s.t.}\quad&
-        \varphi(\bm x)-\eta_{\lambda,\mu}(\xi)
+        \varphi(\bm x)-\eta_{\bm\lambda,\bm\mu}(\xi)
         \le\mathbf1_{\{\xi\le -\hat g(\bm x)\}},
         \quad\forall(\bm x,\xi)\in\mathcal X\times\Xi,
     \end{aligned}
@@ -403,10 +403,10 @@ The function $\varphi$ below is the multiplier for the input marginal equality. 
     \begin{aligned}
       \mathcal L^+
       ={}&\mathbb E_{\mathbb P}[\varphi(\bm X)]
-        +\lambda^\top u-\mu^\top l\\
+        +\bm\lambda^\top\bm u-\bm\mu^\top\bm l\\
         &+\int_{\mathcal X\times\Xi}
         [\mathbf1_{\{\xi\le -\hat g(\bm x)\}}
-        -\varphi(\bm x)-\eta_{\lambda,\mu}(\xi)]\,\mathrm d\Pi.
+        -\varphi(\bm x)-\eta_{\bm\lambda,\bm\mu}(\xi)]\,\mathrm d\Pi.
     \end{aligned}
     \label{eq-upper-lagrangian}
   \end{equation}
@@ -417,10 +417,10 @@ The function $\varphi$ below is the multiplier for the input marginal equality. 
     \begin{aligned}
       \mathcal L^-
       ={}&\mathbb E_{\mathbb P}[\varphi(\bm X)]
-        -\lambda^\top u+\mu^\top l\\
+        -\bm\lambda^\top\bm u+\bm\mu^\top\bm l\\
         &+\int_{\mathcal X\times\Xi}
         [\mathbf1_{\{\xi\le -\hat g(\bm x)\}}
-        -\varphi(\bm x)+\eta_{\lambda,\mu}(\xi)]\,\mathrm d\Pi.
+        -\varphi(\bm x)+\eta_{\bm\lambda,\bm\mu}(\xi)]\,\mathrm d\Pi.
     \end{aligned}
     \label{eq-lower-lagrangian}
   \end{equation}
@@ -468,8 +468,8 @@ This notation makes the finite duals ordinary linear programs with explicit prob
   \begin{equation}
     \begin{aligned}
       \overline d_\theta
-      =\min_{\lambda,\mu\ge0,\ z\in\mathbb R^{K+1}}\quad&
-        \lambda^\top u-\mu^\top l+\sum_{i=0}^K w_i z_i\\
+      =\min_{\bm\lambda,\bm\mu\ge\bm 0,\ \bm z\in\mathbb R^{K+1}}\quad&
+        \bm\lambda^\top\bm u-\bm\mu^\top\bm l+\sum_{i=0}^K w_i z_i\\
       \text{s.t.}\quad&
         z_i+\eta_j\ge\overline h_{ij},
         \qquad i=0,\ldots,K,\quad j=1,\ldots,J,
@@ -480,8 +480,8 @@ This notation makes the finite duals ordinary linear programs with explicit prob
   \begin{equation}
     \begin{aligned}
       \underline d_\theta
-      =\max_{\lambda,\mu\ge0,\ z\in\mathbb R^{K+1}}\quad&
-        -\lambda^\top u+\mu^\top l+\sum_{i=0}^K w_i z_i\\
+      =\max_{\bm\lambda,\bm\mu\ge\bm 0,\ \bm z\in\mathbb R^{K+1}}\quad&
+        -\bm\lambda^\top\bm u+\bm\mu^\top\bm l+\sum_{i=0}^K w_i z_i\\
       \text{s.t.}\quad&
         z_i-\eta_j\le\underline h_{ij},
         \qquad i=0,\ldots,K,\quad j=1,\ldots,J.
@@ -497,10 +497,10 @@ This notation makes the finite duals ordinary linear programs with explicit prob
   Each finite LP has $3K+1$ scalar variables and $(K+1)(2K+1)$ pairwise inequalities, in addition to multiplier nonnegativity. The finite LP optima and the corresponding measure primal and dual optima are attained.
 \end{theorem}
 \begin{proof}
-  Every feasible joint law induces masses $p_{ij}:=\Pi(A_i\times C_j)$ in
+  Every feasible joint law induces a probability matrix $\bm p=(p_{ij})$, with $p_{ij}:=\Pi(A_i\times C_j)$, in
   \begin{equation}
     \mathcal A_\theta:=
-    \left\{p\in\mathbb R_+^{(K+1)\times J}:
+    \left\{\bm p\in\mathbb R_+^{(K+1)\times J}:
     \begin{array}{ll}
       \displaystyle\sum_{j=1}^Jp_{ij}=w_i,
         &i=0,\ldots,K,\\[1mm]
@@ -513,7 +513,7 @@ This notation makes the finite duals ordinary linear programs with explicit prob
   \end{equation}
   By \eqref{eq-cell-costs}, maximizing $\sum_{i,j}\overline h_{ij}p_{ij}$ over this polytope bounds the upper measure problem from above, while minimizing $\sum_{i,j}\underline h_{ij}p_{ij}$ bounds the lower problem from below.
 
-  For the reverse inequalities, fix $p\in\mathcal A_\theta$. Draw $\bm x$ from $\mathbb P$ and, on $A_i$ with $w_i>0$, select a provisional residual category $j$ with probability $p_{ij}/w_i$. For $j\ne2i+1$, choose a fixed representative of $C_j$; both coefficients in \eqref{eq-cell-costs} then equal the actual failure indicator.
+  For the reverse inequalities, fix $\bm p\in\mathcal A_\theta$. Draw $\bm x$ from $\mathbb P$ and, on $A_i$ with $w_i>0$, select a provisional residual category $j$ with probability $p_{ij}/w_i$. For $j\ne2i+1$, choose a fixed representative of $C_j$; both coefficients in \eqref{eq-cell-costs} then equal the actual failure indicator.
 
   In the overlapping category, choose $\xi=-\hat g(\bm x)$ for the upper problem. This attains failure and remains in $C_{2i+1}$ whenever $-\hat g(\bm x)>\xi_{(i)}^{\mathrm{te}}$. If $-\hat g(\bm x)=\xi_{(i)}^{\mathrm{te}}$, it moves the assigned mass to the left endpoint. For $i\ge1$, any $s\in(\xi_{(i)}^{\mathrm{te}},\xi_{(i+1)}^{\mathrm{te}})$, and every observed threshold $\xi_{(k)}^{\mathrm{te}}$,
   \begin{equation}
@@ -527,10 +527,10 @@ This notation makes the finite duals ordinary linear programs with explicit prob
   $\xi=\left(\xi_{(i+1)}^{\mathrm{te}}-\hat g(\bm x)\right)/2$ in the overlapping category when $i<K$, and $\xi=-\hat g(\bm x)+1$ when $i=K$. These choices remain in $C_{2i+1}$ and exceed $-\hat g(\bm x)$, attaining safety even at $-\hat g(\bm x)=\xi_{(i)}^{\mathrm{te}}$. All selections are measurable and preserve the input marginal. A group with $w_i=0$ has a zero row and contributes no mass. We have therefore proved
   \begin{equation}
     \overline p_{\hat f}
-    =\max_{p\in\mathcal A_\theta}\sum_{i=0}^K\sum_{j=1}^J
+    =\max_{\bm p\in\mathcal A_\theta}\sum_{i=0}^K\sum_{j=1}^J
       \overline h_{ij}p_{ij},\qquad
     \underline p_{\hat f}
-    =\min_{p\in\mathcal A_\theta}\sum_{i=0}^K\sum_{j=1}^J
+    =\min_{\bm p\in\mathcal A_\theta}\sum_{i=0}^K\sum_{j=1}^J
       \underline h_{ij}p_{ij}.
     \label{eq-finite-primal-values}
   \end{equation}
@@ -556,7 +556,7 @@ The theorem establishes an exact finite reformulation. The nested residual categ
   \end{align}
 \end{corollary}
 \begin{proof}
-  Fix nonnegative column totals $v_j$ summing to one, and let $V_s:=\sum_{j=1}^s v_j$. Write $\Gamma(w,v)$ for the transportation matrices with row sums $w_i$ and column sums $v_j$. For the upper problem, maximizing mass on pairs $j\le2i+1$ is a maximum-flow problem: connect the source to row $i$ with capacity $w_i$, each row to its permitted columns with capacity two, and column $j$ to the sink with capacity $v_j$. A partial flow can be completed to a transportation matrix using the remaining row and column masses, so the maximum flow equals the upper transport optimum.
+  Fix a nonnegative column-sum vector $\bm v=(v_1,\ldots,v_J)^\top$ with $\sum_{j=1}^J v_j=1$, and let $V_s:=\sum_{j=1}^s v_j$. Write $\Gamma(\bm w,\bm v)$ for the transportation matrices with row-sum vector $\bm w=(w_0,\ldots,w_K)^\top$ and column-sum vector $\bm v$. For the upper problem, maximizing mass on pairs $j\le2i+1$ is a maximum-flow problem: connect the source to row $i$ with capacity $w_i$, each row to its permitted columns with capacity two, and column $j$ to the sink with capacity $v_j$. A partial flow can be completed to a transportation matrix using the remaining row and column masses, so the maximum flow equals the upper transport optimum.
 
   There is a cut of capacity one. Hence a minimum cut crosses no middle edge of capacity two. The row neighborhoods are nested prefixes. If the largest source-side row is $m<K$, adding all smaller rows and retaining exactly the neighboring columns cannot increase the cut capacity. Writing $k=m+1$, the resulting cut has capacity
   \[
@@ -565,7 +565,7 @@ The theorem establishes an exact finite reformulation. The nested residual categ
   \]
   The empty row set and the case $m=K$ give capacity one. By the max-flow/min-cut theorem \citep{F.F56},
   \begin{equation}
-    \max_{p\in\Gamma(w,v)}
+    \max_{\bm p\in\Gamma(\bm w,\bm v)}
       \sum_{i,j}\overline h_{ij}p_{ij}
     =\min\left\{1,\min_k[H\left(-\xi_{(k)}^{\mathrm{te}}\right)+V_{2k-1}]\right\}.
     \label{eq-fixed-column-upper}
@@ -578,7 +578,7 @@ The theorem establishes an exact finite reformulation. The nested residual categ
   \]
   The empty row set and the case $k=0$ give capacity one. The same flow argument yields
   \begin{equation}
-    \min_{p\in\Gamma(w,v)}
+    \min_{\bm p\in\Gamma(\bm w,\bm v)}
       \sum_{i,j}\underline h_{ij}p_{ij}
     =\max\left\{0,\max_k[H\left(-\xi_{(k)}^{\mathrm{te}}\right)+V_{2k}-1]\right\}.
     \label{eq-fixed-column-lower}
@@ -607,15 +607,15 @@ The theorem establishes an exact finite reformulation. The nested residual categ
 
 The closed forms also identify optimal solutions of the full duals. For a rank $k$, the upper choice
 \[
-  \lambda=e_k,\qquad \mu=0,\qquad
+  \bm\lambda=\bm e_k,\qquad \bm\mu=\bm 0,\qquad
   \varphi(\bm x)=\mathbf1_{\{\hat g(\bm x)\le-\xi_{(k)}^{\mathrm{te}}\}}
 \]
 is feasible by \eqref{eq-upper-threshold-certificate} and has objective $u_k+H\left(-\xi_{(k)}^{\mathrm{te}}\right)$. The lower choice
 \[
-  \lambda=0,\qquad \mu=e_k,\qquad
+  \bm\lambda=\bm 0,\qquad \bm\mu=\bm e_k,\qquad
   \varphi(\bm x)=\mathbf1_{\{\hat g(\bm x)\le-\xi_{(k)}^{\mathrm{te}}\}}-1
 \]
-is feasible by \eqref{eq-lower-threshold-certificate} and has objective $l_k+H\left(-\xi_{(k)}^{\mathrm{te}}\right)-1$. Here $e_k$ is the $k$th unit vector. The constant choices $\varphi=1$ and $\varphi=0$, with zero rank multipliers, give the outer candidates one and zero.
+is feasible by \eqref{eq-lower-threshold-certificate} and has objective $l_k+H\left(-\xi_{(k)}^{\mathrm{te}}\right)-1$. Here $\bm e_k$ is the $k$th unit vector. The constant choices $\varphi=1$ and $\varphi=0$, with zero rank multipliers, give the outer candidates one and zero.
 
 Selecting a minimizing upper candidate or a maximizing lower candidate therefore gives an optimal full dual solution. In particular, an optimum needs at most one upper rank multiplier for the upper bound and at most one lower rank multiplier for the lower bound. Both families of constraints still define the feasible residual laws; their ordering allows these sparse optimal certificates. The upper bound combines residual mass below a threshold with the probability that the surrogate threshold is at least that value. The lower bound quantifies overlap that no admissible dependence structure can avoid.
 

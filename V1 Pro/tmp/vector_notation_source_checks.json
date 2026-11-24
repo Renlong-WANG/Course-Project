@@ -1,0 +1,13 @@
+{
+  "scope": "From vector definitions through the end of Section 4",
+  "vectors_use_bm": true,
+  "whole_mass_matrix_uses_bm": true,
+  "scalar_components_remain_unbolded": true,
+  "unrelated_prefix_and_suffix_unchanged": true,
+  "labels_citations_and_bibliography_unchanged": true,
+  "sample_residual_and_ambiguity_set_notation_preserved": true,
+  "build_passed": true,
+  "pdf_pages": 14,
+  "rendered_pages_checked": "8-13",
+  "new_layout_warnings": false
+}
