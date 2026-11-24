@@ -239,13 +239,11 @@ For each empirical probability level $q_j:=j/N^{\mathrm{te}}$, define the scalar
   \label{eq-dw-rank-acceptance}
 \end{equation}
 Let $\xi_{(1)}^{\mathrm{te}}<\cdots<\xi_{(K)}^{\mathrm{te}}$ denote the distinct ordered test residual values, with $k$ indexing distinct values, and set
-\begin{equation}
-  \begin{aligned}
-    c_0&:=0,&
-    c_k&:=\sum_{j=1}^{N^{\mathrm{te}}}\mathbf1_{\{\xi_j^{\mathrm{te}}\le\xi_{(k)}^{\mathrm{te}}\}},\\
-    l_k&:=\alpha_{c_k}(\theta),&
-    u_k&:=\beta_{c_{k-1}}(\theta),\qquad k=1,\ldots,K.
-  \end{aligned}
+\begin{equation} 
+    c_0 :=0, \quad
+    c_k :=\sum_{j=1}^{N^{\mathrm{te}}}\mathbf1_{\{\xi_j^{\mathrm{te}}\le\xi_{(k)}^{\mathrm{te}}\}}, \quad
+    l_k :=\alpha_{c_k}(\theta),  \quad
+    u_k :=\beta_{c_{k-1}}(\theta),\qquad k=1,\ldots,K. 
   \label{eq-dw-counts-and-levels}
 \end{equation}
 The cumulative counts retain all multiplicities, so $c_K=N^{\mathrm{te}}$ even when test residuals coincide.
@@ -290,12 +288,7 @@ The cumulative counts retain all multiplicities, so $c_K=N^{\mathrm{te}}$ even w
 
 The upper rank constraint limits residual mass strictly below $\xi_{(k)}^{\mathrm{te}}$, whereas the lower constraint guarantees mass at or below $\xi_{(k)}^{\mathrm{te}}$. Distinguishing these two half-lines retains possible atoms at the observed residuals. The scalar endpoints can be computed by one-dimensional bisection; the remaining constraints are linear in the residual law.
 
-To interpret the resulting probability bounds, define the CDF of the surrogate response by
-\begin{equation}
-  H(t):=\mathbb P\left\{\hat g(\bm X)\le t\right\},\qquad t\in\mathbb R.
-  \label{eq-surrogate-response-cdf}
-\end{equation}
-For every rank $k$, the failure indicator satisfies
+To interpret the resulting probability bounds, define the CDF of the surrogate response by $H(t):=\mathbb P\left\{\hat g(\bm X)\le t\right\}$ for all $t\in\mathbb R$. For every rank $k$, the failure indicator satisfies 
 \begin{align}
   \mathbf1_{\{\xi\le -\hat g(\bm x)\}}
   &\le
@@ -323,9 +316,9 @@ Let $\mathcal M_+(\mathcal X\times\Xi)$ denote the finite nonnegative Borel meas
       \mathbf1_{\{\xi\le -\hat g(\bm x)\}}\,\Pi(\mathrm d\bm x,\mathrm d\xi)\\
     \text{s.t.}\quad&
       \int_{\mathcal X\times\Xi}
-      \mathbf1_A(\bm x)\,\Pi(\mathrm d\bm x,\mathrm d\xi)
-      =\mathbb P(A),
-      &&\forall A\in\mathcal B(\mathcal X),\\
+      \mathbf1_\mathcal{A}(\bm x)\,\Pi(\mathrm d\bm x,\mathrm d\xi)
+      =\mathbb P(\bm{X} \in \mathcal{A}),
+      &&\forall \mathcal{A}\in\mathcal B(\mathcal X),\\
     &\int_{\mathcal X\times\Xi}
       \mathbf1_{\{\xi<\xi_{(k)}^{\mathrm{te}}\}}\,\Pi(\mathrm d\bm x,\mathrm d\xi)\le u_k,
       &&k=1,\ldots,K,\\
