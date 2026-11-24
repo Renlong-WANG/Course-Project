@@ -1,0 +1,20 @@
+{
+  "prefix_before_lemma_unchanged": true,
+  "multiplier_roles_in_lemma": true,
+  "functional_variable_eliminated": true,
+  "bounded_Borel_envelopes_proved": true,
+  "step_function_defined_after_proof": true,
+  "lower_constraint_multiplier_gamma_consistent": true,
+  "strong_duality_link_updated": true,
+  "theta_zero_retained": true,
+  "no_appendix": true,
+  "no_missing_or_duplicate_labels": true,
+  "active_labels": 63,
+  "original_proof_archive_bytes": 4010,
+  "original_proof_archive_sha256": "282f64583e34b130de1ff6bbc1ede92a86caf31f0efc02a2bf9354d5d3adf1f6",
+  "build_passed": true,
+  "pdf_pages": 15,
+  "rendered_pages_checked": "8-15",
+  "new_layout_warnings": false,
+  "numerical_check_report": "tmp/eliminated_dual_verification.json"
+}

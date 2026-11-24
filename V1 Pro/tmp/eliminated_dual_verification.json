@@ -1,0 +1,15 @@
+{
+  "scenarios": 16,
+  "linear_program_solves": 64,
+  "fixed_multiplier_envelope_and_curvature_checks": 64,
+  "max_primal_full_dual_reduced_dual_difference": 1.6653345369377348e-16,
+  "covered_cases": [
+    "theta=0",
+    "positive theta",
+    "tied residuals",
+    "threshold equality",
+    "atomic input law",
+    "zero-probability input points",
+    "finite Borel residual support"
+  ]
+}
