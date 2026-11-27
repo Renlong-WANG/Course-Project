@@ -1,0 +1,62 @@
+{
+  "backup": "E:\\1.\u79d1\u7814\u4e0e\u7533\u535a\\5. course\\CEVE596\\Project\\1. Manuscript\\V1 Pro\\backups\\concise_result_transitions_20261126_001951",
+  "edited_passages": 21,
+  "edited_prose_words_before": 661,
+  "edited_prose_words_after": 358,
+  "edited_prose_reduction_percent": 45.8,
+  "formal_statements_unchanged": true,
+  "proofs_unchanged": true,
+  "all_displayed_formulas_unchanged": true,
+  "figures_and_captions_unchanged": true,
+  "preamble_and_frontmatter_unchanged": true,
+  "previous_body_commented_exactly": true,
+  "existing_comment_archives_preserved": true,
+  "citation_keys_unchanged": true,
+  "bibliography_unchanged": true,
+  "label_order_unchanged": true,
+  "duplicate_labels": [],
+  "undefined_references": [],
+  "manual_sized_delimiters": [],
+  "pdf_pages": 17,
+  "all_result_leads_share_page_with_heading": true,
+  "result_pages": [
+    {
+      "heading": "Definition 1",
+      "page": 4
+    },
+    {
+      "heading": "Proposition 1",
+      "page": 4
+    },
+    {
+      "heading": "Theorem 1",
+      "page": 5
+    },
+    {
+      "heading": "Corollary 1",
+      "page": 5
+    },
+    {
+      "heading": "Proposition 2",
+      "page": 7
+    },
+    {
+      "heading": "Lemma 1",
+      "page": 9
+    },
+    {
+      "heading": "Theorem 2",
+      "page": 11
+    },
+    {
+      "heading": "Corollary 2",
+      "page": 13
+    },
+    {
+      "heading": "Remark 1",
+      "page": 16
+    }
+  ],
+  "numbered_equations": 33,
+  "log_has_unresolved_references": false
+}

@@ -1,0 +1,107 @@
+[
+  {
+    "purpose": "definition lead",
+    "before": "The following definition uses the corrected discrepancy to constrain the residual CDF simultaneously over all thresholds.",
+    "after": "We use this discrepancy to define the residual ambiguity set."
+  },
+  {
+    "purpose": "definition interpretation",
+    "before": "In Definition~\\ref{definition-dw-ambiguity-set}, $\\theta$ controls the allowed corrected likelihood discrepancy. The induced CDF tolerances vary across probability levels and can be asymmetric about the empirical CDF. Calibrating $\\theta$ assigns a confidence level to this simultaneous band.",
+    "after": "The induced CDF tolerances vary by probability level and can be asymmetric about the empirical CDF. Calibration links $\\theta$ to a confidence level."
+  },
+  {
+    "purpose": "calibration lead",
+    "before": "The following proposition calibrates $\\theta$ using the uniform reference statistic and establishes conditional coverage of the true residual law.",
+    "after": "We choose $\\theta$ from a quantile of this statistic."
+  },
+  {
+    "purpose": "calibration interpretation",
+    "before": "Proposition~\\ref{proposition-01} applies to arbitrary residual distributions, including laws with atoms or infinite moments. For fixed $\\phi$ and $\\psi$, the reference law depends only on $N^{\\mathrm{te}}$, so $\\theta_{N^{\\mathrm{te}}}(\\delta)$ can be calibrated offline. \\citet{L.J23} describe finite-sample evaluation using uniform order-statistic boundary probabilities. A conservative upper bound on the quantile in \\eqref{eq-dw-calibrated-threshold} preserves \\eqref{eq-cdf-coverage}.",
+    "after": "The guarantee allows atoms and infinite moments. For fixed $\\phi$ and $\\psi$, the reference law depends only on $N^{\\mathrm{te}}$, so thresholds can be precomputed. \\citet{L.J23} give finite-sample evaluation through uniform order-statistic boundary probabilities. A conservative quantile upper bound preserves \\eqref{eq-cdf-coverage}."
+  },
+  {
+    "purpose": "failure-coverage lead",
+    "before": "The following theorem transfers the residual-law coverage in Proposition~\\ref{proposition-01} to the upper and lower failure probability bounds.",
+    "after": "Residual-law coverage also controls the failure probability interval."
+  },
+  {
+    "purpose": "failure-coverage interpretation",
+    "before": "Theorem~\\ref{theorem-01} uses the same residual-coverage event for both endpoints, so $1-\\delta$ is the confidence level for the entire interval. For fixed test data, $0\\le\\theta_1\\le\\theta_2$ implies $\\mathcal Q^{\\mathrm{DW}}(\\theta_1)\\subseteq\\mathcal Q^{\\mathrm{DW}}(\\theta_2)$, making the lower bound nonincreasing and the upper bound nondecreasing in $\\theta$. A higher prescribed confidence level requires a nondecreasing calibrated threshold and therefore gives a wider or unchanged interval.",
+    "after": "For fixed test data, $0\\le\\theta_1\\le\\theta_2$ implies $\\mathcal Q^{\\mathrm{DW}}(\\theta_1)\\subseteq\\mathcal Q^{\\mathrm{DW}}(\\theta_2)$. The lower bound is nonincreasing and the upper bound nondecreasing in $\\theta$, so higher confidence gives a wider or unchanged interval."
+  },
+  {
+    "purpose": "threshold-coverage lead",
+    "before": "The following corollary extends this common coverage event to all response thresholds using the same calibrated ambiguity set.",
+    "after": "The same coverage event can be used across response thresholds."
+  },
+  {
+    "purpose": "threshold-coverage interpretation",
+    "before": "Corollary~\\ref{cor-simultaneous-threshold-bounds} gives the entire response-threshold curve from one residual calibration, including thresholds selected after observing the test data, with a common confidence level across $c$. Complementing the endpoints also bounds the strict exceedance probabilities $\\Pr \\left\\{g(\\bm X)>c\\right\\}$ simultaneously. Here $g$, $\\hat g$, and the input law $\\mathbb P$ remain fixed. Fragility curves formed by conditioning on different hazard intensities require coverage for the corresponding conditional residual laws.",
+    "after": "Thresholds may therefore be selected after observing the test data. Complementing the endpoints gives simultaneous bounds on $\\Pr \\left\\{g(\\bm X)>c\\right\\}$. The functions $g$, $\\hat g$, and the law $\\mathbb P$ remain fixed; fragility curves conditioned on hazard intensity require coverage for the corresponding conditional residual laws."
+  },
+  {
+    "purpose": "section 4 roadmap",
+    "before": "Throughout this section, the training data, the test residuals, and $\\theta\\ge0$ are fixed. We use the observed residuals to partition both the residual and input spaces. These partitions express the DW restrictions as cumulative cell probabilities and reduce the Lagrangian duals to finite linear programs. A joint-distribution construction establishes exact finite primal representations, after which LP duality and the ordering of the cells yield strong duality and closed-form bounds. The main development takes $\\Xi=\\mathbb R$; Remark~\\ref{rem-interval-support} treats known interval support.",
+    "after": "Throughout this section, the training data, test residuals, and $\\theta\\ge0$ are fixed. Input and residual cell probabilities give finite primal and dual problems and closed-form bounds. The main results use $\\Xi=\\mathbb R$; Remark~\\ref{rem-interval-support} treats known interval support."
+  },
+  {
+    "purpose": "finite-representation lead",
+    "before": "The following proposition expresses the DW ambiguity set through linear constraints on cumulative residual cell probabilities.",
+    "after": "The DW band can now be expressed through cell masses."
+  },
+  {
+    "purpose": "finite-representation interpretation",
+    "before": "Proposition~\\ref{prop-finite-rank-constraints} replaces the CDF constraint over all thresholds by $2K$ linear inequalities on residual cell probabilities. The distribution within each cell remains free, and the scalar interval endpoints can be computed by one-dimensional bisection.",
+    "after": "Within each cell, the residual distribution remains free. The scalar endpoints can be computed by one-dimensional bisection."
+  },
+  {
+    "purpose": "cell-objective transition",
+    "before": "The row equalities in $\\mathcal C_\\theta$ retain the input cell probabilities, and the cumulative column inequalities impose the DW band. On each product cell, the failure indicator satisfies",
+    "after": "To bound the failure objective, compare the indicator on each product cell:"
+  },
+  {
+    "purpose": "cell-objective interpretation",
+    "before": "Residual cells with $j\\le2i$ always cause failure for inputs in $\\mathcal X_i$, and those with $j\\ge2i+2$ are always safe. Only the overlapping interval $\\Xi_{2i+1}$ has different upper and lower coefficients. Figure~\\ref{fig-joint-partition} illustrates the resulting joint cell structure and the classification of product cells for $K=3$. Thus the cell matrix records the rank constraints exactly, while the failure objective requires the constructions below.",
+    "after": "For inputs in $\\mathcal X_i$, the failure status can vary only within $\\Xi_{2i+1}$. The other cells are uniformly failing or safe, as illustrated in Figure~\\ref{fig-joint-partition} for $K=3$."
+  },
+  {
+    "purpose": "weak-duality lead",
+    "before": "The following lemma reduces the Lagrangian duals to $2K$ nonnegative rank multipliers and establishes weak duality.",
+    "after": "Lagrangian duality provides finite-dimensional certificates for these bounds."
+  },
+  {
+    "purpose": "weak-duality interpretation",
+    "before": "Lemma~\\ref{lem-weak-duality} gives certificates for the primal extrema through optimization over $2K$ nonnegative rank multipliers. Its equivalent LP forms \\eqref{eq-finite-upper-dual} and \\eqref{eq-finite-lower-dual} add $K+1$ free variables $z_i$ and $(K+1)(2K+1)$ pairwise inequalities. Each feasible dual choice supplies a bound in the corresponding direction through \\eqref{eq-weak-duality}.",
+    "after": "The reduced duals use $2K$ nonnegative multipliers. Their LP forms \\eqref{eq-finite-upper-dual} and \\eqref{eq-finite-lower-dual} introduce $K+1$ free variables $z_i$ and $(K+1)(2K+1)$ pairwise inequalities."
+  },
+  {
+    "purpose": "strong-duality lead",
+    "before": "The following theorem shows that these dual bounds are exact by constructing feasible joint laws that attain the finite primal objectives.",
+    "after": "It remains to realize the cellwise objectives by feasible joint laws."
+  },
+  {
+    "purpose": "strong-duality interpretation",
+    "before": "Theorem~\\ref{thm-finite-dual-reformulations} replaces the search over joint distributions by exact allocations of joint cell probability. The conditional residual assignments retain the full input law, and the equalities also hold with residual atoms, zero-probability input cells, and $\\theta=0$.",
+    "after": "A finite optimizer specifies the cell masses; the proof supplies their within-cell realization."
+  },
+  {
+    "purpose": "closed-form lead",
+    "before": "The following corollary uses the ordering of the cells to evaluate both extrema explicitly and identify optimal certificates with at most one nonzero rank multiplier.",
+    "after": "The ordered cells allow the extrema to be evaluated explicitly."
+  },
+  {
+    "purpose": "closed-form interpretation",
+    "before": "In Corollary~\\ref{thm-closed-form-bounds}, the upper bound combines residual mass below an observed value with the probability that the surrogate threshold reaches it. The lower bound measures the overlap required by every admissible coupling.",
+    "after": "The upper bound combines an allowed residual tail mass with the probability that the input threshold reaches the corresponding observed residual. The lower bound measures unavoidable overlap."
+  },
+  {
+    "purpose": "support lead",
+    "before": "The following remark incorporates known interval support through additional constraints at its endpoints.",
+    "after": "Verified support gives information beyond the empirical residuals."
+  },
+  {
+    "purpose": "support interpretation",
+    "before": "Remark~\\ref{rem-interval-support} separates inputs that fail for every admissible residual, $\\hat g(\\bm X)\\le-b$, from inputs that are always safe, $\\hat g(\\bm X)>-a$. In particular, $\\mathbb P\\left\\{\\hat g(\\bm X)\\le-a\\right\\}=0$ rules out failure.",
+    "after": "Inputs with $\\hat g(\\bm X)\\le-b$ must fail; those with $\\hat g(\\bm X)>-a$ are always safe. Thus $\\mathbb P\\left\\{\\hat g(\\bm X)\\le-a\\right\\}=0$ rules out failure."
+  }
+]

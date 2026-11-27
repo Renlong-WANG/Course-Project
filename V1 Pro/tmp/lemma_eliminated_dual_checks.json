@@ -1,0 +1,24 @@
+{
+  "backup": "E:\\1.\u79d1\u7814\u4e0e\u7533\u535a\\5. course\\CEVE596\\Project\\1. Manuscript\\V1 Pro\\backups\\lemma_eliminated_duals_20261125_220735",
+  "all_numbered_mathematical_expressions_preserved": true,
+  "numbered_equation_count": 33,
+  "prefix_before_lemma_unchanged": true,
+  "outside_lemma_and_certificate_reference_unchanged": true,
+  "all_prior_comment_archives_preserved": true,
+  "original_lemma_commented_exactly": true,
+  "duplicate_labels": [],
+  "undefined_references": [],
+  "manual_sized_delimiters": [],
+  "lemma_start_line": 386,
+  "current_dual_equation_numbers": {
+    "eq-upper-measure-dual": "22",
+    "eq-lower-measure-dual": "23",
+    "eq-weak-duality": "24",
+    "eq-dual-envelope-identities": "25",
+    "eq-finite-upper-dual": "26",
+    "eq-finite-lower-dual": "27"
+  },
+  "dual_equations_renumbered_consistently": true,
+  "build_reference_warnings": [],
+  "citation_keys_unchanged": true
+}

@@ -1,0 +1,127 @@
+\begin{corollary}[Closed-form bounds and optimal certificates]
+  \label{thm-closed-form-bounds}
+  Under the conditions of Theorem~\ref{thm-finite-dual-reformulations},
+  \begin{align}
+    \overline p_{\hat f}
+      &=\min\left\{1,\min_{k=1,\ldots,K}\left[u_k+\sum_{i=k}^{K}\mathbb P(\mathcal X_i)\right]\right\},
+      \label{eq-dw-closed-upper}\\
+    \underline p_{\hat f}
+      &=\max\left\{0,\max_{k=1,\ldots,K}\left[l_k+\sum_{i=k}^{K}\mathbb P(\mathcal X_i)-1\right]\right\}.
+      \label{eq-dw-closed-lower}
+  \end{align}
+  Each dual optimum admits a certificate with at most one nonzero rank multiplier, of value one.
+\end{corollary}
+\begin{proof}
+  For a candidate residual law $\mathbb Q\in\mathcal M_1(\Xi)$, define the finite transportation set
+  \[
+    \mathcal T(\mathbb Q):=\left\{\bm\pi\in\mathbb R_+^{(K+1)\times J}:
+    \begin{array}{ll}
+      \displaystyle\sum_{j=1}^{J}\pi_{ij}=\mathbb P(\mathcal X_i),&i=0,\ldots,K,\\[1mm]
+      \displaystyle\sum_{i=0}^{K}\pi_{ij}=\mathbb Q(\Xi_j),&j=1,\ldots,J
+    \end{array}\right\}.
+  \]
+  It contains the product matrix $\pi_{ij}=\mathbb P(\mathcal X_i)\mathbb Q(\Xi_j)$. Every residual cell is nonempty, so any nonnegative column allocation with total mass one is realized by a residual law. Proposition~\ref{prop-finite-rank-constraints} consequently gives
+  \[
+    \mathcal C_\theta
+      =\bigcup_{\mathbb Q\in\mathcal Q^{\mathrm{DW}}(\theta)}\mathcal T(\mathbb Q).
+  \]
+  The parameter $\mathbb Q$ fixes only residual partition masses in this finite matrix problem. The joint-law construction in Theorem~\ref{thm-finite-dual-reformulations} preserves feasibility and the assigned objective while allowing the residual marginal to change, including endpoint transfers in the upper problem.
+
+  For fixed cell masses $\mathbb Q(\Xi_j)$, the upper problem maximizes mass on pairs $j\le2i+1$; the lower problem maximizes safe mass on pairs $j>2i$ and subtracts it from one. Both are maximum-flow problems with source-to-row capacities $\mathbb P(\mathcal X_i)$, column-to-sink capacities $\mathbb Q(\Xi_j)$, and capacity two on each permitted row-to-column edge. A transportation matrix restricts to a feasible flow. Conversely, any flow can be completed to a transportation matrix because the remaining row and column masses are nonnegative with equal totals. Thus the maximum flow equals the maximum permitted mass.
+
+  A cut of capacity one is available, so a minimum cut crosses no edge of capacity two. Its source-side columns can be taken to be exactly the neighbors of its source-side rows. Since the neighborhoods are nested, adding rows whose neighbors are already included cannot increase the capacity. Apart from empty and full row sets, upper-problem cuts reduce to rows $i<k$ and columns $j<2k$, while safe-mass cuts reduce to rows $i\ge k$ and columns $j>2k$. For $k=1,\ldots,K$, their capacities are respectively
+  \[
+    \sum_{i=k}^{K}\mathbb P(\mathcal X_i)+\sum_{j<2k}\mathbb Q(\Xi_j),
+    \qquad
+    \sum_{i=0}^{k-1}\mathbb P(\mathcal X_i)+\sum_{j>2k}\mathbb Q(\Xi_j).
+  \]
+  Empty and full row sets give capacity one. The max-flow/min-cut theorem \citep{F.F56} therefore yields
+  \begin{align*}
+    \max_{\bm\pi\in\mathcal T(\mathbb Q)}\sum_{i,j}\overline h_{ij}\pi_{ij}
+      &=\min\left\{1,\min_k\left[\sum_{i=k}^{K}\mathbb P(\mathcal X_i)
+        +\sum_{j<2k}\mathbb Q(\Xi_j)\right]\right\},\\
+    \min_{\bm\pi\in\mathcal T(\mathbb Q)}\sum_{i,j}\underline h_{ij}\pi_{ij}
+      &=\max\left\{0,\max_k\left[\sum_{i=k}^{K}\mathbb P(\mathcal X_i)
+        +\sum_{j\le2k}\mathbb Q(\Xi_j)-1\right]\right\}.
+  \end{align*}
+
+  These values are nondecreasing in the respective open and closed cumulative residual probabilities. The rank constraints bound the former from above by $u_k$ and the latter from below by $l_k$. To attain all relevant limits simultaneously, choose laws $\mathbb Q^+$ and $\mathbb Q^-$ with cell probabilities
+  \begin{align*}
+    &\mathbb Q^+(\Xi_1):=u_1,\quad
+      \mathbb Q^+(\Xi_{2k}):=u_{k+1}-u_k,\quad
+      \mathbb Q^+(\Xi_{2k+1}):=0,\\
+    &\mathbb Q^-(\Xi_{2k-1}):=0,\quad
+      \mathbb Q^-(\Xi_{2k}):=l_k-l_{k-1},\quad
+      \mathbb Q^-(\Xi_J):=1-l_K,
+      \qquad k=1,\ldots,K.
+  \end{align*}
+  By Proposition~\ref{prop-finite-rank-constraints}, the prescribed masses are nonnegative and sum to one. Choosing a representative in each residual cell realizes both laws. Their cumulative probabilities satisfy
+  \begin{align*}
+    &\sum_{j<2k}\mathbb Q^+(\Xi_j)=u_k,
+      \qquad \sum_{j\le2k}\mathbb Q^+(\Xi_j)=u_{k+1}\ge l_k,\\
+    &\sum_{j\le2k}\mathbb Q^-(\Xi_j)=l_k,
+      \qquad \sum_{j<2k}\mathbb Q^-(\Xi_j)=l_{k-1}\le u_k.
+  \end{align*}
+  Both laws therefore belong to $\mathcal Q^{\mathrm{DW}}(\theta)$. The union representation of $\mathcal C_\theta$ and \eqref{eq-finite-primal-values} show that these allocations attain the upper and lower bounds in \eqref{eq-dw-closed-upper} and \eqref{eq-dw-closed-lower}. Zero masses and coincident cumulative limits are allowed, including at $\theta=0$.
+
+  Finally, let $\bm e_k$ be the $k$th unit vector. Upper and lower dual certificates are respectively
+  \begin{align*}
+    &\bm\lambda=\bm e_k,\qquad\bm\gamma=\bm0,\qquad
+      z_i=\mathbf1_{\{i\ge k\}},\\
+    &\bm\lambda=\bm0,\qquad\bm\gamma=\bm e_k,\qquad
+      z_i=\mathbf1_{\{i\ge k\}}-1.
+  \end{align*}
+  Their feasibility follows from
+  \[
+    \mathbf1_{\{i\ge k\}}+\mathbf1_{\{j<2k\}}\ge\overline h_{ij},
+    \qquad
+    \mathbf1_{\{i\ge k\}}-1+\mathbf1_{\{j\le2k\}}\le\underline h_{ij}.
+  \]
+  Their objectives are $u_k+\sum_{i=k}^{K}\mathbb P(\mathcal X_i)$ and $l_k+\sum_{i=k}^{K}\mathbb P(\mathcal X_i)-1$, the inner candidates in the closed-form expressions. Zero rank multipliers with $z_i=1$ or $z_i=0$ supply the outer candidates. Selecting the best candidate gives an optimal full dual solution, whose functional marginal multiplier follows from \eqref{eq-dual-envelope-identities}. The inclusion of $i=k$ in the tail sum retains inputs whose failure threshold equals the observed residual.
+\end{proof}
+
+For the response-threshold curves in Corollary~\ref{cor-simultaneous-threshold-bounds}, apply the same construction to $g-c$ and $\hat g-c$. Every residual, rank count, and endpoint $l_k,u_k$ is unchanged. The input partition now depends on $c$, and its cumulative probability at rank $k$ is $\mathbb P\left\{\hat g(\bm X)\le c-\xi_{(k)}^{\mathrm{te}}\right\}$. Thus Corollary~\ref{thm-closed-form-bounds} gives
+\begin{align}
+  \overline p_{\hat f}(c)
+    &=\min\left\{1,\min_{k=1,\ldots,K}\left[u_k
+      +\mathbb P\left\{\hat g(\bm X)\le c-\xi_{(k)}^{\mathrm{te}}\right\}\right]\right\},
+    \label{eq-threshold-closed-upper}\\
+  \underline p_{\hat f}(c)
+    &=\max\left\{0,\max_{k=1,\ldots,K}\left[l_k
+      +\mathbb P\left\{\hat g(\bm X)\le c-\xi_{(k)}^{\mathrm{te}}\right\}-1\right]\right\}.
+    \label{eq-threshold-closed-lower}
+\end{align}
+These identities hold for every $c\in\mathbb R$ and $\theta\ge0$, including $\theta=0$. When $\theta\ge\theta_{N^{\mathrm{te}}}(\delta)$, their coverage is simultaneous by \eqref{eq-threshold-curve-coverage}. An extremizing coupling may depend on $c$; the common feasible true joint law supplies the simultaneous guarantee.
+
+The upper bound combines residual mass below an observed value with the probability that the surrogate threshold reaches it. The lower bound measures the overlap required by every admissible coupling. For $p_{\mathrm{tar}}\in(0,1)$, the upper curve satisfies $\overline p_{\hat f}(c)\le p_{\mathrm{tar}}$ exactly when some rank satisfies
+\[
+  u_k+\mathbb P\left\{\hat g(\bm X)\le c-\xi_{(k)}^{\mathrm{te}}\right\}\le p_{\mathrm{tar}}.
+\]
+Both terms must therefore be small at the same residual level.
+
+With a known residual law, the coupling problem is the classical fixed-marginal sum problem studied by \citet{M82} and \citet{F.N.S87}. Here the residual law also varies within a calibrated DW band, and the open and closed rank constraints retain atoms.
+
+Dependence uncertainty can remain even with a known residual marginal. For equally likely surrogate responses $0$ and $2$ and equally likely residuals $-1$ and $1$, failure occurs exactly when the response is $0$ and the residual is $-1$. Its probability ranges from $0$ to $1/2$ over couplings, whereas independence gives $1/4$. Further marginal calibration alone does not resolve this dependence uncertainty.
+
+\begin{remark}[Known interval support]
+  \label{rem-interval-support}
+  Suppose $\Xi=[a,b]$ with $-\infty<a\le b<\infty$ and the observed residuals lie in this interval. Then
+  \begin{align*}
+    \overline p_{\hat f}
+      &=\min\left\{\mathbb P\left\{\hat g(\bm X)\le-a\right\},
+        \min_{k=1,\ldots,K}\left[u_k+\mathbb P\left\{\hat g(\bm X)\le-\xi_{(k)}^{\mathrm{te}}\right\}\right]\right\},\\
+    \underline p_{\hat f}
+      &=\max\left\{\mathbb P\left\{\hat g(\bm X)\le-b\right\},
+        \max_{k=1,\ldots,K}\left[l_k+\mathbb P\left\{\hat g(\bm X)\le-\xi_{(k)}^{\mathrm{te}}\right\}-1\right]\right\}.
+  \end{align*}
+  Represent the support restriction on $\mathbb R$ by $\mathbb Q\{\xi<a\}\le0$ and $\mathbb Q\{\xi\le b\}\ge1$, and add $a,b$ to the ordered threshold list. At a newly added $a$, use upper and lower bounds zero; at a newly added $b$, use upper and lower bounds one. At coincident observed thresholds, tighten only the upper bound at $a$ and the lower bound at $b$. The enlarged sequences satisfy the compatibility conditions in Proposition~\ref{prop-finite-rank-constraints}, so the same finite-aggregation and ordered-cut arguments apply. The effective additional upper candidate is $\mathbb P\left\{\hat g(\bm X)\le-a\right\}$, and the effective additional lower candidate is $\mathbb P\left\{\hat g(\bm X)\le-b\right\}$; the other added candidates are redundant. If $a=b$, both bounds equal $\mathbb P\left\{\hat g(\bm X)\le-a\right\}$.
+
+  For the partition on $\Xi=[a,b]$, intersect the residual cells from the augmented threshold list with $\Xi$ and omit empty cells. Including the support endpoints retains their atoms and the corresponding changes in failure status. For a response threshold $c$, shift each surrogate-response threshold in the displayed event probabilities by $c$.
+\end{remark}
+
+After zero failures in $N^{\mathrm{te}}$ independent tests, the one-sided exact binomial upper limit is $1-\delta^{1/N^{\mathrm{te}}}\approx\log(1/\delta)/N^{\mathrm{te}}$ \citep{C.P34}. At $c=0$, the simple DW case $K=1$ and $\mathbb P(\mathcal X_1)=0$ gives an upper bound $\beta_0(\theta)$ determined by the simultaneous-band calibration. Verified support can exclude otherwise unobserved failures: in Remark~\ref{rem-interval-support}, $\mathbb P\left\{\hat g(\bm X)\le-a\right\}=0$ rules out failure.
+
+Evaluation requires scalar DW inversion, sorting and counting the test residuals, and computing the $K$ input event probabilities $\mathbb P\left\{\hat g(\bm X)\le c-\xi_{(k)}^{\mathrm{te}}\right\}$ at each response threshold $c$. The endpoint table depends only on $N^{\mathrm{te}}$ and $\theta$ and can be precomputed. Given this table and the input event probabilities, the two scans cost $O(K)$ at each response threshold.
+
+For $\theta\ge\theta_{N^{\mathrm{te}}}(\delta)$, the exact expressions retain the coverage in Theorem~\ref{theorem-01} and Corollary~\ref{cor-simultaneous-threshold-bounds}. Independent auxiliary simulation of $\bm X\sim\mathbb P$ can supply simultaneous upper and lower confidence bounds on the input event probabilities. Substituting these bounds in the respective upper and lower expressions preserves conservative failure probability bounds. For one fixed $c$, simultaneous bounds at its $K$ evaluation thresholds suffice. To retain coverage of the entire response-threshold curve, the auxiliary bounds must hold for the surrogate-response CDF at every real threshold. They must hold conditionally on the test data, with their error probability included in the overall confidence budget.
+

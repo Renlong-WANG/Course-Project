@@ -1,0 +1,65 @@
+{
+  "style_status": "Figure 1: added frame padding and an x-label/legend separator; all other figures unchanged.",
+  "figure_pages": {
+    "1": 4,
+    "2": 7,
+    "3": 8,
+    "4": 10
+  },
+  "restoration": {
+    "1": {
+      "restored_exactly": false,
+      "sha256": {
+        "pdf": "8005f97d8acf968cfd0550737c270d39aeb9b311c7663d704ee0e479fb3cff92",
+        "png": "48c7070b5d81075242e9d2ebbcc8f3ffccf81b1dccdc4a804865607f1b10ed08",
+        "svg": "ea225a90921ec4bc04bb4f7522f8f1feccf673f7197a4d29254cbc55f3a62734"
+      },
+      "original_sha256": {
+        "pdf": "34d63093fe8899d95e486c81c1bf6769f0e7d005ce798e89e277b40ee4751052",
+        "png": "617d9aca1335382c117c565fc510512755470a71c3b9918ee3faf177176ca2f3",
+        "svg": "392a78ff56b7cd531ef58c3b4619a00b9272137e35a6ce0f1d1762b76307a44e"
+      },
+      "new_outer_frame": {
+        "color": "#C9D2D8",
+        "source_linewidth_pt": 0.69,
+        "page_width_unchanged": true,
+        "page_height_expanded_for_padding": true,
+        "legend_separator_color": "#C9D2D8"
+      },
+      "main_plot_pixels_unchanged": true,
+      "legend_spacing_adjusted": true
+    },
+    "3": {
+      "restored_exactly": true,
+      "sha256": {
+        "pdf": "25ffb694471c91fa6ef7cb3d2a2152f84a1e9878aea1fdd10f1acfe3351eee96",
+        "png": "d286fac6dafba38da86241d57ab60236d53395dd045128f114e41b3695c070c5",
+        "svg": "4944b29b531c5b5434cbc4f87cf6411d23a64c0a1b9ca459efc98cc677965367"
+      }
+    },
+    "4": {
+      "restored_exactly": true,
+      "sha256": {
+        "pdf": "4efd573ab6ebe1d16176a7d38b642f5d3c9a562599b1d593074bffbe83c9cb79",
+        "png": "4a10d2d3afa1e475cdb612e819d257dafb3014d753f8f55afe94e7666054ff0a",
+        "svg": "80d48a2dd6ca8052612788b6f851a86795a0dec730568bccdaca0fc27861ba4b"
+      }
+    }
+  },
+  "source_backup": "backups/four_figure_typography_20261126_132535",
+  "preserved_width_ratios": [
+    0.65,
+    0.5,
+    0.6,
+    0.6
+  ],
+  "figure_2": {
+    "font_family": "Times New Roman / STIX Two Math",
+    "main_source_font_pt": 12,
+    "axis_source_font_pt": 12.8,
+    "tick_source_font_pt": 11.4,
+    "legend_source_font_pt": 10.8,
+    "legend_layout": "single row, centered",
+    "source_file": "figures/response_threshold_band_optimized/fig_response_threshold_band.tex"
+  }
+}

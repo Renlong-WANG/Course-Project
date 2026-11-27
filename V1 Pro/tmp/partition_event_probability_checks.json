@@ -1,0 +1,30 @@
+{
+  "backup": "E:\\1.\u79d1\u7814\u4e0e\u7533\u535a\\5. course\\CEVE596\\Project\\1. Manuscript\\V1 Pro\\backups\\partition_event_probabilities_20261125_205733",
+  "sections_1_to_3_unchanged": true,
+  "all_previous_comments_preserved": true,
+  "previous_section_commented_exactly": true,
+  "numbered_equation_count": 33,
+  "all_previous_equation_labels_retained": true,
+  "equation_labels_with_updated_expressions": [
+    "eq-input-cells",
+    "eq-dw-closed-upper",
+    "eq-dw-closed-lower",
+    "eq-threshold-closed-upper",
+    "eq-threshold-closed-lower"
+  ],
+  "removed_aliases_remaining": [],
+  "duplicate_labels": [],
+  "undefined_references": [],
+  "citation_keys_unchanged": true,
+  "bibliography_unchanged": true,
+  "manual_sized_delimiters": [],
+  "subsections_or_active_appendix": false,
+  "section4_start_line": 242,
+  "equation_and_theorem_numbers_unchanged": true,
+  "undefined_citations": [],
+  "prefix_and_preserved_comments_byte_checks": true,
+  "build_reference_warnings": [],
+  "unexpanded_joint_measure_differential": false,
+  "pdf_pages": 16,
+  "closed_form_start_line": 555
+}

@@ -1,0 +1,37 @@
+{
+  "figure_role": "Conceptual sampling schematic, not empirical evidence",
+  "core_message": "Training may use design or active selection; independent calibration is iid under the target input law.",
+  "archetype": "single-panel sampling schematic",
+  "geometry": "One input coordinate system with both training and calibration locations",
+  "training": "Flexible coverage plus boundary refinement",
+  "calibration": "Independent iid draws from the illustrative input law",
+  "reference_reuse": "Conceptual geometry only; original vector artwork",
+  "illustrative_law": {
+    "family": "bivariate normal",
+    "mean": [
+      -0.95,
+      0.05
+    ],
+    "covariance": [
+      [
+        0.46,
+        0.09
+      ],
+      [
+        0.09,
+        0.62
+      ]
+    ]
+  },
+  "counts": {
+    "training": 29,
+    "calibration": 90
+  },
+  "calibration_seed": 20261126,
+  "omitted_points": 0,
+  "experimental_results": false,
+  "width_inches": 5.35,
+  "height_inches": 5.45,
+  "preview_dpi": 300,
+  "export_dpi": 600
+}

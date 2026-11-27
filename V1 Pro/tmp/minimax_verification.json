@@ -1,0 +1,10 @@
+{
+  "atomic_cases": 240,
+  "transport_lps": 760,
+  "includes_threshold_equalities": true,
+  "includes_single_distinct_residual": true,
+  "includes_zero_width_rank_constraints": true,
+  "includes_coincident_support_endpoints": true,
+  "includes_singleton_support": true,
+  "maximum_absolute_error": 3.3306690738754696e-16
+}

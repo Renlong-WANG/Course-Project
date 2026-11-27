@@ -1,0 +1,804 @@
+    Failure Probability Bounds with Uncertain Surrogate Residual Distributions
+
+                                                   Renlong Wanga
+            a
+                Department of Civil and Environmental Engineering, Rice University, Houston, TX 77005, USA
+
+
+
+
+Abstract
+
+Keywords:
+
+
+
+1. Introduction
+
+2. Problem Description
+
+   Let X ∼ P be a random input taking values in X ⊆ Rn , and let g : X → R be a measurable limit-state
+function. The failure probability is defined as
+                                                                               Z
+                                                           
+                         pf := Pr{g(X) ≤ 0} = EX∼P 1{g(X)≤0} =                     1{g(x)≤0} P(dx).
+                                                                               X
+
+For fixed g, this functional is linear in P.
+   Evaluating g at an input x can be computationally expensive, particularly when each evaluation
+requires a high-fidelity simulation. A common approach is to replace g with a computationally efficient
+surrogate model. Let
+                                                                       N tr
+                                              Dtr :=       xtr     tr
+                                                       
+                                                            i , g(xi ) i=1
+
+
+denote the training dataset used to construct a measurable surrogate ĝ := ĝDtr . All model fitting
+and selection are completed using the training data before the test data introduced below are used.
+Throughout the analysis, we condition on Dtr , treat ĝ as fixed, and suppress this dependence in the
+notation.
+   Define the signed residual function
+
+                                          ξ(x) := g(x) − ĝ(x),        ∀x ∈ X .
+
+For a new input X ∼ P independent of the training data, the residual ξ ⋆ := ξ(X) has distribution Q⋆
+under the fixed surrogate ĝ. Let E ⊆ R be a known Borel set satisfying Q⋆ (E) = 1. We take E = R when
+no smaller support can be justified. For any Borel set S in a Euclidean space, write B(S) for its Borel
+
+
+   Email address: rw106@rice.edu (Renlong Wang)
+sigma-algebra, M+ (S) for the finite nonnegative Borel measures concentrated on S, and M1 (S) for the
+subset of probability measures.
+    For a candidate residual distribution Q ∈ M1 (E), let Π denote a joint distribution of (X, ξ) on X × E
+with input marginal P = ΠX and residual marginal Q = Πξ . The corresponding surrogate-based failure
+probability is
+                                                               Z
+                         pfˆ(Π) := Pr{ĝ(X) + ξ ≤ 0} =                1{ĝ(x)+ξ≤0} Π(dx, dξ).                    (1)
+                                                               X ×E
+
+For fixed ĝ, this functional is linear in Π. In particular, the true joint distribution Π⋆ satisfies pfˆ(Π⋆ ) = pf .
+    The surrogate-based failure probability depends on both the residual distribution and its dependence
+on the input. This dependence is particularly relevant for inputs whose surrogate predictions lie close to
+the failure threshold, where even small residual errors can change the failure classification. In complex
+engineering systems, however, the available information may be insufficient to specify the residual distri-
+bution reliably. We therefore construct an ambiguity set Q of plausible residual distributions intended
+to contain Q⋆ with high confidence. For a given residual ambiguity set Q, define the joint ambiguity set
+P(Q) by
+                               P(Q) := {Π ∈ M1 (X × E) : ΠX = P, Πξ ∈ Q} .
+
+The joint ambiguity set allows all dependence structures consistent with the specified marginals. The
+upper and lower failure probability bounds are
+
+                                               pfˆ := sup pfˆ(Π),                                                (2)
+                                                        Π∈P(Q)
+
+and
+                                               pfˆ :=     inf p ˆ(Π),                                            (3)
+                                                        Π∈P(Q) f
+
+respectively. If Q⋆ ∈ Q, then Π⋆ ∈ P(Q) and hence pfˆ ≤ pf ≤ pfˆ.
+    The main tasks are therefore:
+
+   1. Ambiguity set design and statistical calibration. Construct a residual ambiguity set and
+      establish its coverage guarantee under explicit sampling conditions.
+   2. Tractable reformulations. Derive exact and computationally tractable reformulations of the
+      infinite-dimensional optimization problems defining the failure probability bounds.
+
+
+3. Ambiguity Set Design
+
+    In the surrogate formulation, failure occurs when ξ ≤ −ĝ(X). The residual cumulative distribution
+function (CDF) therefore describes the marginal probability mass relevant to each failure threshold. Its
+tail accuracy matters when estimating small failure probabilities. We use the Dümbgen–Wellner (DW)
+                                                           2
+construction (Dümbgen and Wellner, 2023) to control deviations from the empirical CDF simultaneously
+over all thresholds, with tolerances that vary across probability levels.
+   We first introduce a local discrepancy that accounts for the probability level. Let q and p denote
+an empirical probability and a candidate probability, respectively. Following Berk and Jones (1979) and
+the CDF confidence band construction of Owen (1995), we compare them using the Bernoulli Kullback–
+Leibler divergence
+                                        q               1−q
+                     ϕ(q, p) := q log     + (1 − q) log     ,          ∀q ∈ [0, 1], p ∈ (0, 1),          (4)
+                                        p               1−p
+where logarithms are natural and a term with zero numerator is interpreted as zero. For q close to an
+interior p, the approximation ϕ(q, p) ≈ (q − p)2 /[2p(1 − p)] scales the deviation by the Bernoulli variance.
+Thus, the same absolute deviation receives a larger weight near the probability boundaries. The full
+divergence also covers zero and full empirical counts through ϕ(0, p) = − log(1 − p) and ϕ(1, p) = − log p.
+At the boundaries of the candidate probability, we set ϕ(0, 0) = ϕ(1, 1) = 0, ϕ(q, 0) = +∞ for q > 0, and
+ϕ(q, 1) = +∞ for q < 1.
+   To compare deviations simultaneously across probability levels, we use the additive correction of
+Dümbgen and Wellner (2023). For v ∈ (0, 1), define
+                                                e
+                                                               ω(v) := log 1 + ρ(v)2 .
+                                                                                    
+                          ρ(v) := log log             ,                                                  (5)
+                                            4v(1 − v)
+We fix the divergence parameter s = 1, corresponding to (4), and the correction parameter ν = 1 before
+sampling. The resulting correction is ψ0 (v) := ρ(v) + ω(v), with ψ0 (0) = ψ0 (1) = +∞. For q, p ∈ [0, 1],
+define its bivariate extension
+                                      ψ(q, p) :=           min              ψ0 (v).                      (6)
+                                                   v∈[min{q,p}, max{q,p}]
+
+The functions ρ and ω vanish at v = 1/2 and increase toward the probability boundaries. Taking the
+minimum over the interval between q and p makes the correction large only when both probabilities lie
+in the same tail. This correction balances fluctuations across probability scales in the simultaneous CDF
+constraint.
+   We now construct the empirical CDF from a test dataset
+                                                                    N te
+                                          Dte :=        xte     te
+                                                    
+                                                         j , g(xj ) j=1 .
+
+
+The test inputs xte           te                                                          tr         te
+                 1 , . . . , xN te are drawn independently from P and are independent of D . We fix N ≥ 1
+
+before sampling and use the test data to calibrate the residual ambiguity set. The fitted surrogate remains
+fixed during and after calibration.
+   Define the signed test residuals
+
+                           ξjte := ξ(xte       te        te
+                                      j ) = g(xj ) − ĝ(xj ),           j = 1, . . . , N te .
+                                                           3
+Conditional on Dtr , these residuals are independent and identically distributed according to Q⋆ . Their
+empirical CDF is
+                                                        N te
+                                                  1 X
+                                      Fbte (t) := te  1{ξjte ≤t} ,       ∀t ∈ R.                          (7)
+                                                 N
+                                                        j=1
+
+For Q ∈ M1 (E), write FQ (t) := Q((−∞, t]). At threshold t, q = Fbte (t) is the average of the Bernoulli
+indicators in (7), and p = FQ (t) is the candidate probability. The quantity N te ϕ(q, p) is then the
+Bernoulli log-likelihood difference between the empirical and candidate probabilities. Combining this
+local discrepancy with the multiscale correction gives N te ϕ(q, p) − ψ(q, p).
+   At the probability boundaries, the corrected discrepancy is −∞ for q = p ∈ {0, 1} and +∞ for
+p = 0 < q or p = 1 > q. These conventions extend the constraint to every residual threshold.
+
+Definition 1 (DW-based CDF ambiguity set). Given the empirical CDF Fbte and a threshold θ ≥ 0,
+define                                                                                 
+                                                h                                i
+              DW                                  te     te               te
+            Q      (θ) :=       Q ∈ M1 (E) : sup N ϕ F (t), FQ (t) − ψ F (t), FQ (t) ≤ θ .
+                                                       b                b                                 (8)
+                                                t∈R
+
+   We calibrate θ against a distribution-free reference law. Following Dümbgen and Wellner (2023), let
+V1 , . . . , VN te be independent standard uniform variables, independent of the training and test data. Their
+empirical CDF is
+                                                       N te
+                                                 1 X
+                                    GN te (u) := te  1{Vj ≤u} ,          ∀u ∈ [0, 1].                     (9)
+                                                N
+                                                       j=1
+
+Define the uniform reference statistic
+
+                                 TNUte := sup
+                                                   te                                
+                                                   N ϕ(GN te (u), u) − ψ(GN te (u), u) .                 (10)
+                                        u∈(0,1)
+
+   The next proposition uses a quantile of this reference statistic to calibrate the residual ambiguity set.
+
+Proposition 1 (Finite-sample threshold calibration). Under the sampling conditions stated above, let
+δ ∈ (0, 1) and define
+                                  θN te (δ) := inf τ ≥ 0 : Pr TNUte ≤ τ ≥ 1 − δ .
+                                                            
+                                                                                                         (11)
+
+   Then, for every θ ≥ θN te (δ), the DW-based CDF ambiguity set satisfies
+
+                                         Pr Q⋆ ∈ QDW (θ) Dtr ≥ 1 − δ.
+                                           
+                                                                                                         (12)
+
+Proof. The reference statistic is finite almost surely, and its distribution function is right-continuous.
+Hence (11) gives
+                                                Pr TNUte > θN te (δ) ≤ δ.
+                                                  
+
+
+
+                                                               4
+Conditioning on Dtr fixes ĝ and Q⋆ . Define the generalized quantile function FQ−1
+                                                                                  ⋆ (u) := inf{t ∈ R :
+
+
+FQ⋆ (t) ≥ u} for all u ∈ (0, 1). The sample FQ−1                           te
+                                               ⋆ (Vj ) for j = 1, . . . , N , has the same conditional joint law
+
+
+as the test residuals. Thus, given Dtr ,
+                                             
+                                                        d
+                                      Fbte (t)          = (GN te (FQ⋆ (t)))t∈R .
+                                                  t∈R
+
+For 0 < FQ⋆ (t) < 1, the discrepancy at Q⋆ is evaluated at a probability level included in (10). When
+FQ⋆ (t) is zero or one, the empirical CDF equals that boundary almost surely, giving discrepancy −∞. The
+supremum in (8), evaluated at Q⋆ , is therefore bounded by TNUte under this coupling. Since Q⋆ (E) = 1,
+we obtain
+                              / QDW (θN te (δ)) Dtr ≤ Pr TNUte > θN te (δ) ≤ δ.
+                        Pr Q⋆ ∈
+                                                       
+
+
+For every test sample, θ ≥ θN te (δ) implies QDW (θN te (δ)) ⊆ QDW (θ). This inclusion proves (12) for every
+such θ.
+
+   Proposition 1 shows that choosing θ as a conservative upper bound on the quantile in (11) preserves
+(12). With ϕ and ψ fixed as above, the reference distribution depends only on N te , so θN te (δ) can be
+computed offline for each prescribed confidence level 1 − δ. Dümbgen and Wellner (2023) describe finite-
+sample numerical calibration using probabilities that uniform order statistics lie within specified bounds.
+Notably, for every fixed N te ≥ 1, the proposition applies to arbitrary residual distributions, including
+laws with atoms or infinite moments.
+   The following theorem transfers the coverage guarantee of the DW-based CDF ambiguity set to
+simultaneous bounds on the failure probability under the joint model.
+
+Theorem 1 (Finite-sample failure probability bounds). Under the sampling conditions of Proposition 1,
+let δ ∈ (0, 1) and θ ≥ θN te (δ), with the calibrated threshold defined in (11). Then the bounds defined in
+(2) and (3), evaluated with Q = QDW (θ), satisfy
+                                     n                 o
+                                  Pr pfˆ ≤ pf ≤ pfˆ Dtr ≥ 1 − δ.                                           (13)
+
+Proof. Consider an arbitrary, possibly data-dependent residual ambiguity set Q ⊆ M1 (E), and let pfˆ
+and pfˆ be defined by (3) and (2), respectively. On the event Q⋆ ∈ Q, the true joint distribution Π⋆
+belongs to P(Q), since its marginals are P and Q⋆ . By the definitions of the lower and upper bounds,
+
+                                           pfˆ ≤ pfˆ(Π⋆ ) = pf ≤ pfˆ.
+
+Consequently,
+                                  n                  o
+                                Pr pfˆ ≤ pf ≤ pfˆ Dtr ≥ Pr Q⋆ ∈ Q Dtr .
+                                                          
+
+
+In particular, taking Q = QDW (θ) with θ ≥ θN te (δ), Proposition 1 guarantees that the right-hand side is
+at least 1 − δ, proving (13).
+                                                            5
+      The event Q⋆ ∈ QDW (θ) gives both inequalities, so 1 − δ is the confidence level for the entire interval.
+In the DW set, θ controls the corrected likelihood discrepancy. The corresponding CDF tolerances vary
+by probability level and can differ above and below the empirical CDF. For a fixed sample size, higher
+confidence requires a nondecreasing calibrated threshold θN te (δ). For a fixed empirical CDF, 0 ≤ θ1 ≤ θ2
+implies QDW (θ1 ) ⊆ QDW (θ2 ). The lower bound is therefore nonincreasing in θ, and the upper bound
+is nondecreasing. The interval reflects finite-sample uncertainty in the residual law and uncertainty in
+its dependence on the input. Because the joint ambiguity set allows all couplings with the specified
+marginals, a gap can persist even when the residual marginal is known exactly. The same coverage
+argument applies to any test-data-dependent residual ambiguity set that contains Q⋆ with conditional
+probability at least 1 − δ given Dtr .
+
+
+4. Tractable Reformulation
+
+      Scalar inversion converts the DW constraint into finitely many linear restrictions on residual prob-
+abilities. We derive the Lagrangian duals, prove strong duality through compactness of the attainable
+probability set and a minimax exchange, and then obtain closed forms and optimal dual certificates.
+Throughout this section, the training data, the test residuals, and θ ≥ 0 are fixed; X is a Borel subset of
+Rn , and ĝ is Borel measurable. The main results use the default residual support E = R; known interval
+support is treated at the end.
+      For each empirical probability level qj := j/N te , define the scalar acceptance interval
+
+                [αj (θ), βj (θ)] := p ∈ [0, 1] : N te ϕ(qj , p) − ψ(qj , p) ≤ θ ,               j = 0, . . . , N te .
+                                   
+                                                                                                                         (14)
+
+     te < · · · < ξ te denote the distinct ordered test residual values, with k indexing distinct values, and
+Let ξ(1)           (K)
+
+set
+                                 N te
+                                 X
+              c0 := 0,   ck :=          1{ξjte ≤ξte } ,   lk := αck (θ),   uk := βck−1 (θ),          k = 1, . . . , K.   (15)
+                                                 (k)
+                                 j=1
+
+The cumulative counts retain all multiplicities, so cK = N te even when test residuals coincide.
+
+Proposition 2 (CDF band and finite rank constraints). Each acceptance set in (14) is a nonempty
+closed interval containing qj . Define
+
+                                 Lθ (t) := αN te Fbte (t) (θ),       Uθ (t) := βN te Fbte (t) (θ).
+
+The DW ambiguity set has the equivalent representations
+
+                          QDW (θ) = {Q ∈ M1 (E) : Lθ (t) ≤ FQ (t) ≤ Uθ (t), ∀t ∈ R}                                      (16)
+
+
+                                                                 6
+and
+                       n                                                                     o
+                                            te
+              QDW (θ) = Q ∈ M1 (E) : Q{ξ < ξ(k)                 te
+                                                } ≤ uk , Q{ξ ≤ ξ(k) } ≥ lk , k = 1, . . . , K .            (17)
+
+Both endpoint sequences are nondecreasing in the empirical rank. Consequently, lk and uk are nonde-
+creasing and satisfy
+
+                          0 ≤ lk , uk ≤ 1,   lk−1 ≤ uk ,        lk ≤ uk+1 ,   k = 1, . . . , K,            (18)
+
+where l0 := 0 and uK+1 := 1.
+
+Proof. For fixed q, the Bernoulli divergence increases as p moves away from q, while ψ(q, p) cannot
+increase as the interval between q and p expands. Thus the corrected discrepancy decreases toward q
+from below and increases above q. It is continuous for p ∈ (0, 1) and has value −ψ0 (q) ≤ 0 at p = q.
+The boundary conventions in Section 3 give a nonempty closed acceptance interval also when q ∈ {0, 1}.
+Applying this scalar inversion at each empirical CDF level gives (16), as in the DW confidence band
+construction (Dümbgen and Wellner, 2023, Supplement, Section S.6).
+           te , ξ te
+    On [ξ(k)                                                 te
+                 (k+1) ), the empirical CDF equals ck /N . Monotonicity of a candidate CDF makes its
+                                                    
+lower band constraint equivalent to FQ ξ(k)       te    ≥ αck (θ) and its upper band constraint equivalent to
+                                                                             
+      te
+FQ ξ(k+1)   − ≤ βck (θ). The left exterior interval contributes FQ ξ(1)     te − ≤ β (θ), and the right exterior
+                                                                                      0
+                                 
+interval contributes FQ ξ(K)  te    ≥ αN te (θ). The other exterior constraints are automatic because α0 (θ) = 0
+                                                                      
+                                   te − = Q{ξ < ξ te } and F          te             te
+and βN te (θ) = 1. Using FQ ξ(k)                      (k)       Q   ξ (k) = Q{ξ ≤ ξ(k) } proves (17).
+
+   With p fixed, the corrected discrepancy also decreases as q approaches p from below and increases
+above p. Together with the fact that each acceptance interval contains q, this implies that both endpoints
+are nondecreasing in q. In particular, αck (θ) ≤ ck /N te ≤ βck (θ), which gives (18).
+
+                                                                  te , whereas the lower constraint
+   The upper rank constraint limits residual mass strictly below ξ(k)
+                             te . Distinguishing these two half-lines retains possible atoms at the
+guarantees mass at or below ξ(k)
+observed residuals. The scalar endpoints can be computed by one-dimensional bisection; the remaining
+constraints are linear in the residual law.
+   Substituting (17) into the upper failure probability problem gives the following linear program over
+M+ (X × E):
+                                         Z
+                 pfˆ =      sup                  1{ξ≤−ĝ(x)} Π(dx, dξ)
+                         Π∈M+ (X ×E)      X ×E
+                                         Z
+                                  s.t.           1U (x) Π(dx, dξ) = P(X ∈ U), ∀U ∈ B(X ),
+                                         ZX ×E                                                             (19)
+                                                 1{ξ<ξte } Π(dx, dξ) ≤ uk ,         k = 1, . . . , K,
+                                                      (k)
+                                          X ×E
+                                         Z
+                                                 1{ξ≤ξte } Π(dx, dξ) ≥ lk ,         k = 1, . . . , K.
+                                                      (k)
+                                          X ×E
+                                                            7
+The lower problem minimizes the same integral under the same constraints:
+                                             Z
+                           pfˆ =     inf          1{ξ≤−ĝ(x)} Π(dx, dξ).                                                                   (20)
+                                           Π∈P(QDW (θ)) X ×E
+
+The marginal equality fixes the input law and total mass one. The other constraints restrict the residual
+marginal while allowing its dependence on the input to vary. For E = R, both problems are feasible for
+every θ ≥ 0: the product of P and the empirical residual law is feasible.
+
+Lemma 1 (Lagrangian dual problems and weak duality). Consider the feasible measure programs (19)
+and (20). Write u = (u1 , . . . , uK )⊤ and l = (l1 , . . . , lK )⊤ . Let λ, γ ∈ RK
+                                                                                  + denote the Lagrange multipliers
+
+associated with the upper and lower rank constraints, respectively. The corresponding Lagrangian dual
+problems are given by
+                                                                          K                           K
+                 (                          "         (                                                                      )#)
+                                                                          X                           X
+                         ⊤         ⊤
+    dθ :=    inf     λ u − γ l + EP sup 1{ξ≤−ĝ(X)} −                         λk 1{ξ<ξte } +                 γk 1{ξ≤ξte }          ,       (21)
+            λ,γ∈RK                                                                         (k)                         (k)
+                 +                              ξ∈E                       k=1                         k=1
+                                                                            K                           K
+                     (                          "         (                                                                    )#)
+                                                                           X                           X
+    dθ := sup        −λ⊤ u + γ ⊤ l + EP inf                 1{ξ≤−ĝ(X)} +         λk 1{ξ<ξte } −              γk 1{ξ≤ξte }             .   (22)
+                                                    ξ∈E                                        (k)                       (k)
+            λ,γ∈RK
+                 +                                                          k=1                         k=1
+
+Their optimal values satisfy
+                                                          dθ ≤ pfˆ ≤ pfˆ ≤ dθ .                                                            (23)
+
+Proof. Let η ∈ Fb (X ) be the unrestricted Lagrange multiplier associated with the input marginal equality,
+where Fb (X ) denotes the space of bounded Borel measurable real-valued functions on X . Recall that
+the input marginal equality is equivalent to
+                          Z
+                                η(x) Π(dx, dξ) = EP [η(X)] ,                             ∀η ∈ Fb (X ).
+                                   X ×E
+
+We first consider the upper measure program (19). Introducing the nonnegative multipliers λ, γ ∈ RK
+                                                                                                  + for
+
+the upper and lower rank constraints, respectively, we obtain the Lagrangian (Boyd and Vandenberghe,
+2004, Section 5.1)
+                     Z                                                       Z
+   +
+ L (Π, η, λ, γ) =               1{ξ≤−ĝ(x)} Π(dx, dξ) + EP [η(X)] −                      η(x) Π(dx, dξ)
+                         X ×E                                                X ×E
+                          XK           Z                                    X K              Z                                          
+                     +          λk uk −             1{ξ<ξte } Π(dx, dξ) +                 γk                1{ξ≤ξte } Π(dx, dξ) − lk .
+                                                              (k)                                                (k)
+                          k=1              X ×E                                    k=1               X ×E
+                                                                                                                                           (24)
+Collecting the terms involving Π gives
+
+    L+ (Π, η, λ, γ) = λ⊤ u − γ ⊤ l + EP [η(X)]
+                                                     K                K                                                                    (25)
+                        Z     "                                                     #
+                                                     X                X
+                      +         1{ξ≤−ĝ(x)} − η(x) −   λk 1{ξ<ξte } +   γk 1{ξ≤ξte } Π(dx, dξ).
+                                                                                   (k)                         (k)
+                                 X ×E                               k=1                        k=1
+                                                                    8
+The Lagrangian dual function is defined as
+
+                                     D+ (η, λ, γ) :=              sup       L+ (Π, η, λ, γ),                               (26)
+                                                            Π∈M+ (X ×E)
+
+Since Π is no longer subject to a prescribed total mass in the Lagrangian relaxation, if the integrand
+in (25) is strictly positive at any point (x, ξ), placing mass M at that point and letting M → ∞
+yields D+ = +∞. Otherwise, the supremum of the integral term is zero, attained by the zero measure.
+Consequently, the Lagrangian dual problem is
+
+     dθ =      inf       λ⊤ u − γ ⊤ l + EP [η(X)]
+             η∈Fb (X )
+             λ,γ∈RK+
+                                                                                                                           (27)
+                                                   K
+                                                   X                        K
+                                                                            X
+                  s.t. η(x) ≥ 1{ξ≤−ĝ(x)} −               λk 1{ξ<ξte } +           γk 1{ξ≤ξte } ,       ∀(x, ξ) ∈ X × E.
+                                                                   (k)                      (k)
+                                                   k=1                      k=1
+
+For fixed λ, γ ∈ RK
+                  + , the pointwise smallest function satisfying the constraint in (27) is
+                                                    K                 K
+                                   (                                                )
+                                                   X                 X
+                      +
+                    ηλ,γ (x) := sup 1{ξ≤−ĝ(x)} −     λk 1{ξ<ξte } +    γk 1{ξ≤ξte } .                                     (28)
+                                                                                  (k)                   (k)
+                                    ξ∈E                         k=1                       k=1
+
+This function is bounded in absolute value by 1 + ∥λ∥1 + ∥γ∥1 . Moreover, replacing −ĝ(x) by a real
+threshold t in (28) yields a nondecreasing function of t, which is therefore Borel measurable. Since ĝ is
+                                   +
+Borel measurable, it follows that ηλ,γ ∈ Fb (X ). By monotonicity of the expectation, the optimal choice
+                                    +
+of η in (27) for fixed λ, γ is η = ηλ,γ . Substituting this choice into (27) yields (21).
+   The derivation for the lower measure program (20) is analogous, with the signs of the rank penalties
+reversed and the optimization directions interchanged. In this case, the optimal marginal multiplier for
+fixed λ, γ is given by
+                                                                K                         K
+                                           (                                                                   )
+                                                                X                         X
+                          −
+                         ηλ,γ (x) := inf   1{ξ≤−ĝ(x)} +               λk 1{ξ<ξte } −           γk 1{ξ≤ξte }       ,       (29)
+                                     ξ∈E                                          (k)                   (k)
+                                                                k=1                       k=1
+
+which also belongs to Fb (X ) by the same argument. Substituting this choice into the corresponding dual
+problem yields (22).
+   Finally, by weak duality, dθ ≤ pfˆ and pfˆ ≤ dθ . Since the two primal programs share the same
+nonempty feasible set, we have pfˆ ≤ pfˆ. Combining these inequalities establishes (23).
+
+   The duals in Lemma 1 have only 2K scalar decision variables. To prove that they recover the primal
+values, we retain the input marginal and collect the probabilities entering the rank constraints and the
+objective. These probabilities summarize the optimization problem exactly.
+
+Lemma 2 (Compactness of the attainable probability set). For E = R, define the vector of event
+indicators                                                                                   ⊤
+                                                           K                K
+                            r(x, ξ) :=         1{ξ<ξte }          , 1{ξ≤ξte }    , 1{ξ≤−ĝ(x)}                             (30)
+                                                    (k)     k=1             (k)     k=1
+                                                                   9
+and its attainable probability set
+                             Z                                                   
+                      R :=             r(x, ξ) Π(dx, dξ) : Π ∈ M1 (X × R), ΠX = P .                   (31)
+                                X ×R
+
+Then R ⊆ [0, 1]2K+1 is nonempty, convex, and compact. Write each element as m = (m< , m≤ , mf ),
+where the first two blocks contain the open and closed residual probabilities, respectively, and the last
+coordinate is the failure probability. In particular, a limit of attainable vectors remains attainable with
+the input marginal unchanged.
+
+Proof. For each input, the vector in (30) takes only finitely many binary values. Its conditional mean
+therefore lies in the compact convex set
+
+                                        V(x) := conv {r(x, ξ) : ξ ∈ R} .
+
+Conversely, any measurable choice from V(x) can be realized by a conditional residual distribution.
+To see this, list the finitely many binary patterns in a fixed order. For a given pattern, the residual
+values realizing it form an interval, a singleton, or the empty set, with endpoints determined by the
+observed residuals and −ĝ(x). Nonemptiness is a Borel condition, and a representative of each nonempty
+section can be chosen measurably using an included endpoint, a midpoint, or a point in an unbounded
+interval. Measurable convex weights can also be selected: choose the first affinely independent subset
+of available patterns whose convex hull contains the prescribed mean, and solve its fixed linear system
+for the weights. There are only finitely many such subsets, and both their availability and the resulting
+nonnegative weights are Borel measurable. Mixing the representatives with these weights defines a
+measurable residual kernel.
+   More formally, let
+
+                        W := v ∈ L2 P; R2K+1 : v(x) ∈ V(x) P-almost surely .
+                                           
+
+
+A joint law with input marginal P admits a regular conditional residual distribution because X and R
+are standard Borel spaces. Its conditional mean of r belongs to W. The preceding construction gives the
+converse, using a Borel version of each measurable selection. Consequently,
+
+                                          R = {EP [v(X)] : v ∈ W} .                                   (32)
+
+The set W is nonempty, convex, and bounded in the Hilbert space L2 P; R2K+1 . It is norm closed:
+                                                                           
+
+an L2 -convergent sequence has an almost surely convergent subsequence, and each V(x) is closed. A
+closed, bounded, convex subset of a Hilbert space is weakly compact. The expectation map in (32) is a
+continuous linear map into a finite-dimensional space, so its image is compact and convex. The kernel
+construction also proves realization of every point in this image.
+                                                      10
+   The compact object is the vector of relevant probabilities. Joint laws themselves may place residual
+mass arbitrarily far into the tails. Conditional randomization makes the attainable set convex even when
+P has atoms; no atomless-input assumption is required. The two rank blocks in (30) remain distinct, and
+the failure coordinate uses a closed inequality, so residual atoms and threshold equalities are retained
+exactly.
+
+Theorem 2 (Strong duality by a minimax argument). For every θ ≥ 0, the measure programs (19)–(20)
+and the Lagrangian duals in Lemma 1 satisfy
+
+                                          pfˆ = dθ ,        pfˆ = dθ .                             (33)
+
+Both primal optima are attained. The result includes θ = 0 and allows atoms in the input and residual
+distributions.
+
+Proof. Keep the input marginal fixed and relax only the rank inequalities. On the attainable set of
+Lemma 2, the resulting Lagrangians are
+
+                                        ⊤
+                  L+               f
+                                          u − m< + γ ⊤ m≤ − l ,
+                                                            
+                   r (m, λ, γ) := m + λ
+                                                                                                   (34)
+                  L−               f    ⊤
+                                          u − m< − γ ⊤ m≤ − l ,
+                                                            
+                   r (m, λ, γ) := m − λ                                           λ, γ ≥ 0.
+
+For a feasible m, minimizing L+                                           f
+                              r over the nonnegative multipliers returns m ; if any rank constraint is
+
+violated, this infimum is −∞. Maximizing L−                    f
+                                          r similarly returns m on feasible points and +∞ otherwise.
+
+Thus,
+                    pfˆ = sup inf L+
+                                   r (m, λ, γ),             pfˆ = inf    sup L−
+                                                                              r (m, λ, γ).         (35)
+                         m∈R λ,γ≥0                                m∈R λ,γ≥0
+
+   Each Lagrangian is continuous and affine in each argument. The set R is compact and convex, and the
+multiplier domain R2K
+                   + is convex. Sion’s minimax theorem, which requires only one of the two domains
+
+to be compact, therefore permits both exchanges (Sion, 1958):
+
+                                      pfˆ = inf    sup L+
+                                                        r (m, λ, γ),                               (36)
+                                             λ,γ≥0 m∈R
+
+                                      pfˆ = sup inf L−
+                                                     r (m, λ, γ).                                  (37)
+                                             λ,γ≥0 m∈R
+
+For fixed multipliers, optimization over R amounts to choosing a conditional residual law at each input.
+The measurable selection argument in Lemma 2 allows the best available binary pattern to be selected
+at every input. Hence the inner values are
+                                                                 h          i
+                                                ⊤       ⊤           +
+                           sup L+
+                                r (m, λ, γ) = λ   u − γ   l + EP  η λ,γ (X)   ,                    (38)
+                          m∈R
+                                                                  h          i
+                                                                      −
+                           inf L−
+                                r (m, λ, γ) = −λ ⊤
+                                                   u + γ ⊤
+                                                           l + EP   η λ,γ (X)  .                   (39)
+                          m∈R
+
+                                                       11
+Substitution into (36)–(37) gives exactly the reduced duals (21)–(22), proving (33).
+   Finally, the feasible portion
+
+                                      Rθ := m ∈ R : m< ≤ u, m≤ ≥ l
+                                           
+
+
+is nonempty by empirical-product feasibility and is closed in the compact set R. Its last coordinate
+therefore attains both extrema, and Lemma 2 realizes these extrema by joint laws. No strict inequality
+or positive calibration threshold was used, so the proof applies also at θ = 0. Attainment of the dual
+optima will follow from the explicit certificates below.
+
+   Strong duality establishes exactness of the 2K-variable dual problems before evaluating them. We
+next use the ordered residual thresholds to derive their closed forms. Define the surrogate-response CDF
+by H(t) := P {ĝ(X) ≤ t} for all t ∈ R.
+
+Corollary 1 (Closed forms and optimal dual certificates). Under the conditions of Theorem 2,
+                                                h             i
+                                                             te
+                           pfˆ = min 1, min uk + H −ξ(k)            ,                                 (40)
+                                       k=1,...,K
+                                                h                 i
+                                                            te
+                           pfˆ = max 0, max lk + H −ξ(k) − 1 .                                        (41)
+                                                 k=1,...,K
+
+Each dual optimum is attained with at most one nonzero rank multiplier, of value one, together with its
+corresponding optimal marginal function.
+
+Proof. For every observed residual threshold, the following pointwise inequalities hold:
+
+                                    1{ξ≤−ĝ(x)} ≤ 1{ξ<ξte } + 1{ĝ(x)≤−ξte } ,                        (42)
+                                                          (k)            (k)
+
+
+                                    1{ξ≤−ĝ(x)} ≥ 1{ξ≤ξte } + 1{ĝ(x)≤−ξte } − 1.                     (43)
+                                                          (k)            (k)
+
+
+The first inequality covers failure by a union of two events; the second guarantees failure on their inter-
+section. Integrating under any feasible joint law gives
+                                                                      
+                                        te                           te
+                            lk + H −ξ(k)     − 1 ≤ pfˆ(Π) ≤ uk + H −ξ(k)   .                          (44)
+
+Together with 0 ≤ pfˆ(Π) ≤ 1, these inequalities give the upper and lower certificates in (40)–(41). To
+show that no combination of rank multipliers improves them, we establish the reverse bounds using
+admissible residual laws.
+   For a fixed residual law Q, the sharp bounds for a sum of two random variables with prescribed
+marginals give (Makarov, 1982; Zhang and Richardson, 2025)
+                                                                   
+                           sup pfˆ(Π) = min 1, inf [FQ (t−) + H(−t)] ,                                (45)
+                            Π∈P({Q})                         t∈R
+                                                                              
+                              inf      pfˆ(Π) = max 0, sup [FQ (t) + H(−t) − 1] .                     (46)
+                            Π∈P({Q})                            t∈R
+
+                                                             12
+The upper formula is usually written with FQ (t). Its infimum is unchanged when this term is replaced
+by FQ (t−): approaching t from below gives the left limit of FQ and, by right continuity, the value H(−t).
+A coupling of ĝ(X) and ξ lifts to a joint law on X × R by using the regular conditional input law given
+ĝ(X), so these scalar coupling bounds apply with the full input marginal fixed. The statements concern
+supremum and infimum values; no assumption about attainment for an arbitrary fixed Q is needed.
+   Fix ε ∈ (0, 1) and choose residual values ξε− < ξ(1)
+                                                    te and ξ + > ξ te such that
+                                                            ε     (K)
+
+
+                                      H −ξε− ≥ 1 − ε,                  H −ξε+ ≤ ε.
+                                                                            
+
+
+Define two discrete residual laws by assigning the following masses, with all other masses zero:
+                             −
+                    Q+
+                     ε {ξ = ξε } := u1 ,            Q+       te
+                                                     ε {ξ = ξ(k) } := uk+1 − uk ,
+                                                                                                         (47)
+                 Q−       te
+                  ε {ξ = ξ(k) } := lk − lk−1 ,           Q−       +
+                                                          ε {ξ = ξε } := 1 − lK ,    k = 1, . . . , K.
+
+Monotonicity of the rank endpoints makes these masses nonnegative and their sums equal to one. At the
+kth observed residual, the open and closed CDF values of Q+                             −
+                                                          ε are uk and uk+1 ; those of Qε are lk−1 and
+
+lk . The compatibility conditions (18) therefore place both laws in QDW (θ).
+   Between consecutive atoms, each residual CDF is constant and H(−t) is nonincreasing. Substituting
+the two laws into (45)–(46) consequently gives
+                                                     h            i
+                                               −                te
+                                                 
+                       sup    pfˆ(Π) = min H −ξε , min uk + H −ξ(k)     ,                                (48)
+                      Π∈P({Q+                                          k
+                            ε })
+                                                                          h              i
+                                                           −ξε+                      te
+                                                                  
+                         inf       pfˆ(Π) = max H                     , max lk + H −ξ(k) − 1 .           (49)
+                      Π∈P({Q−
+                            ε })
+                                                                        k
+
+As ε ↓ 0, the outer candidates tend to one and zero, respectively. Since these residual laws are feasible, the
+two displays give the reverse inequalities needed for (40)–(41). This proves the closed forms independently
+of the minimax exchange.
+   Finally, let ek be the kth unit vector. The pointwise optimal marginal functions in Lemma 1 satisfy
+
+                                                    −
+                          ηe+k ,0 (x) = 1{ĝ(x)≤−ξte } ,
+                                                   η0,e k
+                                                          (x) = 1{ĝ(x)≤−ξte } − 1.                 (50)
+                                                   (k)                    (k)
+                                                               
+Thus (λ, γ) = (ek , 0) has upper dual objective uk + H −ξ(k)  te , while (λ, γ) = (0, e ) has lower dual
+                                                                                       k
+                      
+                    te −1. With zero rank multipliers, the optimal marginal functions are the constants
+objective lk +H −ξ(k)
+one and zero, giving the remaining candidates. Choosing a minimizing upper candidate or a maximizing
+lower candidate provides an optimal solution of the reduced dual and, with the displayed marginal
+function, of the full functional dual. The construction uses only monotonicity and (18), so it remains
+valid when θ = 0.
+
+   The optimal certificates have a direct interpretation. The upper bound combines residual mass below
+an observed value with the probability that the surrogate threshold reaches that value. The lower bound
+                                                              13
+measures overlap that every admissible dependence structure must retain. Although one rank constraint
+suffices to certify each optimum, both families of rank constraints determine the feasible residual laws
+                                                              
+used to prove sharpness. The closed inequalities in H −ξ(k) te   include inputs whose failure threshold
+equals an observed residual, even if such inputs have positive probability.
+
+Remark 1 (Known interval support). Suppose E = [a, b] with −∞ < a ≤ b < ∞ and the observed
+residuals lie in this interval. The compactness and minimax arguments above also apply: feasible binary
+patterns still have interval or singleton residual sections with measurable representatives. The bounds
+become
+                                                       h      i
+                                                             te
+                              pfˆ = min H(−a), min uk + H −ξ(k)     ,                                             (51)
+                                              k=1,...,K
+                                                       h          i
+                                                            te
+                              pfˆ = max H(−b), max lk + H −ξ(k)   −1 .                                            (52)
+                                                    k=1,...,K
+
+
+Indeed, support containment gives the additional certificates 1{ĝ(x)≤−b} ≤ 1{ξ≤−ĝ(x)} ≤ 1{ĝ(x)≤−a} . For
+the reverse inequalities, replace ξε− and ξε+ in (47) by a and b. If an endpoint equals an observed residual,
+combine the coincident masses. The upper law still satisfies every open upper constraint and closed
+lower constraint, and so does the lower law. Applying (45)–(46) gives the displayed expressions directly.
+The additional candidates are certified by zero rank multipliers and marginal functions 1{ĝ(x)≤−a} and
+1{ĝ(x)≤−b} , respectively. If a = b, both bounds equal H(−a).
+
+    For a fixed θ, evaluation consists of scalar DW inversion, sorting and counting the test residuals,
+                    
+evaluating H −ξ(k)te   under P, and scanning the K upper and lower candidates. The endpoint table
+depends only on N te and θ and can be precomputed. Once this table and the surrogate CDF values
+are available, the final scan costs O(K); no numerical optimization over joint laws or dual multipliers is
+needed.
+   For θ ≥ θN te (δ), these exact bounds inherit the finite-sample guarantee of Theorem 1. If the surrogate
+                                                                                                    
+CDF values are estimated by simulation, simultaneous upper CDF bounds can replace H −ξ(k)         te   in the
+                                                                                 
+upper expression, and simultaneous lower CDF bounds can replace H −ξ(k)        te   in the lower expression.
+An independent auxiliary simulation can provide these simultaneous bounds conditionally on the test
+data. Its error probability must be included in the overall confidence budget.
+
+
+References
+
+Berk, R.H., Jones, D.H., 1979. Goodness-of-fit test statistics that dominate the Kolmogorov statistics. Zeitschrift für
+  Wahrscheinlichkeitstheorie und Verwandte Gebiete 47, 47–59. doi:10.1007/BF00533250.
+Boyd, S., Vandenberghe, L., 2004. Convex Optimization. Cambridge University Press. doi:10.1017/CBO9780511804441.
+
+                                                          14
+Dümbgen, L., Wellner, J.A., 2023. A new approach to tests and confidence bands for distribution functions. The Annals of
+  Statistics 51, 260–289. doi:10.1214/22-AOS2249.
+Makarov, G.D., 1982. Estimates for the distribution function of a sum of two random variables when the marginal distri-
+  butions are fixed. Theory of Probability & Its Applications 26, 803–806. doi:10.1137/1126086.
+Owen, A.B., 1995. Nonparametric likelihood confidence bands for a distribution function. Journal of the American Statistical
+  Association 90, 516–521. doi:10.1080/01621459.1995.10476543.
+Sion, M., 1958. On general minimax theorems. Pacific Journal of Mathematics 8, 171–176. doi:10.2140/pjm.1958.8.171.
+Zhang, Z., Richardson, T.S., 2025. Bounds on the distribution of a sum of two random variables: Revisiting a problem of
+  Kolmogorov with application to individual treatment effects. arXiv:2405.08806v2. URL: https://arxiv.org/abs/2405.
+  08806v2, doi:10.48550/arXiv.2405.08806.
+
+
+
+
+                                                            15
+

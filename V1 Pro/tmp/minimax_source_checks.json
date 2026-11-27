@@ -1,0 +1,24 @@
+{
+  "old_section_archive_byte_exact": true,
+  "sections_1_to_3_byte_unchanged": true,
+  "original_comment_archive_unchanged": true,
+  "duplicate_labels": [],
+  "undefined_references": [],
+  "undefined_citations": [],
+  "manual_delimiters": [],
+  "unexpanded_joint_differentials": false,
+  "rank_shorthand_N": false,
+  "active_partition_objects": [],
+  "appendix": false,
+  "new_route_labels_in_order": [
+    24714,
+    32263,
+    36485,
+    41038
+  ],
+  "new_reference_keys": [
+    "M82",
+    "S58",
+    "Z.R25"
+  ]
+}

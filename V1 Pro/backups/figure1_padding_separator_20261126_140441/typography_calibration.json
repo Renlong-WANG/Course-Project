@@ -1,0 +1,62 @@
+{
+  "style_status": "Figure 1: restored content plus new light-gray outer frame; Figures 2,3,4 unchanged.",
+  "figure_pages": {
+    "1": 4,
+    "2": 7,
+    "3": 8,
+    "4": 10
+  },
+  "restoration": {
+    "1": {
+      "restored_exactly": false,
+      "sha256": {
+        "pdf": "91fdb1446423ace7b4c70c654c18d5d5ce0528a9c260b28d4302cffdf996470e",
+        "png": "ce78322d4134fff1a4a0d2554f48b3da7f7d8955420b8244ac4c7e0052ae6b71",
+        "svg": "b559d89a8b7c7a811bf09c4eb7328f148534f8e34a512a312d6a278e045729ea"
+      },
+      "original_sha256": {
+        "pdf": "34d63093fe8899d95e486c81c1bf6769f0e7d005ce798e89e277b40ee4751052",
+        "png": "617d9aca1335382c117c565fc510512755470a71c3b9918ee3faf177176ca2f3",
+        "svg": "392a78ff56b7cd531ef58c3b4619a00b9272137e35a6ce0f1d1762b76307a44e"
+      },
+      "interior_pixels_unchanged": true,
+      "new_outer_frame": {
+        "color": "#C9D2D8",
+        "source_linewidth_pt": 0.69,
+        "page_dimensions_unchanged": true
+      }
+    },
+    "3": {
+      "restored_exactly": true,
+      "sha256": {
+        "pdf": "25ffb694471c91fa6ef7cb3d2a2152f84a1e9878aea1fdd10f1acfe3351eee96",
+        "png": "d286fac6dafba38da86241d57ab60236d53395dd045128f114e41b3695c070c5",
+        "svg": "4944b29b531c5b5434cbc4f87cf6411d23a64c0a1b9ca459efc98cc677965367"
+      }
+    },
+    "4": {
+      "restored_exactly": true,
+      "sha256": {
+        "pdf": "4efd573ab6ebe1d16176a7d38b642f5d3c9a562599b1d593074bffbe83c9cb79",
+        "png": "4a10d2d3afa1e475cdb612e819d257dafb3014d753f8f55afe94e7666054ff0a",
+        "svg": "80d48a2dd6ca8052612788b6f851a86795a0dec730568bccdaca0fc27861ba4b"
+      }
+    }
+  },
+  "source_backup": "backups/four_figure_typography_20261126_132535",
+  "preserved_width_ratios": [
+    0.65,
+    0.5,
+    0.6,
+    0.6
+  ],
+  "figure_2": {
+    "font_family": "Times New Roman / STIX Two Math",
+    "main_source_font_pt": 12,
+    "axis_source_font_pt": 12.8,
+    "tick_source_font_pt": 11.4,
+    "legend_source_font_pt": 10.8,
+    "legend_layout": "single row, centered",
+    "source_file": "figures/response_threshold_band_optimized/fig_response_threshold_band.tex"
+  }
+}

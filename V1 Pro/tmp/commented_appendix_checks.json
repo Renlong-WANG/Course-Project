@@ -1,0 +1,27 @@
+{
+  "active_sections": [
+    "Introduction",
+    "Problem Description",
+    "Ambiguity Set Design",
+    "Tractable Reformulation"
+  ],
+  "only_four_main_sections": true,
+  "original_29_equations_and_labels_unchanged": true,
+  "original_equation_numbers_unchanged": true,
+  "complete_former_section5_preserved_in_commented_appendix": true,
+  "appendix_not_compiled": true,
+  "prior_archives_unchanged": true,
+  "bibliography_byte_unchanged": true,
+  "core_section4_proofs_unchanged": true,
+  "duplicate_labels": [],
+  "undefined_references": [],
+  "undefined_citations": [],
+  "manual_sized_delimiters": [],
+  "obsolete_section5_references": false,
+  "reference_or_citation_warnings": [],
+  "overfull_warnings": [
+    "Overfull \\hbox (2.42162pt too wide) has occurred while \\output is active"
+  ],
+  "commented_appendix_start_line": 678,
+  "pdf_bytes": 437113
+}

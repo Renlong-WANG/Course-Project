@@ -1,0 +1,30 @@
+{
+  "changes": [
+    {
+      "line": 147,
+      "old": "\\caption{Comparison of KL and DW pointwise probability acceptance regions for common illustrative parameters $N^{\\mathrm{te}}=100$, $\\theta=3$, and $s=\\nu=1$. Blue denotes the KL region; blue and gold together denote the DW region. The inset magnifies the left tail. Solid blue and dashed gold boundaries are obtained by numerical inversion; the dotted line is $p=q$. Continuous acceptance envelopes are shown, with empirical CDF levels restricted to $j/N^{\\mathrm{te}}$.}",
+      "new": "\\caption{\\textbf{KL and DW acceptance regions.} Blue denotes KL acceptance; gold adds probabilities accepted only by DW. The inset magnifies the left tail. Boundaries are computed numerically using the illustrative parameters shown; $q$ is displayed continuously between empirical levels $j/N^{\\mathrm{te}}$.}"
+    },
+    {
+      "line": 254,
+      "old": "\\caption{Illustration of simultaneous confidence bounds across response thresholds. The shaded region represents the simultaneous confidence band for the true response CDF $p_f(c)$, bounded by $\\underline p_{\\hat f}(c)$ and $\\overline p_{\\hat f}(c)$. The highlighted vertical segment at $c=0$ corresponds to the original confidence interval for the failure probability.}",
+      "new": "\\caption{\\textbf{Simultaneous confidence band.} Blue shading bounds the response CDF $p_f(c)$; the gold segment at $c=0$ is the original failure probability interval.}"
+    },
+    {
+      "line": 322,
+      "old": "\\caption{Illustration of the residual and input-threshold partitions for $K=3$. The residual partition consists of $K$ singleton cells and $K+1$ open intervals, whereas the input partition is induced by half-open intervals of the failure threshold $-\\hat g(\\bm x)$. Here, $w_i=\\mathbb P(\\mathcal X_i)$ denotes the probability mass of input cell $\\mathcal X_i$.}",
+      "new": "\\caption{\\textbf{Residual and input partitions.} For $K=3$, three singletons and four open intervals partition $\\Xi$. Half-open intervals of $-\\hat g(\\bm x)$ induce the input cells, with masses $w_i=\\mathbb P(\\mathcal X_i)$.}"
+    },
+    {
+      "line": 383,
+      "old": "\\caption{Joint partition of the input and residual spaces for $K=3$. Each product cell has probability mass $\\pi_{ij}=\\Pi(\\mathcal X_i\\times\\Xi_j)$. The blue, yellow, and red cells correspond to $(\\underline h_{ij},\\overline h_{ij})=(0,0)$, $(0,1)$, and $(1,1)$, respectively.}",
+      "new": "\\caption{\\textbf{Joint cell partition.} For $K=3$, each cell has mass $\\pi_{ij}=\\Pi(\\mathcal X_i\\times\\Xi_j)$. Blue, gold, and red denote safe, overlap, and failure cells, respectively.}"
+    }
+  ],
+  "figure_asset_sha256": {
+    "figures\\kl_dw_comparison\\fig_kl_dw_ambiguity_comparison.pdf": "8005f97d8acf968cfd0550737c270d39aeb9b311c7663d704ee0e479fb3cff92",
+    "figures\\response_threshold_band_optimized\\fig_response_threshold_band.pdf": "225661e1206fcf439ec9cfa40438cc0b17aa4468fdafde117b11d0792b9eb14c",
+    "figures\\residual_input_cells_optimized\\fig_residual_input_cells.pdf": "25ffb694471c91fa6ef7cb3d2a2152f84a1e9878aea1fdd10f1acfe3351eee96",
+    "figures\\joint_partition_optimized\\fig_joint_partition.pdf": "4efd573ab6ebe1d16176a7d38b642f5d3c9a562599b1d593074bffbe83c9cb79"
+  }
+}

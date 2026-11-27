@@ -1,0 +1,41 @@
+{
+  "source_bytes_unchanged": true,
+  "schematic_points_unchanged": true,
+  "page_count": 20,
+  "figure_1_actual_fonts": {
+    "body_pt": 7.528163909912109,
+    "axes_pt": 8.065890312194824,
+    "legend_pt": 6.8111958503723145,
+    "minimum_glyph_pt": 5.64612340927124,
+    "legend_single_row": true
+  },
+  "figure_1_frame_width_mm": 120.83749663035073,
+  "figure_1_reference_legend_pt": [
+    6.919,
+    6.8,
+    6.802,
+    6.802
+  ],
+  "figure_locations": [
+    {
+      "caption": "Training and independent calibration sampling",
+      "page": 2
+    },
+    {
+      "caption": "KL and DW acceptance regions",
+      "page": 5
+    },
+    {
+      "caption": "Simultaneous confidence band",
+      "page": 8
+    },
+    {
+      "caption": "Residual and input partitions",
+      "page": 9
+    },
+    {
+      "caption": "Joint cell partition",
+      "page": 11
+    }
+  ]
+}

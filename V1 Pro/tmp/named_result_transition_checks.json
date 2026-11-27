@@ -1,0 +1,73 @@
+{
+  "backup": "E:\\1.\u79d1\u7814\u4e0e\u7533\u535a\\5. course\\CEVE596\\Project\\1. Manuscript\\V1 Pro\\backups\\named_result_transitions_20261126_003728",
+  "edited_passages": 17,
+  "formal_statements_unchanged": true,
+  "proofs_unchanged": true,
+  "all_displayed_formulas_unchanged": true,
+  "figures_and_captions_unchanged": true,
+  "preamble_and_frontmatter_unchanged": true,
+  "previous_body_commented_exactly": true,
+  "existing_comment_archives_preserved": true,
+  "citation_keys_unchanged": true,
+  "bibliography_unchanged": true,
+  "label_order_unchanged": true,
+  "duplicate_labels": [],
+  "undefined_references": [],
+  "manual_sized_delimiters": [],
+  "result_introductions": [
+    "The following definition constrains the residual law through the corrected CDF discrepancy.",
+    "The following proposition calibrates $\\theta$ to obtain finite-sample coverage of the residual law.",
+    "The following theorem transfers this coverage guarantee to the failure probability interval.",
+    "The following corollary extends the guarantee to all response thresholds using the same residual ambiguity set.",
+    "The following proposition expresses the DW ambiguity set through linear constraints on cumulative residual cell probabilities.",
+    "The following lemma gives finite-dimensional Lagrangian duals and establishes weak duality.",
+    "The following theorem proves that the finite cell allocations and their duals recover the original failure probability bounds.",
+    "The following corollary evaluates both bounds in closed form and identifies optimal dual certificates.",
+    "The following remark incorporates known residual support into the bounds."
+  ],
+  "final_body_matches_reviewed_edits": true,
+  "equation_and_result_numbers_unchanged": true,
+  "number_check_method": "unchanged displayed environments, label order, preamble, and numbering controls",
+  "all_result_leads_share_page_with_heading": true,
+  "pdf_pages": 17,
+  "numbered_equations": 33,
+  "result_pages": [
+    {
+      "heading": "Definition 1",
+      "page": 4
+    },
+    {
+      "heading": "Proposition 1",
+      "page": 4
+    },
+    {
+      "heading": "Theorem 1",
+      "page": 5
+    },
+    {
+      "heading": "Corollary 1",
+      "page": 5
+    },
+    {
+      "heading": "Proposition 2",
+      "page": 8
+    },
+    {
+      "heading": "Lemma 1",
+      "page": 10
+    },
+    {
+      "heading": "Theorem 2",
+      "page": 12
+    },
+    {
+      "heading": "Corollary 2",
+      "page": 13
+    },
+    {
+      "heading": "Remark 1",
+      "page": 16
+    }
+  ],
+  "unresolved_reference_warnings": false
+}

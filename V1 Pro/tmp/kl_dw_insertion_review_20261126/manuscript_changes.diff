@@ -1,0 +1,27 @@
+--- before/manuscript.tex
++++ after/manuscript.tex
+@@ -105,7 +105,7 @@
+ \begin{equation*}
+   \psi(q,p):=\min_{v\in[\min\{q,p\},\,\max\{q,p\}]}\psi_0(v).
+ \end{equation*}
+-The functions $\rho$ and $\omega$ vanish at $v=1/2$ and increase toward the probability boundaries. The minimum over the interval between $q$ and $p$ is therefore large only when both probabilities lie in the same tail. This correction balances fluctuations across probability scales in the simultaneous CDF constraint.
++The functions $\rho$ and $\omega$ vanish at $v=1/2$ and increase toward the probability boundaries. Hence $\psi(q,p)=0$ whenever the interval between $q$ and $p$ contains $1/2$, whereas $\psi(q,p)$ increases as both probabilities move deeper into the same tail. This correction balances fluctuations across probability scales in the simultaneous CDF constraint.
+ 
+ We construct the empirical CDF from a test dataset
+ \[
+@@ -138,6 +138,15 @@
+        {}-\psi\!\left(\widehat F^{\mathrm{te}}(t),F_{\mathbb Q}(t)\right)\right]\le\theta\right\}. 
+   \end{equation} 
+ \end{definition}
++
++Figure~\ref{fig-kl-dw-comparison} compares the KL and DW pointwise acceptance regions at a common sample size and threshold. Since $\psi(q,p)\ge0$, the KL constraint $N^{\mathrm{te}}\phi(q,p)\le\theta$ implies the DW constraint $N^{\mathrm{te}}\phi(q,p)-\psi(q,p)\le\theta$. The additional gold region contains probabilities accepted by DW and excluded by KL, with the left-tail enlargement shown in the inset. The ambiguity set in \eqref{eq-cdf-ambiguity-set} imposes the DW constraint simultaneously over all residual thresholds. The figure uses an illustrative threshold; finite-sample confidence coverage requires the calibration below.
++
++\begin{figure}[!htbp]
++  \centering
++  \includegraphics[width=0.86\columnwidth]{figures/kl_dw_comparison/fig_kl_dw_ambiguity_comparison.pdf}
++  \caption{Comparison of KL and DW pointwise probability acceptance regions for common illustrative parameters $N^{\mathrm{te}}=100$, $\theta=3$, and $s=\nu=1$. Blue denotes the KL region; blue and gold together denote the DW region. The inset magnifies the left tail. Solid blue and dashed gold boundaries are obtained by numerical inversion; the dotted line is $p=q$. Continuous acceptance envelopes are shown, with empirical CDF levels restricted to $j/N^{\mathrm{te}}$.}
++  \label{fig-kl-dw-comparison}
++\end{figure}
+ 
+ We calibrate $\theta$ against a distribution-free reference law. Following \citet{L.J23}, let $V_1,\ldots,V_{N^{\mathrm{te}}}$ be independent standard uniform variables, independent of the training and test data. Their empirical CDF is
+ \begin{equation*}

@@ -1,0 +1,69 @@
+{
+  "source_manuscript": "E:\\1.科研与申博\\5. course\\CEVE596\\Project\\1. Manuscript\\V1 Pro\\manuscript.tex",
+  "source_sha256": "73ff55c6f577c2b1f478cd3e69d1a04f8c8b7fd6f267dfd983fd84d4bc469d05",
+  "parameters": {
+    "N_te": 100,
+    "theta": 3.0,
+    "s": 1,
+    "nu": 1
+  },
+  "parameter_status": "illustrative common threshold; not a confidence calibration",
+  "semantics": "pointwise acceptance envelopes, continuous q display",
+  "q_note": "Actual empirical CDF levels are j/N_te; q is drawn continuously for illustration.",
+  "solver": "brentq in logit(p), exact manuscript constraints; no quadratic approximation",
+  "endpoint_convention": "q=p=0 and q=p=1 use manuscript closure conventions",
+  "small_numbers": "Log probabilities are retained in CSV when ordinary p underflows.",
+  "symmetry": "Right-half endpoints reflect left-half roots using (q,p)->(1-q,1-p).",
+  "points": 3441,
+  "checks": {
+    "max_boundary_equation_residual": 2.9465319073551655e-12,
+    "nested_regions_verified": true,
+    "closed_form_checks_passed": true,
+    "correction_minimum_checks": [
+      0.0,
+      0.0,
+      0.0,
+      0.0
+    ]
+  },
+  "physical_size_inches": [
+    7.4,
+    5.35
+  ],
+  "original_canvas_inches": [
+    7.4,
+    6.4
+  ],
+  "crop": {
+    "vertical_only": true,
+    "bottom_inches": 0.45,
+    "top_inches": 5.8,
+    "margin_inches": 0.04
+  },
+  "raster": {
+    "size_pixels": [
+      4440,
+      3210
+    ],
+    "dpi": [
+      599.9988,
+      599.9988
+    ]
+  },
+  "palette": {
+    "blue_fill": "#D5E6F1",
+    "gold_fill": "#F7E6AF",
+    "blue_boundary": "#52758A",
+    "gold_boundary": "#9B752B",
+    "text": "#253139"
+  },
+  "style_reference": [
+    "fig_response_threshold_band.png",
+    "fig_joint_partition.png"
+  ],
+  "versions": {
+    "numpy": "1.26.3",
+    "scipy": "1.12.0",
+    "matplotlib": "3.8.2"
+  }
+}

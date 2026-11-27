@@ -1,0 +1,87 @@
+[
+  {
+    "purpose": "definition introduction",
+    "before": "We use this discrepancy to define the residual ambiguity set.",
+    "after": "The following definition constrains the residual law through the corrected CDF discrepancy."
+  },
+  {
+    "purpose": "calibration introduction",
+    "before": "We choose $\\theta$ from a quantile of this statistic.",
+    "after": "The following proposition calibrates $\\theta$ to obtain finite-sample coverage of the residual law."
+  },
+  {
+    "purpose": "calibration interpretation",
+    "before": "The guarantee allows atoms and infinite moments. For fixed $\\phi$ and $\\psi$, the reference law depends only on $N^{\\mathrm{te}}$, so thresholds can be precomputed.",
+    "after": "Proposition~\\ref{proposition-01} requires no continuity or moment assumptions on the residual law. For fixed $\\phi$ and $\\psi$, the reference law depends only on $N^{\\mathrm{te}}$, so thresholds can be precomputed."
+  },
+  {
+    "purpose": "failure bounds introduction",
+    "before": "Residual-law coverage also controls the failure probability interval.",
+    "after": "The following theorem transfers this coverage guarantee to the failure probability interval."
+  },
+  {
+    "purpose": "failure bounds interpretation",
+    "before": "For fixed test data, $0\\le\\theta_1\\le\\theta_2$ implies $\\mathcal Q^{\\mathrm{DW}}(\\theta_1)\\subseteq\\mathcal Q^{\\mathrm{DW}}(\\theta_2)$. The lower bound is nonincreasing and the upper bound nondecreasing in $\\theta$, so higher confidence gives a wider or unchanged interval.",
+    "after": "Theorem~\\ref{theorem-01} uses one residual-coverage event for both endpoints, so the confidence level applies to the entire interval. For fixed test data, $0\\le\\theta_1\\le\\theta_2$ implies $\\mathcal Q^{\\mathrm{DW}}(\\theta_1)\\subseteq\\mathcal Q^{\\mathrm{DW}}(\\theta_2)$. The lower bound is nonincreasing and the upper bound nondecreasing in $\\theta$, so higher confidence gives a wider or unchanged interval."
+  },
+  {
+    "purpose": "threshold curves introduction",
+    "before": "The same coverage event can be used across response thresholds.",
+    "after": "The following corollary extends the guarantee to all response thresholds using the same residual ambiguity set."
+  },
+  {
+    "purpose": "threshold curves interpretation",
+    "before": "Thresholds may therefore be selected after observing the test data.",
+    "after": "Corollary~\\ref{cor-simultaneous-threshold-bounds} permits response thresholds to be selected after observing the test data."
+  },
+  {
+    "purpose": "finite representation introduction",
+    "before": "The DW band can now be expressed through cell masses.",
+    "after": "The following proposition expresses the DW ambiguity set through linear constraints on cumulative residual cell probabilities."
+  },
+  {
+    "purpose": "finite representation interpretation",
+    "before": "Within each cell, the residual distribution remains free. The scalar endpoints can be computed by one-dimensional bisection.",
+    "after": "Proposition~\\ref{prop-finite-rank-constraints} restricts only the residual cell masses, leaving the distribution within each cell free. The scalar endpoints can be computed by one-dimensional bisection."
+  },
+  {
+    "purpose": "weak duality introduction",
+    "before": "Lagrangian duality provides finite-dimensional certificates for these bounds.",
+    "after": "The following lemma gives finite-dimensional Lagrangian duals and establishes weak duality."
+  },
+  {
+    "purpose": "weak duality interpretation",
+    "before": "The reduced duals use $2K$ nonnegative multipliers. Their LP forms \\eqref{eq-finite-upper-dual} and \\eqref{eq-finite-lower-dual} introduce $K+1$ free variables $z_i$ and $(K+1)(2K+1)$ pairwise inequalities.",
+    "after": "Lemma~\\ref{lem-weak-duality} eliminates the function-valued marginal multiplier, leaving $2K$ nonnegative multipliers. The equivalent LPs \\eqref{eq-finite-upper-dual} and \\eqref{eq-finite-lower-dual} introduce $K+1$ free variables $z_i$ and $(K+1)(2K+1)$ pairwise inequalities."
+  },
+  {
+    "purpose": "strong duality introduction",
+    "before": "It remains to realize the cellwise objectives by feasible joint laws.",
+    "after": "The following theorem proves that the finite cell allocations and their duals recover the original failure probability bounds."
+  },
+  {
+    "purpose": "strong duality interpretation",
+    "before": "A finite optimizer specifies the cell masses; the proof supplies their within-cell realization.",
+    "after": "Theorem~\\ref{thm-finite-dual-reformulations} reduces the optimization to joint cell masses while retaining the full input law through the within-cell construction."
+  },
+  {
+    "purpose": "closed form introduction",
+    "before": "The ordered cells allow the extrema to be evaluated explicitly.",
+    "after": "The following corollary evaluates both bounds in closed form and identifies optimal dual certificates."
+  },
+  {
+    "purpose": "closed form interpretation",
+    "before": "The upper bound combines an allowed residual tail mass with the probability that the input threshold reaches the corresponding observed residual. The lower bound measures unavoidable overlap.",
+    "after": "Corollary~\\ref{thm-closed-form-bounds} shows that each residual level gives an upper bound combining allowed tail mass and the probability that the input threshold reaches that level. The lower bound measures unavoidable overlap."
+  },
+  {
+    "purpose": "support introduction",
+    "before": "Verified support gives information beyond the empirical residuals.",
+    "after": "The following remark incorporates known residual support into the bounds."
+  },
+  {
+    "purpose": "support interpretation",
+    "before": "Inputs with $\\hat g(\\bm X)\\le-b$ must fail; those with $\\hat g(\\bm X)>-a$ are always safe. Thus $\\mathbb P\\left\\{\\hat g(\\bm X)\\le-a\\right\\}=0$ rules out failure.",
+    "after": "Remark~\\ref{rem-interval-support} identifies inputs that must fail, $\\hat g(\\bm X)\\le-b$, and those that are always safe, $\\hat g(\\bm X)>-a$. Thus $\\mathbb P\\left\\{\\hat g(\\bm X)\\le-a\\right\\}=0$ rules out failure."
+  }
+]

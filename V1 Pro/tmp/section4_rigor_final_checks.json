@@ -1,0 +1,25 @@
+{
+  "sections_1_to_3_unchanged": true,
+  "numbered_equation_count": 29,
+  "all_numbered_equations_and_labels_unchanged": true,
+  "equation_numbers_consecutive_1_to_29": true,
+  "prior_comment_archives_preserved": true,
+  "preaudit_section_archived_exactly": true,
+  "pre_refinement_closed_form_proof_archived": true,
+  "bibliography_byte_unchanged": true,
+  "citation_keys_unchanged": true,
+  "duplicate_labels": [],
+  "undefined_references": [],
+  "undefined_citations": [],
+  "manual_sized_delimiters": [],
+  "unexpanded_joint_differential": false,
+  "subsections_or_appendix": false,
+  "obsolete_notation": [],
+  "build_reference_or_citation_warnings": [],
+  "overfull_warnings": [
+    "Overfull \\hbox (2.42162pt too wide) has occurred while \\output is active"
+  ],
+  "pdf_bytes": 431526,
+  "section4_start_line": 227,
+  "closed_form_proof_start_line": 603
+}

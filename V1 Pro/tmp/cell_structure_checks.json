@@ -1,0 +1,15 @@
+{
+  "requested_order_satisfied": true,
+  "sections_1_to_3_only_support_symbol_changed": true,
+  "preexisting_comment_archive_unchanged": true,
+  "prior_section_comment_archive_exact": true,
+  "bibliography_unchanged": true,
+  "upper_penalty_substitutions": 4,
+  "lower_penalty_substitutions": 2,
+  "old_support_and_cell_symbols_remaining": false,
+  "duplicate_labels": [],
+  "undefined_references": [],
+  "undefined_citations": [],
+  "manual_sized_delimiters": [],
+  "unexpanded_joint_differential": false
+}

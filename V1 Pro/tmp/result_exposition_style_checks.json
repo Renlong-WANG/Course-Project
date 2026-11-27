@@ -1,0 +1,89 @@
+{
+  "backup": "E:\\1.\u79d1\u7814\u4e0e\u7533\u535a\\5. course\\CEVE596\\Project\\1. Manuscript\\V1 Pro\\backups\\result_exposition_style_20261125_230301",
+  "prose_changes": [
+    "introduce DW definition",
+    "interpret DW definition",
+    "introduce calibration proposition",
+    "introduce failure probability theorem",
+    "interpret joint interval coverage",
+    "introduce simultaneous-threshold corollary",
+    "interpret simultaneous-threshold corollary",
+    "introduce finite-representation proposition",
+    "interpret finite-representation proposition",
+    "interpret cell probability polytope",
+    "introduce weak-duality lemma",
+    "interpret weak-duality lemma",
+    "introduce strong-duality theorem",
+    "interpret strong duality and introduce closed forms",
+    "place closed-form interpretation immediately after proof",
+    "introduce interval-support remark",
+    "interpret interval-support remark",
+    "remove relocated support interpretation"
+  ],
+  "formal_result_count": 9,
+  "all_formal_statements_unchanged": true,
+  "all_proofs_unchanged": true,
+  "all_displayed_formulas_unchanged": true,
+  "figures_and_captions_unchanged": true,
+  "frontmatter_and_section1_unchanged": true,
+  "all_existing_comments_preserved": true,
+  "previous_body_commented_exactly": true,
+  "citation_keys_unchanged": true,
+  "bibliography_byte_unchanged": true,
+  "duplicate_labels": [],
+  "undefined_references": [],
+  "manual_sized_delimiters": [],
+  "numbering_structure_and_label_order_unchanged": true,
+  "build_reference_warnings": [],
+  "pdf_pages": 18,
+  "only_preamble_change_is_pagination_package": true,
+  "formal_results_with_intro_and_interpretation": [
+    {
+      "environment": "definition",
+      "introductory_sentence_present": true,
+      "interpretation_paragraph_present": true
+    },
+    {
+      "environment": "proposition",
+      "introductory_sentence_present": true,
+      "interpretation_paragraph_present": true
+    },
+    {
+      "environment": "theorem",
+      "introductory_sentence_present": true,
+      "interpretation_paragraph_present": true
+    },
+    {
+      "environment": "corollary",
+      "introductory_sentence_present": true,
+      "interpretation_paragraph_present": true
+    },
+    {
+      "environment": "proposition",
+      "introductory_sentence_present": true,
+      "interpretation_paragraph_present": true
+    },
+    {
+      "environment": "lemma",
+      "introductory_sentence_present": true,
+      "interpretation_paragraph_present": true
+    },
+    {
+      "environment": "theorem",
+      "introductory_sentence_present": true,
+      "interpretation_paragraph_present": true
+    },
+    {
+      "environment": "corollary",
+      "introductory_sentence_present": true,
+      "interpretation_paragraph_present": true
+    },
+    {
+      "environment": "remark",
+      "introductory_sentence_present": true,
+      "interpretation_paragraph_present": true
+    }
+  ],
+  "reserved_space_for_result_openings": true,
+  "preserved_comments_byte_check": true
+}

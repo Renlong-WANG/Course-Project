@@ -1,0 +1,35 @@
+{
+  "original_29_numbered_formulas_preserved": true,
+  "original_equation_numbers_unchanged": true,
+  "total_numbered_formulas": 33,
+  "numbered_formulas_consecutive": true,
+  "prior_comment_archives_unchanged": true,
+  "previous_active_manuscript_archived_exactly": true,
+  "ambiguity_set_section_unchanged": true,
+  "original_bibliography_entries_preserved": true,
+  "duplicate_labels": [],
+  "duplicate_bibliography_keys": [],
+  "undefined_references": [],
+  "undefined_citations": [],
+  "manual_sized_delimiters": [],
+  "unexpanded_joint_differential": false,
+  "subsections_or_appendix": false,
+  "reference_or_citation_warnings": [],
+  "overfull_warnings": [
+    "Overfull \\hbox (2.42162pt too wide) has occurred while \\output is active"
+  ],
+  "used_citation_keys": [
+    "B.J79",
+    "B.V04",
+    "C.P34",
+    "F.F56",
+    "F.N.S87",
+    "L.J23",
+    "M82",
+    "O95"
+  ],
+  "new_section_start_line": 675,
+  "new_theorem_start_line": 690,
+  "paired_proposition_start_line": 749,
+  "pdf_bytes": 454620
+}

@@ -1,0 +1,53 @@
+{
+  "only_figure_captions_changed": true,
+  "caption_fonts_regular": true,
+  "pages": 20,
+  "captions": [
+    {
+      "figure": 1,
+      "page": 2,
+      "fonts": [
+        "SFRM0900"
+      ],
+      "caption_text": "Figure 1: Training design and independent residual calibration. Blue squares indicate training inputs selected for space"
+    },
+    {
+      "figure": 2,
+      "page": 5,
+      "fonts": [
+        "SFRM0900"
+      ],
+      "caption_text": "Figure 2: Pointwise KL and DW acceptance regions. Blue denotes KL acceptance; gold adds probabilities accepted only"
+    },
+    {
+      "figure": 3,
+      "page": 8,
+      "fonts": [
+        "SFRM0900"
+      ],
+      "caption_text": "Figure 3: Simultaneous bounds on the response CDF. Blue shading shows the interval between the lower and upper bounds"
+    },
+    {
+      "figure": 4,
+      "page": 9,
+      "fonts": [
+        "CMMI9",
+        "CMR9",
+        "SFRM0900"
+      ],
+      "caption_text": "Figure 4: Partitions of the residual support and input space. For K = 3, three singletons and four open intervals partition"
+    },
+    {
+      "figure": 5,
+      "page": 11,
+      "fonts": [
+        "CMMI6",
+        "CMMI9",
+        "CMR9",
+        "CMSY9",
+        "SFRM0900"
+      ],
+      "caption_text": "Figure 5: Joint partition of the input and residual spaces. For K = 3, each cell has mass ¦Ðij = ¦°(Xi ¡Á ¦®j). Blue, gold, and"
+    }
+  ]
+}

@@ -1,0 +1,49 @@
+{
+  "numbered_equations_unchanged": true,
+  "proofs_unchanged": true,
+  "sections_3_to_5_unchanged": true,
+  "bibliography_unchanged": true,
+  "section_titles": [
+    "Introduction",
+    "Problem Description",
+    "Ambiguity Set Design",
+    "Tractable Reformulation",
+    "Implementation Procedure"
+  ],
+  "one_problem_description_heading": true,
+  "one_problem_description_label": true,
+  "one_sampling_figure": true,
+  "sampling_figure_referenced": true,
+  "figure_assets_exist": true,
+  "duplicates": [],
+  "undefined_references": [],
+  "unresolved_build_warnings": [],
+  "overfull_warnings": [
+    "Overfull \\hbox (2.42162pt too wide) has occurred while \\output is active"
+  ],
+  "calibration_iid_statement": true,
+  "no_manually_sized_delimiters_in_new_section": true,
+  "page_count": 20,
+  "figure_locations": [
+    {
+      "caption": "Training and independent calibration sampling",
+      "page": 2
+    },
+    {
+      "caption": "KL and DW acceptance regions",
+      "page": 5
+    },
+    {
+      "caption": "Simultaneous confidence band",
+      "page": 8
+    },
+    {
+      "caption": "Residual and input partitions",
+      "page": 9
+    },
+    {
+      "caption": "Joint cell partition",
+      "page": 11
+    }
+  ]
+}

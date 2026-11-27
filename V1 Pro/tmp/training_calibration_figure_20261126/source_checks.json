@@ -1,0 +1,29 @@
+{
+  "numbered_formulas_unchanged": true,
+  "unnumbered_display_math_unchanged": true,
+  "all_proofs_unchanged": true,
+  "sections_3_to_5_unchanged": true,
+  "training_and_calibration_math_preserved": true,
+  "figure_count": 5,
+  "all_graphics_exist": true,
+  "new_figure_defined_once": true,
+  "new_figure_referenced": true,
+  "duplicate_labels": [],
+  "undefined_source_references": [],
+  "undefined_build_references": [],
+  "unresolved_build_warnings": [],
+  "caption_is_single_panel": true,
+  "caption_explains_independence": true,
+  "caption_explains_fixed_surrogate": true,
+  "caption_identifies_schematic": true,
+  "aux_new_figure": [
+    "\\newlabel{fig-training-calibration-sampling}{{1}{2}{\\textbf {Training and independent calibration sampling.} Blue squares illustrate training inputs selected for space coverage and active refinement near the limit-state boundary. Green circles are iid calibration inputs from $\\mathbb P$, independent of $\\mathcal D^{\\mathrm {tr}}$, with $\\hat g$ fixed. Dashed contours show an illustrative input density; shading marks $g(\\bm x)\\le 0$. The geometry and point counts are illustrative}{figure.1}{}}"
+  ],
+  "existing_overfull_warning": [
+    "Overfull \\hbox (2.42162pt too wide) has occurred while \\output is active"
+  ],
+  "page_count": 20,
+  "new_figure_page": [
+    2
+  ]
+}

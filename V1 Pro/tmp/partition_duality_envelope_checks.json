@@ -1,0 +1,8 @@
+{
+  "fixed_multiplier_envelope_cases": 6112,
+  "threshold_equality_cases": 2784,
+  "largest_number_of_distinct_residuals": 8,
+  "maximum_envelope_difference": 0.0,
+  "nonnegative_multipliers_with_zero_components_included": true,
+  "all_single_rank_certificates_checked": true
+}

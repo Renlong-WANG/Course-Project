@@ -1,0 +1,16 @@
+# Sampling schematic: provenance and review
+
+- **Purpose:** Explain flexible training selection and statistically representative independent calibration in one coordinate system. This is a conceptual illustration, not empirical evidence or a reliability estimate.
+- **Artwork:** Original Matplotlib vector artwork, using the supplied diagram as a conceptual reference. The final layout combines both point classes in one axes.
+- **Illustrative law:** Bivariate Gaussian with parameters and random seeds recorded in `figure_contract.json` and the plotting source. The manuscript does not assume Gaussian inputs or residuals.
+- **Locations:** 14 space-filling training locations plus 15 boundary-refinement locations, and 90 iid calibration locations. Calibration generation uses a separate random generator. All 119 locations are exported; no point is filtered, hidden outside the plot window, or deleted for appearance.
+- **Meaning:** Input-density contours and the limit-state boundary describe one input space. The training design may emphasize low-probability locations. Calibration follows the illustrative input law; a finite sample need not exactly reproduce its density.
+- **Editorial choices:** The caption states independent calibration, a fixed surrogate, and the illustrative nature of the geometry. Active-selection positions illustrate a possible pattern, not a fitted active-learning algorithm.
+- **Encoding:** Blue squares and green circles distinguish the point classes by shape as well as color. A red line and pale red fill identify the boundary and failure region. Density contours have a separate dashed encoding.
+- **Rendered text:** The standalone PDF's minimum glyph size is 7.7 pt. Its embedded Times New Roman and STIX fonts match the existing manuscript figures. This deliberate serif choice is a reviewed exception to the generic static validator's sans-serif-only FONT-FAMILY rule; the raw report is retained.
+- **Static warnings:** The width is selected for the manuscript's 0.70-column insertion rather than a generic journal width. Simulation and uncertainty warnings apply to conceptual locations and their Gaussian location parameter, not empirical replicates or an estimated performance statistic. No experimental confidence interval is implied.
+- **PDF geometry:** The final collision audit reports zero failures and zero warnings. Multi-panel alignment is not applicable, as recorded by the alignment helper.
+- **Visual review:** The complete figure, legend, and inserted manuscript page were inspected. Marker overlap is expected in the joint scatter schematic; all labels remain clear. The figure appears in Section 2 on page 2.
+- **Paper checks:** Existing formulas, proofs, and Sections 3-5 are unchanged. The figure label, five graphic paths, figure numbering, and cross-references were verified after compilation.
+
+Rebuild with `python plot_training_calibration_sampling.py`. The vector PDF is the manuscript asset; SVG retains editable text. PNG/TIFF are 600 dpi exports, and `preview.png` is a 300 dpi preview.

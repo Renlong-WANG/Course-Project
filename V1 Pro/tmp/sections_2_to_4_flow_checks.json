@@ -1,0 +1,34 @@
+{
+  "original_29_numbered_formulas_and_labels_unchanged": true,
+  "original_equation_numbers_unchanged": true,
+  "section4_all_four_proofs_byte_unchanged": true,
+  "calibration_proof_unchanged": true,
+  "all_six_main_proofs_present": true,
+  "optional_commented_appendix_and_bibliography_commands_unchanged": true,
+  "old_comment_archives_preserved": true,
+  "previous_sections_2_to_4_archived_exactly": true,
+  "preamble_frontmatter_and_introduction_unchanged": true,
+  "bibliography_byte_unchanged": true,
+  "citation_keys_preserved": true,
+  "only_four_main_sections": true,
+  "appendix_not_compiled": true,
+  "no_active_section5_reference": true,
+  "duplicate_labels": [],
+  "undefined_references": [],
+  "undefined_citations": [],
+  "manual_sized_delimiters": [],
+  "unexpanded_joint_differential": false,
+  "obsolete_notation": [],
+  "build_reference_or_citation_warnings": [],
+  "overfull_warnings": [
+    "Overfull \\hbox (2.42162pt too wide) has occurred while \\output is active"
+  ],
+  "main_section_start_lines": {
+    "Introduction": 36,
+    "Problem Description": 38,
+    "Ambiguity Set Design": 85,
+    "Tractable Reformulation": 209
+  },
+  "commented_appendix_start_line": 658,
+  "pdf_bytes": 434155
+}

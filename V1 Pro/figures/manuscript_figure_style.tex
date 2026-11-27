@@ -1,0 +1,19 @@
+% Shared typography and colors for the manuscript's standalone TikZ figures.
+\usepackage[T1]{fontenc}
+\usepackage{lmodern}
+\usepackage{amsmath,amssymb,bm}
+% Keep the text design used by the 10.95 pt manuscript body when source
+% lettering is enlarged to compensate for includegraphics scaling.
+\DeclareFontShape{T1}{lmr}{m}{n}{<->ec-lmr10}{}
+\DeclareFontShape{T1}{lmr}{m}{it}{<->ec-lmri10}{}
+\DeclareFontShape{T1}{lmr}{bx}{n}{<->ec-lmbx10}{}
+\usetikzlibrary{arrows.meta}
+\definecolor{ink}{HTML}{253139}
+\definecolor{blueink}{HTML}{52758A}
+\definecolor{linegray}{HTML}{65747E}
+\definecolor{guidegray}{HTML}{AEBBC4}
+\definecolor{framegray}{HTML}{C9D2D8}
+\definecolor{safefill}{HTML}{D5E6F1}
+\definecolor{overlapfill}{HTML}{F7E6AF}
+\definecolor{failurefill}{HTML}{EFC6C1}
+\definecolor{intervalink}{HTML}{9B752B}

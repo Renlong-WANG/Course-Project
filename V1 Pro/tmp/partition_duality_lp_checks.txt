@@ -1,0 +1,23 @@
+{
+  "unbounded_support_scenarios": 72,
+  "bounded_support_scenarios": 144,
+  "theta_zero_scenarios": 24,
+  "binding_adjacent_prefix_scenarios": 12,
+  "linear_programs_solved": 720,
+  "constructed_joint_laws_checked": 168,
+  "forced_threshold_equality_endpoint_moves": 24,
+  "cdf_band_rank_equivalence_checks": 144,
+  "maximum_primal_dual_closed_form_difference": 3.3306690738754696e-16,
+  "maximum_input_marginal_difference": 5.551115123125783e-17,
+  "covered": [
+    "tied test residuals",
+    "K=1",
+    "input atoms exactly at first and last residuals",
+    "zero-probability input cells",
+    "theta=0 with exact zero-width median acceptance",
+    "upper endpoint moves preserving open probabilities and increasing closed probabilities",
+    "lower construction preserving the entire cell matrix",
+    "known support endpoints coinciding with observations",
+    "singleton residual support"
+  ]
+}

@@ -1,0 +1,12 @@
+{
+  "paired_intersection_cases": 60,
+  "linear_programs_solved": 180,
+  "empty_intersections_correctly_infeasible": 30,
+  "theta_zero_base_cases": 12,
+  "maximum_combined_interval_lp_difference": 2.220446049250313e-16,
+  "exact_binomial_coverage_checks": 1015,
+  "minimum_binomial_coverage_for_nominal_0_92": 0.921637652320713,
+  "exhaustive_hidden_regions": 898,
+  "adaptive_query_paths_checked": 3592,
+  "passed": true
+}

@@ -1,0 +1,838 @@
+perl: warning: Setting locale failed.
+perl: warning: Please check that your locale settings:
+	LC_ALL = "C.UTF-8",
+	(possibly more locale environment variables)
+	LANG = "C.UTF-8"
+    are supported and installed on your system.
+perl: warning: Falling back to the system default locale ("Chinese (Simplified)_China.936").
+Locale 'Chinese (Simplified)_China.936' is unsupported, and may crash the interpreter.
+Initial Win CP for (console input, console output, system): (CP936, CP65001, CP936)
+I changed them all to CP936
+Rc files read:
+  NONE
+Latexmk: This is Latexmk, John Collins, 31 Jan. 2024. Version 4.83.
+Latexmk: making output directory 'tmp/sampling_stages_baseline_20261126'
+No existing .aux file, so I'll make a simple one, and require run of *latex.
+Latexmk: applying rule 'pdflatex'...
+Rule 'pdflatex':  Reasons for rerun
+Category 'other':
+  Rerun of 'pdflatex' forced or previously required:
+    Reason or flag: 'Initial setup'
+
+------------
+Run number 1 of rule 'pdflatex'
+------------
+------------
+Running 'pdflatex  -interaction=nonstopmode -halt-on-error -file-line-error -recorder -output-directory="tmp/sampling_stages_baseline_20261126"  "manuscript.tex"'
+------------
+This is pdfTeX, Version 3.141592653-2.6-1.40.26 (TeX Live 2024) (preloaded format=pdflatex)
+ restricted \write18 enabled.
+entering extended mode
+(./manuscript.tex
+LaTeX2e <2023-11-01> patch level 1
+L3 programming layer <2024-02-20>
+(./elsarticle.cls
+Document Class: elsarticle 2020/11/20, 3.3: Elsevier Ltd
+(d:/texlive/2024/texmf-dist/tex/latex/l3kernel/expl3.sty
+(d:/texlive/2024/texmf-dist/tex/latex/l3backend/l3backend-pdftex.def))
+(d:/texlive/2024/texmf-dist/tex/latex/l3packages/xparse/xparse.sty)
+(d:/texlive/2024/texmf-dist/tex/latex/etoolbox/etoolbox.sty)
+(d:/texlive/2024/texmf-dist/tex/latex/base/article.cls
+Document Class: article 2023/05/17 v1.4n Standard LaTeX document class
+(d:/texlive/2024/texmf-dist/tex/latex/base/size11.clo))
+(d:/texlive/2024/texmf-dist/tex/latex/graphics/graphicx.sty
+(d:/texlive/2024/texmf-dist/tex/latex/graphics/keyval.sty)
+(d:/texlive/2024/texmf-dist/tex/latex/graphics/graphics.sty
+(d:/texlive/2024/texmf-dist/tex/latex/graphics/trig.sty)
+(d:/texlive/2024/texmf-dist/tex/latex/graphics-cfg/graphics.cfg)
+(d:/texlive/2024/texmf-dist/tex/latex/graphics-def/pdftex.def)))
+(./manuscript.spl) (d:/texlive/2024/texmf-dist/tex/latex/natbib/natbib.sty)
+(d:/texlive/2024/texmf-dist/tex/latex/geometry/geometry.sty
+(d:/texlive/2024/texmf-dist/tex/generic/iftex/ifvtex.sty
+(d:/texlive/2024/texmf-dist/tex/generic/iftex/iftex.sty))))
+(d:/texlive/2024/texmf-dist/tex/latex/base/fontenc.sty)
+(d:/texlive/2024/texmf-dist/tex/latex/amsmath/amsmath.sty
+For additional information on amsmath, use the `?' option.
+(d:/texlive/2024/texmf-dist/tex/latex/amsmath/amstext.sty
+(d:/texlive/2024/texmf-dist/tex/latex/amsmath/amsgen.sty))
+(d:/texlive/2024/texmf-dist/tex/latex/amsmath/amsbsy.sty)
+(d:/texlive/2024/texmf-dist/tex/latex/amsmath/amsopn.sty))
+(d:/texlive/2024/texmf-dist/tex/latex/amsfonts/amssymb.sty
+(d:/texlive/2024/texmf-dist/tex/latex/amsfonts/amsfonts.sty))
+(d:/texlive/2024/texmf-dist/tex/latex/amscls/amsthm.sty)
+(d:/texlive/2024/texmf-dist/tex/latex/jknapltx/mathrsfs.sty)
+(d:/texlive/2024/texmf-dist/tex/latex/tools/bm.sty)
+(d:/texlive/2024/texmf-dist/tex/latex/needspace/needspace.sty)
+(d:/texlive/2024/texmf-dist/tex/latex/algorithms/algorithm.sty
+(d:/texlive/2024/texmf-dist/tex/latex/float/float.sty)
+(d:/texlive/2024/texmf-dist/tex/latex/base/ifthen.sty))
+(d:/texlive/2024/texmf-dist/tex/latex/algorithmicx/algpseudocode.sty
+(d:/texlive/2024/texmf-dist/tex/latex/algorithmicx/algorithmicx.sty
+Document Style algorithmicx 1.2 - a greatly improved `algorithmic' style
+)
+Document Style - pseudocode environments for use with the `algorithmicx' style
+) (d:/texlive/2024/texmf-dist/tex/latex/xcolor/xcolor.sty
+(d:/texlive/2024/texmf-dist/tex/latex/graphics-cfg/color.cfg)
+(d:/texlive/2024/texmf-dist/tex/latex/graphics/mathcolor.ltx))
+(d:/texlive/2024/texmf-dist/tex/latex/hyperref/hyperref.sty
+(d:/texlive/2024/texmf-dist/tex/latex/kvsetkeys/kvsetkeys.sty)
+(d:/texlive/2024/texmf-dist/tex/generic/kvdefinekeys/kvdefinekeys.sty)
+(d:/texlive/2024/texmf-dist/tex/generic/pdfescape/pdfescape.sty
+(d:/texlive/2024/texmf-dist/tex/generic/ltxcmds/ltxcmds.sty)
+(d:/texlive/2024/texmf-dist/tex/generic/pdftexcmds/pdftexcmds.sty
+(d:/texlive/2024/texmf-dist/tex/generic/infwarerr/infwarerr.sty)))
+(d:/texlive/2024/texmf-dist/tex/latex/hycolor/hycolor.sty)
+(d:/texlive/2024/texmf-dist/tex/latex/auxhook/auxhook.sty)
+(d:/texlive/2024/texmf-dist/tex/latex/hyperref/nameref.sty
+(d:/texlive/2024/texmf-dist/tex/latex/refcount/refcount.sty)
+(d:/texlive/2024/texmf-dist/tex/generic/gettitlestring/gettitlestring.sty
+(d:/texlive/2024/texmf-dist/tex/latex/kvoptions/kvoptions.sty)))
+(d:/texlive/2024/texmf-dist/tex/latex/hyperref/pd1enc.def)
+(d:/texlive/2024/texmf-dist/tex/generic/intcalc/intcalc.sty)
+(d:/texlive/2024/texmf-dist/tex/latex/hyperref/puenc.def)
+(d:/texlive/2024/texmf-dist/tex/latex/url/url.sty)
+(d:/texlive/2024/texmf-dist/tex/generic/bitset/bitset.sty
+(d:/texlive/2024/texmf-dist/tex/generic/bigintcalc/bigintcalc.sty))
+(d:/texlive/2024/texmf-dist/tex/latex/base/atbegshi-ltx.sty))
+(d:/texlive/2024/texmf-dist/tex/latex/hyperref/hpdftex.def
+(d:/texlive/2024/texmf-dist/tex/latex/base/atveryend-ltx.sty)
+(d:/texlive/2024/texmf-dist/tex/latex/rerunfilecheck/rerunfilecheck.sty
+(d:/texlive/2024/texmf-dist/tex/generic/uniquecounter/uniquecounter.sty)))
+(tmp/sampling_stages_baseline_20261126/manuscript.aux)
+(d:/texlive/2024/texmf-dist/tex/context/base/mkii/supp-pdf.mkii
+[Loading MPS to PDF converter (version 2006.09.02).]
+) (d:/texlive/2024/texmf-dist/tex/latex/epstopdf-pkg/epstopdf-base.sty
+(d:/texlive/2024/texmf-dist/tex/latex/latexconfig/epstopdf-sys.cfg))
+*geometry* driver: auto-detecting
+*geometry* detected driver: pdftex
+(d:/texlive/2024/texmf-dist/tex/latex/amsfonts/umsa.fd)
+(d:/texlive/2024/texmf-dist/tex/latex/amsfonts/umsb.fd)
+(d:/texlive/2024/texmf-dist/tex/latex/jknapltx/ursfs.fd)
+Overfull \hbox (2.42162pt too wide) has occurred while \output is active
+[] 
+[1{d:/texlive/2024/texmf-var/fonts/map/pdftex/updmap/pdftex.map}{d:/texlive/202
+4/texmf-dist/fonts/enc/dvips/cm-super/cm-super-t1.enc}]
+
+LaTeX Warning: Reference `sec-ambiguity-set' on page 2 undefined on input line 
+85.
+
+
+LaTeX Warning: Reference `sec-reformulation' on page 2 undefined on input line 
+85.
+
+
+LaTeX Warning: Reference `sec-implementation' on page 2 undefined on input line
+ 85.
+
+
+Package natbib Warning: Citation `L.J23' on page 2 undefined on input line 91.
+
+
+Package natbib Warning: Citation `B.J79' on page 2 undefined on input line 93.
+
+
+Package natbib Warning: Citation `O95' on page 2 undefined on input line 93.
+
+
+Package natbib Warning: Citation `L.J23' on page 2 undefined on input line 100.
+
+
+[2]
+
+LaTeX Warning: Reference `eq-bernoulli-kl' on page 3 undefined on input line 10
+4.
+
+
+LaTeX Warning: Reference `eq-empirical-cdf' on page 3 undefined on input line 1
+25.
+
+
+LaTeX Warning: Reference `fig-kl-dw-comparison' on page 3 undefined on input li
+ne 142.
+
+
+LaTeX Warning: Reference `eq-cdf-ambiguity-set' on page 3 undefined on input li
+ne 142.
+
+[3]
+
+Package natbib Warning: Citation `L.J23' on page 4 undefined on input line 151.
+
+
+[4 <./figures/kl_dw_comparison/fig_kl_dw_ambiguity_comparison.pdf>]
+
+LaTeX Warning: Reference `eq-dw-calibrated-threshold' on page 5 undefined on in
+put line 178.
+
+
+LaTeX Warning: Reference `eq-dw-reference-statistic' on page 5 undefined on inp
+ut line 186.
+
+
+LaTeX Warning: Reference `eq-cdf-ambiguity-set' on page 5 undefined on input li
+ne 186.
+
+
+LaTeX Warning: Reference `eq-cdf-coverage' on page 5 undefined on input line 19
+1.
+
+
+LaTeX Warning: Reference `proposition-01' on page 5 undefined on input line 194
+.
+
+
+LaTeX Warning: Reference `eq-cdf-coverage' on page 5 undefined on input line 19
+4.
+
+
+LaTeX Warning: Reference `sec-implementation' on page 5 undefined on input line
+ 194.
+
+
+LaTeX Warning: Reference `proposition-01' on page 5 undefined on input line 201
+.
+
+
+LaTeX Warning: Reference `eq-dw-calibrated-threshold' on page 5 undefined on in
+put line 201.
+
+
+LaTeX Warning: Reference `eq-upper-bound' on page 5 undefined on input line 201
+.
+
+
+LaTeX Warning: Reference `eq-lower-bound' on page 5 undefined on input line 201
+.
+
+
+LaTeX Warning: Reference `proposition-01' on page 5 undefined on input line 213
+.
+
+
+LaTeX Warning: Reference `eq-failure-probability-coverage' on page 5 undefined 
+on input line 213.
+
+
+LaTeX Warning: Reference `theorem-01' on page 5 undefined on input line 216.
+
+[5]
+
+LaTeX Warning: Reference `theorem-01' on page 6 undefined on input line 222.
+
+
+LaTeX Warning: Reference `proposition-01' on page 6 undefined on input line 246
+.
+
+
+LaTeX Warning: Reference `eq-threshold-curve-coverage' on page 6 undefined on i
+nput line 246.
+
+
+LaTeX Warning: Reference `fig-simultaneous-threshold-band' on page 6 undefined 
+on input line 249.
+
+
+LaTeX Warning: Reference `rem-interval-support' on page 6 undefined on input li
+ne 262.
+
+[6] [7 <./figures/response_threshold_band_optimized/fig_response_threshold_band
+.pdf>]
+
+LaTeX Warning: Reference `fig-residual-input-cells' on page 8 undefined on inpu
+t line 318.
+
+
+LaTeX Warning: Reference `eq-dw-rank-acceptance' on page 8 undefined on input l
+ine 330.
+
+
+LaTeX Warning: Reference `sec-ambiguity-set' on page 8 undefined on input line 
+346.
+
+
+Package natbib Warning: Citation `L.J23' on page 8 undefined on input line 346.
+
+
+
+LaTeX Warning: Reference `eq-finite-rank-constraints' on page 8 undefined on in
+put line 354.
+
+[8 <./figures/residual_input_cells_optimized/fig_residual_input_cells.pdf>]
+
+LaTeX Warning: Reference `prop-finite-rank-constraints' on page 9 undefined on 
+input line 359.
+
+
+LaTeX Warning: Reference `fig-joint-partition' on page 9 undefined on input lin
+e 379.
+
+[9]
+
+Package natbib Warning: Citation `B.V04' on page 10 undefined on input line 452
+.
+
+[10 <./figures/joint_partition_optimized/fig_joint_partition.pdf>]
+
+LaTeX Warning: Reference `eq-cell-costs' on page 11 undefined on input line 501
+.
+
+
+LaTeX Warning: Reference `eq-upper-measure-dual' on page 11 undefined on input 
+line 503.
+
+
+LaTeX Warning: Reference `eq-lower-measure-dual' on page 11 undefined on input 
+line 503.
+
+[11]
+
+LaTeX Warning: Reference `eq-weak-duality' on page 12 undefined on input line 5
+27.
+
+
+LaTeX Warning: Reference `lem-weak-duality' on page 12 undefined on input line 
+530.
+
+
+LaTeX Warning: Reference `eq-finite-upper-dual' on page 12 undefined on input l
+ine 530.
+
+
+LaTeX Warning: Reference `eq-finite-lower-dual' on page 12 undefined on input l
+ine 530.
+
+
+LaTeX Warning: Reference `lem-weak-duality' on page 12 undefined on input line 
+545.
+
+
+LaTeX Warning: Reference `eq-cell-costs' on page 12 undefined on input line 555
+.
+
+[12]
+
+LaTeX Warning: Reference `eq-finite-primal-values' on page 13 undefined on inpu
+t line 577.
+
+
+LaTeX Warning: Reference `eq-finite-primal-values' on page 13 undefined on inpu
+t line 586.
+
+
+LaTeX Warning: Reference `eq-strong-duality' on page 13 undefined on input line
+ 586.
+
+
+Package natbib Warning: Citation `B.V04' on page 13 undefined on input line 586
+.
+
+
+LaTeX Warning: Reference `eq-dual-envelope-identities' on page 13 undefined on 
+input line 586.
+
+
+LaTeX Warning: Reference `thm-finite-dual-reformulations' on page 13 undefined 
+on input line 589.
+
+[13]
+
+LaTeX Warning: Reference `thm-finite-dual-reformulations' on page 14 undefined 
+on input line 595.
+
+
+LaTeX Warning: Reference `prop-finite-rank-constraints' on page 14 undefined on
+ input line 615.
+
+
+LaTeX Warning: Reference `thm-finite-dual-reformulations' on page 14 undefined 
+on input line 620.
+
+
+Package natbib Warning: Citation `F.F56' on page 14 undefined on input line 630
+.
+
+[14]
+
+LaTeX Warning: Reference `prop-finite-rank-constraints' on page 15 undefined on
+ input line 650.
+
+
+LaTeX Warning: Reference `eq-finite-primal-values' on page 15 undefined on inpu
+t line 657.
+
+
+LaTeX Warning: Reference `eq-dw-closed-upper' on page 15 undefined on input lin
+e 657.
+
+
+LaTeX Warning: Reference `eq-dw-closed-lower' on page 15 undefined on input lin
+e 657.
+
+
+LaTeX Warning: Reference `eq-finite-upper-dual' on page 15 undefined on input l
+ine 659.
+
+
+LaTeX Warning: Reference `eq-finite-lower-dual' on page 15 undefined on input l
+ine 659.
+
+
+LaTeX Warning: Reference `eq-dual-envelope-identities' on page 15 undefined on 
+input line 672.
+
+
+LaTeX Warning: Reference `thm-closed-form-bounds' on page 15 undefined on input
+ line 675.
+
+
+Package natbib Warning: Citation `M82' on page 15 undefined on input line 675.
+
+
+Package natbib Warning: Citation `F.N.S87' on page 15 undefined on input line 6
+75.
+
+[15]
+
+LaTeX Warning: Reference `thm-closed-form-bounds' on page 16 undefined on input
+ line 677.
+
+
+LaTeX Warning: Reference `eq-threshold-curve-coverage' on page 16 undefined on 
+input line 690.
+
+
+LaTeX Warning: Reference `prop-finite-rank-constraints' on page 16 undefined on
+ input line 711.
+
+[16]
+
+LaTeX Warning: Reference `alg-implementation' on page 17 undefined on input lin
+e 719.
+
+
+LaTeX Warning: Reference `eq-dw-calibrated-threshold' on page 17 undefined on i
+nput line 733.
+
+
+LaTeX Warning: Reference `eq-dw-counts-and-levels' on page 17 undefined on inpu
+t line 735.
+
+
+LaTeX Warning: Reference `eq-dw-rank-acceptance' on page 17 undefined on input 
+line 736.
+
+
+LaTeX Warning: Reference `eq-threshold-closed-upper' on page 17 undefined on in
+put line 740.
+
+
+LaTeX Warning: Reference `eq-threshold-closed-lower' on page 17 undefined on in
+put line 740.
+
+
+Package natbib Warning: Citation `L.J23' on page 17 undefined on input line 745
+.
+
+[17]
+
+LaTeX Warning: Reference `sec-problem' on page 18 undefined on input line 747.
+
+
+LaTeX Warning: Reference `rem-interval-support' on page 18 undefined on input l
+ine 747.
+
+
+LaTeX Warning: Reference `cor-simultaneous-threshold-bounds' on page 18 undefin
+ed on input line 749.
+
+
+LaTeX Warning: Reference `eq-threshold-closed-upper' on page 18 undefined on in
+put line 749.
+
+
+LaTeX Warning: Reference `eq-threshold-closed-lower' on page 18 undefined on in
+put line 749.
+
+(./manuscript.bbl (d:/texlive/2024/texmf-dist/tex/latex/base/t1cmtt.fd))
+
+Package natbib Warning: There were undefined citations.
+
+[18] (tmp/sampling_stages_baseline_20261126/manuscript.aux
+
+Package natbib Warning: Citation(s) may have changed.
+(natbib)                Rerun to get citations correct.
+
+)
+
+LaTeX Warning: There were undefined references.
+
+
+LaTeX Warning: Label(s) may have changed. Rerun to get cross-references right.
+
+
+Package rerunfilecheck Warning: File `manuscript.out' has changed.
+(rerunfilecheck)                Rerun to get outlines right
+(rerunfilecheck)                or use package `bookmark'.
+
+ )
+(see the transcript file for additional information)<d:/texlive/2024/texmf-dist
+/fonts/type1/public/amsfonts/cm/cmbx10.pfb><d:/texlive/2024/texmf-dist/fonts/ty
+pe1/public/amsfonts/cm/cmbx8.pfb><d:/texlive/2024/texmf-dist/fonts/type1/public
+/amsfonts/cm/cmex10.pfb><d:/texlive/2024/texmf-dist/fonts/type1/public/amsfonts
+/cmextra/cmex8.pfb><d:/texlive/2024/texmf-dist/fonts/type1/public/amsfonts/cm/c
+mmi10.pfb><d:/texlive/2024/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi5.pfb>
+<d:/texlive/2024/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi6.pfb><d:/texliv
+e/2024/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi7.pfb><d:/texlive/2024/tex
+mf-dist/fonts/type1/public/amsfonts/cm/cmmi8.pfb><d:/texlive/2024/texmf-dist/fo
+nts/type1/public/amsfonts/cm/cmmi9.pfb><d:/texlive/2024/texmf-dist/fonts/type1/
+public/amsfonts/cm/cmmib10.pfb><d:/texlive/2024/texmf-dist/fonts/type1/public/a
+msfonts/cmextra/cmmib8.pfb><d:/texlive/2024/texmf-dist/fonts/type1/public/amsfo
+nts/cmextra/cmmib9.pfb><d:/texlive/2024/texmf-dist/fonts/type1/public/amsfonts/
+cm/cmr10.pfb><d:/texlive/2024/texmf-dist/fonts/type1/public/amsfonts/cm/cmr5.pf
+b><d:/texlive/2024/texmf-dist/fonts/type1/public/amsfonts/cm/cmr6.pfb><d:/texli
+ve/2024/texmf-dist/fonts/type1/public/amsfonts/cm/cmr7.pfb><d:/texlive/2024/tex
+mf-dist/fonts/type1/public/amsfonts/cm/cmr8.pfb><d:/texlive/2024/texmf-dist/fon
+ts/type1/public/amsfonts/cm/cmr9.pfb><d:/texlive/2024/texmf-dist/fonts/type1/pu
+blic/amsfonts/cm/cmsy10.pfb><d:/texlive/2024/texmf-dist/fonts/type1/public/amsf
+onts/cm/cmsy5.pfb><d:/texlive/2024/texmf-dist/fonts/type1/public/amsfonts/cm/cm
+sy6.pfb><d:/texlive/2024/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy8.pfb><d
+:/texlive/2024/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy9.pfb><d:/texlive/
+2024/texmf-dist/fonts/type1/public/amsfonts/symbols/msbm10.pfb><d:/texlive/2024
+/texmf-dist/fonts/type1/public/cm-super/sfbx0900.pfb><d:/texlive/2024/texmf-dis
+t/fonts/type1/public/cm-super/sfbx1000.pfb><d:/texlive/2024/texmf-dist/fonts/ty
+pe1/public/cm-super/sfbx1095.pfb><d:/texlive/2024/texmf-dist/fonts/type1/public
+/cm-super/sfrm0800.pfb><d:/texlive/2024/texmf-dist/fonts/type1/public/cm-super/
+sfrm0900.pfb><d:/texlive/2024/texmf-dist/fonts/type1/public/cm-super/sfrm1000.p
+fb><d:/texlive/2024/texmf-dist/fonts/type1/public/cm-super/sfrm1095.pfb><d:/tex
+live/2024/texmf-dist/fonts/type1/public/cm-super/sfrm1440.pfb><d:/texlive/2024/
+texmf-dist/fonts/type1/public/cm-super/sfti0600.pfb><d:/texlive/2024/texmf-dist
+/fonts/type1/public/cm-super/sfti0900.pfb><d:/texlive/2024/texmf-dist/fonts/typ
+e1/public/cm-super/sfti1095.pfb><d:/texlive/2024/texmf-dist/fonts/type1/public/
+cm-super/sftt0900.pfb>
+Output written on tmp/sampling_stages_baseline_20261126/manuscript.pdf (18 page
+s, 948096 bytes).
+Transcript written on tmp/sampling_stages_baseline_20261126/manuscript.log.
+Latexmk: Couldn't find aux file 'manuscript.aux'
+Latexmk: Getting log file 'tmp/sampling_stages_baseline_20261126/manuscript.log'
+Latexmk: Examining 'tmp/sampling_stages_baseline_20261126/manuscript.fls'
+Latexmk: Examining 'tmp/sampling_stages_baseline_20261126/manuscript.log'
+Latexmk: Found input bbl file 'manuscript.bbl'
+Latexmk: References changed.
+Latexmk: References changed.
+Latexmk: References changed.
+Latexmk: Log file says output to 'tmp/sampling_stages_baseline_20261126/manuscript.pdf'
+Latexmk: Log file says output to 'tmp/sampling_stages_baseline_20261126/manuscript.pdf'
+Latexmk: applying rule 'pdflatex'...
+Rule 'pdflatex':  Reasons for rerun
+Changed files or newly in use/created:
+  tmp/sampling_stages_baseline_20261126/manuscript.aux
+  tmp/sampling_stages_baseline_20261126/manuscript.out
+
+------------
+Run number 2 of rule 'pdflatex'
+------------
+------------
+Running 'pdflatex  -interaction=nonstopmode -halt-on-error -file-line-error -recorder -output-directory="tmp/sampling_stages_baseline_20261126"  "manuscript.tex"'
+------------
+This is pdfTeX, Version 3.141592653-2.6-1.40.26 (TeX Live 2024) (preloaded format=pdflatex)
+ restricted \write18 enabled.
+entering extended mode
+(./manuscript.tex
+LaTeX2e <2023-11-01> patch level 1
+L3 programming layer <2024-02-20>
+(./elsarticle.cls
+Document Class: elsarticle 2020/11/20, 3.3: Elsevier Ltd
+(d:/texlive/2024/texmf-dist/tex/latex/l3kernel/expl3.sty
+(d:/texlive/2024/texmf-dist/tex/latex/l3backend/l3backend-pdftex.def))
+(d:/texlive/2024/texmf-dist/tex/latex/l3packages/xparse/xparse.sty)
+(d:/texlive/2024/texmf-dist/tex/latex/etoolbox/etoolbox.sty)
+(d:/texlive/2024/texmf-dist/tex/latex/base/article.cls
+Document Class: article 2023/05/17 v1.4n Standard LaTeX document class
+(d:/texlive/2024/texmf-dist/tex/latex/base/size11.clo))
+(d:/texlive/2024/texmf-dist/tex/latex/graphics/graphicx.sty
+(d:/texlive/2024/texmf-dist/tex/latex/graphics/keyval.sty)
+(d:/texlive/2024/texmf-dist/tex/latex/graphics/graphics.sty
+(d:/texlive/2024/texmf-dist/tex/latex/graphics/trig.sty)
+(d:/texlive/2024/texmf-dist/tex/latex/graphics-cfg/graphics.cfg)
+(d:/texlive/2024/texmf-dist/tex/latex/graphics-def/pdftex.def)))
+(tmp/sampling_stages_baseline_20261126/manuscript.spl)
+(d:/texlive/2024/texmf-dist/tex/latex/natbib/natbib.sty)
+(d:/texlive/2024/texmf-dist/tex/latex/geometry/geometry.sty
+(d:/texlive/2024/texmf-dist/tex/generic/iftex/ifvtex.sty
+(d:/texlive/2024/texmf-dist/tex/generic/iftex/iftex.sty))))
+(d:/texlive/2024/texmf-dist/tex/latex/base/fontenc.sty)
+(d:/texlive/2024/texmf-dist/tex/latex/amsmath/amsmath.sty
+For additional information on amsmath, use the `?' option.
+(d:/texlive/2024/texmf-dist/tex/latex/amsmath/amstext.sty
+(d:/texlive/2024/texmf-dist/tex/latex/amsmath/amsgen.sty))
+(d:/texlive/2024/texmf-dist/tex/latex/amsmath/amsbsy.sty)
+(d:/texlive/2024/texmf-dist/tex/latex/amsmath/amsopn.sty))
+(d:/texlive/2024/texmf-dist/tex/latex/amsfonts/amssymb.sty
+(d:/texlive/2024/texmf-dist/tex/latex/amsfonts/amsfonts.sty))
+(d:/texlive/2024/texmf-dist/tex/latex/amscls/amsthm.sty)
+(d:/texlive/2024/texmf-dist/tex/latex/jknapltx/mathrsfs.sty)
+(d:/texlive/2024/texmf-dist/tex/latex/tools/bm.sty)
+(d:/texlive/2024/texmf-dist/tex/latex/needspace/needspace.sty)
+(d:/texlive/2024/texmf-dist/tex/latex/algorithms/algorithm.sty
+(d:/texlive/2024/texmf-dist/tex/latex/float/float.sty)
+(d:/texlive/2024/texmf-dist/tex/latex/base/ifthen.sty))
+(d:/texlive/2024/texmf-dist/tex/latex/algorithmicx/algpseudocode.sty
+(d:/texlive/2024/texmf-dist/tex/latex/algorithmicx/algorithmicx.sty
+Document Style algorithmicx 1.2 - a greatly improved `algorithmic' style
+)
+Document Style - pseudocode environments for use with the `algorithmicx' style
+) (d:/texlive/2024/texmf-dist/tex/latex/xcolor/xcolor.sty
+(d:/texlive/2024/texmf-dist/tex/latex/graphics-cfg/color.cfg)
+(d:/texlive/2024/texmf-dist/tex/latex/graphics/mathcolor.ltx))
+(d:/texlive/2024/texmf-dist/tex/latex/hyperref/hyperref.sty
+(d:/texlive/2024/texmf-dist/tex/latex/kvsetkeys/kvsetkeys.sty)
+(d:/texlive/2024/texmf-dist/tex/generic/kvdefinekeys/kvdefinekeys.sty)
+(d:/texlive/2024/texmf-dist/tex/generic/pdfescape/pdfescape.sty
+(d:/texlive/2024/texmf-dist/tex/generic/ltxcmds/ltxcmds.sty)
+(d:/texlive/2024/texmf-dist/tex/generic/pdftexcmds/pdftexcmds.sty
+(d:/texlive/2024/texmf-dist/tex/generic/infwarerr/infwarerr.sty)))
+(d:/texlive/2024/texmf-dist/tex/latex/hycolor/hycolor.sty)
+(d:/texlive/2024/texmf-dist/tex/latex/auxhook/auxhook.sty)
+(d:/texlive/2024/texmf-dist/tex/latex/hyperref/nameref.sty
+(d:/texlive/2024/texmf-dist/tex/latex/refcount/refcount.sty)
+(d:/texlive/2024/texmf-dist/tex/generic/gettitlestring/gettitlestring.sty
+(d:/texlive/2024/texmf-dist/tex/latex/kvoptions/kvoptions.sty)))
+(d:/texlive/2024/texmf-dist/tex/latex/hyperref/pd1enc.def)
+(d:/texlive/2024/texmf-dist/tex/generic/intcalc/intcalc.sty)
+(d:/texlive/2024/texmf-dist/tex/latex/hyperref/puenc.def)
+(d:/texlive/2024/texmf-dist/tex/latex/url/url.sty)
+(d:/texlive/2024/texmf-dist/tex/generic/bitset/bitset.sty
+(d:/texlive/2024/texmf-dist/tex/generic/bigintcalc/bigintcalc.sty))
+(d:/texlive/2024/texmf-dist/tex/latex/base/atbegshi-ltx.sty))
+(d:/texlive/2024/texmf-dist/tex/latex/hyperref/hpdftex.def
+(d:/texlive/2024/texmf-dist/tex/latex/base/atveryend-ltx.sty)
+(d:/texlive/2024/texmf-dist/tex/latex/rerunfilecheck/rerunfilecheck.sty
+(d:/texlive/2024/texmf-dist/tex/generic/uniquecounter/uniquecounter.sty)))
+(tmp/sampling_stages_baseline_20261126/manuscript.aux)
+(d:/texlive/2024/texmf-dist/tex/context/base/mkii/supp-pdf.mkii
+[Loading MPS to PDF converter (version 2006.09.02).]
+) (d:/texlive/2024/texmf-dist/tex/latex/epstopdf-pkg/epstopdf-base.sty
+(d:/texlive/2024/texmf-dist/tex/latex/latexconfig/epstopdf-sys.cfg))
+*geometry* driver: auto-detecting
+*geometry* detected driver: pdftex
+(tmp/sampling_stages_baseline_20261126/manuscript.out)
+(tmp/sampling_stages_baseline_20261126/manuscript.out)
+(d:/texlive/2024/texmf-dist/tex/latex/amsfonts/umsa.fd)
+(d:/texlive/2024/texmf-dist/tex/latex/amsfonts/umsb.fd)
+(d:/texlive/2024/texmf-dist/tex/latex/jknapltx/ursfs.fd)
+(d:/texlive/2024/texmf-dist/tex/latex/base/t1cmtt.fd)
+Overfull \hbox (2.42162pt too wide) has occurred while \output is active
+[] 
+[1{d:/texlive/2024/texmf-var/fonts/map/pdftex/updmap/pdftex.map}{d:/texlive/202
+4/texmf-dist/fonts/enc/dvips/cm-super/cm-super-t1.enc}] [2] [3] [4 <./figures/k
+l_dw_comparison/fig_kl_dw_ambiguity_comparison.pdf>] [5] [6] [7 <./figures/resp
+onse_threshold_band_optimized/fig_response_threshold_band.pdf>] [8 <./figures/r
+esidual_input_cells_optimized/fig_residual_input_cells.pdf>] [9] [10 <./figures
+/joint_partition_optimized/fig_joint_partition.pdf>] [11] [12] [13] [14]
+[15] [16] [17] [18] (./manuscript.bbl) [19]
+(tmp/sampling_stages_baseline_20261126/manuscript.aux)
+
+LaTeX Warning: Label(s) may have changed. Rerun to get cross-references right.
+
+ )
+(see the transcript file for additional information)<d:/texlive/2024/texmf-dist
+/fonts/type1/public/amsfonts/cm/cmbx10.pfb><d:/texlive/2024/texmf-dist/fonts/ty
+pe1/public/amsfonts/cm/cmbx8.pfb><d:/texlive/2024/texmf-dist/fonts/type1/public
+/amsfonts/cm/cmex10.pfb><d:/texlive/2024/texmf-dist/fonts/type1/public/amsfonts
+/cmextra/cmex8.pfb><d:/texlive/2024/texmf-dist/fonts/type1/public/amsfonts/cm/c
+mmi10.pfb><d:/texlive/2024/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi5.pfb>
+<d:/texlive/2024/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi6.pfb><d:/texliv
+e/2024/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi7.pfb><d:/texlive/2024/tex
+mf-dist/fonts/type1/public/amsfonts/cm/cmmi8.pfb><d:/texlive/2024/texmf-dist/fo
+nts/type1/public/amsfonts/cm/cmmi9.pfb><d:/texlive/2024/texmf-dist/fonts/type1/
+public/amsfonts/cm/cmmib10.pfb><d:/texlive/2024/texmf-dist/fonts/type1/public/a
+msfonts/cmextra/cmmib8.pfb><d:/texlive/2024/texmf-dist/fonts/type1/public/amsfo
+nts/cmextra/cmmib9.pfb><d:/texlive/2024/texmf-dist/fonts/type1/public/amsfonts/
+cm/cmr10.pfb><d:/texlive/2024/texmf-dist/fonts/type1/public/amsfonts/cm/cmr5.pf
+b><d:/texlive/2024/texmf-dist/fonts/type1/public/amsfonts/cm/cmr6.pfb><d:/texli
+ve/2024/texmf-dist/fonts/type1/public/amsfonts/cm/cmr7.pfb><d:/texlive/2024/tex
+mf-dist/fonts/type1/public/amsfonts/cm/cmr8.pfb><d:/texlive/2024/texmf-dist/fon
+ts/type1/public/amsfonts/cm/cmr9.pfb><d:/texlive/2024/texmf-dist/fonts/type1/pu
+blic/amsfonts/cm/cmsy10.pfb><d:/texlive/2024/texmf-dist/fonts/type1/public/amsf
+onts/cm/cmsy5.pfb><d:/texlive/2024/texmf-dist/fonts/type1/public/amsfonts/cm/cm
+sy6.pfb><d:/texlive/2024/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy8.pfb><d
+:/texlive/2024/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy9.pfb><d:/texlive/
+2024/texmf-dist/fonts/type1/public/amsfonts/symbols/msbm10.pfb><d:/texlive/2024
+/texmf-dist/fonts/type1/public/cm-super/sfbx0900.pfb><d:/texlive/2024/texmf-dis
+t/fonts/type1/public/cm-super/sfbx1000.pfb><d:/texlive/2024/texmf-dist/fonts/ty
+pe1/public/cm-super/sfbx1095.pfb><d:/texlive/2024/texmf-dist/fonts/type1/public
+/cm-super/sfrm0800.pfb><d:/texlive/2024/texmf-dist/fonts/type1/public/cm-super/
+sfrm0900.pfb><d:/texlive/2024/texmf-dist/fonts/type1/public/cm-super/sfrm1000.p
+fb><d:/texlive/2024/texmf-dist/fonts/type1/public/cm-super/sfrm1095.pfb><d:/tex
+live/2024/texmf-dist/fonts/type1/public/cm-super/sfrm1440.pfb><d:/texlive/2024/
+texmf-dist/fonts/type1/public/cm-super/sfti0600.pfb><d:/texlive/2024/texmf-dist
+/fonts/type1/public/cm-super/sfti0900.pfb><d:/texlive/2024/texmf-dist/fonts/typ
+e1/public/cm-super/sfti1095.pfb><d:/texlive/2024/texmf-dist/fonts/type1/public/
+cm-super/sftt0900.pfb>
+Output written on tmp/sampling_stages_baseline_20261126/manuscript.pdf (19 page
+s, 958295 bytes).
+Transcript written on tmp/sampling_stages_baseline_20261126/manuscript.log.
+Latexmk: Couldn't find aux file 'manuscript.aux'
+Latexmk: Getting log file 'tmp/sampling_stages_baseline_20261126/manuscript.log'
+Latexmk: Examining 'tmp/sampling_stages_baseline_20261126/manuscript.fls'
+Latexmk: Examining 'tmp/sampling_stages_baseline_20261126/manuscript.log'
+Latexmk: Found input bbl file 'manuscript.bbl'
+Latexmk: References changed.
+Latexmk: Log file says output to 'tmp/sampling_stages_baseline_20261126/manuscript.pdf'
+Latexmk: Log file says output to 'tmp/sampling_stages_baseline_20261126/manuscript.pdf'
+Latexmk: applying rule 'pdflatex'...
+Rule 'pdflatex':  Reasons for rerun
+Changed files or newly in use/created:
+  tmp/sampling_stages_baseline_20261126/manuscript.aux
+  tmp/sampling_stages_baseline_20261126/manuscript.spl
+
+------------
+Run number 3 of rule 'pdflatex'
+------------
+------------
+Running 'pdflatex  -interaction=nonstopmode -halt-on-error -file-line-error -recorder -output-directory="tmp/sampling_stages_baseline_20261126"  "manuscript.tex"'
+------------
+This is pdfTeX, Version 3.141592653-2.6-1.40.26 (TeX Live 2024) (preloaded format=pdflatex)
+ restricted \write18 enabled.
+entering extended mode
+(./manuscript.tex
+LaTeX2e <2023-11-01> patch level 1
+L3 programming layer <2024-02-20>
+(./elsarticle.cls
+Document Class: elsarticle 2020/11/20, 3.3: Elsevier Ltd
+(d:/texlive/2024/texmf-dist/tex/latex/l3kernel/expl3.sty
+(d:/texlive/2024/texmf-dist/tex/latex/l3backend/l3backend-pdftex.def))
+(d:/texlive/2024/texmf-dist/tex/latex/l3packages/xparse/xparse.sty)
+(d:/texlive/2024/texmf-dist/tex/latex/etoolbox/etoolbox.sty)
+(d:/texlive/2024/texmf-dist/tex/latex/base/article.cls
+Document Class: article 2023/05/17 v1.4n Standard LaTeX document class
+(d:/texlive/2024/texmf-dist/tex/latex/base/size11.clo))
+(d:/texlive/2024/texmf-dist/tex/latex/graphics/graphicx.sty
+(d:/texlive/2024/texmf-dist/tex/latex/graphics/keyval.sty)
+(d:/texlive/2024/texmf-dist/tex/latex/graphics/graphics.sty
+(d:/texlive/2024/texmf-dist/tex/latex/graphics/trig.sty)
+(d:/texlive/2024/texmf-dist/tex/latex/graphics-cfg/graphics.cfg)
+(d:/texlive/2024/texmf-dist/tex/latex/graphics-def/pdftex.def)))
+(tmp/sampling_stages_baseline_20261126/manuscript.spl)
+(d:/texlive/2024/texmf-dist/tex/latex/natbib/natbib.sty)
+(d:/texlive/2024/texmf-dist/tex/latex/geometry/geometry.sty
+(d:/texlive/2024/texmf-dist/tex/generic/iftex/ifvtex.sty
+(d:/texlive/2024/texmf-dist/tex/generic/iftex/iftex.sty))))
+(d:/texlive/2024/texmf-dist/tex/latex/base/fontenc.sty)
+(d:/texlive/2024/texmf-dist/tex/latex/amsmath/amsmath.sty
+For additional information on amsmath, use the `?' option.
+(d:/texlive/2024/texmf-dist/tex/latex/amsmath/amstext.sty
+(d:/texlive/2024/texmf-dist/tex/latex/amsmath/amsgen.sty))
+(d:/texlive/2024/texmf-dist/tex/latex/amsmath/amsbsy.sty)
+(d:/texlive/2024/texmf-dist/tex/latex/amsmath/amsopn.sty))
+(d:/texlive/2024/texmf-dist/tex/latex/amsfonts/amssymb.sty
+(d:/texlive/2024/texmf-dist/tex/latex/amsfonts/amsfonts.sty))
+(d:/texlive/2024/texmf-dist/tex/latex/amscls/amsthm.sty)
+(d:/texlive/2024/texmf-dist/tex/latex/jknapltx/mathrsfs.sty)
+(d:/texlive/2024/texmf-dist/tex/latex/tools/bm.sty)
+(d:/texlive/2024/texmf-dist/tex/latex/needspace/needspace.sty)
+(d:/texlive/2024/texmf-dist/tex/latex/algorithms/algorithm.sty
+(d:/texlive/2024/texmf-dist/tex/latex/float/float.sty)
+(d:/texlive/2024/texmf-dist/tex/latex/base/ifthen.sty))
+(d:/texlive/2024/texmf-dist/tex/latex/algorithmicx/algpseudocode.sty
+(d:/texlive/2024/texmf-dist/tex/latex/algorithmicx/algorithmicx.sty
+Document Style algorithmicx 1.2 - a greatly improved `algorithmic' style
+)
+Document Style - pseudocode environments for use with the `algorithmicx' style
+) (d:/texlive/2024/texmf-dist/tex/latex/xcolor/xcolor.sty
+(d:/texlive/2024/texmf-dist/tex/latex/graphics-cfg/color.cfg)
+(d:/texlive/2024/texmf-dist/tex/latex/graphics/mathcolor.ltx))
+(d:/texlive/2024/texmf-dist/tex/latex/hyperref/hyperref.sty
+(d:/texlive/2024/texmf-dist/tex/latex/kvsetkeys/kvsetkeys.sty)
+(d:/texlive/2024/texmf-dist/tex/generic/kvdefinekeys/kvdefinekeys.sty)
+(d:/texlive/2024/texmf-dist/tex/generic/pdfescape/pdfescape.sty
+(d:/texlive/2024/texmf-dist/tex/generic/ltxcmds/ltxcmds.sty)
+(d:/texlive/2024/texmf-dist/tex/generic/pdftexcmds/pdftexcmds.sty
+(d:/texlive/2024/texmf-dist/tex/generic/infwarerr/infwarerr.sty)))
+(d:/texlive/2024/texmf-dist/tex/latex/hycolor/hycolor.sty)
+(d:/texlive/2024/texmf-dist/tex/latex/auxhook/auxhook.sty)
+(d:/texlive/2024/texmf-dist/tex/latex/hyperref/nameref.sty
+(d:/texlive/2024/texmf-dist/tex/latex/refcount/refcount.sty)
+(d:/texlive/2024/texmf-dist/tex/generic/gettitlestring/gettitlestring.sty
+(d:/texlive/2024/texmf-dist/tex/latex/kvoptions/kvoptions.sty)))
+(d:/texlive/2024/texmf-dist/tex/latex/hyperref/pd1enc.def)
+(d:/texlive/2024/texmf-dist/tex/generic/intcalc/intcalc.sty)
+(d:/texlive/2024/texmf-dist/tex/latex/hyperref/puenc.def)
+(d:/texlive/2024/texmf-dist/tex/latex/url/url.sty)
+(d:/texlive/2024/texmf-dist/tex/generic/bitset/bitset.sty
+(d:/texlive/2024/texmf-dist/tex/generic/bigintcalc/bigintcalc.sty))
+(d:/texlive/2024/texmf-dist/tex/latex/base/atbegshi-ltx.sty))
+(d:/texlive/2024/texmf-dist/tex/latex/hyperref/hpdftex.def
+(d:/texlive/2024/texmf-dist/tex/latex/base/atveryend-ltx.sty)
+(d:/texlive/2024/texmf-dist/tex/latex/rerunfilecheck/rerunfilecheck.sty
+(d:/texlive/2024/texmf-dist/tex/generic/uniquecounter/uniquecounter.sty)))
+(tmp/sampling_stages_baseline_20261126/manuscript.aux)
+(d:/texlive/2024/texmf-dist/tex/context/base/mkii/supp-pdf.mkii
+[Loading MPS to PDF converter (version 2006.09.02).]
+) (d:/texlive/2024/texmf-dist/tex/latex/epstopdf-pkg/epstopdf-base.sty
+(d:/texlive/2024/texmf-dist/tex/latex/latexconfig/epstopdf-sys.cfg))
+*geometry* driver: auto-detecting
+*geometry* detected driver: pdftex
+(tmp/sampling_stages_baseline_20261126/manuscript.out)
+(tmp/sampling_stages_baseline_20261126/manuscript.out)
+(d:/texlive/2024/texmf-dist/tex/latex/amsfonts/umsa.fd)
+(d:/texlive/2024/texmf-dist/tex/latex/amsfonts/umsb.fd)
+(d:/texlive/2024/texmf-dist/tex/latex/jknapltx/ursfs.fd)
+(d:/texlive/2024/texmf-dist/tex/latex/base/t1cmtt.fd)
+Overfull \hbox (2.42162pt too wide) has occurred while \output is active
+[] 
+[1{d:/texlive/2024/texmf-var/fonts/map/pdftex/updmap/pdftex.map}{d:/texlive/202
+4/texmf-dist/fonts/enc/dvips/cm-super/cm-super-t1.enc}] [2] [3] [4 <./figures/k
+l_dw_comparison/fig_kl_dw_ambiguity_comparison.pdf>] [5] [6] [7 <./figures/resp
+onse_threshold_band_optimized/fig_response_threshold_band.pdf>] [8 <./figures/r
+esidual_input_cells_optimized/fig_residual_input_cells.pdf>] [9] [10 <./figures
+/joint_partition_optimized/fig_joint_partition.pdf>] [11] [12] [13] [14]
+[15] [16] [17] [18] (./manuscript.bbl) [19]
+(tmp/sampling_stages_baseline_20261126/manuscript.aux) )
+(see the transcript file for additional information)<d:/texlive/2024/texmf-dist
+/fonts/type1/public/amsfonts/cm/cmbx10.pfb><d:/texlive/2024/texmf-dist/fonts/ty
+pe1/public/amsfonts/cm/cmbx8.pfb><d:/texlive/2024/texmf-dist/fonts/type1/public
+/amsfonts/cm/cmex10.pfb><d:/texlive/2024/texmf-dist/fonts/type1/public/amsfonts
+/cmextra/cmex8.pfb><d:/texlive/2024/texmf-dist/fonts/type1/public/amsfonts/cm/c
+mmi10.pfb><d:/texlive/2024/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi5.pfb>
+<d:/texlive/2024/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi6.pfb><d:/texliv
+e/2024/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi7.pfb><d:/texlive/2024/tex
+mf-dist/fonts/type1/public/amsfonts/cm/cmmi8.pfb><d:/texlive/2024/texmf-dist/fo
+nts/type1/public/amsfonts/cm/cmmi9.pfb><d:/texlive/2024/texmf-dist/fonts/type1/
+public/amsfonts/cm/cmmib10.pfb><d:/texlive/2024/texmf-dist/fonts/type1/public/a
+msfonts/cmextra/cmmib8.pfb><d:/texlive/2024/texmf-dist/fonts/type1/public/amsfo
+nts/cmextra/cmmib9.pfb><d:/texlive/2024/texmf-dist/fonts/type1/public/amsfonts/
+cm/cmr10.pfb><d:/texlive/2024/texmf-dist/fonts/type1/public/amsfonts/cm/cmr5.pf
+b><d:/texlive/2024/texmf-dist/fonts/type1/public/amsfonts/cm/cmr6.pfb><d:/texli
+ve/2024/texmf-dist/fonts/type1/public/amsfonts/cm/cmr7.pfb><d:/texlive/2024/tex
+mf-dist/fonts/type1/public/amsfonts/cm/cmr8.pfb><d:/texlive/2024/texmf-dist/fon
+ts/type1/public/amsfonts/cm/cmr9.pfb><d:/texlive/2024/texmf-dist/fonts/type1/pu
+blic/amsfonts/cm/cmsy10.pfb><d:/texlive/2024/texmf-dist/fonts/type1/public/amsf
+onts/cm/cmsy5.pfb><d:/texlive/2024/texmf-dist/fonts/type1/public/amsfonts/cm/cm
+sy6.pfb><d:/texlive/2024/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy8.pfb><d
+:/texlive/2024/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy9.pfb><d:/texlive/
+2024/texmf-dist/fonts/type1/public/amsfonts/symbols/msbm10.pfb><d:/texlive/2024
+/texmf-dist/fonts/type1/public/cm-super/sfbx0900.pfb><d:/texlive/2024/texmf-dis
+t/fonts/type1/public/cm-super/sfbx1000.pfb><d:/texlive/2024/texmf-dist/fonts/ty
+pe1/public/cm-super/sfbx1095.pfb><d:/texlive/2024/texmf-dist/fonts/type1/public
+/cm-super/sfrm0800.pfb><d:/texlive/2024/texmf-dist/fonts/type1/public/cm-super/
+sfrm0900.pfb><d:/texlive/2024/texmf-dist/fonts/type1/public/cm-super/sfrm1000.p
+fb><d:/texlive/2024/texmf-dist/fonts/type1/public/cm-super/sfrm1095.pfb><d:/tex
+live/2024/texmf-dist/fonts/type1/public/cm-super/sfrm1440.pfb><d:/texlive/2024/
+texmf-dist/fonts/type1/public/cm-super/sfti0600.pfb><d:/texlive/2024/texmf-dist
+/fonts/type1/public/cm-super/sfti0900.pfb><d:/texlive/2024/texmf-dist/fonts/typ
+e1/public/cm-super/sfti1095.pfb><d:/texlive/2024/texmf-dist/fonts/type1/public/
+cm-super/sftt0900.pfb>
+Output written on tmp/sampling_stages_baseline_20261126/manuscript.pdf (19 page
+s, 958295 bytes).
+Transcript written on tmp/sampling_stages_baseline_20261126/manuscript.log.
+Latexmk: Couldn't find aux file 'manuscript.aux'
+Reverting Windows console CPs to (in,out) = (936,65001)
+Latexmk: Getting log file 'tmp/sampling_stages_baseline_20261126/manuscript.log'
+Latexmk: Examining 'tmp/sampling_stages_baseline_20261126/manuscript.fls'
+Latexmk: Examining 'tmp/sampling_stages_baseline_20261126/manuscript.log'
+Latexmk: Found input bbl file 'manuscript.bbl'
+Latexmk: Log file says output to 'tmp/sampling_stages_baseline_20261126/manuscript.pdf'
+Latexmk: Log file says output to 'tmp/sampling_stages_baseline_20261126/manuscript.pdf'
+Latexmk: All targets (tmp/sampling_stages_baseline_20261126/manuscript.pdf) are up-to-date
+

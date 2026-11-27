@@ -1,0 +1,54 @@
+{
+  "figure_role": "Conceptual sampling schematic, not empirical evidence",
+  "core_message": "Training may use design or active selection; independent calibration is iid under the target input law.",
+  "archetype": "single-panel sampling schematic",
+  "geometry": "One input coordinate system with both training and calibration locations",
+  "training": "Flexible coverage plus boundary refinement",
+  "calibration": "Independent iid draws from the illustrative input law",
+  "reference_reuse": "Conceptual geometry only; original vector artwork",
+  "illustrative_law": {
+    "family": "bivariate normal",
+    "mean": [
+      -0.95,
+      0.05
+    ],
+    "covariance": [
+      [
+        0.46,
+        0.09
+      ],
+      [
+        0.09,
+        0.62
+      ]
+    ]
+  },
+  "counts": {
+    "training": 29,
+    "calibration": 90
+  },
+  "calibration_seed": 20261126,
+  "omitted_points": 0,
+  "experimental_results": false,
+  "width_inches": 5.35,
+  "height_inches": 5.65,
+  "frame_and_legend": {
+    "color": "#C9D2D8",
+    "outer_frame_linewidth_pt": 0.69,
+    "outer_frame_inset_pt": 1.5,
+    "separator_linewidth_pt": 0.55,
+    "separator_y_inches": 0.8572557123655915,
+    "xlabel_to_legend_gap_inches": 0.3038280913978496,
+    "xlabel_to_separator_gap_pt": 10.937811290322585,
+    "separator_to_legend_gap_pt": 10.937811290322585,
+    "legend_bbox_inches": [
+      0.5409768371582035,
+      0.1243,
+      4.809023162841797,
+      0.7053416666666666
+    ],
+    "plot_and_legend_separated": true
+  },
+  "preview_dpi": 300,
+  "export_dpi": 600
+}

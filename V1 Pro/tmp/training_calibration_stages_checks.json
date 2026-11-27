@@ -1,0 +1,37 @@
+{
+  "numbered_formula_count": 33,
+  "all_numbered_formulas_and_labels_unchanged": true,
+  "all_equation_numbers_unchanged": true,
+  "all_displayed_math_preserved": true,
+  "all_proofs_unchanged": true,
+  "section4_byte_unchanged": true,
+  "figures_and_captions_unchanged": true,
+  "algorithm_steps_unchanged": true,
+  "test_dataset_defined_once_in_section2": true,
+  "test_residuals_defined_once_in_section2": true,
+  "no_dataset_or_residual_redefinitions_in_section3": true,
+  "training_freedom_explicit": true,
+  "calibration_iid_target_law_explicit": true,
+  "surrogate_frozen_during_calibration": true,
+  "coverage_proposition_refers_to_section2": true,
+  "preamble_and_introduction_unchanged": true,
+  "post_document_content_unchanged": true,
+  "bibliography_byte_unchanged": true,
+  "citation_keys_unchanged": true,
+  "main_sections_unchanged": true,
+  "duplicate_labels": [],
+  "undefined_references": [],
+  "undefined_citations": [],
+  "manual_sized_delimiters": [],
+  "reference_or_citation_warnings": [],
+  "baseline_overfull_warnings": [
+    "Overfull \\hbox (2.42162pt too wide) has occurred while \\output is active"
+  ],
+  "revision_overfull_warnings": [
+    "Overfull \\hbox (2.42162pt too wide) has occurred while \\output is active"
+  ],
+  "training_paragraph_start_line": 49,
+  "calibration_paragraph_start_line": 55,
+  "section3_start_line": 100,
+  "built_pdf_bytes": 959929
+}

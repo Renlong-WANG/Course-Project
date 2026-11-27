@@ -1,0 +1,154 @@
+{
+  "body_font_tex_pt": 10.95,
+  "column_width_tex_pt": 495,
+  "font_family": "Latin Modern",
+  "figures": [
+    {
+      "number": 1,
+      "width_ratio": 0.65,
+      "source_pdf_size_bp": [
+        532.8,
+        398.4
+      ],
+      "source_font_tex_pt": 18.2,
+      "scale": 0.6016290262865607,
+      "inserted_main_font_tex_pt": 10.949648278415404,
+      "inserted_width_mm": 113.08219178082193,
+      "inserted_height_mm": 84.55695421448847,
+      "all_pdf_fonts_embedded": true
+    },
+    {
+      "number": 2,
+      "width_ratio": 0.5,
+      "source_pdf_size_bp": [
+        390.29,
+        291.08
+      ],
+      "source_font_tex_pt": 17.33,
+      "scale": 0.6317746866836287,
+      "inserted_main_font_tex_pt": 10.948655320227283,
+      "inserted_width_mm": 86.98630136986301,
+      "inserted_height_mm": 64.87476646273214,
+      "all_pdf_fonts_embedded": true
+    },
+    {
+      "number": 3,
+      "width_ratio": 0.6,
+      "source_pdf_size_bp": [
+        390.15,
+        221.49
+      ],
+      "source_font_tex_pt": 14.44,
+      "scale": 0.7584016684836707,
+      "inserted_main_font_tex_pt": 10.951320092904204,
+      "inserted_width_mm": 104.38356164383562,
+      "inserted_height_mm": 59.25904156989146,
+      "all_pdf_fonts_embedded": true
+    },
+    {
+      "number": 4,
+      "width_ratio": 0.6,
+      "source_pdf_size_bp": [
+        390.15,
+        254.09
+      ],
+      "source_font_tex_pt": 14.44,
+      "scale": 0.7584016684836707,
+      "inserted_main_font_tex_pt": 10.951320092904204,
+      "inserted_width_mm": 104.38356164383562,
+      "inserted_height_mm": 67.98108209171393,
+      "all_pdf_fonts_embedded": true
+    }
+  ],
+  "pdf_font_samples": [
+    {
+      "page": "1",
+      "text": "Failure Probability Bounds with Uncertain Surrogate Residual Distributions",
+      "font": "LJQLWZ+LMRoman12",
+      "size_bp_rounded": "14"
+    },
+    {
+      "page": "4",
+      "text": "KL feasible",
+      "font": "LMRoman10",
+      "size_bp_rounded": "11"
+    },
+    {
+      "page": "6",
+      "text": "(Simultaneous bounds across response thresholds)",
+      "font": null,
+      "size_bp_rounded": null
+    },
+    {
+      "page": "7",
+      "text": "Response threshold",
+      "font": "XZXHFU+LMRoman10",
+      "size_bp_rounded": "11"
+    },
+    {
+      "page": "7",
+      "text": "Simultaneous",
+      "font": "XZXHFU+LMRoman10",
+      "size_bp_rounded": "11"
+    },
+    {
+      "page": "8",
+      "text": "Residual partition in",
+      "font": "XXCLFW+LMRoman10",
+      "size_bp_rounded": "11"
+    },
+    {
+      "page": "8",
+      "text": "Input-threshold partition in",
+      "font": "XXCLFW+LMRoman10",
+      "size_bp_rounded": "11"
+    },
+    {
+      "page": "10",
+      "text": "Joint partition of",
+      "font": "YFXEHL+LMRoman10",
+      "size_bp_rounded": "11"
+    },
+    {
+      "page": "10",
+      "text": "Cell mass:",
+      "font": "BCFKSX+LMRoman10",
+      "size_bp_rounded": "11"
+    },
+    {
+      "page": "10",
+      "text": "Figure 4: Joint partition of the input and residual spaces for",
+      "font": null,
+      "size_bp_rounded": null
+    },
+    {
+      "page": "19",
+      "text": "Probability Theory and Related Fields 74, 199–211. doi:",
+      "font": null,
+      "size_bp_rounded": null
+    },
+    {
+      "page": "19",
+      "text": "butions are ﬁxed. Theory of Probability & Its Applications 26, 803–806. doi:",
+      "font": null,
+      "size_bp_rounded": null
+    }
+  ],
+  "response_band_checks": {
+    "same_supplied_functions": true,
+    "monotone_and_nested": true,
+    "interval_at_zero": [
+      0.1846733863969171,
+      0.8153266136030829
+    ]
+  },
+  "kl_dw_boundary_csv_identical_to_backup": true,
+  "final_article_pages": 19,
+  "figure_pages": [
+    4,
+    7,
+    8,
+    10
+  ],
+  "main_source_change": "Only Figure 2 asset path changed; user width ratios and all text/captions preserved."
+}

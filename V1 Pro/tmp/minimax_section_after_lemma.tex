@@ -1,0 +1,226 @@
+The duals in Lemma~\ref{lem-weak-duality} have only $2K$ scalar decision variables. To prove that they recover the primal values, we retain the input marginal and collect the probabilities entering the rank constraints and the objective. These probabilities summarize the optimization problem exactly.
+
+\begin{lemma}[Compactness of the attainable probability set]
+  \label{lem-attainable-probabilities}
+  For $\mathcal E=\mathbb R$, define the vector of event indicators
+  \begin{equation}
+    \bm r(\bm x,\xi):=
+    \left(
+      \left(\mathbf1_{\{\xi<\xi_{(k)}^{\mathrm{te}}\}}\right)_{k=1}^K,
+      \left(\mathbf1_{\{\xi\le\xi_{(k)}^{\mathrm{te}}\}}\right)_{k=1}^K,
+      \mathbf1_{\{\xi\le-\hat g(\bm x)\}}
+    \right)^\top
+    \label{eq-event-probability-vector}
+  \end{equation}
+  and its attainable probability set
+  \begin{equation}
+    \mathcal R:=\left\{
+      \int_{\mathcal X\times\mathbb R}\bm r(\bm x,\xi)\,\Pi(\mathrm d\bm x,\mathrm d\xi):
+      \Pi\in\mathcal M_1(\mathcal X\times\mathbb R),\ \Pi_{\bm X}=\mathbb P
+    \right\}.
+    \label{eq-attainable-probability-set}
+  \end{equation}
+  Then $\mathcal R\subseteq[0,1]^{2K+1}$ is nonempty, convex, and compact. Write each element as $\bm m=(\bm m^{<},\bm m^{\le},m^{\mathrm f})$, where the first two blocks contain the open and closed residual probabilities, respectively, and the last coordinate is the failure probability. In particular, a limit of attainable vectors remains attainable with the input marginal unchanged.
+\end{lemma}
+\begin{proof}
+  For each input, the vector in \eqref{eq-event-probability-vector} takes only finitely many binary values. Its conditional mean therefore lies in the compact convex set
+  \[
+    \mathcal V(\bm x):=\operatorname{conv}\left\{\bm r(\bm x,\xi):\xi\in\mathbb R\right\}.
+  \]
+  Conversely, any measurable choice from $\mathcal V(\bm x)$ can be realized by a conditional residual distribution. To see this, list the finitely many binary patterns in a fixed order. For a given pattern, the residual values realizing it form an interval, a singleton, or the empty set, with endpoints determined by the observed residuals and $-\hat g(\bm x)$. Nonemptiness is a Borel condition, and a representative of each nonempty section can be chosen measurably using an included endpoint, a midpoint, or a point in an unbounded interval. Measurable convex weights can also be selected: choose the first affinely independent subset of available patterns whose convex hull contains the prescribed mean, and solve its fixed linear system for the weights. There are only finitely many such subsets, and both their availability and the resulting nonnegative weights are Borel measurable. Mixing the representatives with these weights defines a measurable residual kernel.
+
+  More formally, let
+  \[
+    \mathcal W:=\left\{
+      \bm v\in L^2\left(\mathbb P;\mathbb R^{2K+1}\right):
+      \bm v(\bm x)\in\mathcal V(\bm x)\quad\mathbb P\text{-almost surely}
+    \right\}.
+  \]
+  A joint law with input marginal $\mathbb P$ admits a regular conditional residual distribution because $\mathcal X$ and $\mathbb R$ are standard Borel spaces. Its conditional mean of $\bm r$ belongs to $\mathcal W$. The preceding construction gives the converse, using a Borel version of each measurable selection. Consequently,
+  \begin{equation}
+    \mathcal R=\left\{\mathbb E_{\mathbb P}\left[\bm v(\bm X)\right]:\bm v\in\mathcal W\right\}.
+    \label{eq-attainable-selection-representation}
+  \end{equation}
+  The set $\mathcal W$ is nonempty, convex, and bounded in the Hilbert space $L^2\left(\mathbb P;\mathbb R^{2K+1}\right)$. It is norm closed: an $L^2$-convergent sequence has an almost surely convergent subsequence, and each $\mathcal V(\bm x)$ is closed. A closed, bounded, convex subset of a Hilbert space is weakly compact. The expectation map in \eqref{eq-attainable-selection-representation} is a continuous linear map into a finite-dimensional space, so its image is compact and convex. The kernel construction also proves realization of every point in this image.
+\end{proof}
+
+The compact object is the vector of relevant probabilities. Joint laws themselves may place residual mass arbitrarily far into the tails. Conditional randomization makes the attainable set convex even when $\mathbb P$ has atoms; no atomless-input assumption is required. The two rank blocks in \eqref{eq-event-probability-vector} remain distinct, and the failure coordinate uses a closed inequality, so residual atoms and threshold equalities are retained exactly.
+
+\begin{theorem}[Strong duality by a minimax argument]
+  \label{thm-finite-dual-reformulations}
+  For every $\theta\ge0$, the measure programs \eqref{eq-measure-upper}--\eqref{eq-measure-lower} and the Lagrangian duals in Lemma~\ref{lem-weak-duality} satisfy
+  \begin{equation}
+    \overline p_{\hat f}=\overline d_\theta,
+    \qquad
+    \underline p_{\hat f}=\underline d_\theta.
+    \label{eq-strong-duality}
+  \end{equation}
+  Both primal optima are attained. The result includes $\theta=0$ and allows atoms in the input and residual distributions.
+\end{theorem}
+\begin{proof}
+  Keep the input marginal fixed and relax only the rank inequalities. On the attainable set of Lemma~\ref{lem-attainable-probabilities}, the resulting Lagrangians are
+  \begin{equation}
+    \begin{aligned}
+      \mathcal L_{\mathrm r}^+(\bm m,\bm\lambda,\bm\gamma)
+      &:=m^{\mathrm f}+\bm\lambda^\top\left(\bm u-\bm m^{<}\right)
+        +\bm\gamma^\top\left(\bm m^{\le}-\bm l\right),\\
+      \mathcal L_{\mathrm r}^-(\bm m,\bm\lambda,\bm\gamma)
+      &:=m^{\mathrm f}-\bm\lambda^\top\left(\bm u-\bm m^{<}\right)
+        -\bm\gamma^\top\left(\bm m^{\le}-\bm l\right),
+        \qquad\bm\lambda,\bm\gamma\ge\bm0.
+    \end{aligned}
+    \label{eq-rank-probability-lagrangians}
+  \end{equation}
+  For a feasible $\bm m$, minimizing $\mathcal L_{\mathrm r}^+$ over the nonnegative multipliers returns $m^{\mathrm f}$; if any rank constraint is violated, this infimum is $-\infty$. Maximizing $\mathcal L_{\mathrm r}^-$ similarly returns $m^{\mathrm f}$ on feasible points and $+\infty$ otherwise. Thus,
+  \begin{equation}
+    \overline p_{\hat f}=\sup_{\bm m\in\mathcal R}
+      \inf_{\bm\lambda,\bm\gamma\ge\bm0}\mathcal L_{\mathrm r}^+(\bm m,\bm\lambda,\bm\gamma),
+    \qquad
+    \underline p_{\hat f}=\inf_{\bm m\in\mathcal R}
+      \sup_{\bm\lambda,\bm\gamma\ge\bm0}\mathcal L_{\mathrm r}^-(\bm m,\bm\lambda,\bm\gamma).
+    \label{eq-primal-minimax-representation}
+  \end{equation}
+
+  Each Lagrangian is continuous and affine in each argument. The set $\mathcal R$ is compact and convex, and the multiplier domain $\mathbb R_+^{2K}$ is convex. Sion's minimax theorem, which requires only one of the two domains to be compact, therefore permits both exchanges \citep{S58}:
+  \begin{align}
+    \overline p_{\hat f}
+    &=\inf_{\bm\lambda,\bm\gamma\ge\bm0}\sup_{\bm m\in\mathcal R}
+      \mathcal L_{\mathrm r}^+(\bm m,\bm\lambda,\bm\gamma),
+      \label{eq-upper-minimax-exchange}\\
+    \underline p_{\hat f}
+    &=\sup_{\bm\lambda,\bm\gamma\ge\bm0}\inf_{\bm m\in\mathcal R}
+      \mathcal L_{\mathrm r}^-(\bm m,\bm\lambda,\bm\gamma).
+      \label{eq-lower-minimax-exchange}
+  \end{align}
+  For fixed multipliers, optimization over $\mathcal R$ amounts to choosing a conditional residual law at each input. The measurable selection argument in Lemma~\ref{lem-attainable-probabilities} allows the best available binary pattern to be selected at every input. Hence the inner values are
+  \begin{align}
+    \sup_{\bm m\in\mathcal R}\mathcal L_{\mathrm r}^+(\bm m,\bm\lambda,\bm\gamma)
+    &=\bm\lambda^\top\bm u-\bm\gamma^\top\bm l
+      +\mathbb E_{\mathbb P}\left[\eta^+_{\bm\lambda,\bm\gamma}(\bm X)\right],
+      \label{eq-upper-inner-value}\\
+    \inf_{\bm m\in\mathcal R}\mathcal L_{\mathrm r}^-(\bm m,\bm\lambda,\bm\gamma)
+    &=-\bm\lambda^\top\bm u+\bm\gamma^\top\bm l
+      +\mathbb E_{\mathbb P}\left[\eta^-_{\bm\lambda,\bm\gamma}(\bm X)\right].
+      \label{eq-lower-inner-value}
+  \end{align}
+  Substitution into \eqref{eq-upper-minimax-exchange}--\eqref{eq-lower-minimax-exchange} gives exactly the reduced duals \eqref{eq-upper-measure-dual}--\eqref{eq-lower-measure-dual}, proving \eqref{eq-strong-duality}.
+
+  Finally, the feasible portion
+  \[
+    \mathcal R_\theta:=\left\{\bm m\in\mathcal R:
+      \bm m^{<}\le\bm u,\ \bm m^{\le}\ge\bm l\right\}
+  \]
+  is nonempty by empirical-product feasibility and is closed in the compact set $\mathcal R$. Its last coordinate therefore attains both extrema, and Lemma~\ref{lem-attainable-probabilities} realizes these extrema by joint laws. No strict inequality or positive calibration threshold was used, so the proof applies also at $\theta=0$. Attainment of the dual optima will follow from the explicit certificates below.
+\end{proof}
+
+Strong duality establishes exactness of the $2K$-variable dual problems before evaluating them. We next use the ordered residual thresholds to derive their closed forms. Define the surrogate-response CDF by $H(t):=\mathbb P\left\{\hat g(\bm X)\le t\right\}$ for all $t\in\mathbb R$.
+
+\begin{corollary}[Closed forms and optimal dual certificates]
+  \label{thm-closed-form-bounds}
+  Under the conditions of Theorem~\ref{thm-finite-dual-reformulations},
+  \begin{align}
+    \overline p_{\hat f}
+    &=\min\left\{1,\min_{k=1,\ldots,K}\left[u_k+H\left(-\xi_{(k)}^{\mathrm{te}}\right)\right]\right\},
+    \label{eq-dw-closed-upper}\\
+    \underline p_{\hat f}
+    &=\max\left\{0,\max_{k=1,\ldots,K}\left[l_k+H\left(-\xi_{(k)}^{\mathrm{te}}\right)-1\right]\right\}.
+    \label{eq-dw-closed-lower}
+  \end{align}
+  Each dual optimum is attained with at most one nonzero rank multiplier, of value one, together with its corresponding optimal marginal function.
+\end{corollary}
+\begin{proof}
+  For every observed residual threshold, the following pointwise inequalities hold:
+  \begin{align}
+    \mathbf1_{\{\xi\le-\hat g(\bm x)\}}
+    &\le\mathbf1_{\{\xi<\xi_{(k)}^{\mathrm{te}}\}}
+      +\mathbf1_{\{\hat g(\bm x)\le-\xi_{(k)}^{\mathrm{te}}\}},
+      \label{eq-upper-threshold-certificate}\\
+    \mathbf1_{\{\xi\le-\hat g(\bm x)\}}
+    &\ge\mathbf1_{\{\xi\le\xi_{(k)}^{\mathrm{te}}\}}
+      +\mathbf1_{\{\hat g(\bm x)\le-\xi_{(k)}^{\mathrm{te}}\}}-1.
+      \label{eq-lower-threshold-certificate}
+  \end{align}
+  The first inequality covers failure by a union of two events; the second guarantees failure on their intersection. Integrating under any feasible joint law gives
+  \begin{equation}
+    l_k+H\left(-\xi_{(k)}^{\mathrm{te}}\right)-1
+    \le p_{\hat f}(\Pi)
+    \le u_k+H\left(-\xi_{(k)}^{\mathrm{te}}\right).
+    \label{eq-rankwise-failure-bounds}
+  \end{equation}
+  Together with $0\le p_{\hat f}(\Pi)\le1$, these inequalities give the upper and lower certificates in \eqref{eq-dw-closed-upper}--\eqref{eq-dw-closed-lower}. To show that no combination of rank multipliers improves them, we establish the reverse bounds using admissible residual laws.
+
+  For a fixed residual law $\mathbb Q$, the sharp bounds for a sum of two random variables with prescribed marginals give \citep{M82,Z.R25}
+  \begin{align}
+    \sup_{\Pi\in\mathcal P(\{\mathbb Q\})}p_{\hat f}(\Pi)
+    &=\min\left\{1,\inf_{t\in\mathbb R}\left[F_{\mathbb Q}(t-)+H(-t)\right]\right\},
+      \label{eq-fixed-residual-upper}\\
+    \inf_{\Pi\in\mathcal P(\{\mathbb Q\})}p_{\hat f}(\Pi)
+    &=\max\left\{0,\sup_{t\in\mathbb R}\left[F_{\mathbb Q}(t)+H(-t)-1\right]\right\}.
+      \label{eq-fixed-residual-lower}
+  \end{align}
+  The upper formula is usually written with $F_{\mathbb Q}(t)$. Its infimum is unchanged when this term is replaced by $F_{\mathbb Q}(t-)$: approaching $t$ from below gives the left limit of $F_{\mathbb Q}$ and, by right continuity, the value $H(-t)$. A coupling of $\hat g(\bm X)$ and $\xi$ lifts to a joint law on $\mathcal X\times\mathbb R$ by using the regular conditional input law given $\hat g(\bm X)$, so these scalar coupling bounds apply with the full input marginal fixed. The statements concern supremum and infimum values; no assumption about attainment for an arbitrary fixed $\mathbb Q$ is needed.
+
+  Fix $\varepsilon\in(0,1)$ and choose residual values $\xi^-_\varepsilon<\xi_{(1)}^{\mathrm{te}}$ and $\xi^+_\varepsilon>\xi_{(K)}^{\mathrm{te}}$ such that
+  \[
+    H\left(-\xi^-_\varepsilon\right)\ge1-\varepsilon,
+    \qquad H\left(-\xi^+_\varepsilon\right)\le\varepsilon.
+  \]
+  Define two discrete residual laws by assigning the following masses, with all other masses zero:
+  \begin{equation}
+    \begin{aligned}
+      \mathbb Q^+_\varepsilon\{\xi=\xi^-_\varepsilon\}&:=u_1,
+      &\mathbb Q^+_\varepsilon\{\xi=\xi_{(k)}^{\mathrm{te}}\}&:=u_{k+1}-u_k,\\
+      \mathbb Q^-_\varepsilon\{\xi=\xi_{(k)}^{\mathrm{te}}\}&:=l_k-l_{k-1},
+      &\mathbb Q^-_\varepsilon\{\xi=\xi^+_\varepsilon\}&:=1-l_K,
+      \qquad k=1,\ldots,K.
+    \end{aligned}
+    \label{eq-extremal-residual-laws}
+  \end{equation}
+  Monotonicity of the rank endpoints makes these masses nonnegative and their sums equal to one. At the $k$th observed residual, the open and closed CDF values of $\mathbb Q^+_\varepsilon$ are $u_k$ and $u_{k+1}$; those of $\mathbb Q^-_\varepsilon$ are $l_{k-1}$ and $l_k$. The compatibility conditions \eqref{eq-rank-compatibility} therefore place both laws in $\mathcal Q^{\mathrm{DW}}(\theta)$.
+
+  Between consecutive atoms, each residual CDF is constant and $H(-t)$ is nonincreasing. Substituting the two laws into \eqref{eq-fixed-residual-upper}--\eqref{eq-fixed-residual-lower} consequently gives
+  \begin{align}
+    \sup_{\Pi\in\mathcal P(\{\mathbb Q^+_\varepsilon\})}p_{\hat f}(\Pi)
+    &=\min\left\{H\left(-\xi^-_\varepsilon\right),
+      \min_k\left[u_k+H\left(-\xi_{(k)}^{\mathrm{te}}\right)\right]\right\},
+      \label{eq-upper-extremal-value}\\
+    \inf_{\Pi\in\mathcal P(\{\mathbb Q^-_\varepsilon\})}p_{\hat f}(\Pi)
+    &=\max\left\{H\left(-\xi^+_\varepsilon\right),
+      \max_k\left[l_k+H\left(-\xi_{(k)}^{\mathrm{te}}\right)-1\right]\right\}.
+      \label{eq-lower-extremal-value}
+  \end{align}
+  As $\varepsilon\downarrow0$, the outer candidates tend to one and zero, respectively. Since these residual laws are feasible, the two displays give the reverse inequalities needed for \eqref{eq-dw-closed-upper}--\eqref{eq-dw-closed-lower}. This proves the closed forms independently of the minimax exchange.
+
+  Finally, let $\bm e_k$ be the $k$th unit vector. The pointwise optimal marginal functions in Lemma~\ref{lem-weak-duality} satisfy
+  \begin{equation}
+    \eta^+_{\bm e_k,\bm0}(\bm x)
+    =\mathbf1_{\{\hat g(\bm x)\le-\xi_{(k)}^{\mathrm{te}}\}},
+    \qquad
+    \eta^-_{\bm0,\bm e_k}(\bm x)
+    =\mathbf1_{\{\hat g(\bm x)\le-\xi_{(k)}^{\mathrm{te}}\}}-1.
+    \label{eq-optimal-threshold-functions}
+  \end{equation}
+  Thus $(\bm\lambda,\bm\gamma)=(\bm e_k,\bm0)$ has upper dual objective $u_k+H\left(-\xi_{(k)}^{\mathrm{te}}\right)$, while $(\bm\lambda,\bm\gamma)=(\bm0,\bm e_k)$ has lower dual objective $l_k+H\left(-\xi_{(k)}^{\mathrm{te}}\right)-1$. With zero rank multipliers, the optimal marginal functions are the constants one and zero, giving the remaining candidates. Choosing a minimizing upper candidate or a maximizing lower candidate provides an optimal solution of the reduced dual and, with the displayed marginal function, of the full functional dual. The construction uses only monotonicity and \eqref{eq-rank-compatibility}, so it remains valid when $\theta=0$.
+\end{proof}
+
+The optimal certificates have a direct interpretation. The upper bound combines residual mass below an observed value with the probability that the surrogate threshold reaches that value. The lower bound measures overlap that every admissible dependence structure must retain. Although one rank constraint suffices to certify each optimum, both families of rank constraints determine the feasible residual laws used to prove sharpness. The closed inequalities in $H\left(-\xi_{(k)}^{\mathrm{te}}\right)$ include inputs whose failure threshold equals an observed residual, even if such inputs have positive probability.
+
+\begin{remark}[Known interval support]
+  \label{rem-interval-support}
+  Suppose $\mathcal E=[a,b]$ with $-\infty<a\le b<\infty$ and the observed residuals lie in this interval. The compactness and minimax arguments above also apply: feasible binary patterns still have interval or singleton residual sections with measurable representatives. The bounds become
+  \begin{align}
+    \overline p_{\hat f}
+    &=\min\left\{H(-a),\min_{k=1,\ldots,K}\left[u_k+H\left(-\xi_{(k)}^{\mathrm{te}}\right)\right]\right\},
+    \label{eq-dw-interval-upper}\\
+    \underline p_{\hat f}
+    &=\max\left\{H(-b),\max_{k=1,\ldots,K}\left[l_k+H\left(-\xi_{(k)}^{\mathrm{te}}\right)-1\right]\right\}.
+    \label{eq-dw-interval-lower}
+  \end{align}
+  Indeed, support containment gives the additional certificates
+  $\mathbf1_{\{\hat g(\bm x)\le-b\}}\le\mathbf1_{\{\xi\le-\hat g(\bm x)\}}\le\mathbf1_{\{\hat g(\bm x)\le-a\}}$.
+  For the reverse inequalities, replace $\xi^-_\varepsilon$ and $\xi^+_\varepsilon$ in \eqref{eq-extremal-residual-laws} by $a$ and $b$. If an endpoint equals an observed residual, combine the coincident masses. The upper law still satisfies every open upper constraint and closed lower constraint, and so does the lower law. Applying \eqref{eq-fixed-residual-upper}--\eqref{eq-fixed-residual-lower} gives the displayed expressions directly. The additional candidates are certified by zero rank multipliers and marginal functions $\mathbf1_{\{\hat g(\bm x)\le-a\}}$ and $\mathbf1_{\{\hat g(\bm x)\le-b\}}$, respectively. If $a=b$, both bounds equal $H(-a)$.
+\end{remark}
+
+For a fixed $\theta$, evaluation consists of scalar DW inversion, sorting and counting the test residuals, evaluating $H\left(-\xi_{(k)}^{\mathrm{te}}\right)$ under $\mathbb P$, and scanning the $K$ upper and lower candidates. The endpoint table depends only on $N^{\mathrm{te}}$ and $\theta$ and can be precomputed. Once this table and the surrogate CDF values are available, the final scan costs $O(K)$; no numerical optimization over joint laws or dual multipliers is needed.
+
+For $\theta\ge\theta_{N^{\mathrm{te}}}(\delta)$, these exact bounds inherit the finite-sample guarantee of Theorem~\ref{theorem-01}. If the surrogate CDF values are estimated by simulation, simultaneous upper CDF bounds can replace $H\left(-\xi_{(k)}^{\mathrm{te}}\right)$ in the upper expression, and simultaneous lower CDF bounds can replace $H\left(-\xi_{(k)}^{\mathrm{te}}\right)$ in the lower expression. An independent auxiliary simulation can provide these simultaneous bounds conditionally on the test data. Its error probability must be included in the overall confidence budget.

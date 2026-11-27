@@ -1,0 +1,11 @@
+{
+  "profiles": 12,
+  "measure_linear_programs_solved": 328,
+  "threshold_equality_cases": 100,
+  "exact_coverage_and_monotonicity_checks": 260,
+  "maximum_lp_formula_difference": 2.220446049250313e-16,
+  "includes_theta_zero_and_zero_width_acceptance": true,
+  "includes_tied_residuals_and_surrogate_response_atoms": true,
+  "includes_interval_and_singleton_residual_support": true,
+  "passed": true
+}

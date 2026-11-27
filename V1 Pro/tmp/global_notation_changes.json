@@ -1,0 +1,24 @@
+{
+  "sets": {
+    "residual support": "\\mathcal E",
+    "probability laws / finite nonnegative measures": "\\mathcal M_1 / \\mathcal M_+",
+    "residual / joint ambiguity sets": "\\mathcal Q / \\mathcal P",
+    "arbitrary Borel input event": "\\mathcal U",
+    "input groups / residual cells": "\\mathcal A_i / \\mathcal I_j",
+    "mass polytope / fixed-marginal transport matrices": "\\mathcal C_\\theta / \\mathcal T",
+    "bounded Borel functions": "\\mathcal F_{\\mathrm b}"
+  },
+  "collisions_resolved": {
+    "input potential / residual penalty": "\\eta / \\zeta",
+    "Bernoulli probability / Lagrangian dual function": "q / D^+",
+    "scalar probability / allocation matrix": "p / \\bm\\pi",
+    "reference uniforms / cumulative column masses": "V_j / Y_j",
+    "column masses": "\\bm y=(y_1,\\ldots,y_J)^\\top",
+    "univariate / bivariate corrections": "\\psi_0(v) / \\psi(q,p)",
+    "calibration quantile variable": "\\tau",
+    "residual cell representative": "\\widetilde\\xi"
+  },
+  "joint_differential": "\\Pi(\\mathrm d\\bm x,\\mathrm d\\xi)",
+  "abbreviated_joint_differentials_replaced": 6,
+  "historical_comments_preserved": true
+}

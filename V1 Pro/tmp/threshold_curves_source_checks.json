@@ -1,0 +1,30 @@
+{
+  "original_29_numbered_formulas_and_labels_preserved": true,
+  "numbered_formula_count": 32,
+  "all_equation_numbers_consecutive": true,
+  "all_six_original_proofs_unchanged": true,
+  "one_new_proof_added": true,
+  "commented_appendix_and_all_archives_byte_unchanged": true,
+  "bibliography_byte_unchanged": true,
+  "citation_keys_unchanged": true,
+  "only_four_main_sections": true,
+  "no_active_appendix_or_section5_reference": true,
+  "duplicate_labels": [],
+  "undefined_references": [],
+  "undefined_citations": [],
+  "manual_sized_delimiters": [],
+  "unexpanded_joint_differential": false,
+  "obsolete_notation": [],
+  "reference_or_citation_warnings": [],
+  "overfull_warnings": [
+    "Overfull \\hbox (2.42162pt too wide) has occurred while \\output is active"
+  ],
+  "corollary_start_line": 208,
+  "closed_curve_formulas_start_line": 665,
+  "new_coverage_equation_number": "11",
+  "new_closed_curve_equation_numbers": [
+    "31",
+    "32"
+  ],
+  "pdf_bytes": 440483
+}

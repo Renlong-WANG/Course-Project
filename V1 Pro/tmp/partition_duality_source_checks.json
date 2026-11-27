@@ -1,0 +1,31 @@
+{
+  "backup": "E:\\1.\u79d1\u7814\u4e0e\u7533\u535a\\5. course\\CEVE596\\Project\\1. Manuscript\\V1 Pro\\backups\\partition_duality_20261125_171045",
+  "sections_1_to_3_unchanged": true,
+  "threshold_curves_discussion_and_existing_comment_archives_unchanged": true,
+  "previous_section_commented_exactly": true,
+  "bibliography_byte_unchanged": true,
+  "all_previous_labels_retained": true,
+  "new_labels": [
+    "eq-dual-envelope-identities"
+  ],
+  "numbered_equations": 33,
+  "equation_numbers_consecutive": true,
+  "duplicate_labels": [],
+  "undefined_references": [],
+  "undefined_citations": [],
+  "citation_keys_preserved": true,
+  "manual_sized_delimiters": [],
+  "old_notation": [],
+  "unexpanded_joint_differential": false,
+  "subsections_or_active_appendix": false,
+  "build_reference_warnings": [],
+  "overfull_warnings": [
+    "Overfull \\hbox (2.42162pt too wide) has occurred while \\output is active"
+  ],
+  "residual_partition_precedes_proposition": true,
+  "input_partition_precedes_proposition": true,
+  "finite_duals_in_weak_duality_lemma": true,
+  "envelope_identity_in_lemma_proof": true,
+  "section4_start_line": 242,
+  "pdf_bytes": 435311
+}

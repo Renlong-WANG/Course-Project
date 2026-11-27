@@ -1,0 +1,18 @@
+{
+  "named_sets_calligraphic": true,
+  "standard_number_field_retained": true,
+  "independent_symbol_roles_separated": true,
+  "input_potential_eta_consistent": true,
+  "residual_penalty_zeta_consistent": true,
+  "all_joint_integrals_explicit": true,
+  "joint_integral_count": 12,
+  "original_labels_and_citations_retained": true,
+  "active_labels": 62,
+  "coefficient_and_sample_notation_counts_preserved": true,
+  "historical_comments_and_proof_preserved": true,
+  "bibliography_unchanged": true,
+  "build_passed": true,
+  "pdf_pages": 15,
+  "rendered_pages_checked": "1-15",
+  "new_layout_warnings": false
+}

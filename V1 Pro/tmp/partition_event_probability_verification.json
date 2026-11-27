@@ -1,0 +1,10 @@
+{
+  "linear_programs_solved": 96,
+  "fixed_partition_transport_cases": 15,
+  "candidate_law_allocations_checked": 8,
+  "response_threshold_cases": 16,
+  "bounded_support_threshold_cases": 16,
+  "theta_zero_and_singleton_support_included": true,
+  "fixed_partition_vs_full_law_distinction_checked": true,
+  "maximum_difference": 2.220446049250313e-16
+}
